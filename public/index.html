@@ -3,369 +3,450 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#fff4ec">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>ปิดครัวสู้หิว</title>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ปิดครัว">
+<meta name="description" content="ตัวช่วยงดมื้อเย็น — ติดตามเวลา สตรีค และต้านความหิว">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>ปิดครัว</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#fff4ec; --bg2:#ffe7d6; --card:#ffffff; --ink:#2b1d16; --muted:#8a7468; --line:#f1ddd0;
-  --accent:#ff6b4a; --accent-ink:#ffffff; --accent-soft:#ffe1d8;
-  --night:#3b3a7a; --night-soft:#e7e6ff;
-  --ok:#22a06b; --ok-soft:#d8f5e7; --light:#e0a100; --light-soft:#fff1c7; --miss:#d9486a; --miss-soft:#ffdde5;
-  --shadow:0 6px 24px rgba(120,60,20,.08);
+  --bg:#f2f2f4; --card:#ffffff; --ink:#111113; --ink2:#3c3c43; --muted:#8a8a8f; --line:#e4e4e8; --fill:#efeff2;
+  --accent:#ff5a1f; --accent-2:#ff8a5c; --accent-soft:#fff0ea; --on-accent:#ffffff;
+  --light:#ffb595; --miss:#c9c9ce;
+  --nav:rgba(255,255,255,.82);
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#17131f; --bg2:#201a2c; --card:#241e31; --ink:#f4ecff; --muted:#a99cbc; --line:#352d45;
-    --accent:#ff7a5c; --accent-ink:#1a0f0a; --accent-soft:#3e2630;
-    --night:#a9a6ff; --night-soft:#2c2a52;
-    --ok:#3ccf8e; --ok-soft:#173a2c; --light:#ffc53d; --light-soft:#3a3017; --miss:#ff6f91; --miss-soft:#40202b;
-    --shadow:0 6px 24px rgba(0,0,0,.35);
+    --bg:#000000; --card:#1c1c1e; --ink:#f5f5f7; --ink2:#d1d1d6; --muted:#8e8e93; --line:#2c2c2e; --fill:#2c2c2e;
+    --accent:#ff6a33; --accent-2:#ff8f63; --accent-soft:#3a1d12; --on-accent:#ffffff;
+    --light:#8a4a30; --miss:#48484a;
+    --nav:rgba(18,18,20,.78);
+    color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#17131f; --bg2:#201a2c; --card:#241e31; --ink:#f4ecff; --muted:#a99cbc; --line:#352d45;
-  --accent:#ff7a5c; --accent-ink:#1a0f0a; --accent-soft:#3e2630;
-  --night:#a9a6ff; --night-soft:#2c2a52;
-  --ok:#3ccf8e; --ok-soft:#173a2c; --light:#ffc53d; --light-soft:#3a3017; --miss:#ff6f91; --miss-soft:#40202b;
-  --shadow:0 6px 24px rgba(0,0,0,.35);
+  --bg:#000000; --card:#1c1c1e; --ink:#f5f5f7; --ink2:#d1d1d6; --muted:#8e8e93; --line:#2c2c2e; --fill:#2c2c2e;
+  --accent:#ff6a33; --accent-2:#ff8f63; --accent-soft:#3a1d12; --on-accent:#ffffff;
+  --light:#8a4a30; --miss:#48484a;
+  --nav:rgba(18,18,20,.78);
+  color-scheme:dark;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0}
+html{background:var(--bg)}
 body{
   background:var(--bg); color:var(--ink);
-  font-family:"IBM Plex Sans Thai",system-ui,sans-serif; font-size:16px; line-height:1.5;
-  -webkit-tap-highlight-color:transparent;
+  font-family:-apple-system,BlinkMacSystemFont,"Inter","IBM Plex Sans Thai",system-ui,sans-serif;
+  font-size:16px; line-height:1.45; -webkit-font-smoothing:antialiased;
+  overscroll-behavior-y:none; touch-action:manipulation;
 }
-h1,h2,h3,.display{font-family:"Mitr",sans-serif;font-weight:500;margin:0}
-button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
-.wrap{max-width:560px;margin:0 auto;padding:16px 16px 48px}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer;-webkit-user-select:none;user-select:none}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.num{font-family:-apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;font-weight:700}
 
-/* header */
-.top{display:flex;align-items:center;gap:12px;margin:4px 0 16px}
-.top h1{font-size:22px;line-height:1.2}
-.top .sub{color:var(--muted);font-size:14px}
-.top .grow{flex:1;min-width:0}
-.icon-btn{width:40px;height:40px;border-radius:12px;background:var(--card);box-shadow:var(--shadow);display:grid;place-items:center;font-size:18px}
+/* compact nav that fades in on scroll */
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(var(--sat) + 10px) 16px 10px;text-align:center;
+  font-weight:600;font-size:16px;background:var(--nav);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:.5px solid var(--line);opacity:0;pointer-events:none;transition:opacity .2s}
+.nav.show{opacity:1}
 
-.card{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:18px;margin-bottom:14px}
-.card h2{font-size:18px;margin-bottom:10px}
-.row{display:flex;gap:10px;align-items:center}
+main{max-width:560px;margin:0 auto;padding:calc(var(--sat) + 20px) 16px calc(var(--sab) + 96px)}
+.tab[hidden]{display:none}
+.eyebrow{font-size:13px;color:var(--muted);font-weight:500}
+h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;letter-spacing:-.01em}
+.section{display:flex;align-items:baseline;justify-content:space-between;margin:26px 4px 8px}
+.section h2{font-size:20px;font-weight:700;margin:0}
+.section .aside{font-size:14px;color:var(--muted)}
+.card{background:var(--card);border-radius:16px;padding:16px}
+.muted{color:var(--muted)}
+.label{font-size:13px;color:var(--muted);font-weight:500}
 
-/* pet */
-.pet{display:flex;gap:14px;align-items:center}
-.pet-face{font-size:64px;line-height:1;width:84px;height:84px;display:grid;place-items:center;background:var(--bg2);border-radius:24px;flex:none;animation:bob 2.6s ease-in-out infinite;user-select:none}
-@keyframes bob{50%{transform:translateY(-5px) rotate(-3deg)}}
-.pet-info{flex:1;min-width:0}
-.bubble{background:var(--bg2);border-radius:14px;padding:8px 12px;font-size:14px;position:relative;margin-top:8px}
-.xpbar{height:10px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-top:6px}
-.xpbar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#ffb84a);border-radius:99px;transition:width .6s}
-.tiny{font-size:12px;color:var(--muted)}
+/* hero timer */
+.hero-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:5px 10px;border-radius:99px;background:var(--fill);color:var(--ink2)}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.pill.live{background:var(--accent-soft);color:var(--accent)}
+.pill.live .dot{background:var(--accent);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.bignum{font-size:56px;line-height:1.05;margin:2px 0 16px}
+.bar{height:6px;border-radius:99px;background:var(--fill);overflow:hidden}
+.bar>i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .6s}
+.bar-meta{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px}
+.bar-meta b{color:var(--ink);font-weight:600}
 
-/* fasting status */
-.status{display:flex;gap:16px;align-items:center}
-.ring{width:132px;height:132px;flex:none;position:relative}
-.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring .center{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
-.ring .center b{font-family:"Mitr";font-size:24px;font-weight:500;display:block;line-height:1.1}
-.status .label{font-family:"Mitr";font-size:18px}
-.chip{display:inline-block;padding:3px 10px;border-radius:99px;font-size:13px;font-weight:500}
-.chip.c-night{background:var(--night-soft);color:var(--night)}
-.chip.c-day{background:var(--accent-soft);color:var(--accent)}
+.cta{width:100%;margin-top:12px;height:54px;border-radius:14px;background:var(--ink);color:var(--card);
+  display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:17px;transition:transform .1s,opacity .1s}
+.cta:active{transform:scale(.98);opacity:.85}
 
-.hungry{
-  width:100%;margin-top:16px;padding:16px;border-radius:16px;
-  background:var(--accent);color:var(--accent-ink);font-family:"Mitr";font-size:20px;
-  box-shadow:0 6px 0 rgba(0,0,0,.15);transition:transform .08s
-}
-.hungry:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+/* segmented check-in */
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--fill);border-radius:12px;padding:4px}
+.seg button{height:44px;border-radius:9px;font-size:15px;font-weight:600;color:var(--ink2);transition:background .15s,color .15s}
+.seg button.sel{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg button.sel[data-s="ok"]{background:var(--accent);color:var(--on-accent)}
+.seg.locked button{opacity:.4;pointer-events:none}
+.hint{font-size:13px;color:var(--muted);margin-top:10px}
 
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:12px;text-align:center}
-.stat b{font-family:"Mitr";font-weight:500;font-size:24px;display:block;line-height:1.2}
-.stat span{font-size:12px;color:var(--muted)}
+/* week strip */
+.week{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;gap:4px}
+.week .wd{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:6px}
+.dotday{width:34px;height:34px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600;
+  background:var(--fill);color:var(--muted)}
+.dotday.ok{background:var(--accent);color:var(--on-accent)}
+.dotday.light{background:var(--light);color:#fff}
+.dotday.miss{background:transparent;border:1.5px solid var(--miss);color:var(--muted)}
+.dotday.today{box-shadow:0 0 0 2px var(--card),0 0 0 3.5px var(--ink)}
+.dotday svg{width:16px;height:16px;stroke-width:2.6}
 
-/* check-in */
-.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.choice{padding:12px 6px;border-radius:14px;background:var(--bg2);text-align:center;font-size:14px;border:2px solid transparent;transition:transform .1s}
-.choice .e{font-size:26px;display:block}
-.choice:active{transform:scale(.96)}
-.choice.sel.ok{border-color:var(--ok);background:var(--ok-soft)}
-.choice.sel.light{border-color:var(--light);background:var(--light-soft)}
-.choice.sel.miss{border-color:var(--miss);background:var(--miss-soft)}
-.note{font-size:14px;color:var(--muted);margin-top:10px}
+/* 3-up stats */
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);padding:14px 0}
+.stats3>div{padding:0 14px}
+.stats3>div+div{border-left:.5px solid var(--line)}
+.stats3 .v{font-size:26px;line-height:1.2;margin-top:2px}
+.stats3 .u{font-size:13px;color:var(--muted);font-weight:500;margin-left:2px}
 
-/* calendar */
-.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.cal .wd{font-size:12px;color:var(--muted);text-align:center}
-.day{aspect-ratio:1;border-radius:10px;background:var(--bg2);display:grid;place-items:center;font-size:12px;color:var(--muted);position:relative}
-.day.ok{background:var(--ok);color:#fff}
-.day.light{background:var(--light);color:#2b1d16}
-.day.miss{background:var(--miss-soft);color:var(--miss)}
-.day.today{outline:2px solid var(--accent);outline-offset:1px}
-.day.future{opacity:.35;cursor:default}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+/* progress tab */
+.seg-small{display:inline-grid;grid-auto-flow:column;gap:2px;background:var(--fill);border-radius:9px;padding:2px}
+.chart svg{width:100%;height:auto;display:block}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart text{fill:var(--muted);font-size:10px;font-family:-apple-system,"Inter",sans-serif}
+.chart .bar-ok{fill:var(--accent)}
+.chart .bar-light{fill:var(--light)}
 
-/* badges */
-.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
-.badge{border-radius:14px;padding:10px 6px;text-align:center;background:var(--bg2);font-size:12px}
-.badge .e{font-size:28px;display:block}
-.badge.locked{opacity:.35;filter:grayscale(1)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-head b{font-size:17px;font-weight:600}
+.icon-btn{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--fill)}
+.icon-btn:active{opacity:.6}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);row-gap:6px;text-align:center}
+.cal .wd{font-size:12px;color:var(--muted);font-weight:500;padding-bottom:4px}
+.cal .dotday{width:36px;height:36px}
+.cal .dotday.future{opacity:.35}
+.cal .blank{height:36px}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
 
-/* modal */
-.modal{position:fixed;inset:0;background:rgba(20,10,30,.55);display:none;align-items:flex-end;justify-content:center;z-index:50;padding:0}
-.modal.open{display:flex}
-.sheet{background:var(--bg);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:20px 16px 28px;animation:up .25s ease-out}
-@media (min-width:600px){.modal{align-items:center}.sheet{border-radius:24px}}
-@keyframes up{from{transform:translateY(40px);opacity:0}}
-.sheet-head{display:flex;align-items:center;margin-bottom:12px}
-.sheet-head h2{flex:1;font-size:20px}
+.list{background:var(--card);border-radius:16px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:56px;position:relative}
+.row+.row::before{content:"";position:absolute;top:0;left:64px;right:0;border-top:.5px solid var(--line)}
+.row .ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--fill);color:var(--muted)}
+.row .ic.ok{background:var(--accent);color:var(--on-accent)}
+.row .ic.light{background:var(--light);color:#fff}
+.row .ic svg{width:18px;height:18px;stroke-width:2.2}
+.row .t{flex:1;min-width:0}
+.row .t b{display:block;font-weight:600;font-size:15px}
+.row .t span{font-size:13px;color:var(--muted)}
+.row .r{font-size:15px;font-weight:600}
+.empty{padding:28px 16px;text-align:center;color:var(--muted);font-size:14px}
 
-.wave{position:relative;height:64px;border-radius:16px;background:var(--bg2);overflow:hidden;display:grid;place-items:center}
-.wave .fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#7cc7ff,#5aa9ff);opacity:.35;transition:width 1s linear}
-.wave b{position:relative;font-family:"Mitr";font-size:26px;font-weight:500}
+/* profile */
+.profile{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;display:grid;place-items:center;font-size:26px;font-weight:700;flex:none}
+.profile b{font-size:22px;font-weight:700;display:block;line-height:1.2}
+.level{font-size:14px;color:var(--muted)}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 8px;text-align:center}
+.medal{width:56px;height:56px;margin:0 auto 6px;border-radius:50%;display:grid;place-items:center;
+  background:var(--fill);color:var(--muted);font-weight:800;font-size:18px;position:relative}
+.medal svg{width:24px;height:24px}
+.medal.got{background:linear-gradient(145deg,var(--accent-2),var(--accent));color:#fff;box-shadow:0 4px 12px rgba(255,90,31,.28)}
+.badges .n{font-size:11px;line-height:1.3;color:var(--ink2)}
+.badges .locked .n{color:var(--muted)}
 
-.arena{text-align:center;padding:8px 0 4px;position:relative;user-select:none}
-.monster{font-size:84px;line-height:1;display:inline-block;transition:transform .08s;touch-action:manipulation}
-.monster.hit{transform:scale(.85) rotate(-8deg)}
-.monster.dead{animation:boom .5s forwards}
-@keyframes boom{to{transform:scale(1.8);opacity:0}}
-.hp{height:12px;background:var(--bg2);border-radius:99px;overflow:hidden;margin:8px auto 4px;max-width:260px}
-.hp>i{display:block;height:100%;background:var(--miss);transition:width .15s}
-.dmg{position:absolute;font-family:"Mitr";font-weight:600;color:var(--accent);pointer-events:none;animation:floatup .7s forwards}
-@keyframes floatup{to{transform:translateY(-50px);opacity:0}}
+.form .row{min-height:50px;padding:0 16px}
+.form .row+.row::before{left:16px}
+.form label{flex:1;font-size:16px}
+.form input{border:0;background:transparent;color:var(--muted);font:inherit;font-size:16px;text-align:right;min-width:0;width:50%;padding:12px 0;outline:none}
+.form input:focus{color:var(--accent)}
+.danger{width:100%;height:50px;color:#ff3b30;font-weight:500;background:var(--card);border-radius:16px;margin-top:12px}
+.footnote{font-size:13px;color:var(--muted);margin:14px 4px 0;line-height:1.55}
 
-.mission{background:var(--card);border-radius:16px;padding:14px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center}
-.mission .e{font-size:36px}
-.mission .t{flex:1}
-.btn{padding:10px 14px;border-radius:12px;background:var(--bg2);font-weight:500;font-size:14px}
-.btn.primary{background:var(--accent);color:var(--accent-ink)}
-.btn.ok{background:var(--ok);color:#fff}
-.btn.block{width:100%;padding:14px;font-size:16px;font-family:"Mitr"}
+/* tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:space-around;
+  padding:6px 8px calc(var(--sab) + 6px);background:var(--nav);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:.5px solid var(--line)}
+.tabbar button{flex:1;max-width:120px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:500;color:var(--muted);padding:4px 0}
+.tabbar button svg{width:26px;height:26px}
+.tabbar button.on{color:var(--accent)}
 
-label.field{display:block;margin-bottom:12px;font-size:14px}
-label.field input{display:block;width:100%;margin-top:4px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+/* SOS full screen */
+.sos{position:fixed;inset:0;z-index:50;background:#0c0c0e;color:#f5f5f7;display:none;flex-direction:column;
+  padding:calc(var(--sat) + 8px) 20px calc(var(--sab) + 16px);overflow:auto}
+.sos.open{display:flex;animation:fadein .25s ease-out}
+@keyframes fadein{from{opacity:0;transform:translateY(16px)}}
+.sos-top{display:flex;align-items:center;justify-content:space-between;height:44px}
+.sos-top .ttl{font-weight:600}
+.sos .icon-btn{background:#232326;color:#f5f5f7}
+.breath{position:relative;width:min(72vw,300px);aspect-ratio:1;margin:12px auto 6px;display:grid;place-items:center}
+.breath .ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(255,106,51,.28),rgba(255,106,51,.06) 70%);
+  border:1px solid rgba(255,106,51,.45);transform:scale(.72)}
+.breath.go .ring{animation:breathe 10s ease-in-out infinite}
+@keyframes breathe{0%{transform:scale(.72)}40%{transform:scale(1)}100%{transform:scale(.72)}}
+.breath .in{position:relative;text-align:center}
+.breath .clock{font-size:64px;line-height:1}
+.breath .cue{font-size:15px;color:#ff8f63;margin-top:6px;font-weight:500}
+.sos .sub{text-align:center;color:#a1a1a6;font-size:14px;margin:4px 0 18px}
+.mission{background:#1c1c1f;border-radius:16px;padding:16px}
+.mission .label{color:#8e8e93}
+.mission p{margin:6px 0 14px;font-size:17px;font-weight:500;line-height:1.4}
+.mission .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mission .btns button{height:44px;border-radius:12px;background:#2c2c2f;font-weight:600;font-size:15px}
+.mission .btns button.done{background:#f5f5f7;color:#0c0c0e}
+.mission .btns button:disabled{opacity:.5}
+.sos .spacer{flex:1;min-height:20px}
+.finish{height:58px;border-radius:29px;background:var(--accent);color:#fff;font-weight:700;font-size:17px;width:100%}
+.finish:active{transform:scale(.98)}
+.run{display:flex;flex-direction:column;flex:1}
+.summary{display:none;flex:1;flex-direction:column;align-items:center;text-align:center;padding-top:10vh}
+.summary .ok{width:84px;height:84px;border-radius:50%;background:var(--accent);display:grid;place-items:center;margin-bottom:18px;animation:pop .4s cubic-bezier(.2,1.4,.4,1)}
+.summary .ok svg{width:40px;height:40px;stroke:#fff;stroke-width:3}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
+.summary h2{font-size:26px;margin:0 0 6px}
+.summary .stats3{width:100%;margin:26px 0;background:#1c1c1f;border-radius:16px}
+.summary .stats3>div+div{border-color:#333}
+.summary .stats3 .label{color:#8e8e93}
+.sos.done .run{display:none}
+.sos.done .summary{display:flex}
 
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:14px;font-size:15px;z-index:80;transition:transform .3s;max-width:calc(100% - 32px);text-align:center}
-.toast.show{transform:translateX(-50%) translateY(0)}
+/* toast */
+.toast{position:fixed;left:16px;right:16px;margin:0 auto;width:max-content;top:calc(var(--sat) + 10px);z-index:90;transform:translateY(-160%);
+  background:var(--card);color:var(--ink);padding:10px 16px;border-radius:99px;font-size:14px;font-weight:600;
+  box-shadow:0 8px 30px rgba(0,0,0,.16);display:flex;gap:8px;align-items:center;transition:transform .35s cubic-bezier(.2,1,.3,1);max-width:calc(100% - 32px)}
+.toast.show{transform:translateY(0)}
+.toast svg{width:18px;height:18px;color:var(--accent);stroke-width:2.4}
 
-.confetti{position:fixed;top:-40px;font-size:24px;pointer-events:none;z-index:90;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
-
-.safety{font-size:13px;color:var(--muted);background:var(--bg2);border-radius:14px;padding:12px 14px;margin-top:6px}
-@media (max-width:380px){.ring{width:112px;height:112px}.ring .center b{font-size:20px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="top">
-    <div class="grow">
-      <h1 id="hello">ปิดครัวสู้หิว 🍽️🚫</h1>
-      <div class="sub" id="today"></div>
-    </div>
-    <button class="icon-btn" id="openSettings" aria-label="ตั้งค่า">⚙️</button>
-  </header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V11M10 20V5M16 20v-6M21 20H3"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.6-4 3.8-6 7.5-6s6.9 2 7.5 6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.8-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.7-7.5-9.5V6z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h1.5a2.5 2.5 0 0 1 0 5H16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c.8 3.5 5.5 5.6 5.5 11a5.5 5.5 0 0 1-11 0c0-2.6 1.4-4.3 2.6-5.3.1 1.7.9 2.8 2 3.1-.3-3 .2-5.9.9-8.8z"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.5 9h-3.2a1.8 1.8 0 0 0 0 3.6h1.4a1.8 1.8 0 0 1 0 3.6H9.5M12 7.5V9M12 16.2v1.3"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 11 11 5 19.5 4.5 19 13 13 19 5 19zM5 19l7.5-7.5"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 1 1 9.4 4.5a6.3 6.3 0 0 0 10.1 10.1z"/></symbol>
+</svg>
 
-  <!-- Pet -->
-  <section class="card pet">
-    <div class="pet-face" id="petFace" title="แตะเพื่อคุยกับน้อง">🥚</div>
-    <div class="pet-info">
-      <div class="row" style="justify-content:space-between">
-        <h3 id="petName" style="font-size:17px">ไข่ปริศนา</h3>
-        <span class="tiny" id="lvl">Lv.1</span>
+<header class="nav" id="nav"><span id="navTitle">วันนี้</span></header>
+
+<main>
+  <!-- ============ HOME ============ -->
+  <section class="tab" id="tab-home" data-title="วันนี้">
+    <div class="eyebrow" id="homeDate"></div>
+    <h1 class="large" id="homeTitle">วันนี้</h1>
+
+    <div class="card">
+      <div class="hero-top">
+        <span class="pill" id="phasePill"><span class="dot"></span><span id="phaseText"></span></span>
+        <span class="label" id="phaseRange"></span>
       </div>
-      <div class="xpbar"><i id="xpFill" style="width:0"></i></div>
-      <div class="tiny" id="xpText"></div>
-      <div class="bubble" id="petSay">สวัสดี! มาเป็นทีมเดียวกันนะ</div>
+      <div class="label" id="heroLabel"></div>
+      <div class="bignum num" id="heroTime">0:00:00</div>
+      <div class="bar"><i id="heroBar"></i></div>
+      <div class="bar-meta"><span id="heroStart"></span><span id="heroRemain"></span><span id="heroEnd"></span></div>
+    </div>
+
+    <button class="cta" id="sosBtn"><svg class="i"><use href="#i-shield"/></svg>หิวอยู่? เริ่มโหมดต้านหิว</button>
+
+    <div class="section"><h2 id="ciTitle">เช็คอินคืนนี้</h2><span class="aside" id="ciDate"></span></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-s="ok">งดได้</button>
+        <button data-s="light">กินเบาๆ</button>
+        <button data-s="miss">พลาด</button>
+      </div>
+      <div class="hint" id="ciNote"></div>
+    </div>
+
+    <div class="section"><h2>สัปดาห์นี้</h2><span class="aside" id="weekCount"></span></div>
+    <div class="card week" id="week"></div>
+
+    <div class="card stats3" style="margin-top:12px">
+      <div><div class="label">สตรีค</div><div class="v num" id="stStreak">0<span class="u">คืน</span></div></div>
+      <div><div class="label">ประหยัด</div><div class="v num" id="stSaved">฿0</div></div>
+      <div><div class="label">ต้านหิว</div><div class="v num" id="stFought">0<span class="u">ครั้ง</span></div></div>
     </div>
   </section>
 
-  <!-- Fasting status -->
-  <section class="card">
-    <div class="status">
-      <div class="ring">
-        <svg viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="52" fill="none" stroke="var(--bg2)" stroke-width="12"/>
-          <circle id="ringArc" cx="60" cy="60" r="52" fill="none" stroke="var(--night)" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset .8s"/>
-        </svg>
-        <div class="center"><div><b id="ringBig">--:--</b><span class="tiny" id="ringSmall"></span></div></div>
+  <!-- ============ PROGRESS ============ -->
+  <section class="tab" id="tab-progress" data-title="ความคืบหน้า" hidden>
+    <div class="eyebrow">ภาพรวม</div>
+    <h1 class="large">ความคืบหน้า</h1>
+
+    <div class="card stats3">
+      <div><div class="label">เดือนนี้</div><div class="v num" id="pmNights">0<span class="u">คืน</span></div></div>
+      <div><div class="label">สำเร็จ</div><div class="v num" id="pmRate">0%</div></div>
+      <div><div class="label">ประหยัด</div><div class="v num" id="pmSaved">฿0</div></div>
+    </div>
+
+    <div class="section"><h2>8 สัปดาห์ล่าสุด</h2><span class="aside">คืนต่อสัปดาห์</span></div>
+    <div class="card chart" id="chart"></div>
+
+    <div class="section"><h2>ปฏิทิน</h2><span class="aside">แตะวันเพื่อแก้ไข</span></div>
+    <div class="card">
+      <div class="cal-head">
+        <button class="icon-btn" id="calPrev" aria-label="เดือนก่อน"><svg class="i" style="width:18px;height:18px"><use href="#i-left"/></svg></button>
+        <b id="calTitle"></b>
+        <button class="icon-btn" id="calNext" aria-label="เดือนถัดไป"><svg class="i" style="width:18px;height:18px"><use href="#i-right"/></svg></button>
       </div>
+      <div class="cal" id="cal"></div>
+      <div class="legend">
+        <span><i style="background:var(--accent)"></i>งดได้</span>
+        <span><i style="background:var(--light)"></i>กินเบาๆ</span>
+        <span><i style="border:1.5px solid var(--miss)"></i>พลาด</span>
+      </div>
+    </div>
+
+    <div class="section"><h2>บันทึกล่าสุด</h2></div>
+    <div class="list" id="feed"></div>
+  </section>
+
+  <!-- ============ PROFILE ============ -->
+  <section class="tab" id="tab-profile" data-title="โปรไฟล์" hidden>
+    <div class="eyebrow">บัญชีของคุณ</div>
+    <h1 class="large">โปรไฟล์</h1>
+
+    <div class="profile">
+      <div class="avatar" id="avatar">?</div>
       <div style="flex:1;min-width:0">
-        <span class="chip" id="phaseChip"></span>
-        <div class="label" id="phaseLabel" style="margin-top:6px"></div>
-        <div class="tiny" id="phaseDetail"></div>
+        <b id="pName">ผู้ใช้</b>
+        <div class="level" id="pLevel"></div>
       </div>
     </div>
-    <button class="hungry" id="hungryBtn">😫 หิวแล้ว! ช่วยด้วย</button>
-  </section>
-
-  <!-- Stats -->
-  <section class="stats" style="margin-bottom:14px">
-    <div class="stat"><b id="stStreak">0</b><span>🔥 สตรีคคืนนี้</span></div>
-    <div class="stat"><b id="stSaved">0</b><span>💰 บาทที่ประหยัด</span></div>
-    <div class="stat"><b id="stFought">0</b><span>👊 ต้านความหิว</span></div>
-  </section>
-
-  <!-- Check-in -->
-  <section class="card">
-    <h2 id="ciTitle">เช็คอินคืนนี้</h2>
-    <div class="choices" id="choices">
-      <button class="choice ok" data-s="ok"><span class="e">🏆</span>งดได้!</button>
-      <button class="choice light" data-s="light"><span class="e">🍵</span>กินเบาๆ</button>
-      <button class="choice miss" data-s="miss"><span class="e">🍜</span>วันนี้พลาด</button>
-    </div>
-    <div class="note" id="ciNote"></div>
-  </section>
-
-  <!-- Calendar -->
-  <section class="card">
-    <h2>5 สัปดาห์ที่ผ่านมา</h2>
-    <div class="cal" id="cal"></div>
-    <div class="legend">
-      <span><i style="background:var(--ok)"></i>งดได้</span>
-      <span><i style="background:var(--light)"></i>กินเบาๆ</span>
-      <span><i style="background:var(--miss-soft);border:1px solid var(--miss)"></i>พลาด</span>
-      <span>แตะช่องเพื่อแก้ไข</span>
-    </div>
-  </section>
-
-  <!-- Badges -->
-  <section class="card">
-    <h2>เหรียญรางวัล <span class="tiny" id="badgeCount"></span></h2>
-    <div class="badges" id="badges"></div>
-  </section>
-
-  <div class="safety">
-    💛 ฟังร่างกายตัวเองเสมอ ถ้าเวียนหัว ใจสั่น มือสั่น หรือมีโรคประจำตัว (เช่น เบาหวาน กรดไหลย้อน) หรือกำลังตั้งครรภ์ — กินได้เลย และควรปรึกษาแพทย์ก่อนงดมื้อเป็นประจำ สุขภาพสำคัญกว่าสตรีคนะ
-  </div>
-</div>
-
-<!-- Hunger SOS -->
-<div class="modal" id="sos">
-  <div class="sheet">
-    <div class="sheet-head">
-      <h2>ภารกิจสู้หิว 🛡️</h2>
-      <button class="icon-btn" data-close aria-label="ปิด">✕</button>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between" class="label"><span id="xpLabel"></span><span id="xpNext"></span></div>
+      <div class="bar" style="margin-top:8px"><i id="xpBar"></i></div>
     </div>
 
-    <div class="tiny" style="margin-bottom:6px">ความอยากอาหารมักมาเป็นระลอกแล้วค่อยๆ จางลง — อยู่กับมันอีกแค่นิดเดียว</div>
-    <div class="wave"><div class="fill" id="waveFill"></div><b id="waveTime">10:00</b></div>
-
-    <div class="arena" id="arena">
-      <div class="tiny" id="monsterName" style="margin-top:12px">มอนสเตอร์ความอยาก</div>
-      <div class="hp"><i id="hpFill" style="width:100%"></i></div>
-      <button class="monster" id="monster" aria-label="ตีมอนสเตอร์">🍕</button>
-      <div class="tiny">แตะรัวๆ เพื่อตีมันให้ล้ม!</div>
+    <div class="card stats3" style="margin-top:12px">
+      <div><div class="label">งดได้ทั้งหมด</div><div class="v num" id="pTotal">0</div></div>
+      <div><div class="label">สตรีคสูงสุด</div><div class="v num" id="pBest">0</div></div>
+      <div><div class="label">ภารกิจ</div><div class="v num" id="pMissions">0</div></div>
     </div>
 
-    <h3 style="font-size:16px;margin:16px 0 8px">หรือทำภารกิจนี้ 🎯</h3>
+    <div class="section"><h2>ความสำเร็จ</h2><span class="aside" id="badgeCount"></span></div>
+    <div class="card badges" id="badges"></div>
+
+    <div class="section"><h2>ตั้งค่า</h2></div>
+    <div class="list form">
+      <div class="row"><label for="fName">ชื่อ</label><input id="fName" maxlength="20" placeholder="ใส่ชื่อ" autocomplete="nickname"></div>
+      <div class="row"><label for="fCut">เวลาปิดครัว</label><input id="fCut" type="time"></div>
+      <div class="row"><label for="fBreak">มื้อเช้า</label><input id="fBreak" type="time"></div>
+      <div class="row"><label for="fCost">ค่ามื้อเย็น (บาท)</label><input id="fCost" type="number" inputmode="numeric" min="0" step="10"></div>
+    </div>
+    <button class="danger" id="resetAll">ล้างข้อมูลทั้งหมด</button>
+    <p class="footnote">ฟังร่างกายตัวเองเสมอ ถ้าเวียนหัว ใจสั่น มือสั่น มีโรคประจำตัว (เช่น เบาหวาน กรดไหลย้อน) หรือกำลังตั้งครรภ์ ให้กินได้เลยและปรึกษาแพทย์ก่อนงดมื้อเป็นประจำ · ข้อมูลทั้งหมดเก็บไว้ในเครื่องนี้เท่านั้น</p>
+  </section>
+</main>
+
+<nav class="tabbar" id="tabbar">
+  <button data-tab="home" class="on"><svg class="i"><use href="#i-home"/></svg>วันนี้</button>
+  <button data-tab="progress"><svg class="i"><use href="#i-chart"/></svg>ความคืบหน้า</button>
+  <button data-tab="profile"><svg class="i"><use href="#i-user"/></svg>โปรไฟล์</button>
+</nav>
+
+<!-- ============ SOS ============ -->
+<div class="sos" id="sos" role="dialog" aria-modal="true" aria-label="โหมดต้านหิว">
+  <div class="run">
+    <div class="sos-top">
+      <button class="icon-btn" id="sosClose" aria-label="ปิด"><svg class="i" style="width:18px;height:18px"><use href="#i-x"/></svg></button>
+      <span class="ttl">โหมดต้านหิว</span>
+      <span style="width:36px"></span>
+    </div>
+    <div class="breath" id="breath">
+      <div class="ring"></div>
+      <div class="in"><div class="clock num" id="sosClock">10:00</div><div class="cue" id="sosCue">หายใจเข้า</div></div>
+    </div>
+    <div class="sub" id="sosSub">ความอยากมักมาเป็นระลอกแล้วค่อยๆ จางลง หายใจตามวงกลมไปก่อน</div>
     <div class="mission">
-      <div class="e" id="mEmoji">💧</div>
-      <div class="t" id="mText">ดื่มน้ำ 1 แก้วใหญ่</div>
+      <div class="label">ภารกิจระหว่างรอ</div>
+      <p id="mText"></p>
+      <div class="btns"><button id="mShuffle">สุ่มใหม่</button><button class="done" id="mDone">ทำแล้ว</button></div>
     </div>
-    <div class="row" style="margin-top:10px">
-      <button class="btn" id="mShuffle" style="flex:1">🎲 สุ่มใหม่</button>
-      <button class="btn ok" id="mDone" style="flex:1">✓ ทำแล้ว +10 XP</button>
+    <div class="spacer"></div>
+    <button class="finish" id="sosFinish">ผ่านไปได้แล้ว</button>
+  </div>
+  <div class="summary">
+    <div class="ok"><svg class="i"><use href="#i-check"/></svg></div>
+    <h2>ต้านความหิวสำเร็จ</h2>
+    <div style="color:#a1a1a6" id="sumMsg"></div>
+    <div class="stats3">
+      <div><div class="label">เวลา</div><div class="v num" id="sumTime">0:00</div></div>
+      <div><div class="label">ภารกิจ</div><div class="v num" id="sumMissions">0</div></div>
+      <div><div class="label">XP</div><div class="v num" id="sumXP">+0</div></div>
     </div>
-
-    <button class="btn primary block" id="survived" style="margin-top:16px">😤 รอดแล้ว! ไม่กินแล้ว</button>
+    <div class="spacer"></div>
+    <button class="finish" id="sosDone" style="max-width:420px">เสร็จสิ้น</button>
   </div>
 </div>
 
-<!-- Settings -->
-<div class="modal" id="settings">
-  <div class="sheet">
-    <div class="sheet-head">
-      <h2>ตั้งค่า</h2>
-      <button class="icon-btn" data-close aria-label="ปิด">✕</button>
-    </div>
-    <label class="field">ชื่อเล่นของคุณ<input id="fName" maxlength="20" placeholder="เช่น ต้น"></label>
-    <label class="field">เวลาปิดครัว (มื้อสุดท้ายของวัน)<input type="time" id="fCut"></label>
-    <label class="field">เวลามื้อเช้า (จบการงด)<input type="time" id="fBreak"></label>
-    <label class="field">ปกติมื้อเย็นราคาประมาณ (บาท)<input type="number" id="fCost" min="0" step="10"></label>
-    <button class="btn primary block" id="saveSettings">บันทึก</button>
-    <button class="btn block" id="resetAll" style="margin-top:10px;color:var(--miss)">ล้างข้อมูลทั้งหมด</button>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast"><svg class="i"><use href="#i-check"/></svg><span id="toastText"></span></div>
 
 <script>
 const KEY = 'skipdinner.v1';
 const DEFAULTS = { name:'', cutoff:'17:00', breakfast:'07:00', cost:80 };
 const XP_VAL = { ok:50, light:20, miss:5 };
+const WAVE_MS = 10*60*1000;
 
-const PETS = [
-  { lv:1, e:'🥚', n:'ไข่ปริศนา' },
-  { lv:2, e:'🐣', n:'ลูกเจี๊ยบหิวโหย' },
-  { lv:3, e:'🐥', n:'เจี๊ยบนักสู้' },
-  { lv:4, e:'🐔', n:'ไก่จอมอึด' },
-  { lv:5, e:'🦚', n:'นกยูงวินัยเหล็ก' },
-  { lv:7, e:'🦄', n:'ยูนิคอร์นพุงแบน' },
-  { lv:9, e:'🐉', n:'มังกรราชันย์แห่งการงด' },
-];
+const LEVELS = ['มือใหม่','เริ่มจับทาง','มีวินัย','สม่ำเสมอ','แข็งแกร่ง','ตัวจริง','ระดับโปร','ตำนาน'];
 
 const MISSIONS = [
-  ['💧','ดื่มน้ำเปล่า 1 แก้วใหญ่ แบบหมดแก้ว'],
-  ['🪥','แปรงฟันเลย! ปากสดชื่นแล้วจะไม่อยากกิน'],
-  ['🍵','ชงชาร้อนหรือชาสมุนไพร ไม่ใส่น้ำตาล'],
-  ['🏋️','สควอท 15 ครั้ง'],
-  ['🚶','เดินรอบบ้าน/ที่พัก 5 นาที'],
-  ['🚿','ไปอาบน้ำอุ่นสบายๆ'],
-  ['📞','ทักหรือโทรหาเพื่อนสักคน'],
-  ['✍️','เขียน 3 เรื่องดีๆ ที่เกิดขึ้นวันนี้'],
-  ['🌬️','หายใจเข้า 4 วิ กลั้น 7 วิ ออก 8 วิ ทำ 3 รอบ'],
-  ['🧹','เก็บโต๊ะหรือจัดห้อง 10 นาที'],
-  ['😂','ดูคลิปตลก 1 คลิป (ห้ามคลิปรีวิวอาหาร!)'],
-  ['🧘','ยืดเส้นยืดสาย 5 นาที'],
-  ['🎧','ฟังเพลงโปรด 2 เพลง แล้วเต้นตามด้วย'],
-  ['📖','อ่านหนังสือ 10 หน้า'],
-  ['🛏️','เตรียมตัวเข้านอนเร็วขึ้นวันนี้ หลับแล้วไม่หิว'],
-  ['🧊','อมน้ำแข็งก้อนเล็กๆ หรือเคี้ยวหมากฝรั่งไม่มีน้ำตาล'],
+  'ดื่มน้ำเปล่า 1 แก้วใหญ่ให้หมดแก้ว',
+  'แปรงฟันเลย ปากสดชื่นแล้วความอยากจะลดลง',
+  'ชงชาร้อนหรือชาสมุนไพร ไม่ใส่น้ำตาล',
+  'สควอท 15 ครั้ง',
+  'ออกไปเดินเบาๆ 5 นาที',
+  'อาบน้ำอุ่นให้สบายตัว',
+  'ทักหรือโทรหาเพื่อนสักคน',
+  'เขียน 3 เรื่องดีๆ ที่เกิดขึ้นวันนี้',
+  'ยืดเหยียดร่างกาย 5 นาที',
+  'เก็บโต๊ะหรือจัดห้อง 10 นาที',
+  'อ่านหนังสือ 10 หน้า',
+  'เตรียมตัวเข้านอนให้เร็วขึ้นคืนนี้',
+  'เคี้ยวหมากฝรั่งไม่มีน้ำตาล',
+  'ฟังเพลงหรือพอดแคสต์ที่ชอบ 1 ตอน',
 ];
-
-const MONSTERS = [
-  ['🍕','พิซซ่าชีสยืด'], ['🍔','เบอร์เกอร์เยิ้ม'], ['🍜','บะหมี่ตอนดึก'], ['🍩','โดนัทเคลือบน้ำตาล'],
-  ['🍟','เฟรนช์ฟรายส์กรอบ'], ['🧋','ชานมไข่มุกหวาน 100%'], ['🍗','ไก่ทอดเที่ยงคืน'], ['🍦','ไอติมในตู้เย็น'],
-];
-
-const SAYINGS = {
-  ok: ['เก่งมาก! ท้องเบาๆ หลับสบายแน่นอน','สุดยอด! คืนนี้เราชนะ 🏆','วินัยแบบนี้ ไปได้ไกลแน่'],
-  light:['กินเบาๆ ก็ยังดีกว่าจัดเต็มนะ 👍','ไม่เป็นไร ค่อยเป็นค่อยไป','ประคองสตรีคไว้ได้ เยี่ยม!'],
-  miss: ['ไม่เป็นไรเลย พรุ่งนี้เริ่มใหม่ 💛','พลาดได้ แต่ซื่อสัตย์กับตัวเองเก่งมาก','คนเก่งก็พลาดได้ พรุ่งนี้สู้ใหม่!'],
-  day:  ['กินมื้อกลางวันให้อิ่มดีๆ นะ จะได้มีแรงสู้ตอนเย็น','อย่าลืมกินโปรตีนกับผักตอนกลางวัน','ดื่มน้ำเยอะๆ ระหว่างวันด้วยน้า'],
-  night:['อดทนอีกนิด เราทำได้!','หิวไหม? กดปุ่มหิวแล้วมาสู้ด้วยกัน','ความหิวเดี๋ยวก็ผ่านไป ใจเย็นๆ','ท้องร้องคือเสียงเชียร์นะ 📣'],
-  poke: ['จั๊กจี้!','ฮึบ! สู้ๆ','อยากโตเร็วๆ ช่วยเลี้ยงหน่อย','ขอ XP หน่อยได้ไหม 🥺'],
-};
 
 const BADGES = [
-  { id:'first', e:'🌱', n:'คืนแรก', test:s=>countStatus('ok')>=1 },
-  { id:'s3',    e:'🔥', n:'สตรีค 3 คืน', test:s=>s.best>=3 },
-  { id:'s7',    e:'⭐', n:'สตรีค 7 คืน', test:s=>s.best>=7 },
-  { id:'s14',   e:'🏅', n:'สตรีค 14 คืน', test:s=>s.best>=14 },
-  { id:'s30',   e:'👑', n:'สตรีค 30 คืน', test:s=>s.best>=30 },
-  { id:'m1',    e:'👊', n:'ล้มมอนสเตอร์ตัวแรก', test:s=>s.monsters>=1 },
-  { id:'m10',   e:'🐲', n:'นักล่ามอนสเตอร์ 10 ตัว', test:s=>s.monsters>=10 },
-  { id:'c10',   e:'🎯', n:'ภารกิจ 10 ครั้ง', test:s=>s.challenges>=10 },
-  { id:'f5',    e:'🛡️', n:'ต้านหิว 5 ครั้ง', test:s=>s.cravings>=5 },
-  { id:'b500',  e:'💰', n:'ประหยัด 500 บาท', test:s=>saved()>=500 },
-  { id:'b2000', e:'🤑', n:'ประหยัด 2,000 บาท', test:s=>saved()>=2000 },
-  { id:'honest',e:'😇', n:'ซื่อสัตย์กับตัวเอง', test:s=>countStatus('miss')>=1 },
+  { id:'first', icon:'leaf',  n:'คืนแรก',          test:()=>countStatus('ok')>=1 },
+  { id:'s3',    txt:'3',      n:'สตรีค 3 คืน',      test:s=>s.best>=3 },
+  { id:'s7',    txt:'7',      n:'สตรีค 7 คืน',      test:s=>s.best>=7 },
+  { id:'s14',   txt:'14',     n:'สตรีค 14 คืน',     test:s=>s.best>=14 },
+  { id:'s30',   txt:'30',     n:'สตรีค 30 คืน',     test:s=>s.best>=30 },
+  { id:'n20',   icon:'moon',  n:'งดได้ 20 คืน',     test:()=>countStatus('ok')>=20 },
+  { id:'f1',    icon:'shield',n:'ต้านหิวครั้งแรก',   test:s=>s.cravings>=1 },
+  { id:'f10',   icon:'flame', n:'ต้านหิว 10 ครั้ง',  test:s=>s.cravings>=10 },
+  { id:'c10',   icon:'target',n:'ภารกิจ 10 ครั้ง',   test:s=>s.challenges>=10 },
+  { id:'b500',  icon:'coin',  n:'ประหยัด ฿500',     test:()=>saved()>=500 },
+  { id:'b2000', txt:'฿',      n:'ประหยัด ฿2,000',   test:()=>saved()>=2000 },
+  { id:'honest',icon:'heart', n:'บันทึกตามจริง',     test:()=>countStatus('miss')>=1 },
 ];
 
 /* ---------- state ---------- */
-function blank(){ return { settings:{...DEFAULTS}, log:{}, xp:0, monsters:0, challenges:0, cravings:0, best:0, badges:[] }; }
+function blank(){ return { settings:{...DEFAULTS}, log:{}, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[] }; }
 function load(){
   try{
     const r = JSON.parse(localStorage.getItem(KEY));
-    if(r && typeof r==='object'){ const b=blank(); return {...b, ...r, settings:{...DEFAULTS, ...(r.settings||{})}}; }
+    if(r && typeof r==='object'){ const b=blank(); return {...b, ...r, settings:{...DEFAULTS, ...(r.settings||{})}, sessions:r.sessions||[]}; }
   }catch(e){}
   return blank();
 }
@@ -376,89 +457,68 @@ function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} 
 const $ = id => document.getElementById(id);
 const pad = n => String(n).padStart(2,'0');
 const keyOf = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-const fromKey = k => new Date(k+'T12:00:00');
+const fromKey = k => { const [y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d,12); };
 const addDays = (d,n) => { const x=new Date(d); x.setDate(x.getDate()+n); return x; };
-function atTime(base, hhmm){ const [h,m]=hhmm.split(':').map(Number); const d=new Date(base); d.setHours(h,m,0,0); return d; }
+const atTime = (base,hhmm) => { const [h,m]=hhmm.split(':').map(Number); const d=new Date(base); d.setHours(h,m,0,0); return d; };
 const pick = a => a[Math.floor(Math.random()*a.length)];
-const fmtHM = ms => { const t=Math.max(0,Math.floor(ms/60000)); return `${Math.floor(t/60)}:${pad(t%60)}`; };
-const TH_DAYS = ['อา','จ','อ','พ','พฤ','ศ','ส'];
-const TH_MONTHS = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-const thDate = d => `${d.getDate()} ${TH_MONTHS[d.getMonth()]}`;
+const icon = (id,cls='i') => `<svg class="${cls}"><use href="#i-${id}"/></svg>`;
+const baht = n => '฿' + Math.round(n).toLocaleString('th-TH');
+const TH_DAY = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+const TH_DAY_S = ['อา','จ','อ','พ','พฤ','ศ','ส'];
+const WEEK_HEAD = ['จ','อ','พ','พฤ','ศ','ส','อา'];
+const TH_MON = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const TH_MON_L = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const thDate = d => `${d.getDate()} ${TH_MON[d.getMonth()]}`;
+const mondayOf = d => addDays(d, -((d.getDay()+6)%7));
+function hms(ms){ const s=Math.max(0,Math.floor(ms/1000)); return `${Math.floor(s/3600)}:${pad(Math.floor(s/60)%60)}:${pad(s%60)}`; }
+function ms(msv){ const s=Math.max(0,Math.floor(msv/1000)); return `${Math.floor(s/60)}:${pad(s%60)}`; }
+function hrsMin(msv){ const m=Math.max(0,Math.round(msv/60000)); const h=Math.floor(m/60), mm=m%60; return h ? `${h} ชม. ${mm} นาที` : `${mm} นาที`; }
+function fastHours(){ const [ch,cm]=S.settings.cutoff.split(':').map(Number), [bh,bm]=S.settings.breakfast.split(':').map(Number);
+  const mins=((bh*60+bm)+1440-(ch*60+cm))%1440; return Math.round(mins/6)/10; }
 
-/* "night" a moment belongs to: before breakfast still counts as last night */
-function nightKey(now=new Date()){
-  return keyOf(now < atTime(now, S.settings.breakfast) ? addDays(now,-1) : now);
-}
-
-/* fasting window that is current or next */
+function nightKey(now=new Date()){ return keyOf(now < atTime(now,S.settings.breakfast) ? addDays(now,-1) : now); }
 function fastingState(now=new Date()){
-  const {cutoff, breakfast} = S.settings;
-  const todayCut = atTime(now, cutoff);
-  const todayBreak = atTime(now, breakfast);
-  // Window that started yesterday and ends this morning
-  if(now < todayBreak){
-    const start = atTime(addDays(now,-1), cutoff);
-    return { fasting:true, start, end:todayBreak };
-  }
-  if(now >= todayCut){
-    return { fasting:true, start:todayCut, end:atTime(addDays(now,1), breakfast) };
-  }
-  return { fasting:false, start:todayCut, end:atTime(addDays(now,1), breakfast), since:todayBreak };
+  const {cutoff,breakfast} = S.settings;
+  const cut = atTime(now,cutoff), brk = atTime(now,breakfast);
+  if(now < brk) return { fasting:true, start:atTime(addDays(now,-1),cutoff), end:brk };
+  if(now >= cut) return { fasting:true, start:cut, end:atTime(addDays(now,1),breakfast) };
+  return { fasting:false, since:brk, start:cut, end:atTime(addDays(now,1),breakfast) };
 }
-
 function countStatus(s){ return Object.values(S.log).filter(v=>v===s).length; }
-function saved(){ return countStatus('ok')*Number(S.settings.cost||0) + countStatus('light')*Math.round(Number(S.settings.cost||0)/2); }
-
+const nightSaving = s => s==='ok' ? Number(S.settings.cost||0) : s==='light' ? Number(S.settings.cost||0)/2 : 0;
+function saved(){ return Object.values(S.log).reduce((a,s)=>a+nightSaving(s),0); }
 function streak(){
   let d = fromKey(nightKey());
   if(!S.log[keyOf(d)]) d = addDays(d,-1);
-  let n = 0;
-  while(S.log[keyOf(d)]==='ok' || S.log[keyOf(d)]==='light'){ n++; d = addDays(d,-1); }
+  let n=0; while(S.log[keyOf(d)]==='ok'||S.log[keyOf(d)]==='light'){ n++; d=addDays(d,-1); }
   return n;
 }
-function levelInfo(xp){
-  // Lv L needs 50*L*(L-1) total xp: 0,100,300,600,1000,1500...
-  let L = 1; while(xp >= 50*(L+1)*L) L++;
-  const base = 50*L*(L-1), next = 50*(L+1)*L;
-  return { L, cur:xp-base, need:next-base };
-}
-function petFor(L){ let p = PETS[0]; for(const x of PETS) if(L>=x.lv) p=x; return p; }
+function levelInfo(xp){ let L=1; while(xp >= 50*(L+1)*L) L++; const base=50*L*(L-1), next=50*(L+1)*L; return {L,cur:xp-base,need:next-base}; }
+const levelName = L => LEVELS[Math.min(L,LEVELS.length)-1];
 
 /* ---------- feedback ---------- */
 let toastT;
-function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600); }
-function confetti(emojis=['🎉','✨','⭐','💪','🏆']){
-  for(let i=0;i<26;i++){
-    const s=document.createElement('div'); s.className='confetti'; s.textContent=pick(emojis);
-    s.style.left=Math.random()*100+'vw'; s.style.animationDuration=(1.6+Math.random()*1.6)+'s'; s.style.animationDelay=(Math.random()*.4)+'s';
-    document.body.appendChild(s); setTimeout(()=>s.remove(),3800);
-  }
-}
-function say(msg){ $('petSay').textContent = msg; }
-
+function toast(msg){ $('toastText').textContent=msg; const t=$('toast'); t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2400); }
 function gainXP(n){
   const before = levelInfo(S.xp).L;
-  S.xp = Math.max(0, S.xp + n);
+  S.xp = Math.max(0, S.xp+n);
   const after = levelInfo(S.xp).L;
-  if(after > before){
-    const p = petFor(after);
-    setTimeout(()=>{ toast(`เลเวลอัป! Lv.${after} — ${p.e} ${p.n}`); confetti([p.e,'✨','🎉']); }, 300);
-  }
+  if(after>before) setTimeout(()=>toast(`เลื่อนระดับ: ${levelName(after)} · Lv.${after}`), 2600);
 }
 function checkBadges(){
   S.best = Math.max(S.best||0, streak());
+  let delay = 0;
   for(const b of BADGES){
     if(!S.badges.includes(b.id) && b.test(S)){
       S.badges.push(b.id);
-      setTimeout(()=>{ toast(`ปลดล็อกเหรียญ ${b.e} ${b.n}!`); confetti([b.e,'✨']); }, 700);
+      delay += 2600; setTimeout(()=>toast(`ได้รับความสำเร็จ: ${b.n}`), delay);
     }
   }
 }
 
 /* ---------- check-in ---------- */
 function checkinTarget(){
-  const now = new Date();
-  const fs = fastingState(now);
+  const now=new Date(), fs=fastingState(now);
   if(!fs.fasting){
     const last = keyOf(addDays(now,-1));
     if(!S.log[last]) return { key:last, label:'เมื่อคืน', open:true };
@@ -466,220 +526,241 @@ function checkinTarget(){
   }
   return { key:nightKey(now), label:'คืนนี้', open:true };
 }
-function setStatus(key, status){
+function setStatus(key,status){
   const old = S.log[key];
   if(old) gainXP(-XP_VAL[old]);
-  if(status){ S.log[key] = status; gainXP(XP_VAL[status]); }
-  else delete S.log[key];
-  checkBadges(); save(); render();
+  if(status){ S.log[key]=status; gainXP(XP_VAL[status]); } else delete S.log[key];
+  checkBadges(); save(); renderAll();
 }
 
-/* ---------- render ---------- */
-function render(){
-  const now = new Date();
-  const name = S.settings.name ? `สวัสดี ${S.settings.name}` : 'ปิดครัวสู้หิว';
-  $('hello').textContent = `${name} 🍽️🚫`;
-  $('today').textContent = `วัน${['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'][now.getDay()]}ที่ ${thDate(now)} · ปิดครัว ${S.settings.cutoff} น.`;
+/* ---------- render: home ---------- */
+function renderHome(){
+  const now=new Date();
+  $('homeDate').textContent = `วัน${TH_DAY[now.getDay()]}ที่ ${now.getDate()} ${TH_MON_L[now.getMonth()]}`;
+  $('homeTitle').textContent = S.settings.name ? `สวัสดี ${S.settings.name}` : 'วันนี้';
+  $('phaseRange').textContent = `${S.settings.cutoff} – ${S.settings.breakfast} · ${fastHours()} ชม.`;
+  renderTimer();
 
-  // pet + xp
-  const li = levelInfo(S.xp), pet = petFor(li.L);
-  $('petFace').textContent = pet.e;
-  $('petName').textContent = pet.n;
-  $('lvl').textContent = `Lv.${li.L}`;
-  $('xpFill').style.width = (li.cur/li.need*100)+'%';
-  $('xpText').textContent = `${li.cur} / ${li.need} XP ถึงเลเวลถัดไป`;
+  const t=checkinTarget(), cur=S.log[t.key];
+  $('ciTitle').textContent = `เช็คอิน${t.label}`;
+  $('ciDate').textContent = `${TH_DAY_S[fromKey(t.key).getDay()]} ${thDate(fromKey(t.key))}`;
+  $('seg').classList.toggle('locked', !t.open);
+  document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('sel', b.dataset.s===cur));
+  $('ciNote').textContent = !t.open ? `เช็คอินได้หลัง ${S.settings.cutoff} น.`
+    : cur ? `บันทึกแล้ว · +${XP_VAL[cur]} XP` : 'งดได้ +50 XP · กินเบาๆ +20 XP และยังรักษาสตรีค · พลาด +5 XP';
 
-  renderStatus(now);
+  // week strip
+  const tonight=fromKey(nightKey(now)), mon=mondayOf(tonight);
+  let html='', cnt=0;
+  for(let i=0;i<7;i++){
+    const d=addDays(mon,i), k=keyOf(d), s=S.log[k];
+    if(s==='ok'||s==='light') cnt++;
+    const inner = s==='ok'||s==='light' ? icon('check') : d.getDate();
+    html += `<div><div class="wd">${WEEK_HEAD[i]}</div><div class="dotday ${s||''} ${k===keyOf(tonight)?'today':''}">${inner}</div></div>`;
+  }
+  $('week').innerHTML = html;
+  $('weekCount').textContent = `${cnt}/7 คืน`;
 
-  // stats
-  $('stStreak').textContent = streak();
-  $('stSaved').textContent = saved().toLocaleString('th-TH');
-  $('stFought').textContent = S.cravings;
-
-  // check-in
-  const t = checkinTarget(), cur = S.log[t.key];
-  $('ciTitle').textContent = `เช็คอิน${t.label} · ${thDate(fromKey(t.key))}`;
-  document.querySelectorAll('.choice').forEach(b=>{
-    b.classList.toggle('sel', b.dataset.s===cur);
-    b.disabled = !t.open;
-    b.style.opacity = t.open ? 1 : .45;
-  });
-  $('ciNote').textContent = !t.open
-    ? `เช็คอินคืนนี้ได้หลัง ${S.settings.cutoff} น. ตอนนี้กินมื้อกลางวันให้ดีก่อนนะ 🍱`
-    : cur ? `บันทึกแล้ว (+${XP_VAL[cur]} XP) · แตะอีกครั้งเพื่อเปลี่ยน`
-          : 'งดได้ +50 XP · กินเบาๆ +20 XP (ยังรักษาสตรีค) · พลาด +5 XP (ให้รางวัลความซื่อสัตย์)';
-
-  renderCalendar(now);
-  renderBadges();
+  $('stStreak').innerHTML = `${streak()}<span class="u">คืน</span>`;
+  $('stSaved').textContent = baht(saved());
+  $('stFought').innerHTML = `${S.cravings}<span class="u">ครั้ง</span>`;
 }
 
-let lastPhase = null;
-function renderStatus(now){
-  const fs = fastingState(now);
-  const arc = $('ringArc'), C = 326.7;
+function renderTimer(){
+  const now=new Date(), fs=fastingState(now);
+  const pill=$('phasePill');
   if(fs.fasting){
-    const total = fs.end - fs.start, done = now - fs.start;
-    arc.style.stroke = 'var(--night)';
-    arc.style.strokeDashoffset = C * (1 - Math.min(1, done/total));
-    $('ringBig').textContent = fmtHM(done);
-    $('ringSmall').textContent = 'ชม. ที่งดมา';
-    $('phaseChip').className = 'chip c-night'; $('phaseChip').textContent = '🌙 ช่วงปิดครัว';
-    $('phaseLabel').textContent = `อีก ${fmtHM(fs.end-now)} ชม. ถึงมื้อเช้า`;
-    $('phaseDetail').textContent = `งดไปแล้ว ${Math.round(done/total*100)}% · ดื่มน้ำได้ไม่จำกัด`;
+    const total=fs.end-fs.start, done=now-fs.start;
+    pill.classList.add('live'); $('phaseText').textContent='กำลังงด';
+    $('heroLabel').textContent='งดมาแล้ว';
+    $('heroTime').textContent=hms(done);
+    $('heroBar').style.width=Math.min(100,done/total*100)+'%';
+    $('heroStart').textContent=S.settings.cutoff;
+    $('heroEnd').textContent=S.settings.breakfast;
+    $('heroRemain').innerHTML=`เหลือ <b>${hrsMin(fs.end-now)}</b>`;
   }else{
-    const total = fs.start - fs.since, left = fs.start - now;
-    arc.style.stroke = 'var(--accent)';
-    arc.style.strokeDashoffset = C * (left/total);
-    $('ringBig').textContent = fmtHM(left);
-    $('ringSmall').textContent = 'ก่อนปิดครัว';
-    $('phaseChip').className = 'chip c-day'; $('phaseChip').textContent = '☀️ ช่วงกินได้';
-    $('phaseLabel').textContent = `ปิดครัว ${S.settings.cutoff} น.`;
-    $('phaseDetail').textContent = left < 3600000 ? 'ใกล้แล้ว! กินมื้อสุดท้ายให้อิ่มพอดีๆ' : 'กินมื้อกลางวันให้ครบหมู่ จะได้ไม่หิวตอนเย็น';
-  }
-  const phase = fs.fasting ? 'night' : 'day';
-  if(phase !== lastPhase){ lastPhase = phase; say(pick(SAYINGS[phase])); }
-}
-
-function renderCalendar(now){
-  const cal = $('cal'); cal.innerHTML = '';
-  TH_DAYS.forEach(d=>{ const e=document.createElement('div'); e.className='wd'; e.textContent=d; cal.appendChild(e); });
-  const tonight = fromKey(nightKey(now));
-  const end = addDays(tonight, 6 - tonight.getDay());   // end of this week (Sat)
-  const start = addDays(end, -34);
-  for(let i=0;i<35;i++){
-    const d = addDays(start,i), k = keyOf(d), s = S.log[k];
-    const el = document.createElement('button');
-    el.className = 'day' + (s?' '+s:'') + (k===keyOf(tonight)?' today':'') + (d>tonight?' future':'');
-    el.textContent = d.getDate();
-    el.title = `${thDate(d)}${s?' · '+{ok:'งดได้',light:'กินเบาๆ',miss:'พลาด'}[s]:''}`;
-    if(d<=tonight){
-      el.onclick = ()=>{
-        const order = [undefined,'ok','light','miss'];
-        const next = order[(order.indexOf(S.log[k])+1)%order.length];
-        setStatus(k, next);
-      };
-    }else el.disabled = true;
-    cal.appendChild(el);
+    const total=fs.start-fs.since, left=fs.start-now;
+    pill.classList.remove('live'); $('phaseText').textContent='ช่วงกินได้';
+    $('heroLabel').textContent='ปิดครัวในอีก';
+    $('heroTime').textContent=hms(left);
+    $('heroBar').style.width=Math.min(100,(1-left/total)*100)+'%';
+    $('heroStart').textContent=S.settings.breakfast;
+    $('heroEnd').textContent=S.settings.cutoff;
+    $('heroRemain').textContent = left<3600000 ? 'ใกล้ถึงมื้อสุดท้ายแล้ว' : 'กินกลางวันให้อิ่มพอดี';
   }
 }
 
-function renderBadges(){
-  const box = $('badges'); box.innerHTML = '';
-  for(const b of BADGES){
-    const got = S.badges.includes(b.id);
-    const el = document.createElement('div');
-    el.className = 'badge' + (got?'':' locked');
-    el.innerHTML = `<span class="e">${b.e}</span>${b.n}`;
-    box.appendChild(el);
-  }
-  $('badgeCount').textContent = `${S.badges.length}/${BADGES.length}`;
+/* ---------- render: progress ---------- */
+let calMonth = (()=>{ const d=fromKey(nightKey()); return new Date(d.getFullYear(), d.getMonth(), 1); })();
+
+function renderProgress(){
+  // month summary (calendar month of "tonight")
+  const t=fromKey(nightKey()), y=t.getFullYear(), m=t.getMonth();
+  const entries = Object.entries(S.log).filter(([k])=>{ const d=fromKey(k); return d.getFullYear()===y && d.getMonth()===m; });
+  const good = entries.filter(([,s])=>s==='ok'||s==='light').length;
+  $('pmNights').innerHTML = `${entries.filter(([,s])=>s==='ok').length}<span class="u">คืน</span>`;
+  $('pmRate').textContent = entries.length ? Math.round(good/entries.length*100)+'%' : '–';
+  $('pmSaved').textContent = baht(entries.reduce((a,[,s])=>a+nightSaving(s),0));
+
+  renderChart(t); renderCal(); renderFeed();
 }
+
+function renderChart(tonight){
+  const W=320, H=150, padL=18, padB=22, padT=8, weeks=8, slot=(W-padL)/weeks, bw=slot*.5;
+  const mon=mondayOf(tonight);
+  const y = v => padT + (H-padT-padB)*(1-v/7);
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="จำนวนคืนที่งดได้ต่อสัปดาห์">`;
+  for(const v of [0,3.5,7]){ svg += `<line class="grid" x1="${padL}" x2="${W}" y1="${y(v)}" y2="${y(v)}"${v?' stroke-dasharray="2 3"':''}/>`; }
+  svg += `<text x="0" y="${y(7)+3}">7</text><text x="0" y="${y(0)+3}">0</text>`;
+  for(let w=0; w<weeks; w++){
+    const ws=addDays(mon,-7*(weeks-1-w)); let ok=0, li=0;
+    for(let i=0;i<7;i++){ const s=S.log[keyOf(addDays(ws,i))]; if(s==='ok') ok++; else if(s==='light') li++; }
+    const x = padL + w*slot + (slot-bw)/2;
+    if(ok) svg += `<rect class="bar-ok" x="${x}" y="${y(ok)}" width="${bw}" height="${y(0)-y(ok)}" rx="3"><title>${thDate(ws)}: งดได้ ${ok} คืน</title></rect>`;
+    if(li) svg += `<rect class="bar-light" x="${x}" y="${y(ok+li)}" width="${bw}" height="${y(ok)-y(ok+li)}" rx="3"/>`;
+    if(!ok && !li) svg += `<rect fill="var(--fill)" x="${x}" y="${y(0)-3}" width="${bw}" height="3" rx="1.5"/>`;
+    if(w%2===1 || w===weeks-1) svg += `<text x="${x+bw/2}" y="${H-6}" text-anchor="middle">${w===weeks-1?'สัปดาห์นี้':thDate(ws)}</text>`;
+  }
+  $('chart').innerHTML = svg + '</svg>';
+}
+
+function renderCal(){
+  const y=calMonth.getFullYear(), m=calMonth.getMonth();
+  $('calTitle').textContent = `${TH_MON_L[m]} ${y+543}`;
+  const tonight=fromKey(nightKey()), first=new Date(y,m,1,12), days=new Date(y,m+1,0).getDate();
+  const lead=(first.getDay()+6)%7;
+  const cal=$('cal'); cal.innerHTML = WEEK_HEAD.map(d=>`<div class="wd">${d}</div>`).join('') + '<div class="blank"></div>'.repeat(lead);
+  for(let i=1;i<=days;i++){
+    const d=new Date(y,m,i,12), k=keyOf(d), s=S.log[k], future=d>tonight;
+    const b=document.createElement('div');
+    b.innerHTML = `<button class="dotday ${s||''} ${k===keyOf(tonight)?'today':''} ${future?'future':''}" ${future?'disabled':''} aria-label="${thDate(d)}">${i}</button>`;
+    if(!future) b.firstChild.onclick = ()=>{
+      const order=[undefined,'ok','light','miss'];
+      setStatus(k, order[(order.indexOf(S.log[k])+1)%order.length]);
+    };
+    cal.appendChild(b);
+  }
+  const nextMonth = new Date(y,m+1,1);
+  $('calNext').disabled = nextMonth > tonight; $('calNext').style.opacity = nextMonth > tonight ? .3 : 1;
+}
+
+function renderFeed(){
+  const keys = Object.keys(S.log).sort().reverse().slice(0,12);
+  if(!keys.length){ $('feed').innerHTML = '<div class="empty">ยังไม่มีบันทึก เช็คอินคืนแรกได้ที่หน้า "วันนี้"</div>'; return; }
+  const T = { ok:'งดมื้อเย็นสำเร็จ', light:'กินเบาๆ', miss:'พลาดมื้อเย็น' };
+  const I = { ok:'check', light:'cup', miss:'x' };
+  $('feed').innerHTML = keys.map(k=>{
+    const s=S.log[k], d=fromKey(k);
+    const fights = S.sessions.filter(x=>nightKey(new Date(x.t))===k).length;
+    const sub = `${TH_DAY_S[d.getDay()]} ${thDate(d)}` + (s==='ok'?` · ${fastHours()} ชม.`:'') + (fights?` · ต้านหิว ${fights} ครั้ง`:'');
+    const r = nightSaving(s) ? baht(nightSaving(s)) : '';
+    return `<div class="row"><div class="ic ${s}">${icon(I[s])}</div><div class="t"><b>${T[s]}</b><span>${sub}</span></div><div class="r num">${r}</div></div>`;
+  }).join('');
+}
+
+/* ---------- render: profile ---------- */
+function renderProfile(){
+  const li=levelInfo(S.xp), name=S.settings.name||'ผู้ใช้';
+  $('avatar').textContent = (S.settings.name||'?').trim().charAt(0).toUpperCase() || '?';
+  $('pName').textContent = name;
+  $('pLevel').textContent = `Lv.${li.L} · ${levelName(li.L)}`;
+  $('xpLabel').textContent = `${S.xp.toLocaleString('th-TH')} XP`;
+  $('xpNext').textContent = `อีก ${li.need-li.cur} XP ถึง Lv.${li.L+1}`;
+  $('xpBar').style.width = (li.cur/li.need*100)+'%';
+  $('pTotal').textContent = countStatus('ok');
+  $('pBest').textContent = S.best||0;
+  $('pMissions').textContent = S.challenges;
+  const got = BADGES.filter(b=>S.badges.includes(b.id)).length;
+  $('badgeCount').textContent = `${got}/${BADGES.length}`;
+  $('badges').innerHTML = BADGES.map(b=>{
+    const has=S.badges.includes(b.id);
+    const inner = b.icon ? icon(b.icon) : b.txt;
+    return `<div class="${has?'':'locked'}"><div class="medal ${has?'got':''}">${inner}</div><div class="n">${b.n}</div></div>`;
+  }).join('');
+  if(document.activeElement?.tagName!=='INPUT'){
+    $('fName').value=S.settings.name; $('fCut').value=S.settings.cutoff; $('fBreak').value=S.settings.breakfast; $('fCost').value=S.settings.cost;
+  }
+}
+
+function renderAll(){ renderHome(); renderProgress(); renderProfile(); }
+
+/* ---------- tabs & nav ---------- */
+let tab='home';
+function showTab(name){
+  tab=name;
+  document.querySelectorAll('.tab').forEach(s=>s.hidden = s.id!=='tab-'+name);
+  document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('on', b.dataset.tab===name));
+  $('navTitle').textContent = $('tab-'+name).dataset.title;
+  window.scrollTo(0,0); onScroll();
+}
+document.querySelectorAll('#tabbar button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+function onScroll(){ $('nav').classList.toggle('show', window.scrollY>48); }
+window.addEventListener('scroll', onScroll, {passive:true});
 
 /* ---------- events ---------- */
-document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{
-  const t = checkinTarget(); if(!t.open) return;
-  const s = b.dataset.s;
-  if(S.log[t.key]===s) return;
-  setStatus(t.key, s);
-  say(pick(SAYINGS[s]));
-  if(s==='ok') confetti(); else if(s==='light') toast('กินเบาๆ ก็นับว่าเก่งนะ 🍵');
+document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{
+  const t=checkinTarget(); if(!t.open) return;
+  const s=b.dataset.s; if(S.log[t.key]===s) return;
+  setStatus(t.key,s);
+  toast(s==='ok' ? `เยี่ยมมาก · +${XP_VAL.ok} XP` : s==='light' ? `รักษาสตรีคไว้ได้ · +${XP_VAL.light} XP` : 'ไม่เป็นไร พรุ่งนี้เริ่มใหม่');
 });
+$('calPrev').onclick=()=>{ calMonth=new Date(calMonth.getFullYear(), calMonth.getMonth()-1, 1); renderCal(); };
+$('calNext').onclick=()=>{ calMonth=new Date(calMonth.getFullYear(), calMonth.getMonth()+1, 1); renderCal(); };
 
-$('petFace').onclick = ()=>{ say(pick(SAYINGS.poke)); const f=$('petFace'); f.style.transform='scale(1.15) rotate(8deg)'; setTimeout(()=>f.style.transform='',180); };
-
-function openModal(id){ $(id).classList.add('open'); }
-function closeModal(id){ $(id).classList.remove('open'); }
-document.querySelectorAll('.modal').forEach(m=>{
-  m.addEventListener('click', e=>{ if(e.target===m || e.target.closest('[data-close]')) { if(m.id==='sos') stopSOS(); closeModal(m.id); } });
-});
-
-/* settings */
-$('openSettings').onclick = ()=>{
-  $('fName').value = S.settings.name; $('fCut').value = S.settings.cutoff;
-  $('fBreak').value = S.settings.breakfast; $('fCost').value = S.settings.cost;
-  openModal('settings');
-};
-$('saveSettings').onclick = ()=>{
-  const cut = $('fCut').value || DEFAULTS.cutoff, br = $('fBreak').value || DEFAULTS.breakfast;
-  if(br >= cut){ toast('เวลามื้อเช้าต้องมาก่อนเวลาปิดครัวนะ'); return; }
-  S.settings = { name:$('fName').value.trim(), cutoff:cut, breakfast:br, cost:Math.max(0, Number($('fCost').value)||0) };
-  lastPhase = null; save(); render(); closeModal('settings'); toast('บันทึกแล้ว ✓');
-};
-$('resetAll').onclick = ()=>{
-  if(confirm('ล้างประวัติ XP และเหรียญทั้งหมด? ย้อนกลับไม่ได้นะ')){ S = blank(); save(); lastPhase=null; render(); closeModal('settings'); toast('เริ่มต้นใหม่แล้ว 🌱'); }
-};
-
-/* ---------- Hunger SOS ---------- */
-const WAVE_MS = 10*60*1000;
-let waveEnd = 0, waveTimer = null, hp = 100, monster = null, mission = null, sosXP = 0;
-
-function newMonster(){
-  monster = pick(MONSTERS); hp = 100;
-  const m = $('monster'); m.classList.remove('dead'); m.textContent = monster[0];
-  $('monsterName').textContent = `มอนสเตอร์ความอยาก: ${monster[1]}`;
-  $('hpFill').style.width = '100%';
+function bindSetting(id, apply){
+  $(id).addEventListener('change', ()=>{ if(apply($(id).value)!==false){ save(); renderAll(); toast('บันทึกการตั้งค่าแล้ว'); } else renderProfile(); });
 }
-function newMission(){
-  let next; do{ next = pick(MISSIONS); }while(MISSIONS.length>1 && next===mission);
-  mission = next; $('mEmoji').textContent = mission[0]; $('mText').textContent = mission[1];
-  $('mDone').disabled = false; $('mDone').textContent = '✓ ทำแล้ว +10 XP';
-}
-function tickWave(){
-  const left = waveEnd - Date.now();
-  const s = Math.max(0, Math.ceil(left/1000));
-  $('waveTime').textContent = `${Math.floor(s/60)}:${pad(s%60)}`;
-  $('waveFill').style.width = (100 - Math.max(0,left)/WAVE_MS*100) + '%';
-  if(left <= 0){
-    clearInterval(waveTimer); waveTimer = null;
-    $('waveTime').textContent = 'คลื่นผ่านไปแล้ว 🏄';
-  }
-}
-$('hungryBtn').onclick = ()=>{
-  sosXP = 0; newMonster(); newMission();
-  waveEnd = Date.now() + WAVE_MS; tickWave();
-  clearInterval(waveTimer); waveTimer = setInterval(tickWave, 1000);
-  openModal('sos');
-};
-function stopSOS(){ clearInterval(waveTimer); waveTimer = null; }
+bindSetting('fName', v=>{ S.settings.name=v.trim(); });
+bindSetting('fCut', v=>{ if(!v||v<=S.settings.breakfast){ toast('เวลาปิดครัวต้องหลังมื้อเช้า'); return false; } S.settings.cutoff=v; });
+bindSetting('fBreak', v=>{ if(!v||v>=S.settings.cutoff){ toast('มื้อเช้าต้องก่อนเวลาปิดครัว'); return false; } S.settings.breakfast=v; });
+bindSetting('fCost', v=>{ S.settings.cost=Math.max(0,Number(v)||0); });
+$('resetAll').onclick=()=>{ if(confirm('ล้างประวัติ XP และความสำเร็จทั้งหมด? ย้อนกลับไม่ได้')){ S=blank(); save(); renderAll(); toast('ล้างข้อมูลแล้ว'); } };
 
-$('monster').onclick = e=>{
-  if(hp<=0) return;
-  const dmg = 4 + Math.floor(Math.random()*7);
-  hp = Math.max(0, hp - dmg);
-  $('hpFill').style.width = hp+'%';
-  const m = $('monster'); m.classList.add('hit'); setTimeout(()=>m.classList.remove('hit'), 80);
-  const arena = $('arena'), r = arena.getBoundingClientRect();
-  const f = document.createElement('div'); f.className='dmg'; f.textContent = '-'+dmg;
-  f.style.left = ((e.clientX||r.left+r.width/2) - r.left - 10 + (Math.random()*30-15))+'px';
-  f.style.top = ((e.clientY||r.top+80) - r.top - 30)+'px';
-  arena.appendChild(f); setTimeout(()=>f.remove(), 700);
-  if(navigator.vibrate) try{ navigator.vibrate(15); }catch(_){}
-  if(hp===0){
-    m.classList.add('dead');
-    S.monsters++; gainXP(15); sosXP += 15; checkBadges(); save(); render();
-    toast(`ล้ม ${monster[1]} ได้แล้ว! +15 XP 💥`);
-    setTimeout(newMonster, 900);
-  }
+/* ---------- SOS ---------- */
+let sos = null, sosTimer = null, mission = null;
+function newMission(){ let n; do{ n=pick(MISSIONS); }while(n===mission); mission=n; $('mText').textContent=n; $('mDone').disabled=false; $('mDone').textContent='ทำแล้ว'; }
+function tickSOS(){
+  const el=Date.now()-sos.start, left=WAVE_MS-el;
+  $('sosClock').textContent = left>0 ? ms(left+999) : ms(el);
+  $('sosCue').textContent = (el/1000)%10 < 4 ? 'หายใจเข้า' : 'หายใจออกช้าๆ';
+  if(left<=0) $('sosSub').textContent = 'ครบ 10 นาทีแล้ว ความอยากน่าจะเบาลง เก่งมาก';
+}
+$('sosBtn').onclick = ()=>{
+  sos = { start:Date.now(), missions:0, xp:0 };
+  newMission();
+  $('sosSub').textContent = 'ความอยากมักมาเป็นระลอกแล้วค่อยๆ จางลง หายใจตามวงกลมไปก่อน';
+  const br=$('breath'); br.classList.remove('go'); void br.offsetWidth; br.classList.add('go');
+  $('sos').classList.remove('done'); $('sos').classList.add('open');
+  document.body.style.overflow='hidden';
+  tickSOS(); clearInterval(sosTimer); sosTimer=setInterval(tickSOS,250);
 };
+function closeSOS(){ clearInterval(sosTimer); $('sos').classList.remove('open'); document.body.style.overflow=''; renderAll(); }
+$('sosClose').onclick = closeSOS;
 $('mShuffle').onclick = newMission;
 $('mDone').onclick = ()=>{
-  S.challenges++; gainXP(10); sosXP += 10; checkBadges(); save(); render();
-  $('mDone').disabled = true; $('mDone').textContent = 'เยี่ยม! ✓';
-  toast(`${mission[0]} ภารกิจสำเร็จ +10 XP`);
-  setTimeout(newMission, 1200);
+  S.challenges++; gainXP(10); sos.missions++; sos.xp+=10; checkBadges(); save();
+  $('mDone').disabled=true; $('mDone').textContent='เยี่ยม ✓';
+  setTimeout(newMission, 900);
 };
-$('survived').onclick = ()=>{
-  S.cravings++; gainXP(10); sosXP += 10; checkBadges(); save();
-  stopSOS(); closeModal('sos'); render();
-  say('เราชนะความหิวอีกครั้ง! 💪');
-  toast(`รอดแล้ว! รอบนี้ได้ +${sosXP} XP`);
-  confetti(['💪','🛡️','✨','🔥']);
+$('sosFinish').onclick = ()=>{
+  clearInterval(sosTimer);
+  const dur = Date.now()-sos.start;
+  S.cravings++; S.sessions.push({ t:Date.now(), d:Math.round(dur/1000) }); if(S.sessions.length>300) S.sessions.shift();
+  gainXP(10); sos.xp+=10; checkBadges(); save();
+  $('sumTime').textContent = ms(dur);
+  $('sumMissions').textContent = sos.missions;
+  $('sumXP').textContent = '+'+sos.xp;
+  $('sumMsg').textContent = `ครั้งที่ ${S.cravings} ที่คุณชนะความหิว`;
+  $('sos').classList.add('done');
 };
+$('sosDone').onclick = closeSOS;
 
 /* ---------- boot ---------- */
-checkBadges(); save(); render();
-setInterval(()=>renderStatus(new Date()), 30000);
-document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) render(); });
+checkBadges(); save(); renderAll(); showTab('home');
+setInterval(()=>{ if(tab==='home') renderTimer(); }, 1000);
+let lastNight = nightKey();
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden){ renderAll(); } });
+setInterval(()=>{ const n=nightKey(); if(n!==lastNight){ lastNight=n; renderAll(); } }, 60000);
 </script>
 </body>
 </html>
