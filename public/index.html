@@ -592,6 +592,169 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .rate-notes li{margin:4px 0}
 .mini-avatar svg,.av-wrap .avatar svg{width:88%;height:88%}
 
+/* ===== treadmill runs ===== */
+.run-hero{position:relative;overflow:hidden;isolation:isolate;background:var(--hero);color:#fff;border-radius:24px;padding:18px 18px 14px;
+  box-shadow:0 20px 50px rgba(255,90,31,.14),0 2px 6px rgba(0,0,0,.1)}
+.run-hero::before{content:"";position:absolute;z-index:-1;right:-110px;top:-130px;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,31,.5),rgba(255,90,31,0) 65%)}
+.run-hero .k{font-size:13px;color:rgba(255,255,255,.6);font-weight:600}
+.run-hero .big{font-size:46px;line-height:1.05;margin:4px 0;color:#fff}
+.run-hero .big small,.run-hero .big .u{font-size:17px;color:rgba(255,255,255,.55);margin-left:5px;font-weight:600;letter-spacing:0}
+.run-hero .sub{font-size:13.5px;color:#ffb08a;font-weight:600}
+.wbars{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:16px}
+.wbars>div{display:flex;flex-direction:column;align-items:center;gap:6px}
+.wbars .bar{height:70px;width:100%;display:flex;align-items:flex-end;justify-content:center}
+.wbars i{display:block;width:100%;max-width:26px;border-radius:7px;background:rgba(255,255,255,.1)}
+.wbars i.on{background:var(--grad);box-shadow:0 4px 12px rgba(255,90,31,.35)}
+.wbars span{font-size:11px;color:rgba(255,255,255,.45);font-weight:600}
+.wbars .today span{color:#fff}
+.cta.live{background:linear-gradient(135deg,#15803d,#22c55e);box-shadow:0 12px 28px rgba(34,197,94,.32)}
+.ghost-btn{width:100%;height:48px;margin-top:10px;border-radius:16px;background:var(--card);box-shadow:var(--shadow);color:var(--ink2);
+  font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px}
+.ghost-btn svg{width:18px;height:18px;color:var(--accent)}
+.wk12{display:grid;grid-template-columns:repeat(12,1fr);gap:5px}
+.wk12>div{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}
+.wk12 .bar{height:84px;width:100%;display:flex;align-items:flex-end}
+.wk12 i{display:block;width:100%;border-radius:5px;background:var(--fill)}
+.wk12 i.on{background:var(--accent);opacity:.55}
+.wk12 .cur i.on{background:var(--grad);opacity:1}
+.wk12 span{font-size:9.5px;color:var(--muted);font-weight:600;white-space:nowrap;height:12px}
+.rfeed{display:flex;flex-direction:column;gap:12px}
+.rcard{display:block;width:100%;text-align:left;padding:14px 16px 12px}
+.rc-head{display:flex;align-items:center;gap:11px}
+.rc-ic{width:38px;height:38px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex:none}
+.rc-ic svg{width:19px;height:19px}
+.rc-head .t{flex:1;min-width:0}
+.rc-head b{display:block;font-size:15.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-head span{font-size:12.5px;color:var(--muted)}
+.rc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.rc-tag{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--fill);color:var(--ink2);display:inline-flex;align-items:center;gap:4px}
+.rc-tag svg{width:12px;height:12px}
+.rc-tag.dinner{background:rgba(139,92,246,.14);color:#7c5cff}
+.rc-stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:12px}
+.rc-stats .k{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.rc-stats b{font-size:21px;line-height:1.2}
+.rc-stats small{font-size:12px;color:var(--muted);margin-left:2px;font-weight:600;letter-spacing:0}
+.rc-spark svg{display:block;width:100%;height:36px;margin-top:10px}
+.sp-area{fill:var(--accent);opacity:.14}
+.sp-line{fill:none;stroke:var(--accent);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.inc-line{fill:none;stroke:#8b7cf6;stroke-width:1.6;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}
+.more-btn{height:44px;border-radius:14px;font-weight:600;font-size:14.5px;color:var(--accent);background:var(--card);box-shadow:var(--shadow)}
+#runRecs .row{cursor:pointer}
+#runRecs .r{font-weight:700;color:var(--ink)}
+
+/* live treadmill screen */
+.rlive{position:fixed;inset:0;z-index:55;background:#0a0a0c;color:#f5f5f7;display:none;flex-direction:column;
+  padding:calc(var(--sat) + 8px) 18px calc(var(--sab) + 16px);overflow:auto;touch-action:manipulation}
+.rlive::before{content:"";position:fixed;left:50%;top:18%;width:520px;height:520px;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,31,.2),rgba(255,90,31,0) 62%);pointer-events:none}
+.rlive.open{display:flex}
+.rlive .icon-btn{background:rgba(255,255,255,.09);color:#f5f5f7}
+.rl-run{position:relative;display:flex;flex-direction:column;flex:1;width:100%;max-width:480px;margin:0 auto}
+.rlive.sum .rl-run{display:none}
+.rl-state{font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px;background:rgba(34,197,94,.16);color:#4ade80;display:inline-flex;align-items:center;gap:6px}
+.rl-state::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;animation:dotpulse 1.2s infinite}
+.rlive.paused .rl-state{background:rgba(251,191,36,.16);color:#fbbf24}
+.rlive.paused .rl-state::before{animation:none}
+.rl-clock{font-size:clamp(56px,17vw,76px);line-height:1;text-align:center;margin:16px 0 16px;letter-spacing:-.04em}
+.rlive.paused .rl-clock{animation:dotpulse 1.6s ease-in-out infinite}
+.rl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rl-grid>div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:10px 14px}
+.rl-grid .k{font-size:12px;color:#8e8e93;font-weight:600}
+.rl-grid b{display:block;font-size:28px;line-height:1.15;margin-top:2px}
+.rl-grid small{font-size:13px;color:#8e8e93;margin-left:3px;font-weight:600;letter-spacing:0}
+.rl-ctl{margin-top:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:12px 14px}
+.rl-ctl-head{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#a1a1a6;font-weight:600}
+.rl-ctl-head span{display:flex;align-items:center;gap:6px}
+.rl-ctl-head svg{width:16px;height:16px;color:#ff8a5c}
+.rl-step{display:grid;grid-template-columns:56px 1fr 56px;align-items:center;margin:6px 0 10px}
+.rl-step button{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;color:#fff;-webkit-touch-callout:none;touch-action:manipulation}
+.rl-step button:active{background:rgba(255,255,255,.22)}
+.rl-step button svg{width:24px;height:24px;stroke-width:2.6}
+.rl-step b{text-align:center;font-size:46px;line-height:1}
+.rl-chips{display:flex;gap:6px}
+.rl-chips button{flex:1;height:34px;border-radius:10px;background:rgba(255,255,255,.07);font-size:14px;font-weight:700;color:#d1d1d6}
+.rl-chips button.sel{background:var(--grad);color:#fff}
+.rl-btns{display:flex;gap:10px;margin-top:16px}
+.rl-btns button{flex:1;height:62px;border-radius:31px;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;gap:8px}
+.rl-btns svg{width:20px;height:20px}
+.rl-pause{background:#f5f5f7;color:#0a0a0c}
+.rl-pause svg{fill:currentColor;stroke:none}
+.rl-resume{background:var(--grad);color:#fff;box-shadow:0 12px 30px rgba(255,90,31,.4)}
+.rl-resume svg{fill:currentColor}
+.rl-finish{background:rgba(255,255,255,.1);color:#fff}
+.rl-finish svg{fill:currentColor;stroke:none;width:16px!important;height:16px!important}
+.rlive .rl-resume,.rlive .rl-finish,.rlive.paused .rl-pause{display:none}
+.rlive.paused .rl-resume,.rlive.paused .rl-finish{display:flex}
+.rl-count{position:fixed;inset:0;z-index:3;display:none;place-items:center;background:rgba(10,10,12,.88);font-size:140px;font-weight:800;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif}
+.rl-count.on{display:grid}
+.rl-count span{display:block}
+.rl-sum{position:relative;display:none;flex:1;flex-direction:column;align-items:center;text-align:center;padding-top:3vh;width:100%;max-width:440px;margin:0 auto}
+.rlive.sum .rl-sum{display:flex}
+.rl-sum .ok{width:84px;height:84px;border-radius:50%;background:var(--grad);display:grid;place-items:center;margin-bottom:16px;box-shadow:0 16px 40px rgba(255,90,31,.45)}
+.rl-sum .ok svg{width:40px;height:40px;stroke:#fff}
+.rl-sum h2{font-size:28px;margin:0 0 6px;letter-spacing:-.02em}
+.rl-sum p{color:#a1a1a6;font-size:14px;margin:0 0 16px;line-height:1.5}
+.rl-form{width:100%;background:rgba(255,255,255,.06);border-radius:20px;overflow:hidden;text-align:left}
+.rl-form label{display:flex;align-items:center;gap:10px;padding:0 16px;min-height:54px}
+.rl-form label+label{border-top:1px solid rgba(255,255,255,.08)}
+.rl-form label span{flex:1;font-size:15.5px;color:#d1d1d6}
+.rl-form input{width:110px;border:0;background:transparent;color:#fff;font:inherit;font-size:19px;font-weight:700;text-align:right;outline:none;font-variant-numeric:tabular-nums;padding:12px 0}
+.rl-form input:focus{color:#ff9a62}
+.rl-form small{color:#8e8e93;font-weight:600;font-size:13px;width:34px}
+.rl-sum .stats3{width:100%;margin:12px 0 0;background:rgba(255,255,255,.06);border-radius:20px}
+.rl-sum .stats3>div+div{border-color:rgba(255,255,255,.1)}
+.rl-sum .stats3 .label{color:#8e8e93}
+.rl-sum .stats3 .v{font-size:22px}
+.feel-k{font-size:13px;color:#8e8e93;font-weight:600;margin:16px 0 8px}
+.feel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.feel button{height:44px;border-radius:14px;background:rgba(255,255,255,.07);font-weight:600;font-size:14.5px;color:#d1d1d6}
+.feel button.sel{background:#f5f5f7;color:#0a0a0c}
+.feel.light button{background:var(--fill);color:var(--ink2)}
+.feel.light button.sel{background:var(--grad);color:#fff}
+.rl-sum .finish{margin-top:18px}
+.rl-discard{margin-top:4px;padding:12px;color:#ff6b6b;font-weight:600;font-size:14.5px}
+.run-pill{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--sab) + 74px);z-index:21;display:none;align-items:center;gap:8px;
+  height:42px;padding:0 18px 0 14px;border-radius:99px;background:#16a34a;color:#fff;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;
+  box-shadow:0 10px 24px rgba(22,163,74,.4);white-space:nowrap}
+.run-pill.on{display:flex}
+.run-pill i{width:8px;height:8px;border-radius:50%;background:#fff;animation:dotpulse 1.2s infinite}
+.run-pill svg{width:17px;height:17px}
+.run-pill.paused{background:#b45309;box-shadow:0 10px 24px rgba(180,83,9,.4)}
+.run-pill.paused i{animation:none}
+
+/* run detail & manual log sheets */
+.run-panel{max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.rd-title{font-size:21px!important;font-weight:700;margin:0 0 2px!important}
+.rd-date{font-size:13px;color:var(--muted);margin:0 0 14px}
+.rd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 8px;background:var(--fill);border-radius:16px;padding:14px}
+.rd-grid .k{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.rd-grid b{font-size:20px;line-height:1.25}
+.rd-grid small{font-size:11.5px;color:var(--muted);margin-left:2px;font-weight:600;letter-spacing:0}
+.rd-h{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;font-weight:700;margin:18px 0 8px}
+.rd-h span{font-size:12px;color:var(--muted);font-weight:600;display:flex;gap:10px;align-items:center}
+.rd-h i{display:inline-block;width:14px;height:3px;border-radius:2px;background:var(--accent);margin-right:4px;vertical-align:middle}
+.rd-h i.inc{background:#8b7cf6}
+.rd-chart svg{display:block;width:100%;height:120px}
+.rd-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:600;margin-top:4px}
+.split{display:grid;grid-template-columns:42px 52px 1fr;align-items:center;gap:10px;font-size:14px;padding:5px 0}
+.split .km{color:var(--muted);font-weight:600}
+.split .bar{height:8px;border-radius:99px;background:var(--fill);overflow:hidden}
+.split .bar i{display:block;height:100%;background:var(--accent);opacity:.6;border-radius:inherit}
+.split.best .bar i{background:var(--grad);opacity:1}
+.rd-actions{display:flex;flex-direction:column;gap:4px;margin-top:18px}
+.rd-actions .st-btn{width:100%;flex:none}
+.rd-del,.sheet-x{height:46px;font-weight:600;font-size:15px}
+.rd-del{color:#ff3b30}
+.sheet-x{color:var(--muted)}
+.lf{border-radius:16px;background:var(--fill);overflow:hidden}
+.lf label{display:flex;align-items:center;gap:10px;padding:0 14px;min-height:50px}
+.lf label+label{border-top:1px solid var(--line)}
+.lf span{flex:1;font-size:15px}
+.lf input{border:0;background:transparent;font:inherit;font-size:16px;text-align:right;color:var(--ink);width:52%;min-width:0;outline:none;padding:12px 0}
+.lf input:focus{color:var(--accent)}
+.run-panel .feel-k{color:var(--muted)}
+
 /* ===== splash / loading screen (shown before the app is ready) ===== */
 .splash{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;
   background:var(--bg);overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
@@ -745,6 +908,18 @@ html:has(#splash){overflow:hidden}
 <symbol id="i-calendar-check" viewBox="0 0 24 24"> <path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="m9 16 2 2 4-4" /></symbol>
 <symbol id="i-crown" viewBox="0 0 24 24"> <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z" /> <path d="M5 21h14" /></symbol>
 <symbol id="i-circle-help" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol>
+<symbol id="i-activity" viewBox="0 0 24 24"> <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" /></symbol>
+<symbol id="i-footprints" viewBox="0 0 24 24"> <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /> <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /> <path d="M16 17h4" /> <path d="M4 13h4" /></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"> <path d="m12 14 4-4" /> <path d="M3.34 19a10 10 0 1 1 17.32 0" /></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"> <path d="M5 12h14" /></symbol>
+<symbol id="i-mountain" viewBox="0 0 24 24"> <path d="m8 3 4 8 5-5 5 15H2L8 3z" /></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"> <rect x="14" y="4" width="4" height="16" rx="1" /> <rect x="6" y="4" width="4" height="16" rx="1" /></symbol>
+<symbol id="i-pencil" viewBox="0 0 24 24"> <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"> <polygon points="6 3 20 12 6 21 6 3" /></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"> <path d="M5 12h14" /> <path d="M12 5v14" /></symbol>
+<symbol id="i-square" viewBox="0 0 24 24"> <rect width="18" height="18" x="3" y="3" rx="2" /></symbol>
+<symbol id="i-trending-up" viewBox="0 0 24 24"> <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /> <polyline points="16 7 22 7 22 13" /></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"> <path d="m6 9 6 6 6-6" /></symbol>
   <defs>
     <linearGradient id="gArc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb37f"/><stop offset=".5" stop-color="#ff6a2b"/><stop offset="1" stop-color="#ff3d00"/></linearGradient>
   </defs>
@@ -815,6 +990,39 @@ html:has(#splash){overflow:hidden}
     </div>
 
     <button class="card rw-strip press anim" id="rwStrip"><span class="ic"><svg class="i"><use href="#i-gift"/></svg></span><span class="tx"><b data-i18n="rwStripTitle"></b><span id="rwStripText"></span></span><svg class="i"><use href="#i-chevron-right"/></svg></button>
+  </section>
+
+  <!-- ============ RUN (treadmill) ============ -->
+  <section class="tab" id="tab-run" data-title="tabRun" hidden>
+    <div class="anim">
+      <div class="eyebrow" data-i18n="runEyebrow"></div>
+      <h1 class="large" data-i18n="tabRun"></h1>
+    </div>
+
+    <div class="run-hero anim">
+      <div class="k" data-i18n="runThisWeek"></div>
+      <div class="big num"><span id="rwKm">0.0</span><small>km</small></div>
+      <div class="sub" id="rwSub"></div>
+      <div class="wbars" id="rwBars"></div>
+    </div>
+    <button class="cta press anim" id="runCta"><svg class="i"><use href="#i-play"/></svg><span id="runCtaText"></span></button>
+    <button class="ghost-btn press anim" id="runLogBtn"><svg class="i"><use href="#i-pencil"/></svg><span data-i18n="runLog"></span></button>
+
+    <div class="section anim"><h2 data-i18n="runWeeks"></h2><span class="aside" id="wk12Avg"></span></div>
+    <div class="card anim"><div class="wk12" id="wk12"></div></div>
+
+    <div class="section anim"><h2 data-i18n="runRecords"></h2></div>
+    <div class="list anim" id="runRecs"></div>
+
+    <div class="section anim"><h2 data-i18n="runTotals"></h2></div>
+    <div class="card stats3 anim">
+      <div><div class="label" data-i18n="runCount"></div><div class="v num" id="rtCount">0</div></div>
+      <div><div class="label" data-i18n="runKmTotal"></div><div class="v num" id="rtKm">0</div></div>
+      <div><div class="label" data-i18n="runHours"></div><div class="v num" id="rtHrs">0</div></div>
+    </div>
+
+    <div class="section anim"><h2 data-i18n="runActivities"></h2><span class="aside" id="runCountAside"></span></div>
+    <div class="rfeed anim" id="runFeed"></div>
   </section>
 
   <!-- ============ REWARDS (quests + gacha) ============ -->
@@ -956,6 +1164,7 @@ html:has(#splash){overflow:hidden}
       <div class="row"><label for="fCut" data-i18n="fCut"></label><input id="fCut" type="time"></div>
       <div class="row"><label for="fBreak" data-i18n="fBreak"></label><input id="fBreak" type="time"></div>
       <div class="row"><label for="fCost" data-i18n="fCost"></label><input id="fCost" type="number" inputmode="numeric" min="0" step="10"></div>
+      <div class="row"><label for="fWeight" data-i18n="fWeight"></label><input id="fWeight" type="number" inputmode="decimal" min="25" max="250" step="0.5"></div>
       <div class="row link" id="replayTour" role="button" tabindex="0"><span style="flex:1" data-i18n="replayTour"></span><svg class="i"><use href="#i-circle-help"/></svg></div>
     </div>
     <button class="danger press anim" id="resetAll" data-i18n="reset"></button>
@@ -965,6 +1174,7 @@ html:has(#splash){overflow:hidden}
 
 <nav class="tabbar" id="tabbar">
   <button data-tab="home" class="on"><svg class="i"><use href="#i-house"/></svg><span data-i18n="tabToday"></span></button>
+  <button data-tab="run"><svg class="i"><use href="#i-footprints"/></svg><span data-i18n="tabRun"></span></button>
   <button data-tab="rewards"><svg class="i"><use href="#i-gift"/></svg><span data-i18n="tabRewards"></span><i class="tab-dot" id="rwDot" hidden></i></button>
   <button data-tab="progress"><svg class="i"><use href="#i-chart-no-axes-column"/></svg><span data-i18n="tabProgress"></span></button>
   <button data-tab="profile"><svg class="i"><use href="#i-user-round"/></svg><span data-i18n="tabProfile"></span></button>
@@ -1024,6 +1234,100 @@ html:has(#splash){overflow:hidden}
     </div>
     <div class="spacer"></div>
     <button class="finish press" id="sosDone" style="max-width:420px" data-i18n="done"></button>
+  </div>
+</div>
+
+<!-- ============ LIVE TREADMILL RUN ============ -->
+<div class="rlive" id="runLive" role="dialog" aria-modal="true" data-i18n-aria="runLiveTitle">
+  <div class="rl-run">
+    <div class="sos-top">
+      <button class="icon-btn press" id="rlMin" data-i18n-aria="runMin"><svg class="i"><use href="#i-chevron-down"/></svg></button>
+      <span class="ttl" data-i18n="runLiveTitle"></span>
+      <span class="rl-state" id="rlState"></span>
+    </div>
+    <div class="rl-clock num" id="rlTime">0:00:00</div>
+    <div class="rl-grid">
+      <div><span class="k" data-i18n="runDist"></span><b class="num"><span id="rlDist">0.00</span><small>km</small></b></div>
+      <div><span class="k" data-i18n="runPace"></span><b class="num"><span id="rlPace">–:––</span><small>/km</small></b></div>
+      <div><span class="k" data-i18n="runKcal"></span><b class="num"><span id="rlKcal">0</span><small>kcal</small></b></div>
+      <div><span class="k" data-i18n="runElev"></span><b class="num"><span id="rlElev">0</span><small>m</small></b></div>
+    </div>
+    <div class="rl-ctl">
+      <div class="rl-ctl-head"><span><svg class="i"><use href="#i-gauge"/></svg><span data-i18n="runSpeed"></span></span><span>km/h</span></div>
+      <div class="rl-step">
+        <button type="button" data-adj="speed" data-d="-0.1" data-i18n-aria="runSlower"><svg class="i"><use href="#i-minus"/></svg></button>
+        <b class="num" id="rlSpeed">0.0</b>
+        <button type="button" data-adj="speed" data-d="0.1" data-i18n-aria="runFaster"><svg class="i"><use href="#i-plus"/></svg></button>
+      </div>
+      <div class="rl-chips" id="rlSpeedChips"></div>
+    </div>
+    <div class="rl-ctl">
+      <div class="rl-ctl-head"><span><svg class="i"><use href="#i-trending-up"/></svg><span data-i18n="runIncline"></span></span><span>%</span></div>
+      <div class="rl-step">
+        <button type="button" data-adj="incline" data-d="-0.5" data-i18n-aria="runLower"><svg class="i"><use href="#i-minus"/></svg></button>
+        <b class="num" id="rlInc">0.0</b>
+        <button type="button" data-adj="incline" data-d="0.5" data-i18n-aria="runHigher"><svg class="i"><use href="#i-plus"/></svg></button>
+      </div>
+      <div class="rl-chips" id="rlIncChips"></div>
+    </div>
+    <div class="rl-btns">
+      <button class="rl-pause press" id="rlPause"><svg class="i"><use href="#i-pause"/></svg><span data-i18n="runPause"></span></button>
+      <button class="rl-finish press" id="rlFinish"><svg class="i"><use href="#i-square"/></svg><span data-i18n="runFinish"></span></button>
+      <button class="rl-resume press" id="rlResume"><svg class="i"><use href="#i-play"/></svg><span data-i18n="runResume"></span></button>
+    </div>
+    <div class="rl-count" id="rlCount" aria-live="assertive"></div>
+  </div>
+  <div class="rl-sum" id="rlSum">
+    <div class="ok"><svg class="i"><use href="#i-trophy"/></svg></div>
+    <h2 data-i18n="runDoneTitle"></h2>
+    <p data-i18n="runDoneSub"></p>
+    <div class="rl-form">
+      <label><span data-i18n="runDist"></span><input id="rsDist" type="number" inputmode="decimal" min="0" step="0.01"><small>km</small></label>
+      <label><span data-i18n="runTime"></span><input id="rsTime" inputmode="numeric" placeholder="mm:ss" autocomplete="off"><small></small></label>
+      <label><span data-i18n="runKcal"></span><input id="rsKcal" type="number" inputmode="numeric" min="0" step="1"><small>kcal</small></label>
+    </div>
+    <div class="stats3">
+      <div><div class="label" data-i18n="runAvgPace"></div><div class="v num" id="rsPace">–:––</div></div>
+      <div><div class="label" data-i18n="runElev"></div><div class="v num" id="rsElev">0</div></div>
+      <div><div class="label">XP</div><div class="v num" id="rsXP">+0</div></div>
+    </div>
+    <div class="feel-k" data-i18n="runFeel"></div>
+    <div class="feel" id="rsFeel"></div>
+    <button class="finish press" id="rsSave" data-i18n="runSave"></button>
+    <button class="rl-discard press" id="rsDiscard" data-i18n="runDiscard"></button>
+  </div>
+</div>
+<button class="run-pill press" id="runPill"><i></i><svg class="i"><use href="#i-footprints"/></svg><span id="runPillText"></span></button>
+
+<div class="rmodal" id="runSheet" role="dialog" aria-modal="true">
+  <div class="rm-bg" id="runSheetBg"></div>
+  <div class="rm-panel run-panel">
+    <div id="rdBody"></div>
+    <div class="rd-actions">
+      <button class="st-btn press" id="rdClose" data-i18n="close"></button>
+      <button class="rd-del press" id="rdDel" data-i18n="runDelete"></button>
+    </div>
+  </div>
+</div>
+
+<div class="rmodal" id="runLog" role="dialog" aria-modal="true" aria-labelledby="lgH">
+  <div class="rm-bg" id="runLogBg"></div>
+  <div class="rm-panel run-panel">
+    <h3 id="lgH" class="rd-title" data-i18n="runLogTitle"></h3>
+    <p class="rd-date" data-i18n="runLogSub"></p>
+    <div class="lf">
+      <label><span data-i18n="runWhen"></span><input id="lgWhen" type="datetime-local"></label>
+      <label><span data-i18n="runMinutes"></span><input id="lgMin" type="number" inputmode="decimal" min="1" max="600" step="1" placeholder="30"></label>
+      <label><span data-i18n="runDistKm"></span><input id="lgDist" type="number" inputmode="decimal" min="0" step="0.01" placeholder="5.00"></label>
+      <label><span data-i18n="runAvgIncline"></span><input id="lgInc" type="number" inputmode="decimal" min="-3" max="15" step="0.5" placeholder="0"></label>
+      <label><span data-i18n="runKcalOpt"></span><input id="lgKcal" type="number" inputmode="numeric" min="0" step="1" data-i18n-ph="auto"></label>
+    </div>
+    <div class="feel-k" data-i18n="runFeel"></div>
+    <div class="feel light" id="lgFeel"></div>
+    <div class="rd-actions">
+      <button class="st-btn press" id="lgSave" data-i18n="runSave"></button>
+      <button class="sheet-x press" id="lgCancel" data-i18n="cancel"></button>
+    </div>
   </div>
 </div>
 
@@ -1154,7 +1458,7 @@ const KEY = 'skipdinner.v1';
    Leave both empty to turn cloud sync off. Never put the secret/service_role key here. */
 const CLOUD = { url:'https://acfamivfwkpihgqrmfui.supabase.co', key:'sb_publishable__yvE3Bg8EwsYPxoDbKGpZQ_vf-N7k0W' };
 const SYNC_KEY = 'skipdinner.sync';
-const DEFAULTS = { name:'', cutoff:'17:00', breakfast:'07:00', cost:80, lang:'' };
+const DEFAULTS = { name:'', cutoff:'17:00', breakfast:'07:00', cost:80, lang:'', weight:60 };
 const XP_VAL = { ok:50, light:20, miss:5 };
 const WAVE_MS = 10*60*1000;
 const RING_C = 2*Math.PI*104, LV_C = 2*Math.PI*39, CD_C = 2*Math.PI*146;
@@ -1203,6 +1507,31 @@ const I18N = {
     fName:'ชื่อ', fNamePh:'ใส่ชื่อ', fCut:'เวลาปิดครัว', fBreak:'มื้อเช้า', fCost:'ค่ามื้อเย็น (บาท)',
     reset:'ล้างข้อมูลทั้งหมด', resetConfirm:'ล้างประวัติ XP และความสำเร็จทั้งหมด? ย้อนกลับไม่ได้', resetDone:'ล้างข้อมูลแล้ว',
     footnote:'ฟังร่างกายตัวเองเสมอ ถ้าเวียนหัว ใจสั่น มือสั่น มีโรคประจำตัว (เช่น เบาหวาน กรดไหลย้อน) หรือกำลังตั้งครรภ์ ให้กินได้เลยและปรึกษาแพทย์ก่อนงดมื้อเป็นประจำ · ข้อมูลเก็บไว้ในเครื่องนี้ และขึ้นคลาวด์เฉพาะเมื่อคุณล็อกอิน',
+    tabRun:'วิ่ง', runEyebrow:'ลู่วิ่ง', runThisWeek:'สัปดาห์นี้', runWeekSub:'{n} ครั้ง · {time} · ไต่ {m} ม.',
+    runStart:'เริ่มวิ่งบนลู่', runBack:'กลับไปที่การวิ่ง', runLog:'บันทึกการวิ่งย้อนหลัง',
+    runWeeks:'12 สัปดาห์ล่าสุด', runWeeksAvg:'เฉลี่ย {km} กม./สัปดาห์', runRecords:'สถิติส่วนตัว', runTotals:'รวมทั้งหมด',
+    runActivities:'กิจกรรม', runCountN:'{n} ครั้ง', runCount:'ครั้ง', runKmTotal:'กิโลเมตร', runHours:'ชั่วโมง', runMore:'ดูเพิ่ม',
+    runEmpty:'ยังไม่มีการวิ่ง ลองกด "เริ่มวิ่งบนลู่" แล้วสถิติจะมาอยู่ตรงนี้',
+    recLongest:'ระยะไกลที่สุด', rec1k:'1 กม. เร็วที่สุด', rec5k:'5 กม. เร็วที่สุด', rec10k:'10 กม. เร็วที่สุด', recClimb:'ไต่สูงที่สุด', recLong:'วิ่งนานที่สุด',
+    recNone:'วิ่งครั้งแรกเพื่อปลดล็อกสถิติส่วนตัว',
+    runDist:'ระยะทาง', runDistKm:'ระยะทาง (กม.)', runPace:'เพซ', runAvgPace:'เพซเฉลี่ย', runTime:'เวลา', runKcal:'แคลอรี่', runElev:'ไต่ระดับ',
+    runSpeed:'ความเร็ว', runAvgSpeed:'ความเร็วเฉลี่ย', runIncline:'ความชัน',
+    runLiveTitle:'วิ่งบนลู่', runMin:'ย่อหน้าจอ', runOn:'กำลังวิ่ง', runPaused:'พักอยู่', runGo:'ไป!',
+    runPause:'พัก', runResume:'วิ่งต่อ', runFinish:'จบการวิ่ง',
+    runSlower:'ลดความเร็ว', runFaster:'เพิ่มความเร็ว', runLower:'ลดความชัน', runHigher:'เพิ่มความชัน',
+    runSplit:'กม. ที่ {n} · เพซ {p}',
+    runDoneTitle:'วิ่งเสร็จแล้ว!', runDoneSub:'ตัวเลขตรงกับหน้าจอลู่วิ่งไหม? แก้ให้ตรงได้ก่อนบันทึก',
+    runFeel:'รู้สึกยังไง', feel1:'สบายๆ', feel2:'กำลังดี', feel3:'เหนื่อยมาก',
+    runSave:'บันทึกการวิ่ง', runDiscard:'ทิ้งการวิ่งนี้', runDiscardConfirm:'ทิ้งการวิ่งนี้ใช่ไหม? จะไม่ถูกบันทึก',
+    runTooShort:'สั้นเกินไป ต้องวิ่งอย่างน้อย 1 นาที', runBadInput:'ตรวจสอบระยะทางและเวลาอีกครั้ง', runFuture:'เลือกเวลาในอนาคตไม่ได้',
+    runSaved:'บันทึกแล้ว +{xp} XP · ✦{s}', runDelete:'ลบการวิ่งนี้', runDeleted:'ลบการวิ่งแล้ว',
+    runDeleteConfirm:'ลบการวิ่งนี้ใช่ไหม? XP และ ✦ ที่ได้จะถูกหักคืน',
+    runManual:'บันทึกเอง', runDinner:'ช่วงมื้อเย็น', runProfile:'ความเร็วและความชัน', runSplits:'สปลิตรายกิโล',
+    runLogTitle:'บันทึกการวิ่งย้อนหลัง', runLogSub:'ใส่ตัวเลขจากหน้าจอลู่วิ่ง', runWhen:'วันและเวลา', runMinutes:'เวลาที่วิ่ง (นาที)',
+    runAvgIncline:'ความชันเฉลี่ย (%)', runKcalOpt:'แคลอรี่', auto:'อัตโนมัติ',
+    runTitle:(h,day)=>'วิ่ง'+(h>=5&&h<11?'ตอนเช้า':h>=11&&h<14?'ตอนเที่ยง':h>=14&&h<17?'ตอนบ่าย':h>=17&&h<21?'ตอนเย็น':'ตอนดึก')+'วัน'+day,
+    qRun2:'วิ่งบนลู่ 2 ครั้งในสัปดาห์', qRun10:'วิ่งรวม 10 กม. ในสัปดาห์', qRunTotal:'วิ่งบนลู่รวม {n} กม.',
+    fWeight:'น้ำหนักตัว (กก.)', errWeight:'ใส่น้ำหนัก 25–250 กก.',
     settingsSaved:'บันทึกการตั้งค่าแล้ว', errCut:'เวลาปิดครัวต้องหลังมื้อเช้า', errBreak:'มื้อเช้าต้องก่อนเวลาปิดครัว',
     toastOk:'เยี่ยมมาก · +{xp} XP', toastLight:'รักษาสตรีคไว้ได้ · +{xp} XP', toastMiss:'ไม่เป็นไร พรุ่งนี้เริ่มใหม่',
     levelUp:'เลื่อนระดับ: {name} · Lv.{l}', badgeGot:'ได้รับความสำเร็จ: {name}',
@@ -1234,6 +1563,7 @@ const I18N = {
     rateDupe:'ได้ตัวซ้ำจะเปลี่ยนเป็นเศษดาว ✦ (เกลือ 1 · ธรรมดา 2 · แรร์ 4 · SR 10 · ตำนาน 25) สะสม 10✦ แลกตั๋วได้ 1 ใบ',
     saltQuips:['เค็มอีกแล้ว…','เกลือมาตามนัด','ไม่เป็นไร เกลือก็มีประโยชน์ (นิดนึง)','ตู้นี้ชอบเกลือจริงๆ','ความเค็ม +1'],
     quip_common:'เพื่อนใหม่มาแล้ว!', quip_rare:'โอ้โห! ได้แรร์!', quip_sr:'ซูเปอร์แรร์!! ดวงดีสุดๆ', quip_legend:'ตำนานปรากฏตัวแล้ว!!!',
+    t_run:'ชอบวิ่งไหม? แท็บ "วิ่ง" จับเวลาวิ่งบนลู่ให้\nตั้งความเร็วกับความชันตามหน้าจอลู่ แล้วเราจะคิดระยะทาง เพซ กับแคลอรี่ให้เอง',
     t_gacha:'ทำเควสแล้วจะได้ตั๋วมาหมุนตู้กาชา สะสมตัวละครให้ครบทั้ง 6 คอลเลกชัน!\nระวัง "เกลือ" ด้วยนะ ออกบ่อยมาก',
     mascotName:'มูนนี่', tourSkip:'ข้าม', tourNext:'ต่อไป', tourStart:'เริ่มเลย!', tourOk:'ตกลง', tourNoName:'ไม่บอกดีกว่า',
     helpAria:'วิธีใช้', replayTour:'ดูวิธีใช้อีกครั้ง', tourGift:'ของขวัญต้อนรับ +20 XP',
@@ -1262,7 +1592,7 @@ const I18N = {
     t_doneAgain:'พร้อมแล้ว{nm}! ไปลุยกันต่อเลย',
     levels:['มือใหม่','เริ่มจับทาง','มีวินัย','สม่ำเสมอ','แข็งแกร่ง','ตัวจริง','ระดับโปร','ตำนาน'],
     badges:{ first:'คืนแรก', s3:'สตรีค 3 คืน', s7:'สตรีค 7 คืน', s14:'สตรีค 14 คืน', s30:'สตรีค 30 คืน', n20:'งดได้ 20 คืน',
-      f1:'ต้านหิวครั้งแรก', f10:'ต้านหิว 10 ครั้ง', c10:'ภารกิจ 10 ครั้ง', b500:'ประหยัด ฿500', b2000:'ประหยัด ฿2,000', honest:'บันทึกตามจริง' },
+      f1:'ต้านหิวครั้งแรก', f10:'ต้านหิว 10 ครั้ง', c10:'ภารกิจ 10 ครั้ง', b500:'ประหยัด ฿500', b2000:'ประหยัด ฿2,000', honest:'บันทึกตามจริง', run1:'วิ่งครั้งแรก', run42:'ครบมาราธอน' },
     missionList:[
       'ดื่มน้ำเปล่า 1 แก้วใหญ่ให้หมดแก้ว','แปรงฟันเลย ปากสดชื่นแล้วความอยากจะลดลง','ชงชาร้อนหรือชาสมุนไพร ไม่ใส่น้ำตาล',
       'สควอท 15 ครั้ง','ออกไปเดินเบาๆ 5 นาที','อาบน้ำอุ่นให้สบายตัว','ทักหรือโทรหาเพื่อนสักคน','เขียน 3 เรื่องดีๆ ที่เกิดขึ้นวันนี้',
@@ -1309,6 +1639,31 @@ const I18N = {
     fName:'Name', fNamePh:'Your name', fCut:'Kitchen closes', fBreak:'Breakfast', fCost:'Dinner cost (฿)',
     reset:'Reset all data', resetConfirm:'Erase all history, XP and achievements? This cannot be undone.', resetDone:'All data cleared',
     footnote:'Listen to your body. If you feel dizzy, shaky or your heart races, have a medical condition (e.g. diabetes, acid reflux) or are pregnant — eat, and talk to a doctor before skipping meals regularly. · Your data stays on this device and goes to the cloud only if you sign in.',
+    tabRun:'Run', runEyebrow:'Treadmill', runThisWeek:'This week', runWeekSub:'{n} runs · {time} · {m} m climb',
+    runStart:'Start treadmill run', runBack:'Back to your run', runLog:'Log a past run',
+    runWeeks:'Last 12 weeks', runWeeksAvg:'Avg {km} km/week', runRecords:'Personal records', runTotals:'All time',
+    runActivities:'Activities', runCountN:'{n} runs', runCount:'Runs', runKmTotal:'Kilometres', runHours:'Hours', runMore:'Show more',
+    runEmpty:'No runs yet. Tap "Start treadmill run" and your stats will show up here.',
+    recLongest:'Longest run', rec1k:'Fastest 1 km', rec5k:'Fastest 5 km', rec10k:'Fastest 10 km', recClimb:'Most climb', recLong:'Longest time',
+    recNone:'Finish your first run to unlock personal records.',
+    runDist:'Distance', runDistKm:'Distance (km)', runPace:'Pace', runAvgPace:'Avg pace', runTime:'Time', runKcal:'Calories', runElev:'Climb',
+    runSpeed:'Speed', runAvgSpeed:'Avg speed', runIncline:'Incline',
+    runLiveTitle:'Treadmill run', runMin:'Minimize', runOn:'Running', runPaused:'Paused', runGo:'Go!',
+    runPause:'Pause', runResume:'Resume', runFinish:'Finish',
+    runSlower:'Slower', runFaster:'Faster', runLower:'Lower incline', runHigher:'Higher incline',
+    runSplit:'Km {n} · {p} /km',
+    runDoneTitle:'Run complete!', runDoneSub:'Do the numbers match the treadmill screen? Fix them before saving.',
+    runFeel:'How did it feel?', feel1:'Easy', feel2:'Moderate', feel3:'Hard',
+    runSave:'Save run', runDiscard:'Discard this run', runDiscardConfirm:'Discard this run? It will not be saved.',
+    runTooShort:'Too short. Run for at least 1 minute.', runBadInput:'Check the distance and time.', runFuture:'That time is in the future.',
+    runSaved:'Saved +{xp} XP · ✦{s}', runDelete:'Delete this run', runDeleted:'Run deleted',
+    runDeleteConfirm:'Delete this run? The XP and ✦ it earned will be taken back.',
+    runManual:'Logged', runDinner:'Dinner time', runProfile:'Speed & incline', runSplits:'Splits',
+    runLogTitle:'Log a past run', runLogSub:'Enter the numbers from the treadmill screen.', runWhen:'Date & time', runMinutes:'Duration (min)',
+    runAvgIncline:'Avg incline (%)', runKcalOpt:'Calories', auto:'Auto',
+    runTitle:(h,day)=>`${day} ${h>=5&&h<11?'morning':h>=11&&h<14?'lunch':h>=14&&h<17?'afternoon':h>=17&&h<21?'evening':'night'} run`,
+    qRun2:'Run on the treadmill twice this week', qRun10:'Run 10 km this week', qRunTotal:'Run {n} km in total',
+    fWeight:'Body weight (kg)', errWeight:'Enter a weight from 25 to 250 kg',
     settingsSaved:'Settings saved', errCut:'Kitchen must close after breakfast', errBreak:'Breakfast must be before kitchen closes',
     toastOk:'Great job · +{xp} XP', toastLight:'Streak kept · +{xp} XP', toastMiss:'No worries — fresh start tomorrow',
     levelUp:'Level up: {name} · Lv.{l}', badgeGot:'Achievement unlocked: {name}',
@@ -1340,6 +1695,7 @@ const I18N = {
     rateDupe:'Duplicates turn into stardust ✦ (Salt 1 · Common 2 · Rare 4 · SR 10 · Legend 25). Trade 10✦ for a ticket.',
     saltQuips:['Salty again…','Salt arrives right on schedule','Salt has its uses (kind of)','This machine really loves salt','+1 saltiness'],
     quip_common:'A new friend appears!', quip_rare:'Ooh — a Rare!', quip_sr:'SUPER RARE!! What luck!', quip_legend:'A LEGEND has appeared!!!',
+    t_run:'Like running? The Run tab tracks treadmill runs.\nSet the speed and incline like on the treadmill and I will work out distance, pace and calories.',
     t_gacha:'Complete quests to earn tickets for the gachapon. Complete all 6 collections!\nWatch out for "Salt" — it drops a lot.',
     mascotName:'Moonie', tourSkip:'Skip', tourNext:'Next', tourStart:"Let's go!", tourOk:'OK', tourNoName:'Skip',
     helpAria:'How to use', replayTour:'Replay tutorial', tourGift:'Welcome gift +20 XP',
@@ -1368,7 +1724,7 @@ const I18N = {
     t_doneAgain:"You're all set{nm}! Let's keep going.",
     levels:['Beginner','Finding rhythm','Disciplined','Consistent','Strong','The real deal','Pro','Legend'],
     badges:{ first:'First night', s3:'3-night streak', s7:'7-night streak', s14:'14-night streak', s30:'30-night streak', n20:'20 nights fasted',
-      f1:'First craving resisted', f10:'10 cravings resisted', c10:'10 missions', b500:'Saved ฿500', b2000:'Saved ฿2,000', honest:'Honest log' },
+      f1:'First craving resisted', f10:'10 cravings resisted', c10:'10 missions', b500:'Saved ฿500', b2000:'Saved ฿2,000', honest:'Honest log', run1:'First run', run42:'Marathon total' },
     missionList:[
       'Drink a big glass of water — all of it','Brush your teeth — a fresh mouth curbs cravings','Make hot tea or herbal tea, no sugar',
       'Do 15 squats','Take a gentle 5-minute walk','Take a warm shower','Message or call a friend','Write down 3 good things from today',
@@ -1397,11 +1753,13 @@ const BADGES = [
   { id:'b500',  icon:'piggy-bank',   test:()=>saved()>=500 },
   { id:'b2000', icon:'coins',        test:()=>saved()>=2000 },
   { id:'honest',icon:'heart',        test:()=>countStatus('miss')>=1 },
+  { id:'run1',  icon:'footprints',   test:s=>(s.runs||[]).length>=1 },
+  { id:'run42', icon:'mountain',     test:()=>totalKm()>=42.195 },
 ];
 
 /* ---------- state ---------- */
 function detectLang(){ try{ return (navigator.language||'').toLowerCase().startsWith('th') ? 'th' : 'en'; }catch(e){ return 'th'; } }
-function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, logAt:{}, epoch:0, updatedAt:0, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}} }; }
+function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, logAt:{}, epoch:0, updatedAt:0, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}}, runs:[], runDel:{} }; }
 function shape(r){
   const b=blank();
   if(!r || typeof r!=='object') return b;
@@ -1409,7 +1767,8 @@ function shape(r){
   if(!settings.lang) settings.lang = 'th';
   const g = r.gacha||{};
   return {...b, ...r, settings, log:{...(r.log||{})}, logAt:{...(r.logAt||{})}, badges:[...(r.badges||[])], sessions:[...(r.sessions||[])],
-    gacha:{...b.gacha, ...g, owned:{...(g.owned||{})}}, quests:{claimed:{...((r.quests||{}).claimed||{})}}};
+    gacha:{...b.gacha, ...g, owned:{...(g.owned||{})}}, quests:{claimed:{...((r.quests||{}).claimed||{})}},
+    runs:(Array.isArray(r.runs) ? r.runs : []).map(x=>({...x, segs:(x.segs||[]).map(s=>[...s])})), runDel:{...(r.runDel||{})}};
 }
 function load(){
   try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r && typeof r==='object') return shape(r); }catch(e){}
@@ -1749,11 +2108,11 @@ function renderProfile(){
     return `<div class="${has?'':'locked'}"><div class="medal ${has?'got':''}">${b.icon ? icon(b.icon) : b.txt}</div><div class="n">${L().badges[b.id]}</div></div>`;
   }).join('');
   if(document.activeElement?.tagName!=='INPUT'){
-    $('fName').value=S.settings.name; $('fCut').value=S.settings.cutoff; $('fBreak').value=S.settings.breakfast; $('fCost').value=S.settings.cost;
+    $('fName').value=S.settings.name; $('fCut').value=S.settings.cutoff; $('fBreak').value=S.settings.breakfast; $('fCost').value=S.settings.cost; $('fWeight').value=S.settings.weight;
   }
 }
 
-function renderAll(){ renderHome(); renderProgress(); renderProfile(); renderRewards(); renderAccount(); }
+function renderAll(){ renderHome(); renderRun(); renderProgress(); renderProfile(); renderRewards(); renderAccount(); }
 
 /* ---------- tabs & nav ---------- */
 let tab='home';
@@ -1792,6 +2151,7 @@ bindSetting('fName', v=>{ S.settings.name=v.trim(); });
 bindSetting('fCut', v=>{ if(!v||v<=S.settings.breakfast){ toast(t('errCut')); return false; } S.settings.cutoff=v; });
 bindSetting('fBreak', v=>{ if(!v||v>=S.settings.cutoff){ toast(t('errBreak')); return false; } S.settings.breakfast=v; });
 bindSetting('fCost', v=>{ S.settings.cost=Math.max(0,Number(v)||0); });
+bindSetting('fWeight', v=>{ const n=Number(v); if(!(n>=25 && n<=250)){ toast(t('errWeight')); return false; } S.settings.weight=Math.round(n*10)/10; });
 $('resetAll').onclick=()=>{ if(confirm(t('resetConfirm'))){ const l=lang; S=blank(); S.settings.lang=l; S.epoch=Date.now(); save(); destroyCharts(); renderAll(); toast(t('resetDone')); } };
 
 try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ()=>{ destroyCharts(); renderAll(); }); }catch(e){}
@@ -2262,6 +2622,8 @@ function weeklyQuests(k){
     { id:`w:${wk}:fast3`, icon:'flame',          title:t('qWeek3'),   cur:Math.min(ok,3), goal:3, reward:{tickets:1} },
     { id:`w:${wk}:fast5`, icon:'flame',          title:t('qWeek5'),   cur:Math.min(ok,5), goal:5, reward:{tickets:2} },
     { id:`w:${wk}:log7`,  icon:'calendar-check', title:t('qWeekLog'), cur:logged,         goal:7, reward:{tickets:1} },
+    { id:`w:${wk}:run2`,  icon:'footprints',     title:t('qRun2'),    cur:Math.min(runsBetween(dayStart(mon), 7).length,2), goal:2, reward:{tickets:1} },
+    { id:`w:${wk}:run10`, icon:'footprints',     title:t('qRun10'),   cur:Math.min(Math.floor(runsBetween(dayStart(mon), 7).reduce((a,r)=>a+r.dist,0)),10), goal:10, reward:{tickets:2} },
   ];
 }
 const MILESTONES = [
@@ -2271,6 +2633,8 @@ const MILESTONES = [
     items:[[1,{tickets:1}],[10,{tickets:2}],[25,{tickets:3}],[50,{tickets:3,gold:1}],[100,{tickets:5,gold:1}]] },
   { track:'collect', icon:'book-open', val:()=>ownedCount(), title:n=>t('qCollect',{n}),
     items:[[6,{tickets:1}],[12,{tickets:2}],[18,{tickets:3,gold:1}],[24,{tickets:3}],[30,{tickets:4,gold:1}],[36,{tickets:5,gold:2}]] },
+  { track:'run',     icon:'footprints', val:()=>Math.floor(totalKm()), title:n=>t('qRunTotal',{n}),
+    items:[[5,{tickets:1}],[21,{tickets:2}],[42,{tickets:3,gold:1}],[100,{tickets:5,gold:1}],[200,{tickets:6,gold:2}]] },
 ];
 /* one quest per collection; it only shows in the quest list once the set is complete */
 function setQuest(s){
@@ -2619,6 +2983,7 @@ const STEPS = [
   { key:'t_charts',  mood:'think',   tab:'progress', target:'#weekCard' },
   { key:'t_cal',     mood:'wink',    tab:'progress', target:'#calCard' },
   { key:'t_badges',  mood:'excited', tab:'profile', target:'#badges' },
+  { key:'t_run',     mood:'excited', tab:'run', target:'#runCta' },
   { key:'t_gacha',   mood:'excited', tab:'rewards', target:'#machineCard' },
   { key:'t_help',    mood:'happy',   tab:'home', target:'#helpBtn', round:true },
   { key:'t_done',    mood:'excited', wave:true, final:true },
@@ -2775,6 +3140,381 @@ window.addEventListener('resize', ()=>{ if(tour) layoutStep(false); });
 $('helpBtn').onclick = ()=>startTour();
 $('replayTour').onclick = ()=>{ showTab('home'); setTimeout(startTour, 350); };
 
+/* ---------- treadmill runs ----------
+   No GPS on a treadmill, so a run is the console settings over time: segments [t, km/h, incline%],
+   each holding until the next one (t = seconds of moving time). Distance, pace, climb and calories
+   are all derived from them, and fixing the totals after a run just rescales the segments. */
+const RUN_KEY = 'skipdinner.run';          // the run in progress, kept on this device only
+const RUN_PREFS = 'skipdinner.runPrefs';   // last speed/incline used, to start the next run there
+const SPEED_CHIPS = [4,5,6,8,10,12], INCLINE_CHIPS = [0,1,2,4,6,8];
+const r1 = v => Math.round(v*10)/10;
+const runKg = () => Math.min(250, Math.max(25, Number(S.settings.weight)||60));
+function runPrefs(){ try{ return JSON.parse(localStorage.getItem(RUN_PREFS)) || {}; }catch(e){ return {}; } }
+/* ACSM metabolic equations (walking below 6.5 km/h, running above) → kcal per minute */
+function kcalPerMin(speed, incline, kg){
+  if(speed<=0) return 0;
+  const v = speed*1000/60, g = incline/100;
+  const vo2 = speed < 6.5 ? 0.1*v + 1.8*v*g + 3.5 : 0.2*v + 0.9*v*g + 3.5;
+  return vo2 * kg / 1000 * 5;
+}
+function segTotals(segs, end, kg){
+  let dist=0, elev=0, kcal=0;
+  segs.forEach(([ts,sp,inc],k)=>{
+    const dt = Math.max(0, (k+1<segs.length ? segs[k+1][0] : end) - ts), d = sp*dt/3600;
+    dist += d; elev += d*1000*Math.max(0,inc)/100; kcal += kcalPerMin(sp,inc,kg)*dt/60;
+  });
+  return { dist, elev, kcal };
+}
+function paceStr(sec){ if(!isFinite(sec) || sec<=0 || sec>=6000) return '–:––'; const s=Math.round(sec); return `${Math.floor(s/60)}:${pad(s%60)}`; }
+function durStr(sec){ const s=Math.max(0,Math.round(sec)); return s>=3600 ? `${Math.floor(s/3600)}:${pad(Math.floor(s/60)%60)}:${pad(s%60)}` : `${Math.floor(s/60)}:${pad(s%60)}`; }
+const kmStr = km => (Math.floor(km*100+1e-6)/100).toFixed(2);   // rounds down like a treadmill console
+const runPace = r => r.dist>0 ? r.dur/r.dist : NaN;
+const runXP = km => 10 + Math.round(km*10);
+function totalKm(){ return (S.runs||[]).reduce((a,r)=>a+r.dist,0); }
+function dayStart(d){ const x=new Date(d); x.setHours(0,0,0,0); return x; }
+function runsBetween(from, days){ const a=from.getTime(), b=addDays(from,days).getTime(); return S.runs.filter(r=>r.at>=a && r.at<b); }
+function runTitle(r){ const d=new Date(r.at); return L().runTitle(d.getHours(), L().days[d.getDay()]); }
+function runWhen(r){ const d=new Date(r.at); return `${fmtDate(d)} · ${d.toLocaleTimeString(L().locale,{hour:'2-digit',minute:'2-digit'})}`; }
+/* started within an hour before closing time up to 4 hours after: running instead of dinner */
+function isDinnerRun(r){ const d=new Date(r.at), [h,m]=S.settings.cutoff.split(':').map(Number), x=d.getHours()*60+d.getMinutes(), c=h*60+m; return x>=c-60 && x<=c+240; }
+
+/* metres covered by each whole second of moving time (for splits and best efforts) */
+function cumDist(r){
+  const n=Math.max(1,Math.round(r.dur)), out=new Float64Array(n+1); let k=0, d=0;
+  for(let s=1;s<=n;s++){ while(k+1<r.segs.length && r.segs[k+1][0] <= s-1) k++; d += (r.segs[k]?.[1]||0)/3.6; out[s]=d; }
+  const f = out[n] ? r.dist*1000/out[n] : 1; for(let s=1;s<=n;s++) out[s]*=f;
+  return out;
+}
+const _best = new Map();
+function bestTime(r, metres){
+  const key=`${r.id}|${metres}|${r.dist}|${r.dur}`;
+  if(_best.has(key)) return _best.get(key);
+  let best=Infinity;
+  if(r.dist*1000 >= metres-0.5){
+    const c=cumDist(r); let i=0;
+    for(let j=1;j<c.length;j++){ while(i+1<j && c[j]-c[i+1] >= metres) i++; if(c[j]-c[i] >= metres-0.5) best=Math.min(best, j-i); }
+  }
+  _best.set(key, best); return best;
+}
+function splits(r){
+  const c=cumDist(r), out=[]; let km=1, last=0;
+  for(let s=1;s<c.length;s++) while(c[s] >= km*1000-1e-6){ const tt = s-1 + (km*1000-c[s-1])/((c[s]-c[s-1])||1); out.push({ km, sec:tt-last }); last=tt; km++; }
+  const rest = r.dist-(km-1);
+  if(rest >= 0.05) out.push({ km:(km-1+rest).toFixed(2), part:rest, sec:r.dur-last });
+  return out;
+}
+/* stepped speed line (+ incline) for a run, drawn in a w×h box */
+function profileSVG(r, w, h, withInc){
+  const T=r.dur||1, speeds=r.segs.map(s=>s[1]), maxS=Math.max(...speeds, 1), maxI=Math.max(...r.segs.map(s=>s[2]), 0);
+  const lo=Math.min(...speeds)*.6;   // start the speed axis below the slowest speed so changes are visible
+  const y = (v,a,b) => (h - (v-a)/((b-a)||1)*h*.86).toFixed(1);
+  let line='', inc='';
+  r.segs.forEach(([ts,sp,ic],k)=>{
+    const x1=(ts/T*w).toFixed(1), x2=((k+1<r.segs.length ? r.segs[k+1][0] : T)/T*w).toFixed(1);
+    line += `${k?'L':'M'}${x1} ${y(sp,lo,maxS)}H${x2}`;
+    inc  += `${k?'L':'M'}${x1} ${y(Math.max(0,ic),0,maxI*1.25||1)}H${x2}`;
+  });
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path class="sp-area" d="${line}V${h}H0Z"/><path class="sp-line" d="${line}"/>${withInc && maxI>0 ? `<path class="inc-line" d="${inc}"/>` : ''}</svg>`;
+}
+/* turn raw console segments into a saved run whose totals match what the user confirmed */
+function buildRun(o){
+  let segs = o.segs.map(s=>[...s]);
+  const tScale = o.rawDur>0 ? o.dur/o.rawDur : 1;
+  segs.forEach(s=>s[0]=Math.round(s[0]*tScale));
+  segs = segs.filter((s,k)=> s[0] < o.dur && (k+1>=segs.length || segs[k+1][0] > s[0]));
+  if(!segs.length || segs[0][0]!==0) segs.unshift([0, (segs[0]||o.segs[0])[1], (segs[0]||o.segs[0])[2]]);
+  const raw = segTotals(segs, o.dur, runKg()).dist;
+  if(raw>0){ const f=o.dist/raw; segs.forEach(s=>s[1]=Math.round(s[1]*f*100)/100); }
+  else segs = [[0, Math.round(o.dist/(o.dur/3600)*100)/100, segs[0][2]]];
+  const tot = segTotals(segs, o.dur, runKg());
+  return { id:o.id, at:o.at, dur:Math.round(o.dur), dist:Math.round(o.dist*100)/100, segs, elev:Math.round(tot.elev),
+    kcal: o.kcal ?? Math.round(tot.kcal), feel:o.feel||0, ...(o.manual ? {manual:1} : {}) };
+}
+function commitRun(run){
+  S.runs = S.runs.filter(r=>r.id!==run.id); S.runs.push(run); S.runs.sort((a,b)=>a.at-b.at);
+  const xp=runXP(run.dist), sh=Math.floor(run.dist);
+  gainXP(xp); S.gacha.shards += sh;
+  checkBadges(); save(); renderAll();
+  return { xp, sh };
+}
+function deleteRun(id){
+  const r=S.runs.find(x=>x.id===id);
+  if(!r || !confirm(t('runDeleteConfirm'))) return;
+  S.runs = S.runs.filter(x=>x.id!==id); S.runDel[id]=Date.now();
+  gainXP(-runXP(r.dist)); S.gacha.shards = Math.max(0, S.gacha.shards - Math.floor(r.dist));
+  save(); renderAll(); closeSheet('runSheet'); toast(t('runDeleted'));
+}
+/* vibrate only after a real tap, as browsers require */
+function buzz(p){ if(navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) try{ navigator.vibrate(p); }catch(e){} }
+const newRunId = () => 'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+
+/* ---- live run ---- */
+function loadRun(){ try{ const r=JSON.parse(localStorage.getItem(RUN_KEY)); return r && Array.isArray(r.segs) && r.segs.length ? r : null; }catch(e){ return null; } }
+function keepRun(){ try{ R ? localStorage.setItem(RUN_KEY, JSON.stringify(R)) : localStorage.removeItem(RUN_KEY); }catch(e){} }
+let R = loadRun(), wakeLock = null, runShow = 10, sumFeel = 0, logFeel = 0, kcalTouched = false;
+const runT = (now=Date.now()) => R ? R.acc + (R.since ? (now-R.since)/1000 : 0) : 0;
+const runNow = () => { const T=runT(); return { T, ...segTotals(R.segs, T, runKg()) }; };
+const liveOpen = () => $('runLive').classList.contains('open');
+async function wake(on){
+  try{
+    if(on && !wakeLock && 'wakeLock' in navigator){ wakeLock = await navigator.wakeLock.request('screen'); wakeLock.addEventListener('release', ()=>{ wakeLock=null; }); }
+    else if(!on && wakeLock){ const w=wakeLock; wakeLock=null; await w.release(); }
+  }catch(e){}
+}
+function runSet(speed, incline){
+  if(!R) return;
+  speed = r1(Math.min(25, Math.max(0, speed))); incline = r1(Math.min(15, Math.max(-3, incline)));
+  if(speed===R.speed && incline===R.incline) return;
+  R.speed=speed; R.incline=incline;
+  const now=Math.round(runT()), segs=R.segs, last=segs[segs.length-1];
+  if(now-last[0] < 2){
+    last[1]=speed; last[2]=incline;
+    const prev=segs[segs.length-2]; if(prev && prev[1]===speed && prev[2]===incline) segs.pop();
+  } else segs.push([now, speed, incline]);
+  keepRun(); drawLive();
+  try{ localStorage.setItem(RUN_PREFS, JSON.stringify({speed, incline})); }catch(e){}
+}
+function startRun(){
+  if(R){ openLive(); return; }
+  const p=runPrefs(), sp=r1(p.speed ?? 6), inc=r1(p.incline ?? 1);
+  R = { id:newRunId(), at:Date.now(), segs:[[0,sp,inc]], speed:sp, incline:inc, acc:0, since:null, km:0, kmT:0 };
+  openLive();
+  countdown(()=>{ if(!R) return; R.at=Date.now(); R.since=Date.now(); keepRun(); wake(true); drawLive(); });
+}
+function countdown(done){
+  const el=$('rlCount');
+  if(REDUCE){ done(); return; }
+  const seq=[3,2,1,t('runGo')]; let i=0;
+  el.classList.add('on');
+  const step=()=>{
+    if(i===seq.length){ el.classList.remove('on'); el.innerHTML=''; return; }
+    el.innerHTML=`<span>${seq[i]}</span>`;
+    if(HAS_GSAP) gsap.fromTo(el.firstChild,{scale:1.8,opacity:0},{scale:1,opacity:1,duration:.45,ease:'back.out(2)'});
+    buzz(i===3?120:30);
+    if(i===3) done();
+    i++; setTimeout(step, i===4 ? 600 : 800);
+  };
+  step();
+}
+function openLive(){
+  if(!R) return;
+  const el=$('runLive'); el.classList.remove('sum'); el.classList.add('open'); document.body.style.overflow='hidden';
+  drawLive(); drawPill();
+  if(HAS_GSAP) gsap.fromTo(el,{opacity:0,y:28},{opacity:1,y:0,duration:.4,ease:'power3.out',clearProps:'opacity,transform'});
+  if(R.since) wake(true);
+}
+function closeLive(){ $('runLive').classList.remove('open','sum'); document.body.style.overflow=''; wake(false); renderRun(); drawPill(); }
+function drawLive(){
+  if(!R) return;
+  const n=runNow(), paused=!R.since;
+  $('rlTime').textContent = hms(n.T*1000);
+  $('rlDist').textContent = kmStr(n.dist);
+  $('rlPace').textContent = paceStr(R.speed>0 ? 3600/R.speed : NaN);
+  $('rlKcal').textContent = Math.round(n.kcal);
+  $('rlElev').textContent = Math.round(n.elev);
+  $('rlSpeed').textContent = R.speed.toFixed(1);
+  $('rlInc').textContent = R.incline.toFixed(1);
+  document.querySelectorAll('#rlSpeedChips button').forEach(b=>b.classList.toggle('sel', Number(b.dataset.v)===R.speed));
+  document.querySelectorAll('#rlIncChips button').forEach(b=>b.classList.toggle('sel', Number(b.dataset.v)===R.incline));
+  $('runLive').classList.toggle('paused', paused);
+  $('rlState').textContent = t(paused ? 'runPaused' : 'runOn');
+}
+function drawPill(){
+  const p=$('runPill'), on=!!R && !liveOpen();
+  p.classList.toggle('on', on);
+  if(!on) return;
+  p.classList.toggle('paused', !R.since);
+  const n=runNow(); $('runPillText').textContent = `${hms(n.T*1000)} · ${kmStr(n.dist)} km`;
+}
+/* a toast + buzz at every full kilometre, like a running watch */
+function checkSplit(){
+  if(!R?.since) return;
+  const n=runNow(), km=Math.floor(n.dist+1e-9), was=R.km||0;
+  if(km<=was) return;
+  const sec=n.T-(R.kmT||0);
+  R.km=km; R.kmT=n.T; keepRun();
+  if(km!==was+1) return;
+  toast(t('runSplit',{n:km, p:paceStr(sec)}));
+  buzz([60,40,60]);
+  if(liveOpen()) pop($('rlDist').parentElement);
+}
+setInterval(()=>{ if(!R) return; checkSplit(); if(liveOpen()) drawLive(); drawPill(); }, 500);
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && R?.since && liveOpen()) wake(true); });
+
+$('rlSpeedChips').innerHTML = SPEED_CHIPS.map(v=>`<button type="button" class="press" data-v="${v}">${v}</button>`).join('');
+$('rlIncChips').innerHTML = INCLINE_CHIPS.map(v=>`<button type="button" class="press" data-v="${v}">${v}</button>`).join('');
+$('rlSpeedChips').onclick = e=>{ const b=e.target.closest('button'); if(b && R) runSet(Number(b.dataset.v), R.incline); };
+$('rlIncChips').onclick = e=>{ const b=e.target.closest('button'); if(b && R) runSet(R.speed, Number(b.dataset.v)); };
+/* −/+ step once on tap and keep stepping while held, like the console buttons */
+document.querySelectorAll('#runLive [data-adj]').forEach(b=>{
+  let hold=null, rep=null;
+  const step=()=>{ if(!R) return; const d=Number(b.dataset.d); b.dataset.adj==='speed' ? runSet(R.speed+d, R.incline) : runSet(R.speed, R.incline+d); };
+  const stop=()=>{ clearTimeout(hold); clearInterval(rep); hold=rep=null; };
+  b.addEventListener('pointerdown', e=>{ e.preventDefault(); stop(); step(); hold=setTimeout(()=>{ rep=setInterval(step, 85); }, 420); });
+  ['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev, stop));
+  b.addEventListener('click', e=>{ if(e.detail===0) step(); });   // keyboard
+  b.addEventListener('contextmenu', e=>e.preventDefault());
+});
+$('rlPause').onclick = ()=>{ if(!R?.since) return; R.acc=runT(); R.since=null; keepRun(); wake(false); drawLive(); };
+$('rlResume').onclick = ()=>{ if(!R || R.since) return; R.since=Date.now(); keepRun(); wake(true); drawLive(); };
+$('rlMin').onclick = closeLive;
+$('runPill').onclick = openLive;
+
+/* ---- finish: confirm the numbers against the treadmill screen, then save ---- */
+function parseDur(v){
+  const p=String(v).trim().split(':').map(x=>x.trim()==='' ? NaN : Number(x));
+  if(!p.length || p.some(x=>!isFinite(x) || x<0)) return NaN;
+  return p.length===3 ? p[0]*3600+p[1]*60+p[2] : p.length===2 ? p[0]*60+p[1] : p[0]*60;
+}
+function drawFeel(id, val){ $(id).innerHTML = [1,2,3].map(v=>`<button type="button" class="press ${v===val?'sel':''}" data-v="${v}">${t('feel'+v)}</button>`).join(''); }
+function sumDraft(){
+  const dist=Number($('rsDist').value), dur=parseDur($('rsTime').value);
+  return dist>0 && dur>0 ? buildRun({ id:R.id, at:R.at, segs:R.segs, rawDur:runT(), dur, dist, feel:sumFeel }) : null;
+}
+function drawSum(){
+  const d = R && sumDraft();
+  if(d && !kcalTouched) $('rsKcal').value = d.kcal;
+  $('rsPace').textContent = d ? paceStr(runPace(d)) : '–:––';
+  $('rsElev').innerHTML = d ? `${d.elev}<span class="u">m</span>` : '0';
+  $('rsXP').textContent = '+' + (d ? runXP(d.dist) : 0);
+}
+function openSummary(){
+  if(!R) return;
+  if(R.since){ R.acc=runT(); R.since=null; keepRun(); }
+  wake(false);
+  const n=runNow();
+  $('rsDist').value = kmStr(n.dist); $('rsTime').value = durStr(n.T); $('rsKcal').value = Math.round(n.kcal);
+  sumFeel=0; kcalTouched=false; drawFeel('rsFeel', 0); drawSum();
+  $('runLive').classList.add('sum'); $('runLive').scrollTop=0;
+  if(HAS_GSAP) gsap.fromTo('#rlSum > *',{opacity:0,y:16},{opacity:1,y:0,duration:.45,stagger:.04,ease:'power3.out',clearProps:'opacity,transform'});
+}
+$('rlFinish').onclick = openSummary;
+['rsDist','rsTime'].forEach(id=>$(id).addEventListener('input', drawSum));
+$('rsKcal').addEventListener('input', ()=>{ kcalTouched = true; });
+$('rsFeel').onclick = e=>{ const b=e.target.closest('button'); if(!b) return; sumFeel = sumFeel===Number(b.dataset.v) ? 0 : Number(b.dataset.v); drawFeel('rsFeel', sumFeel); };
+$('rsSave').onclick = ()=>{
+  if(!R) return;
+  const dist=Number($('rsDist').value), dur=parseDur($('rsTime').value);
+  if(!(dur>=60)) return toast(t('runTooShort'));
+  if(!(dist>=0.01 && dist<=100 && dist/(dur/3600) <= 30)) return toast(t('runBadInput'));
+  const kcal = kcalTouched ? Math.max(0, Math.round(Number($('rsKcal').value)||0)) : undefined;
+  const run = buildRun({ id:R.id, at:R.at, segs:R.segs, rawDur:runT(), dur, dist, kcal, feel:sumFeel });
+  R=null; keepRun();
+  const rw = commitRun(run);
+  closeLive(); showTab('run');
+  toast(t('runSaved',{xp:rw.xp, s:rw.sh})); celebrate(1.1);
+};
+$('rsDiscard').onclick = ()=>{ if(!confirm(t('runDiscardConfirm'))) return; R=null; keepRun(); closeLive(); };
+
+/* ---- sheets: run detail and manual log ---- */
+function openSheet(id){ $(id).classList.add('open'); $(id).querySelector('.rm-panel').scrollTop=0; if(HAS_GSAP) gsap.fromTo(`#${id} .rm-panel`,{y:'100%'},{y:0,duration:.45,ease:'power4.out'}); }
+function closeSheet(id){
+  if(!HAS_GSAP){ $(id).classList.remove('open'); return; }
+  gsap.to(`#${id} .rm-panel`,{y:'100%',duration:.28,ease:'power3.in',onComplete:()=>{ $(id).classList.remove('open'); gsap.set(`#${id} .rm-panel`,{clearProps:'transform'}); }});
+}
+function openRunDetail(id){
+  const r=S.runs.find(x=>x.id===id); if(!r) return;
+  const sp=splits(r), whole=sp.filter(s=>!s.part), fast=Math.min(...whole.map(s=>s.sec));
+  const cell=(k,v,u='')=>`<div><span class="k">${t(k)}</span><b class="num">${v}${u?`<small>${u}</small>`:''}</b></div>`;
+  const splitRows = sp.map(s=>{ const pace=s.sec/(s.part||1); return `<div class="split ${!s.part && s.sec===fast && whole.length>1?'best':''}"><span class="km num">${s.km}</span><b class="num">${paceStr(pace)}</b><div class="bar"><i style="width:${Math.max(8, Math.min(100, (fast/pace)*100 || 100))}%"></i></div></div>`; }).join('');
+  $('rdBody').innerHTML =
+    `<h3 class="rd-title">${escHTML(runTitle(r))}</h3>
+     <p class="rd-date">${L().days[new Date(r.at).getDay()]} · ${runWhen(r)}${r.manual?' · '+t('runManual'):''}${r.feel?' · '+t('feel'+r.feel):''}</p>
+     <div class="rd-grid">
+       ${cell('runDist', kmStr(r.dist), 'km')}${cell('runTime', durStr(r.dur))}${cell('runAvgPace', paceStr(runPace(r)), '/km')}
+       ${cell('runAvgSpeed', (r.dist/(r.dur/3600)).toFixed(1), 'km/h')}${cell('runElev', r.elev||0, 'm')}${cell('runKcal', r.kcal||0, 'kcal')}
+     </div>
+     ${r.manual ? '' : `<div class="rd-h">${t('runProfile')}<span><span><i></i>${t('runSpeed')}</span>${Math.max(...r.segs.map(s=>s[2]))>0?`<span><i class="inc"></i>${t('runIncline')}</span>`:''}</span></div>
+       <div class="rd-chart">${profileSVG(r, 320, 120, true)}</div><div class="rd-axis"><span>0:00</span><span>${durStr(r.dur)}</span></div>`}
+     ${sp.length ? `<div class="rd-h">${t('runSplits')}<span>km · /km</span></div>${splitRows}` : ''}`;
+  $('rdDel').onclick = ()=>deleteRun(id);
+  openSheet('runSheet');
+}
+$('rdClose').onclick = $('runSheetBg').onclick = ()=>closeSheet('runSheet');
+function openLog(){
+  const d=new Date(); d.setSeconds(0,0);
+  $('lgWhen').value = new Date(d - d.getTimezoneOffset()*60000).toISOString().slice(0,16);
+  $('lgWhen').max = $('lgWhen').value;
+  ['lgMin','lgDist','lgKcal'].forEach(id=>$(id).value='');
+  $('lgInc').value = runPrefs().incline ?? '';
+  logFeel=0; drawFeel('lgFeel', 0);
+  openSheet('runLog');
+}
+$('lgFeel').onclick = e=>{ const b=e.target.closest('button'); if(!b) return; logFeel = logFeel===Number(b.dataset.v) ? 0 : Number(b.dataset.v); drawFeel('lgFeel', logFeel); };
+$('lgSave').onclick = ()=>{
+  const at=new Date($('lgWhen').value).getTime(), dur=Number($('lgMin').value)*60, dist=Number($('lgDist').value);
+  const inc=Math.min(15, Math.max(-3, Number($('lgInc').value)||0)), kc=$('lgKcal').value.trim();
+  if(!isFinite(at)) return toast(t('runBadInput'));
+  if(at > Date.now()+60000) return toast(t('runFuture'));
+  if(!(dur>=60)) return toast(t('runTooShort'));
+  if(!(dist>=0.01 && dist<=100 && dist/(dur/3600) <= 30)) return toast(t('runBadInput'));
+  const run = buildRun({ id:newRunId(), at, segs:[[0, dist/(dur/3600), r1(inc)]], rawDur:dur, dur, dist, kcal: kc==='' ? undefined : Math.max(0, Math.round(Number(kc)||0)), feel:logFeel, manual:true });
+  const rw = commitRun(run);
+  closeSheet('runLog'); toast(t('runSaved',{xp:rw.xp, s:rw.sh})); celebrate(.8);
+};
+$('lgCancel').onclick = $('runLogBg').onclick = ()=>closeSheet('runLog');
+
+/* ---- Run tab ---- */
+function runCard(r){
+  const tags = (r.manual ? `<span class="rc-tag">${icon('pencil')}${t('runManual')}</span>` : '') + (isDinnerRun(r) ? `<span class="rc-tag dinner">${icon('moon-star')}${t('runDinner')}</span>` : '');
+  return `<button class="card rcard press" data-run="${r.id}">
+    <div class="rc-head"><div class="rc-ic">${icon('footprints')}</div><div class="t"><b>${escHTML(runTitle(r))}</b><span>${runWhen(r)}</span></div></div>
+    ${tags ? `<div class="rc-tags">${tags}</div>` : ''}
+    <div class="rc-stats">
+      <div><span class="k">${t('runDist')}</span><b class="num">${kmStr(r.dist)}<small>km</small></b></div>
+      <div><span class="k">${t('runPace')}</span><b class="num">${paceStr(runPace(r))}<small>/km</small></b></div>
+      <div><span class="k">${t('runTime')}</span><b class="num">${durStr(r.dur)}</b></div>
+    </div>
+    ${r.manual ? '' : `<div class="rc-spark">${profileSVG(r, 300, 36, false)}</div>`}
+  </button>`;
+}
+function renderRun(){
+  const now=new Date(), mon=dayStart(mondayOf(now)), week=runsBetween(mon, 7);
+  const sum=(list,f)=>list.reduce((a,r)=>a+(f(r)||0),0);
+  countTo($('rwKm'), sum(week,r=>r.dist), v=>v.toFixed(1));
+  $('rwSub').textContent = t('runWeekSub',{ n:week.length, time:hrsMin(sum(week,r=>r.dur)*1000), m:Math.round(sum(week,r=>r.elev)) });
+  const days=[...Array(7)].map((_,i)=>sum(runsBetween(addDays(mon,i),1), r=>r.dist)), dmax=Math.max(...days,1), today=(now.getDay()+6)%7;
+  $('rwBars').innerHTML = days.map((km,i)=>`<div class="${i===today?'today':''}"><div class="bar"><i class="${km?'on':''}" style="height:${Math.max(5, Math.round(km/dmax*70))}px"></i></div><span>${L().daysShort[(i+1)%7]}</span></div>`).join('');
+
+  $('runCta').classList.toggle('live', !!R);
+  $('runCtaText').textContent = t(R ? 'runBack' : 'runStart');
+
+  const wks=[...Array(12)].map((_,k)=>{ const a=addDays(mon,-7*(11-k)); return { a, km:sum(runsBetween(a,7), r=>r.dist) }; });
+  const wmax=Math.max(...wks.map(w=>w.km),1);
+  $('wk12').innerHTML = wks.map((w,k)=>`<div class="${k===11?'cur':''}"><div class="bar"><i class="${w.km?'on':''}" style="height:${Math.max(4, Math.round(w.km/wmax*84))}px"></i></div><span>${k%4===0 ? `${w.a.getDate()}/${w.a.getMonth()+1}` : ''}</span></div>`).join('');
+  $('wk12Avg').textContent = t('runWeeksAvg',{ km:(sum(wks,w=>w.km)/12).toFixed(1) });
+
+  const recs=[];
+  if(S.runs.length){
+    const top=f=>S.runs.reduce((b,r)=>f(r)>f(b)?r:b);
+    const lg=top(r=>r.dist); recs.push({ ic:'footprints', k:'recLongest', v:`${kmStr(lg.dist)} km`, r:lg });
+    for(const [m,k] of [[1000,'rec1k'],[5000,'rec5k'],[10000,'rec10k']]){
+      let best=Infinity, br=null; S.runs.forEach(r=>{ const s=bestTime(r,m); if(s<best){ best=s; br=r; } });
+      if(br) recs.push({ ic:'timer', k, v:durStr(best), r:br });
+    }
+    const cl=top(r=>r.elev||0); if(cl.elev>0) recs.push({ ic:'mountain', k:'recClimb', v:`${cl.elev} m`, r:cl });
+    const ln=top(r=>r.dur); recs.push({ ic:'activity', k:'recLong', v:durStr(ln.dur), r:ln });
+  }
+  $('runRecs').innerHTML = recs.length
+    ? recs.map(x=>`<div class="row press" data-run="${x.r.id}" role="button" tabindex="0"><div class="ic">${icon(x.ic)}</div><div class="t"><b>${t(x.k)}</b><span>${fmtDate(new Date(x.r.at))}</span></div><div class="r num">${x.v}</div></div>`).join('')
+    : `<div class="empty">${t('recNone')}</div>`;
+
+  countTo($('rtCount'), S.runs.length);
+  countTo($('rtKm'), totalKm(), v=>v.toFixed(1));
+  countTo($('rtHrs'), sum(S.runs,r=>r.dur)/3600, v=>v.toFixed(1));
+
+  const list=S.runs.slice().sort((a,b)=>b.at-a.at);
+  $('runCountAside').textContent = list.length ? t('runCountN',{n:list.length}) : '';
+  $('runFeed').innerHTML = list.length
+    ? list.slice(0,runShow).map(runCard).join('') + (list.length>runShow ? `<button class="more-btn press" id="runMore">${t('runMore')}</button>` : '')
+    : `<div class="card empty">${t('runEmpty')}</div>`;
+}
+$('runCta').onclick = startRun;
+$('runLogBtn').onclick = openLog;
+$('runFeed').onclick = e=>{ if(e.target.closest('#runMore')){ runShow+=10; renderRun(); return; } const c=e.target.closest('[data-run]'); if(c) openRunDetail(c.dataset.run); };
+$('runRecs').onclick = e=>{ const c=e.target.closest('[data-run]'); if(c) openRunDetail(c.dataset.run); };
+$('runRecs').addEventListener('keydown', e=>{ if((e.key==='Enter'||e.key===' ') && e.target.dataset.run){ e.preventDefault(); openRunDetail(e.target.dataset.run); } });
+
 /* ---------- cloud sync (Supabase) ----------
    Local-first: the app always runs from localStorage. When signed in, the whole
    state is mirrored to one row per user in public.user_state (see supabase/schema.sql). */
@@ -2790,7 +3530,7 @@ function syncMeta(){ try{ return JSON.parse(localStorage.getItem(SYNC_KEY)) || {
 function setSyncMeta(m){ try{ localStorage.setItem(SYNC_KEY, JSON.stringify(m)); }catch(e){} }
 /* JSON with sorted keys: Postgres jsonb does not keep key order */
 function stable(v){ return JSON.stringify(v, (k,x)=> x && typeof x==='object' && !Array.isArray(x) ? Object.keys(x).sort().reduce((o,key)=>(o[key]=x[key],o),{}) : x); }
-const pristine = s => !Object.keys(s.log).length && !s.gacha.pulls && !Object.keys(s.quests.claimed).length && !s.sessions.length;
+const pristine = s => !Object.keys(s.log).length && !s.gacha.pulls && !Object.keys(s.quests.claimed).length && !s.sessions.length && !(s.runs||[]).length;
 
 /* Merge two copies of the state.
    - A reset (newer epoch) wins outright.
@@ -2818,6 +3558,10 @@ function mergeState(a, b, keepA){
   m.gacha.pulls = Math.max(n.gacha.pulls||0, o.gacha.pulls||0);
   for(const f of ['xp','best','challenges','cravings']) m[f] = Math.max(n[f]||0, o[f]||0);
   m.tourDone = !!(n.tourDone || o.tourDone);
+  // runs: union by id; a deletion on either device is kept as a tombstone so the run does not come back
+  m.runDel = {...o.runDel, ...n.runDel};
+  const runs = new Map(); [...o.runs, ...n.runs].forEach(r=>runs.set(r.id, r));
+  m.runs = [...runs.values()].filter(r=>!m.runDel[r.id]).sort((x,y)=>x.at-y.at);
   m.updatedAt = Math.max(n.updatedAt||0, o.updatedAt||0);
   return m;
 }
@@ -3074,7 +3818,10 @@ function hideSplash(){
     .call(()=>animateIn($('tab-home')), null, '-=.1')
     .to(sp, { opacity:0, scale:1.05, duration:.36, ease:'power2.inOut' }, '<');
 }
-function afterSplash(){ if(needGate()) openGate(); else maybeTour(); }
+function afterSplash(){
+  if(R){ showTab('run'); openLive(); return; }   // the app was closed mid-run: go straight back to it
+  if(needGate()) openGate(); else maybeTour();
+}
 
 /* ---------- boot ---------- */
 applyStatic(); checkBadges(); save(); renderAll(); showTab('home');
