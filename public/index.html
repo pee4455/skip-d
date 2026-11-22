@@ -278,6 +278,74 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .toast.show{transform:translateY(0)}
 .toast svg{width:18px;height:18px;color:var(--accent);stroke-width:2.5}
 
+/* ===== onboarding tour ===== */
+.tour{position:fixed;inset:0;z-index:150;display:none;touch-action:none}
+.tour.open{display:block}
+.shade{position:fixed;inset:0;background:rgba(6,6,10,.72);pointer-events:none}
+.spot{position:fixed;left:50%;top:50%;width:0;height:0;border-radius:22px;pointer-events:none;opacity:0}
+.spot::after{content:"";position:absolute;inset:-4px;border-radius:inherit;border:2px solid rgba(255,138,92,.9);
+  box-shadow:0 0 22px rgba(255,90,31,.55);animation:spotPulse 1.6s ease-in-out infinite}
+@keyframes spotPulse{50%{inset:-9px;opacity:.35}}
+.dlg{position:fixed;left:12px;right:12px;max-width:540px;margin:0 auto;bottom:calc(var(--sab) + 14px)}
+.dlg.top{bottom:auto;top:calc(var(--sat) + 100px)}
+.mascot{position:absolute;left:0;bottom:calc(100% - 30px);width:112px;height:121px;z-index:2;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35))}
+.mascot svg{width:100%;height:100%;overflow:visible}
+.dlg-box{position:relative;background:linear-gradient(180deg,#1d1d23,#141418);color:#f5f5f7;border-radius:22px;padding:24px 18px 14px;
+  border:1.5px solid rgba(255,138,92,.55);box-shadow:0 18px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06)}
+.dlg-name{position:absolute;top:-14px;left:112px;padding:4px 14px;border-radius:99px;background:var(--grad);color:#fff;
+  font-weight:700;font-size:14px;box-shadow:0 6px 14px rgba(255,90,31,.4)}
+.dlg-text{font-size:16px;line-height:1.65;min-height:78px;white-space:pre-line;padding-right:16px}
+.dlg-caret{position:absolute;right:13px;top:26px;color:#ff8a5c;font-size:12px;opacity:0;animation:caret 1s steps(1) infinite}
+.dlg-box.ready .dlg-caret{opacity:1}
+@keyframes caret{50%{visibility:hidden}}
+.dlg-extra:empty{display:none}
+.dlg-extra{margin-top:12px}
+.dlg-input{display:flex;gap:8px}
+.dlg-input input{flex:1;min-width:0;height:46px;border-radius:14px;border:1.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);
+  color:#fff;font:inherit;font-size:16px;padding:0 14px;outline:none}
+.dlg-input input:focus{border-color:#ff8a5c}
+.dlg-input button,.dlg-choices button{height:46px;border-radius:14px;background:var(--grad);color:#fff;font-weight:700;padding:0 18px}
+.dlg-choices{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.dlg-choices button{padding:0;background:rgba(255,255,255,.08);border:1.5px solid transparent;font-size:15px}
+.dlg-choices button.sel{background:var(--grad);border-color:rgba(255,255,255,.25)}
+.dlg-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.dlg-skip{font-size:14px;color:#8e8e96;font-weight:600;padding:8px 4px}
+.dlg-dots{display:flex;gap:5px;align-items:center}
+.dlg-dots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.18);transition:width .3s,background .3s}
+.dlg-dots i.on{width:18px;background:#ff8a5c}
+.dlg-dots i.done{background:rgba(255,138,92,.5)}
+.dlg-next{height:40px;padding:0 18px;border-radius:99px;background:var(--grad);color:#fff;font-weight:700;font-size:15px;box-shadow:0 6px 16px rgba(255,90,31,.4)}
+
+/* mascot moods & motion */
+.moonie .e-happy,.moonie .e-wink,.moonie .m-open,.moonie .m-o{display:none}
+.moonie[data-mood="excited"] .e-open,.moonie[data-mood="wink"] .e-open{display:none}
+.moonie[data-mood="excited"] .e-happy,.moonie[data-mood="wink"] .e-wink{display:inline}
+.moonie[data-mood="excited"] .m-smile{display:none}
+.moonie[data-mood="excited"] .m-open{display:inline}
+.moonie[data-mood="think"] .m-smile{display:none}
+.moonie[data-mood="think"] .m-o{display:inline}
+.moonie.talking .m-smile,.moonie.talking .m-o{display:none}
+.moonie.talking .m-open{display:inline;animation:talk .26s ease-in-out infinite}
+.moonie .m-open{transform-box:fill-box;transform-origin:50% 0}
+@keyframes talk{50%{transform:scaleY(.35)}}
+.moonie .e-open{transform-box:fill-box;transform-origin:center;animation:blink 4.2s infinite}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.moonie .m-body{animation:bob 2.4s ease-in-out infinite}
+.moonie .m-shadow{transform-box:fill-box;transform-origin:center;animation:shadow 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+@keyframes shadow{50%{transform:scaleX(.82);opacity:.7}}
+.moonie .m-arm{transform-box:view-box;transform-origin:92px 96px}
+.moonie.wave .m-arm{animation:wave .45s ease-in-out infinite alternate}
+@keyframes wave{from{transform:rotate(-18deg)}to{transform:rotate(22deg)}}
+.moonie .m-spark{transform-box:fill-box;transform-origin:center;animation:twinkle 1.8s ease-in-out infinite}
+.moonie .m-spark.s2{animation-delay:.9s}
+@keyframes twinkle{0%,100%{transform:scale(.4);opacity:.3}50%{transform:scale(1.1);opacity:1}}
+
+.help-btn{width:34px;height:34px;border-radius:50%;background:var(--card);box-shadow:var(--shadow);display:grid;place-items:center;color:var(--ink2)}
+.help-btn svg{width:19px;height:19px}
+.form .row.link{cursor:pointer;color:var(--accent);font-weight:600}
+.form .row.link svg{width:20px;height:20px}
+
 #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:100}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -311,6 +379,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 <symbol id="i-calendar-days" viewBox="0 0 24 24"> <path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="M8 14h.01" /> <path d="M12 14h.01" /> <path d="M16 14h.01" /> <path d="M8 18h.01" /> <path d="M12 18h.01" /> <path d="M16 18h.01" /></symbol>
 <symbol id="i-sparkles" viewBox="0 0 24 24"> <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /> <path d="M20 3v4" /> <path d="M22 5h-4" /> <path d="M4 17v2" /> <path d="M5 18H3" /></symbol>
 <symbol id="i-piggy-bank" viewBox="0 0 24 24"> <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z" /> <path d="M2 9v1c0 1.1.9 2 2 2h1" /> <path d="M16 11h.01" /></symbol>
+<symbol id="i-circle-help" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol>
   <defs>
     <linearGradient id="gArc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb37f"/><stop offset=".5" stop-color="#ff6a2b"/><stop offset="1" stop-color="#ff3d00"/></linearGradient>
   </defs>
@@ -327,6 +396,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
         <h1 class="large" id="homeTitle"></h1>
       </div>
       <div class="head-actions">
+        <button class="help-btn press" id="helpBtn" data-i18n-aria="helpAria"><svg class="i"><use href="#i-circle-help"/></svg></button>
         <button class="chip-btn press" id="langBtn" aria-label="Language / ภาษา"><svg class="i"><use href="#i-globe"/></svg><span id="langBtnText">EN</span></button>
         <button class="mini-avatar press" id="miniAvatar" data-i18n-aria="tabProfile">?</button>
       </div>
@@ -360,7 +430,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
     <button class="cta press anim" id="sosBtn"><svg class="i"><use href="#i-shield-check"/></svg><span data-i18n="sosCta"></span></button>
 
     <div class="section anim"><h2 id="ciTitle"></h2><span class="aside" id="ciDate"></span></div>
-    <div class="card anim">
+    <div class="card anim" id="ciCard">
       <div class="seg" id="seg">
         <span class="thumb" id="segThumb"></span>
         <button data-s="ok" data-i18n="stOk"></button>
@@ -393,7 +463,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
       <div><div class="label" data-i18n="saved"></div><div class="v num" id="pmSaved"></div></div>
     </div>
 
-    <div class="card anim" style="margin-top:12px">
+    <div class="card anim" id="weekCard" style="margin-top:12px">
       <div class="chart-head">
         <div><div class="label" data-i18n="weeklyTitle"></div><div class="big num" id="weekAvg"></div></div>
         <div class="legend"><span><i style="background:var(--accent)"></i><span data-i18n="stOk"></span></span><span><i style="background:var(--light)"></i><span data-i18n="stLight"></span></span></div>
@@ -410,7 +480,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
     </div>
 
     <div class="section anim"><h2 data-i18n="calendar"></h2><span class="aside" data-i18n="tapToEdit"></span></div>
-    <div class="card anim">
+    <div class="card anim" id="calCard">
       <div class="cal-head">
         <button class="icon-btn press" id="calPrev" data-i18n-aria="prevMonth"><svg class="i"><use href="#i-chevron-left"/></svg></button>
         <b id="calTitle"></b>
@@ -463,6 +533,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
       <div class="row"><label for="fCut" data-i18n="fCut"></label><input id="fCut" type="time"></div>
       <div class="row"><label for="fBreak" data-i18n="fBreak"></label><input id="fBreak" type="time"></div>
       <div class="row"><label for="fCost" data-i18n="fCost"></label><input id="fCost" type="number" inputmode="numeric" min="0" step="10"></div>
+      <div class="row link" id="replayTour" role="button" tabindex="0"><span style="flex:1" data-i18n="replayTour"></span><svg class="i"><use href="#i-circle-help"/></svg></div>
     </div>
     <button class="danger press anim" id="resetAll" data-i18n="reset"></button>
     <p class="footnote anim" data-i18n="footnote"></p>
@@ -529,6 +600,73 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
     </div>
     <div class="spacer"></div>
     <button class="finish press" id="sosDone" style="max-width:420px" data-i18n="done"></button>
+  </div>
+</div>
+
+<!-- ============ ONBOARDING TOUR (NPC) ============ -->
+<div class="tour" id="tour" aria-live="polite">
+  <div class="shade" id="shade"></div>
+  <div class="spot" id="spot"></div>
+  <div class="dlg" id="dlg">
+    <button class="mascot" id="mascot" aria-label="Moonie">
+      <svg class="moonie" id="moonie" viewBox="0 0 120 130" data-mood="happy" aria-hidden="true">
+        <defs>
+          <radialGradient id="mFace" cx="38%" cy="32%" r="75%">
+            <stop offset="0" stop-color="#fff6de"/><stop offset=".65" stop-color="#ffd98f"/><stop offset="1" stop-color="#ffb84d"/>
+          </radialGradient>
+        </defs>
+        <ellipse class="m-shadow" cx="60" cy="125" rx="28" ry="4.5" fill="rgba(0,0,0,.28)"/>
+        <g class="m-body">
+          <!-- waving arm -->
+          <g class="m-arm"><ellipse cx="101" cy="86" rx="7.5" ry="9.5" fill="url(#mFace)" stroke="#e39a33" stroke-width="1.5"/></g>
+          <!-- head -->
+          <circle cx="60" cy="84" r="38" fill="url(#mFace)" stroke="#e39a33" stroke-width="1.5"/>
+          <circle cx="80" cy="100" r="5" fill="#f2b55a" opacity=".55"/>
+          <circle cx="42" cy="104" r="3.2" fill="#f2b55a" opacity=".55"/>
+          <circle cx="86" cy="76" r="2.6" fill="#f2b55a" opacity=".55"/>
+          <!-- chef hat -->
+          <g class="m-hat" transform="rotate(-7 60 48)">
+            <circle cx="43" cy="38" r="12" fill="#fff" stroke="#e8ddd2" stroke-width="1.2"/>
+            <circle cx="77" cy="38" r="12" fill="#fff" stroke="#e8ddd2" stroke-width="1.2"/>
+            <circle cx="60" cy="30" r="15" fill="#fff" stroke="#e8ddd2" stroke-width="1.2"/>
+            <rect x="36" y="42" width="48" height="13" rx="5" fill="#fff" stroke="#e8ddd2" stroke-width="1.2"/>
+            <rect x="36.6" y="48" width="46.8" height="4" fill="#ff6a2b"/>
+          </g>
+          <!-- cheeks -->
+          <ellipse cx="37" cy="94" rx="6.5" ry="3.8" fill="#ff8a7a" opacity=".55"/>
+          <ellipse cx="83" cy="94" rx="6.5" ry="3.8" fill="#ff8a7a" opacity=".55"/>
+          <!-- eyes -->
+          <g class="e-open">
+            <ellipse cx="47" cy="81" rx="4.6" ry="6.2" fill="#2b1d16"/><ellipse cx="73" cy="81" rx="4.6" ry="6.2" fill="#2b1d16"/>
+            <circle cx="48.7" cy="78.4" r="1.7" fill="#fff"/><circle cx="74.7" cy="78.4" r="1.7" fill="#fff"/>
+          </g>
+          <g class="e-happy" fill="none" stroke="#2b1d16" stroke-width="3.2" stroke-linecap="round">
+            <path d="M41.5 83 q5.5 -8 11 0"/><path d="M67.5 83 q5.5 -8 11 0"/>
+          </g>
+          <g class="e-wink">
+            <ellipse cx="47" cy="81" rx="4.6" ry="6.2" fill="#2b1d16"/><circle cx="48.7" cy="78.4" r="1.7" fill="#fff"/>
+            <path d="M67.5 82 q5.5 4.5 11 0" fill="none" stroke="#2b1d16" stroke-width="3.2" stroke-linecap="round"/>
+          </g>
+          <!-- mouths -->
+          <path class="m-smile" d="M52 95 q8 8.5 16 0" fill="none" stroke="#2b1d16" stroke-width="3" stroke-linecap="round"/>
+          <g class="m-open"><path d="M51.5 93.5 q8.5 13 17 0 z" fill="#7a2618" stroke="#2b1d16" stroke-width="1.6" stroke-linejoin="round"/><ellipse cx="60" cy="99.5" rx="4" ry="2.2" fill="#ff7b6b"/></g>
+          <ellipse class="m-o" cx="60" cy="97" rx="3.6" ry="4.4" fill="#7a2618"/>
+        </g>
+        <path class="m-spark" d="M101 30 l2.2 5.8 5.8 2.2 -5.8 2.2 -2.2 5.8 -2.2 -5.8 -5.8 -2.2 5.8 -2.2z" fill="#ffd36b"/>
+        <path class="m-spark s2" d="M16 52 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5z" fill="#ffb37f"/>
+      </svg>
+    </button>
+    <div class="dlg-box" id="dlgBox">
+      <div class="dlg-name" data-i18n="mascotName"></div>
+      <div class="dlg-text" id="dlgText"></div>
+      <div class="dlg-extra" id="dlgExtra"></div>
+      <span class="dlg-caret" id="dlgCaret">▼</span>
+      <div class="dlg-foot">
+        <button class="dlg-skip" id="tourSkip" data-i18n="tourSkip"></button>
+        <div class="dlg-dots" id="tourDots"></div>
+        <button class="dlg-next press" id="tourNext"></button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -599,6 +737,21 @@ const I18N = {
     missionLabel:'ภารกิจระหว่างรอ', shuffle:'สุ่มใหม่', mDone:'ทำแล้ว', mDoneOk:'เยี่ยม',
     sosFinish:'ผ่านไปได้แล้ว', sumTitle:'ต้านความหิวสำเร็จ', sumMsg:'ครั้งที่ {n} ที่คุณชนะความหิว', time:'เวลา', done:'เสร็จสิ้น',
     langSwitched:'เปลี่ยนเป็นภาษาไทยแล้ว',
+    mascotName:'มูนนี่', tourSkip:'ข้าม', tourNext:'ต่อไป', tourStart:'เริ่มเลย!', tourOk:'ตกลง', tourNoName:'ไม่บอกดีกว่า',
+    helpAria:'วิธีใช้', replayTour:'ดูวิธีใช้อีกครั้ง', tourGift:'ของขวัญต้อนรับ +20 XP',
+    t_welcome:'สวัสดี! เราชื่อ "มูนนี่" เป็นเชฟประจำแอปปิดครัว\nเดี๋ยวเราพาทัวร์สั้นๆ แค่ 1 นาทีนะ',
+    t_name:'ก่อนอื่นเลย… ให้เราเรียกคุณว่าอะไรดี?',
+    t_hero:'{hi}นี่คือนาฬิกาปิดครัว กลางวันจะนับถอยหลังถึงเวลาปิดครัว พอถึงเวลาแล้ว วงแหวนจะนับว่างดมาแล้วกี่ชั่วโมง',
+    t_cutoff:'ปกติอยากปิดครัวกี่โมงดี? เลือกได้เลย\n(เปลี่ยนทีหลังได้ในหน้าโปรไฟล์)',
+    t_sos:'ตอนดึกๆ ถ้าหิวจนทนไม่ไหว กดปุ่มนี้เลย! เราจะพาหายใจ และให้ทำภารกิจเล็กๆ จนความอยากผ่านไป',
+    t_checkin:'หลังเวลาปิดครัว มาเช็คอินตรงนี้ทุกคืนนะ\nงดได้รับ 50 XP · กินเบาๆ ก็ยังรักษาสตรีคไว้ได้',
+    t_week:'วงกลมสีส้มคือคืนที่ทำสำเร็จ\nลองเก็บให้ครบ 7 วงในสัปดาห์นี้ดูสิ!',
+    t_charts:'หน้านี้ไว้ดูภาพรวม กราฟจะบอกว่าแต่ละสัปดาห์งดได้กี่คืน แตะที่แท่งกราฟเพื่อดูตัวเลขได้ด้วย',
+    t_cal:'ลืมเช็คอินเหรอ? ไม่เป็นไร แตะวันในปฏิทินเพื่อแก้ย้อนหลังได้เลย',
+    t_badges:'ทำสำเร็จเรื่อยๆ จะได้ปลดล็อกเหรียญพวกนี้\nมีทั้งหมด 12 เหรียญ ลองเก็บให้ครบนะ',
+    t_help:'ถ้าลืมวิธีใช้ กดปุ่มนี้ แล้วเราจะกลับมาอธิบายให้ใหม่',
+    t_done:'พร้อมแล้ว{nm}! รับ 20 XP เป็นของขวัญต้อนรับ\nคืนนี้มาสู้ไปด้วยกันนะ',
+    t_doneAgain:'พร้อมแล้ว{nm}! ไปลุยกันต่อเลย',
     levels:['มือใหม่','เริ่มจับทาง','มีวินัย','สม่ำเสมอ','แข็งแกร่ง','ตัวจริง','ระดับโปร','ตำนาน'],
     badges:{ first:'คืนแรก', s3:'สตรีค 3 คืน', s7:'สตรีค 7 คืน', s14:'สตรีค 14 คืน', s30:'สตรีค 30 คืน', n20:'งดได้ 20 คืน',
       f1:'ต้านหิวครั้งแรก', f10:'ต้านหิว 10 ครั้ง', c10:'ภารกิจ 10 ครั้ง', b500:'ประหยัด ฿500', b2000:'ประหยัด ฿2,000', honest:'บันทึกตามจริง' },
@@ -658,6 +811,21 @@ const I18N = {
     missionLabel:'While you wait', shuffle:'Shuffle', mDone:'Done', mDoneOk:'Nice',
     sosFinish:'I made it', sumTitle:'Craving resisted', sumMsg:'Craving #{n} beaten', time:'Time', done:'Done',
     langSwitched:'Switched to English',
+    mascotName:'Moonie', tourSkip:'Skip', tourNext:'Next', tourStart:"Let's go!", tourOk:'OK', tourNoName:'Skip',
+    helpAria:'How to use', replayTour:'Replay tutorial', tourGift:'Welcome gift +20 XP',
+    t_welcome:"Hi there! I'm Moonie, the chef of Kitchen Closed.\nLet me give you a quick 1-minute tour.",
+    t_name:'First things first… what should I call you?',
+    t_hero:'{hi}This is your kitchen clock. During the day it counts down to closing time — after that, the ring shows how long you have fasted.',
+    t_cutoff:'What time do you usually want to close the kitchen? Pick one!\n(You can change it later in Profile.)',
+    t_sos:'Late-night hunger getting loud? Tap this! I will breathe with you and give you small missions until the craving passes.',
+    t_checkin:'After closing time, check in here every night.\nFasted earns 50 XP · a light meal still keeps your streak.',
+    t_week:'Orange circles are nights you nailed it.\nTry to fill all 7 this week!',
+    t_charts:'Here is your overview — how many nights you fasted each week. Tap a bar to see the numbers.',
+    t_cal:'Forgot to check in? No worries — tap any day on the calendar to fix it.',
+    t_badges:'Keep going to unlock these achievements.\nThere are 12 in total — collect them all!',
+    t_help:'Forget how something works? Tap here and I will walk you through it again.',
+    t_done:"You're all set{nm}! Here's 20 XP as a welcome gift.\nLet's take on tonight together.",
+    t_doneAgain:"You're all set{nm}! Let's keep going.",
     levels:['Beginner','Finding rhythm','Disciplined','Consistent','Strong','The real deal','Pro','Legend'],
     badges:{ first:'First night', s3:'3-night streak', s7:'7-night streak', s14:'14-night streak', s30:'30-night streak', n20:'20 nights fasted',
       f1:'First craving resisted', f10:'10 cravings resisted', c10:'10 missions', b500:'Saved ฿500', b2000:'Saved ฿2,000', honest:'Honest log' },
@@ -693,7 +861,7 @@ const BADGES = [
 
 /* ---------- state ---------- */
 function detectLang(){ try{ return (navigator.language||'').toLowerCase().startsWith('th') ? 'th' : 'en'; }catch(e){ return 'th'; } }
-function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[] }; }
+function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false }; }
 function load(){
   try{
     const r = JSON.parse(localStorage.getItem(KEY));
@@ -956,7 +1124,7 @@ function renderCharts(tonight){
       interaction:{mode:'index', intersect:false},
       plugins:{ legend:{display:false}, tooltip:{...tooltip, callbacks:{label:c=>baht(c.parsed.y)}} },
       scales:{ x:{ grid:{display:false}, border:{display:false}, ticks:{font:{size:10}, maxRotation:0, maxTicksLimit:4} },
-               y:{ beginAtZero:true, ticks:{font:{size:10}, maxTicksLimit:4, callback:v=>'฿'+Number(v).toLocaleString(L().locale)}, grid:{color:th.line}, border:{display:false} } } }
+               y:{ beginAtZero:true, suggestedMax:Math.max(100, Number(S.settings.cost||0)*4), ticks:{font:{size:10}, maxTicksLimit:4, precision:0, callback:v=>'฿'+Number(v).toLocaleString(L().locale)}, grid:{color:th.line}, border:{display:false} } } }
   });
 }
 
@@ -1136,9 +1304,177 @@ $('sosFinish').onclick = ()=>{
 };
 $('sosDone').onclick = closeSOS;
 
+/* ---------- onboarding tour (NPC guide "Moonie") ---------- */
+const STEPS = [
+  { key:'t_welcome', mood:'excited', wave:true },
+  { key:'t_name',    mood:'happy',   type:'name', top:true },
+  { key:'t_hero',    mood:'happy',   tab:'home', target:'#hero' },
+  { key:'t_cutoff',  mood:'think',   tab:'home', target:'#hero .hero-metrics', type:'cutoff' },
+  { key:'t_sos',     mood:'wink',    tab:'home', target:'#sosBtn' },
+  { key:'t_checkin', mood:'happy',   tab:'home', target:'#ciCard' },
+  { key:'t_week',    mood:'excited', tab:'home', target:'#week' },
+  { key:'t_charts',  mood:'think',   tab:'progress', target:'#weekCard' },
+  { key:'t_cal',     mood:'wink',    tab:'progress', target:'#calCard' },
+  { key:'t_badges',  mood:'excited', tab:'profile', target:'#badges' },
+  { key:'t_help',    mood:'happy',   tab:'home', target:'#helpBtn', round:true },
+  { key:'t_done',    mood:'excited', wave:true, final:true },
+];
+let tour = null;
+const hole = { x:0, y:0, w:0, h:0, r:26 };
+function drawHole(){
+  const W=innerWidth, H=innerHeight, {x,y,w,h}=hole, r=Math.max(0,Math.min(hole.r, w/2, h/2));
+  let p = `M0 0H${W}V${H}H0Z`;
+  if(w>2 && h>2) p += ` M${x+r} ${y}H${x+w-r}A${r} ${r} 0 0 1 ${x+w} ${y+r}V${y+h-r}A${r} ${r} 0 0 1 ${x+w-r} ${y+h}H${x+r}A${r} ${r} 0 0 1 ${x} ${y+h-r}V${y+r}A${r} ${r} 0 0 1 ${x+r} ${y}Z`;
+  $('shade').style.clipPath = `path(evenodd, "${p}")`;
+  Object.assign($('spot').style, { left:x+'px', top:y+'px', width:w+'px', height:h+'px', borderRadius:r+'px' });
+}
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+const escapeHtml = s => String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function graphemes(s){ try{ return [...new Intl.Segmenter(lang,{granularity:'grapheme'}).segment(s)].map(x=>x.segment); }catch(e){ return Array.from(s); } }
+function tourVars(){
+  const n=S.settings.name;
+  return lang==='th'
+    ? { hi: n ? `ยินดีที่ได้รู้จักนะ คุณ${n}!\n` : '', nm: n ? ` คุณ${n}` : '' }
+    : { hi: n ? `Nice to meet you, ${n}!\n` : '',      nm: n ? `, ${n}` : '' };
+}
+
+function startTour(){
+  if(tour || $('sos').classList.contains('open')) return;
+  tour = { i:-1, typing:null, run:0, firstTime:!S.tourDone };
+  $('tour').classList.add('open'); document.body.style.overflow='hidden';
+  Object.assign(hole,{ x:innerWidth/2, y:innerHeight*0.38, w:0, h:0 }); drawHole(); $('spot').style.opacity=0;
+  if(HAS_GSAP){
+    gsap.fromTo('#tour',{opacity:0},{opacity:1,duration:.35});
+    gsap.fromTo('#dlg',{y:60,opacity:0},{y:0,opacity:1,duration:.6,ease:'back.out(1.5)',delay:.1});
+    gsap.fromTo('#mascot',{scale:.3,rotate:-25},{scale:1,rotate:0,duration:.8,ease:'elastic.out(1,.55)',delay:.25});
+  }
+  goStep(0);
+}
+
+function endTour(completed){
+  if(!tour) return;
+  clearInterval(tour.typing);
+  const first = tour.firstTime;
+  S.tourDone = true;
+  if(completed && first) gainXP(20);
+  save();
+  const fin = ()=>{
+    $('tour').classList.remove('open'); document.body.style.overflow=''; tour=null;
+    showTab('home'); renderAll();
+    if(completed){ celebrate(1); if(first) toast(t('tourGift')); }
+  };
+  if(HAS_GSAP) gsap.to('#tour',{opacity:0,duration:.3,onComplete:()=>{ fin(); gsap.set('#tour',{clearProps:'opacity'}); }});
+  else fin();
+}
+
+async function goStep(i){
+  const run = ++tour.run, st = STEPS[i];
+  tour.i = i;
+  clearInterval(tour.typing); tour.typing=null; tour.onTyped=null;
+  $('dlgBox').classList.remove('ready');
+  $('tourDots').innerHTML = STEPS.map((_,k)=>`<i class="${k===i?'on':k<i?'done':''}"></i>`).join('');
+  $('tourNext').textContent = st.final ? t('tourStart') : st.type==='name' ? t('tourNoName') : t('tourNext');
+  $('tourSkip').style.visibility = st.final ? 'hidden' : 'visible';
+  $('dlgExtra').innerHTML=''; $('dlgText').textContent='';
+  const m=$('moonie'); m.dataset.mood=st.mood; m.classList.toggle('wave', !!st.wave);
+  if(HAS_GSAP && i>0) gsap.fromTo('#mascot',{y:0},{y:-12,duration:.18,yoyo:true,repeat:1,ease:'power2.out'});
+  if(st.tab && st.tab!==tab){ showTab(st.tab); await sleep(650); } else await sleep(40);
+  if(!tour || run!==tour.run) return;
+  await layoutStep(true);
+  if(!tour || run!==tour.run) return;
+  typeText(t(st.final && !tour.firstTime ? 't_doneAgain' : st.key, tourVars()), ()=>renderExtra(st));
+}
+
+async function layoutStep(scroll){
+  if(!tour) return;
+  const st=STEPS[tour.i], el=st.target && document.querySelector(st.target);
+  let rect=null;
+  if(el){
+    if(scroll){ const r=el.getBoundingClientRect(); window.scrollTo(0, Math.max(0, window.scrollY + r.top - 96)); await sleep(70); }
+    rect = el.getBoundingClientRect();
+  }
+  const need = $('dlgBox').offsetHeight + 110;
+  const top = st.top || (rect && rect.bottom > innerHeight - need && rect.top > need);
+  $('dlg').classList.toggle('top', !!top);
+  const pad = 8;
+  const box = rect
+    ? { x:rect.left-pad, y:rect.top-pad, w:rect.width+pad*2, h:rect.height+pad*2, r: st.round ? 999 : 26 }
+    : { x:innerWidth/2, y:innerHeight*0.38, w:0, h:0, r:26 };
+  if(HAS_GSAP){
+    gsap.to(hole,{...box, duration:.55, ease:'power3.inOut', onUpdate:drawHole});
+    gsap.to('#spot',{opacity: rect ? 1 : 0, duration:.3, delay: rect ? .35 : 0});
+  }else{ Object.assign(hole, box); drawHole(); $('spot').style.opacity = rect ? 1 : 0; }
+}
+
+function typeText(str, done){
+  const g=graphemes(str), el=$('dlgText');
+  let k=0;
+  tour.full=str; tour.onTyped=done;
+  $('moonie').classList.add('talking');
+  if(REDUCE){ finishTyping(); return; }
+  tour.typing = setInterval(()=>{ k++; el.textContent=g.slice(0,k).join(''); if(k>=g.length) finishTyping(); }, 24);
+}
+function finishTyping(){
+  if(!tour) return;
+  clearInterval(tour.typing); tour.typing=null;
+  $('dlgText').textContent = tour.full;
+  $('moonie').classList.remove('talking');
+  $('dlgBox').classList.add('ready');
+  const cb=tour.onTyped; tour.onTyped=null; if(cb) cb();
+}
+function advance(){
+  if(!tour) return;
+  if(tour.typing){ finishTyping(); return; }
+  const st=STEPS[tour.i];
+  if(st.final) endTour(true); else goStep(tour.i+1);
+}
+
+function renderExtra(st){
+  const x=$('dlgExtra');
+  if(st.type==='name'){
+    x.innerHTML = `<form class="dlg-input" id="nameForm"><input id="tourName" maxlength="20" autocomplete="nickname" enterkeyhint="done" placeholder="${escapeHtml(t('fNamePh'))}" value="${escapeHtml(S.settings.name)}"><button type="submit">${escapeHtml(t('tourOk'))}</button></form>`;
+    $('nameForm').onsubmit = e=>{
+      e.preventDefault();
+      const v=$('tourName').value.trim();
+      if(v){ S.settings.name=v; save(); renderAll(); }
+      $('tourName').blur(); goStep(tour.i+1);
+    };
+  }else if(st.type==='cutoff'){
+    const opts=['16:00','17:00','18:00','19:00'];
+    x.innerHTML = `<div class="dlg-choices">${opts.map(o=>`<button data-v="${o}" class="${o===S.settings.cutoff?'sel':''}">${o}</button>`).join('')}</div>`;
+    x.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+      const v=b.dataset.v;
+      if(v<=S.settings.breakfast){ toast(t('errCut')); return; }
+      S.settings.cutoff=v; save(); renderAll();
+      x.querySelectorAll('button').forEach(o=>o.classList.toggle('sel', o===b)); pop(b);
+      setTimeout(()=>{ if(tour && STEPS[tour.i]===st) goStep(tour.i+1); }, 450);
+    });
+  }
+  if(HAS_GSAP && x.innerHTML) gsap.fromTo(x,{opacity:0,y:8},{opacity:1,y:0,duration:.35});
+}
+
+$('dlgBox').addEventListener('click', e=>{ if(e.target.closest('button,input,form')) return; advance(); });
+$('tour').addEventListener('click', e=>{ if(e.target===$('tour')) advance(); });
+$('tourNext').onclick = e=>{ e.stopPropagation(); advance(); };
+$('tourSkip').onclick = e=>{ e.stopPropagation(); endTour(false); };
+$('mascot').onclick = e=>{
+  e.stopPropagation();
+  const m=$('moonie'); m.dataset.mood='wink'; pop($('mascot'));
+  setTimeout(()=>{ if(tour) m.dataset.mood=STEPS[tour.i].mood; }, 800);
+};
+document.addEventListener('keydown', e=>{
+  if(!tour || e.target.tagName==='INPUT') return;
+  if(e.key==='Enter' || e.key===' ' || e.key==='ArrowRight'){ e.preventDefault(); advance(); }
+  else if(e.key==='Escape') endTour(false);
+});
+window.addEventListener('resize', ()=>{ if(tour) layoutStep(false); });
+$('helpBtn').onclick = ()=>startTour();
+$('replayTour').onclick = ()=>{ showTab('home'); setTimeout(startTour, 350); };
+
 /* ---------- boot ---------- */
 applyStatic(); checkBadges(); save(); renderAll(); showTab('home'); animateIn($('tab-home'));
 setInterval(()=>{ if(tab==='home') renderTimer(); }, 1000);
+if(!S.tourDone) setTimeout(startTour, 900);
 let lastNight = nightKey();
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden){ renderAll(); } });
 setInterval(()=>{ const n=nightKey(); if(n!==lastNight){ lastNight=n; renderAll(); } }, 60000);
