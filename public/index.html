@@ -223,6 +223,17 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .toast.show{transform:translateY(0)}
 .toast svg{width:18px;height:18px;color:var(--accent);stroke-width:2.4}
 
+/* header with language switch */
+.head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.head>div{min-width:0}
+.lang-btn{margin-top:2px;height:32px;padding:0 12px;border-radius:99px;background:var(--card);font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--ink2);display:flex;align-items:center;gap:6px;flex:none}
+.lang-btn svg{width:16px;height:16px;stroke-width:2}
+.lang-btn:active{opacity:.6}
+.seg-mini{display:inline-grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--fill);border-radius:9px;padding:2px;flex:none}
+.seg-mini button{height:30px;min-width:64px;padding:0 10px;border-radius:7px;font-size:14px;font-weight:600;color:var(--muted)}
+.seg-mini button.sel{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+html[lang="en"] .stats3 .u{margin-left:4px}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -244,15 +255,21 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
   <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 11 11 5 19.5 4.5 19 13 13 19 5 19zM5 19l7.5-7.5"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 1 1 9.4 4.5a6.3 6.3 0 0 0 10.1 10.1z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.6 3.5 5.4 3.5 8.5s-1.1 5.9-3.5 8.5c-2.4-2.6-3.5-5.4-3.5-8.5s1.1-5.9 3.5-8.5z"/></symbol>
 </svg>
 
-<header class="nav" id="nav"><span id="navTitle">วันนี้</span></header>
+<header class="nav" id="nav"><span id="navTitle"></span></header>
 
 <main>
   <!-- ============ HOME ============ -->
-  <section class="tab" id="tab-home" data-title="วันนี้">
-    <div class="eyebrow" id="homeDate"></div>
-    <h1 class="large" id="homeTitle">วันนี้</h1>
+  <section class="tab" id="tab-home" data-title="tabToday">
+    <div class="head">
+      <div>
+        <div class="eyebrow" id="homeDate"></div>
+        <h1 class="large" id="homeTitle"></h1>
+      </div>
+      <button class="lang-btn" id="langBtn" aria-label="Language / ภาษา"><svg class="i"><use href="#i-globe"/></svg><span id="langBtnText">EN</span></button>
+    </div>
 
     <div class="card">
       <div class="hero-top">
@@ -265,70 +282,70 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
       <div class="bar-meta"><span id="heroStart"></span><span id="heroRemain"></span><span id="heroEnd"></span></div>
     </div>
 
-    <button class="cta" id="sosBtn"><svg class="i"><use href="#i-shield"/></svg>หิวอยู่? เริ่มโหมดต้านหิว</button>
+    <button class="cta" id="sosBtn"><svg class="i"><use href="#i-shield"/></svg><span data-i18n="sosCta"></span></button>
 
-    <div class="section"><h2 id="ciTitle">เช็คอินคืนนี้</h2><span class="aside" id="ciDate"></span></div>
+    <div class="section"><h2 id="ciTitle"></h2><span class="aside" id="ciDate"></span></div>
     <div class="card">
       <div class="seg" id="seg">
-        <button data-s="ok">งดได้</button>
-        <button data-s="light">กินเบาๆ</button>
-        <button data-s="miss">พลาด</button>
+        <button data-s="ok" data-i18n="stOk"></button>
+        <button data-s="light" data-i18n="stLight"></button>
+        <button data-s="miss" data-i18n="stMiss"></button>
       </div>
       <div class="hint" id="ciNote"></div>
     </div>
 
-    <div class="section"><h2>สัปดาห์นี้</h2><span class="aside" id="weekCount"></span></div>
+    <div class="section"><h2 data-i18n="thisWeek"></h2><span class="aside" id="weekCount"></span></div>
     <div class="card week" id="week"></div>
 
     <div class="card stats3" style="margin-top:12px">
-      <div><div class="label">สตรีค</div><div class="v num" id="stStreak">0<span class="u">คืน</span></div></div>
-      <div><div class="label">ประหยัด</div><div class="v num" id="stSaved">฿0</div></div>
-      <div><div class="label">ต้านหิว</div><div class="v num" id="stFought">0<span class="u">ครั้ง</span></div></div>
+      <div><div class="label" data-i18n="streak"></div><div class="v num" id="stStreak"></div></div>
+      <div><div class="label" data-i18n="saved"></div><div class="v num" id="stSaved"></div></div>
+      <div><div class="label" data-i18n="resisted"></div><div class="v num" id="stFought"></div></div>
     </div>
   </section>
 
   <!-- ============ PROGRESS ============ -->
-  <section class="tab" id="tab-progress" data-title="ความคืบหน้า" hidden>
-    <div class="eyebrow">ภาพรวม</div>
-    <h1 class="large">ความคืบหน้า</h1>
+  <section class="tab" id="tab-progress" data-title="tabProgress" hidden>
+    <div class="eyebrow" data-i18n="overview"></div>
+    <h1 class="large" data-i18n="tabProgress"></h1>
 
     <div class="card stats3">
-      <div><div class="label">เดือนนี้</div><div class="v num" id="pmNights">0<span class="u">คืน</span></div></div>
-      <div><div class="label">สำเร็จ</div><div class="v num" id="pmRate">0%</div></div>
-      <div><div class="label">ประหยัด</div><div class="v num" id="pmSaved">฿0</div></div>
+      <div><div class="label" data-i18n="thisMonth"></div><div class="v num" id="pmNights"></div></div>
+      <div><div class="label" data-i18n="successRate"></div><div class="v num" id="pmRate"></div></div>
+      <div><div class="label" data-i18n="saved"></div><div class="v num" id="pmSaved"></div></div>
     </div>
 
-    <div class="section"><h2>8 สัปดาห์ล่าสุด</h2><span class="aside">คืนต่อสัปดาห์</span></div>
+    <div class="section"><h2 data-i18n="last8"></h2><span class="aside" data-i18n="perWeek"></span></div>
     <div class="card chart" id="chart"></div>
 
-    <div class="section"><h2>ปฏิทิน</h2><span class="aside">แตะวันเพื่อแก้ไข</span></div>
+    <div class="section"><h2 data-i18n="calendar"></h2><span class="aside" data-i18n="tapToEdit"></span></div>
     <div class="card">
       <div class="cal-head">
-        <button class="icon-btn" id="calPrev" aria-label="เดือนก่อน"><svg class="i" style="width:18px;height:18px"><use href="#i-left"/></svg></button>
+        <button class="icon-btn" id="calPrev" data-i18n-aria="prevMonth"><svg class="i" style="width:18px;height:18px"><use href="#i-left"/></svg></button>
         <b id="calTitle"></b>
-        <button class="icon-btn" id="calNext" aria-label="เดือนถัดไป"><svg class="i" style="width:18px;height:18px"><use href="#i-right"/></svg></button>
+        <button class="icon-btn" id="calNext" data-i18n-aria="nextMonth"><svg class="i" style="width:18px;height:18px"><use href="#i-right"/></svg></button>
       </div>
       <div class="cal" id="cal"></div>
       <div class="legend">
-        <span><i style="background:var(--accent)"></i>งดได้</span>
-        <span><i style="background:var(--light)"></i>กินเบาๆ</span>
-        <span><i style="border:1.5px solid var(--miss)"></i>พลาด</span>
+        <span><i style="background:var(--accent)"></i><span data-i18n="stOk"></span></span>
+        <span><i style="background:var(--light)"></i><span data-i18n="stLight"></span></span>
+        <span><i style="border:1.5px solid var(--miss)"></i><span data-i18n="stMiss"></span></span>
       </div>
     </div>
 
-    <div class="section"><h2>บันทึกล่าสุด</h2></div>
+    <div class="section"><h2 data-i18n="recent"></h2></div>
     <div class="list" id="feed"></div>
   </section>
 
   <!-- ============ PROFILE ============ -->
-  <section class="tab" id="tab-profile" data-title="โปรไฟล์" hidden>
-    <div class="eyebrow">บัญชีของคุณ</div>
-    <h1 class="large">โปรไฟล์</h1>
+  <section class="tab" id="tab-profile" data-title="tabProfile" hidden>
+    <div class="eyebrow" data-i18n="yourAccount"></div>
+    <h1 class="large" data-i18n="tabProfile"></h1>
 
     <div class="profile">
       <div class="avatar" id="avatar">?</div>
       <div style="flex:1;min-width:0">
-        <b id="pName">ผู้ใช้</b>
+        <b id="pName"></b>
         <div class="level" id="pLevel"></div>
       </div>
     </div>
@@ -338,64 +355,67 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
     </div>
 
     <div class="card stats3" style="margin-top:12px">
-      <div><div class="label">งดได้ทั้งหมด</div><div class="v num" id="pTotal">0</div></div>
-      <div><div class="label">สตรีคสูงสุด</div><div class="v num" id="pBest">0</div></div>
-      <div><div class="label">ภารกิจ</div><div class="v num" id="pMissions">0</div></div>
+      <div><div class="label" data-i18n="totalFasted"></div><div class="v num" id="pTotal">0</div></div>
+      <div><div class="label" data-i18n="bestStreak"></div><div class="v num" id="pBest">0</div></div>
+      <div><div class="label" data-i18n="missions"></div><div class="v num" id="pMissions">0</div></div>
     </div>
 
-    <div class="section"><h2>ความสำเร็จ</h2><span class="aside" id="badgeCount"></span></div>
+    <div class="section"><h2 data-i18n="achievements"></h2><span class="aside" id="badgeCount"></span></div>
     <div class="card badges" id="badges"></div>
 
-    <div class="section"><h2>ตั้งค่า</h2></div>
+    <div class="section"><h2 data-i18n="settings"></h2></div>
     <div class="list form">
-      <div class="row"><label for="fName">ชื่อ</label><input id="fName" maxlength="20" placeholder="ใส่ชื่อ" autocomplete="nickname"></div>
-      <div class="row"><label for="fCut">เวลาปิดครัว</label><input id="fCut" type="time"></div>
-      <div class="row"><label for="fBreak">มื้อเช้า</label><input id="fBreak" type="time"></div>
-      <div class="row"><label for="fCost">ค่ามื้อเย็น (บาท)</label><input id="fCost" type="number" inputmode="numeric" min="0" step="10"></div>
+      <div class="row"><label data-i18n="language"></label>
+        <div class="seg-mini" id="langSeg"><button data-lang="th">ไทย</button><button data-lang="en">English</button></div>
+      </div>
+      <div class="row"><label for="fName" data-i18n="fName"></label><input id="fName" maxlength="20" data-i18n-ph="fNamePh" autocomplete="nickname"></div>
+      <div class="row"><label for="fCut" data-i18n="fCut"></label><input id="fCut" type="time"></div>
+      <div class="row"><label for="fBreak" data-i18n="fBreak"></label><input id="fBreak" type="time"></div>
+      <div class="row"><label for="fCost" data-i18n="fCost"></label><input id="fCost" type="number" inputmode="numeric" min="0" step="10"></div>
     </div>
-    <button class="danger" id="resetAll">ล้างข้อมูลทั้งหมด</button>
-    <p class="footnote">ฟังร่างกายตัวเองเสมอ ถ้าเวียนหัว ใจสั่น มือสั่น มีโรคประจำตัว (เช่น เบาหวาน กรดไหลย้อน) หรือกำลังตั้งครรภ์ ให้กินได้เลยและปรึกษาแพทย์ก่อนงดมื้อเป็นประจำ · ข้อมูลทั้งหมดเก็บไว้ในเครื่องนี้เท่านั้น</p>
+    <button class="danger" id="resetAll" data-i18n="reset"></button>
+    <p class="footnote" data-i18n="footnote"></p>
   </section>
 </main>
 
 <nav class="tabbar" id="tabbar">
-  <button data-tab="home" class="on"><svg class="i"><use href="#i-home"/></svg>วันนี้</button>
-  <button data-tab="progress"><svg class="i"><use href="#i-chart"/></svg>ความคืบหน้า</button>
-  <button data-tab="profile"><svg class="i"><use href="#i-user"/></svg>โปรไฟล์</button>
+  <button data-tab="home" class="on"><svg class="i"><use href="#i-home"/></svg><span data-i18n="tabToday"></span></button>
+  <button data-tab="progress"><svg class="i"><use href="#i-chart"/></svg><span data-i18n="tabProgress"></span></button>
+  <button data-tab="profile"><svg class="i"><use href="#i-user"/></svg><span data-i18n="tabProfile"></span></button>
 </nav>
 
 <!-- ============ SOS ============ -->
-<div class="sos" id="sos" role="dialog" aria-modal="true" aria-label="โหมดต้านหิว">
+<div class="sos" id="sos" role="dialog" aria-modal="true" data-i18n-aria="sosTitle">
   <div class="run">
     <div class="sos-top">
-      <button class="icon-btn" id="sosClose" aria-label="ปิด"><svg class="i" style="width:18px;height:18px"><use href="#i-x"/></svg></button>
-      <span class="ttl">โหมดต้านหิว</span>
+      <button class="icon-btn" id="sosClose" data-i18n-aria="close"><svg class="i" style="width:18px;height:18px"><use href="#i-x"/></svg></button>
+      <span class="ttl" data-i18n="sosTitle"></span>
       <span style="width:36px"></span>
     </div>
     <div class="breath" id="breath">
       <div class="ring"></div>
-      <div class="in"><div class="clock num" id="sosClock">10:00</div><div class="cue" id="sosCue">หายใจเข้า</div></div>
+      <div class="in"><div class="clock num" id="sosClock">10:00</div><div class="cue" id="sosCue"></div></div>
     </div>
-    <div class="sub" id="sosSub">ความอยากมักมาเป็นระลอกแล้วค่อยๆ จางลง หายใจตามวงกลมไปก่อน</div>
+    <div class="sub" id="sosSub"></div>
     <div class="mission">
-      <div class="label">ภารกิจระหว่างรอ</div>
+      <div class="label" data-i18n="missionLabel"></div>
       <p id="mText"></p>
-      <div class="btns"><button id="mShuffle">สุ่มใหม่</button><button class="done" id="mDone">ทำแล้ว</button></div>
+      <div class="btns"><button id="mShuffle" data-i18n="shuffle"></button><button class="done" id="mDone"></button></div>
     </div>
     <div class="spacer"></div>
-    <button class="finish" id="sosFinish">ผ่านไปได้แล้ว</button>
+    <button class="finish" id="sosFinish" data-i18n="sosFinish"></button>
   </div>
   <div class="summary">
     <div class="ok"><svg class="i"><use href="#i-check"/></svg></div>
-    <h2>ต้านความหิวสำเร็จ</h2>
+    <h2 data-i18n="sumTitle"></h2>
     <div style="color:#a1a1a6" id="sumMsg"></div>
     <div class="stats3">
-      <div><div class="label">เวลา</div><div class="v num" id="sumTime">0:00</div></div>
-      <div><div class="label">ภารกิจ</div><div class="v num" id="sumMissions">0</div></div>
+      <div><div class="label" data-i18n="time"></div><div class="v num" id="sumTime">0:00</div></div>
+      <div><div class="label" data-i18n="missions"></div><div class="v num" id="sumMissions">0</div></div>
       <div><div class="label">XP</div><div class="v num" id="sumXP">+0</div></div>
     </div>
     <div class="spacer"></div>
-    <button class="finish" id="sosDone" style="max-width:420px">เสร็จสิ้น</button>
+    <button class="finish" id="sosDone" style="max-width:420px" data-i18n="done"></button>
   </div>
 </div>
 
@@ -403,54 +423,165 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 
 <script>
 const KEY = 'skipdinner.v1';
-const DEFAULTS = { name:'', cutoff:'17:00', breakfast:'07:00', cost:80 };
+const DEFAULTS = { name:'', cutoff:'17:00', breakfast:'07:00', cost:80, lang:'' };
 const XP_VAL = { ok:50, light:20, miss:5 };
 const WAVE_MS = 10*60*1000;
 
-const LEVELS = ['มือใหม่','เริ่มจับทาง','มีวินัย','สม่ำเสมอ','แข็งแกร่ง','ตัวจริง','ระดับโปร','ตำนาน'];
-
-const MISSIONS = [
-  'ดื่มน้ำเปล่า 1 แก้วใหญ่ให้หมดแก้ว',
-  'แปรงฟันเลย ปากสดชื่นแล้วความอยากจะลดลง',
-  'ชงชาร้อนหรือชาสมุนไพร ไม่ใส่น้ำตาล',
-  'สควอท 15 ครั้ง',
-  'ออกไปเดินเบาๆ 5 นาที',
-  'อาบน้ำอุ่นให้สบายตัว',
-  'ทักหรือโทรหาเพื่อนสักคน',
-  'เขียน 3 เรื่องดีๆ ที่เกิดขึ้นวันนี้',
-  'ยืดเหยียดร่างกาย 5 นาที',
-  'เก็บโต๊ะหรือจัดห้อง 10 นาที',
-  'อ่านหนังสือ 10 หน้า',
-  'เตรียมตัวเข้านอนให้เร็วขึ้นคืนนี้',
-  'เคี้ยวหมากฝรั่งไม่มีน้ำตาล',
-  'ฟังเพลงหรือพอดแคสต์ที่ชอบ 1 ตอน',
-];
+/* ---------- translations ---------- */
+const I18N = {
+  th: {
+    appTitle:'ปิดครัว',
+    tabToday:'วันนี้', tabProgress:'ความคืบหน้า', tabProfile:'โปรไฟล์',
+    hello:'สวัสดี {name}',
+    homeDate:(d,L)=>`วัน${L.days[d.getDay()]}ที่ ${d.getDate()} ${L.monthsLong[d.getMonth()]}`,
+    date:(d,L)=>`${d.getDate()} ${L.months[d.getMonth()]}`,
+    monthYear:(m,y,L)=>`${L.monthsLong[m]} ${y+543}`,
+    days:['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
+    daysShort:['อา','จ','อ','พ','พฤ','ศ','ส'],
+    weekHead:['จ','อ','พ','พฤ','ศ','ส','อา'],
+    months:['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
+    monthsLong:['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
+    locale:'th-TH',
+    hours:'{n} ชม.', hm:'{h} ชม. {m} นาที', mOnly:'{m} นาที',
+    nights:'คืน', times:'ครั้ง',
+    fasting:'กำลังงด', eating:'ช่วงกินได้',
+    fastingFor:'งดมาแล้ว', closesIn:'ปิดครัวในอีก',
+    left:'เหลือ <b>{t}</b>', lastMealSoon:'ใกล้ถึงมื้อสุดท้ายแล้ว', eatLunch:'กินกลางวันให้อิ่มพอดี',
+    sosCta:'หิวอยู่? เริ่มโหมดต้านหิว',
+    ciTonight:'เช็คอินคืนนี้', ciLastNight:'เช็คอินเมื่อคืน',
+    ciLocked:'เช็คอินได้หลัง {t} น.', ciSaved:'บันทึกแล้ว · +{xp} XP',
+    ciHint:'งดได้ +50 XP · กินเบาๆ +20 XP และยังรักษาสตรีค · พลาด +5 XP',
+    stOk:'งดได้', stLight:'กินเบาๆ', stMiss:'พลาด',
+    thisWeek:'สัปดาห์นี้', weekCount:'{n}/7 คืน',
+    streak:'สตรีค', saved:'ประหยัด', resisted:'ต้านหิว',
+    overview:'ภาพรวม', thisMonth:'เดือนนี้', successRate:'สำเร็จ',
+    last8:'8 สัปดาห์ล่าสุด', perWeek:'คืนต่อสัปดาห์', thisWk:'สัปดาห์นี้', chartAria:'จำนวนคืนที่งดได้ต่อสัปดาห์',
+    calendar:'ปฏิทิน', tapToEdit:'แตะวันเพื่อแก้ไข', prevMonth:'เดือนก่อน', nextMonth:'เดือนถัดไป',
+    recent:'บันทึกล่าสุด', empty:'ยังไม่มีบันทึก เช็คอินคืนแรกได้ที่หน้า "วันนี้"',
+    feedOk:'งดมื้อเย็นสำเร็จ', feedLight:'กินเบาๆ', feedMiss:'พลาดมื้อเย็น', feedFights:'ต้านหิว {n} ครั้ง',
+    yourAccount:'บัญชีของคุณ', user:'ผู้ใช้',
+    xpNext:'อีก {n} XP ถึง Lv.{l}',
+    totalFasted:'งดได้ทั้งหมด', bestStreak:'สตรีคสูงสุด', missions:'ภารกิจ',
+    achievements:'ความสำเร็จ', settings:'ตั้งค่า', language:'ภาษา',
+    fName:'ชื่อ', fNamePh:'ใส่ชื่อ', fCut:'เวลาปิดครัว', fBreak:'มื้อเช้า', fCost:'ค่ามื้อเย็น (บาท)',
+    reset:'ล้างข้อมูลทั้งหมด', resetConfirm:'ล้างประวัติ XP และความสำเร็จทั้งหมด? ย้อนกลับไม่ได้', resetDone:'ล้างข้อมูลแล้ว',
+    footnote:'ฟังร่างกายตัวเองเสมอ ถ้าเวียนหัว ใจสั่น มือสั่น มีโรคประจำตัว (เช่น เบาหวาน กรดไหลย้อน) หรือกำลังตั้งครรภ์ ให้กินได้เลยและปรึกษาแพทย์ก่อนงดมื้อเป็นประจำ · ข้อมูลทั้งหมดเก็บไว้ในเครื่องนี้เท่านั้น',
+    settingsSaved:'บันทึกการตั้งค่าแล้ว', errCut:'เวลาปิดครัวต้องหลังมื้อเช้า', errBreak:'มื้อเช้าต้องก่อนเวลาปิดครัว',
+    toastOk:'เยี่ยมมาก · +{xp} XP', toastLight:'รักษาสตรีคไว้ได้ · +{xp} XP', toastMiss:'ไม่เป็นไร พรุ่งนี้เริ่มใหม่',
+    levelUp:'เลื่อนระดับ: {name} · Lv.{l}', badgeGot:'ได้รับความสำเร็จ: {name}',
+    sosTitle:'โหมดต้านหิว', close:'ปิด',
+    sosSub:'ความอยากมักมาเป็นระลอกแล้วค่อยๆ จางลง หายใจตามวงกลมไปก่อน',
+    sosSubDone:'ครบ 10 นาทีแล้ว ความอยากน่าจะเบาลง เก่งมาก',
+    breatheIn:'หายใจเข้า', breatheOut:'หายใจออกช้าๆ',
+    missionLabel:'ภารกิจระหว่างรอ', shuffle:'สุ่มใหม่', mDone:'ทำแล้ว', mDoneOk:'เยี่ยม ✓',
+    sosFinish:'ผ่านไปได้แล้ว', sumTitle:'ต้านความหิวสำเร็จ', sumMsg:'ครั้งที่ {n} ที่คุณชนะความหิว', time:'เวลา', done:'เสร็จสิ้น',
+    langSwitched:'เปลี่ยนเป็นภาษาไทยแล้ว',
+    levels:['มือใหม่','เริ่มจับทาง','มีวินัย','สม่ำเสมอ','แข็งแกร่ง','ตัวจริง','ระดับโปร','ตำนาน'],
+    badges:{ first:'คืนแรก', s3:'สตรีค 3 คืน', s7:'สตรีค 7 คืน', s14:'สตรีค 14 คืน', s30:'สตรีค 30 คืน', n20:'งดได้ 20 คืน',
+      f1:'ต้านหิวครั้งแรก', f10:'ต้านหิว 10 ครั้ง', c10:'ภารกิจ 10 ครั้ง', b500:'ประหยัด ฿500', b2000:'ประหยัด ฿2,000', honest:'บันทึกตามจริง' },
+    missionList:[
+      'ดื่มน้ำเปล่า 1 แก้วใหญ่ให้หมดแก้ว','แปรงฟันเลย ปากสดชื่นแล้วความอยากจะลดลง','ชงชาร้อนหรือชาสมุนไพร ไม่ใส่น้ำตาล',
+      'สควอท 15 ครั้ง','ออกไปเดินเบาๆ 5 นาที','อาบน้ำอุ่นให้สบายตัว','ทักหรือโทรหาเพื่อนสักคน','เขียน 3 เรื่องดีๆ ที่เกิดขึ้นวันนี้',
+      'ยืดเหยียดร่างกาย 5 นาที','เก็บโต๊ะหรือจัดห้อง 10 นาที','อ่านหนังสือ 10 หน้า','เตรียมตัวเข้านอนให้เร็วขึ้นคืนนี้',
+      'เคี้ยวหมากฝรั่งไม่มีน้ำตาล','ฟังเพลงหรือพอดแคสต์ที่ชอบ 1 ตอน'],
+  },
+  en: {
+    appTitle:'Kitchen Closed',
+    tabToday:'Today', tabProgress:'Progress', tabProfile:'Profile',
+    hello:'Hi, {name}',
+    homeDate:(d,L)=>`${L.days[d.getDay()]}, ${L.monthsLong[d.getMonth()]} ${d.getDate()}`,
+    date:(d,L)=>`${L.months[d.getMonth()]} ${d.getDate()}`,
+    monthYear:(m,y,L)=>`${L.monthsLong[m]} ${y}`,
+    days:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+    daysShort:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+    weekHead:['M','T','W','T','F','S','S'],
+    months:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    monthsLong:['January','February','March','April','May','June','July','August','September','October','November','December'],
+    locale:'en-US',
+    hours:'{n}h', hm:'{h}h {m}m', mOnly:'{m}m',
+    nights:'nights', times:'times',
+    fasting:'Fasting', eating:'Eating window',
+    fastingFor:'Fasting for', closesIn:'Kitchen closes in',
+    left:'<b>{t}</b> left', lastMealSoon:'Last meal soon', eatLunch:'Have a solid lunch',
+    sosCta:'Hungry? Start craving mode',
+    ciTonight:'Check in tonight', ciLastNight:'Check in last night',
+    ciLocked:'Check-in opens at {t}', ciSaved:'Saved · +{xp} XP',
+    ciHint:'Fasted +50 XP · Light meal +20 XP and keeps your streak · Missed +5 XP',
+    stOk:'Fasted', stLight:'Light', stMiss:'Missed',
+    thisWeek:'This week', weekCount:'{n}/7 nights',
+    streak:'Streak', saved:'Saved', resisted:'Resisted',
+    overview:'Overview', thisMonth:'This month', successRate:'Success',
+    last8:'Last 8 weeks', perWeek:'nights per week', thisWk:'This wk', chartAria:'Nights fasted per week',
+    calendar:'Calendar', tapToEdit:'Tap a day to edit', prevMonth:'Previous month', nextMonth:'Next month',
+    recent:'Recent', empty:'No entries yet. Check in your first night on the Today tab.',
+    feedOk:'Skipped dinner', feedLight:'Light meal', feedMiss:'Had dinner', feedFights:'{n} cravings resisted',
+    yourAccount:'Your account', user:'You',
+    xpNext:'{n} XP to Lv.{l}',
+    totalFasted:'Total fasted', bestStreak:'Best streak', missions:'Missions',
+    achievements:'Achievements', settings:'Settings', language:'Language',
+    fName:'Name', fNamePh:'Your name', fCut:'Kitchen closes', fBreak:'Breakfast', fCost:'Dinner cost (฿)',
+    reset:'Reset all data', resetConfirm:'Erase all history, XP and achievements? This cannot be undone.', resetDone:'All data cleared',
+    footnote:'Listen to your body. If you feel dizzy, shaky or your heart races, have a medical condition (e.g. diabetes, acid reflux) or are pregnant — eat, and talk to a doctor before skipping meals regularly. · All data stays on this device.',
+    settingsSaved:'Settings saved', errCut:'Kitchen must close after breakfast', errBreak:'Breakfast must be before kitchen closes',
+    toastOk:'Great job · +{xp} XP', toastLight:'Streak kept · +{xp} XP', toastMiss:'No worries — fresh start tomorrow',
+    levelUp:'Level up: {name} · Lv.{l}', badgeGot:'Achievement unlocked: {name}',
+    sosTitle:'Craving mode', close:'Close',
+    sosSub:'Cravings come in waves and fade. Breathe with the circle for now.',
+    sosSubDone:'10 minutes done — the craving should be easing. Nice work.',
+    breatheIn:'Breathe in', breatheOut:'Breathe out slowly',
+    missionLabel:'While you wait', shuffle:'Shuffle', mDone:'Done', mDoneOk:'Nice ✓',
+    sosFinish:'I made it', sumTitle:'Craving resisted', sumMsg:'Craving #{n} beaten', time:'Time', done:'Done',
+    langSwitched:'Switched to English',
+    levels:['Beginner','Finding rhythm','Disciplined','Consistent','Strong','The real deal','Pro','Legend'],
+    badges:{ first:'First night', s3:'3-night streak', s7:'7-night streak', s14:'14-night streak', s30:'30-night streak', n20:'20 nights fasted',
+      f1:'First craving resisted', f10:'10 cravings resisted', c10:'10 missions', b500:'Saved ฿500', b2000:'Saved ฿2,000', honest:'Honest log' },
+    missionList:[
+      'Drink a big glass of water — all of it','Brush your teeth — a fresh mouth curbs cravings','Make hot tea or herbal tea, no sugar',
+      'Do 15 squats','Take a gentle 5-minute walk','Take a warm shower','Message or call a friend','Write down 3 good things from today',
+      'Stretch for 5 minutes','Tidy your desk or room for 10 minutes','Read 10 pages of a book','Get ready for bed a bit earlier tonight',
+      'Chew sugar-free gum','Listen to a favorite song or podcast episode'],
+  },
+};
+let lang = 'th';
+const L = () => I18N[lang];
+function t(key, vars={}){
+  const v = L()[key] ?? I18N.th[key] ?? key;
+  return typeof v==='string' ? v.replace(/\{(\w+)\}/g, (_,k)=>vars[k] ?? '') : v;
+}
+const fmtDate = d => L().date(d, L());
 
 const BADGES = [
-  { id:'first', icon:'leaf',  n:'คืนแรก',          test:()=>countStatus('ok')>=1 },
-  { id:'s3',    txt:'3',      n:'สตรีค 3 คืน',      test:s=>s.best>=3 },
-  { id:'s7',    txt:'7',      n:'สตรีค 7 คืน',      test:s=>s.best>=7 },
-  { id:'s14',   txt:'14',     n:'สตรีค 14 คืน',     test:s=>s.best>=14 },
-  { id:'s30',   txt:'30',     n:'สตรีค 30 คืน',     test:s=>s.best>=30 },
-  { id:'n20',   icon:'moon',  n:'งดได้ 20 คืน',     test:()=>countStatus('ok')>=20 },
-  { id:'f1',    icon:'shield',n:'ต้านหิวครั้งแรก',   test:s=>s.cravings>=1 },
-  { id:'f10',   icon:'flame', n:'ต้านหิว 10 ครั้ง',  test:s=>s.cravings>=10 },
-  { id:'c10',   icon:'target',n:'ภารกิจ 10 ครั้ง',   test:s=>s.challenges>=10 },
-  { id:'b500',  icon:'coin',  n:'ประหยัด ฿500',     test:()=>saved()>=500 },
-  { id:'b2000', txt:'฿',      n:'ประหยัด ฿2,000',   test:()=>saved()>=2000 },
-  { id:'honest',icon:'heart', n:'บันทึกตามจริง',     test:()=>countStatus('miss')>=1 },
+  { id:'first', icon:'leaf',  test:()=>countStatus('ok')>=1 },
+  { id:'s3',    txt:'3',      test:s=>s.best>=3 },
+  { id:'s7',    txt:'7',      test:s=>s.best>=7 },
+  { id:'s14',   txt:'14',     test:s=>s.best>=14 },
+  { id:'s30',   txt:'30',     test:s=>s.best>=30 },
+  { id:'n20',   icon:'moon',  test:()=>countStatus('ok')>=20 },
+  { id:'f1',    icon:'shield',test:s=>s.cravings>=1 },
+  { id:'f10',   icon:'flame', test:s=>s.cravings>=10 },
+  { id:'c10',   icon:'target',test:s=>s.challenges>=10 },
+  { id:'b500',  icon:'coin',  test:()=>saved()>=500 },
+  { id:'b2000', txt:'฿',      test:()=>saved()>=2000 },
+  { id:'honest',icon:'heart', test:()=>countStatus('miss')>=1 },
 ];
 
 /* ---------- state ---------- */
-function blank(){ return { settings:{...DEFAULTS}, log:{}, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[] }; }
+function detectLang(){ try{ return (navigator.language||'').toLowerCase().startsWith('th') ? 'th' : 'en'; }catch(e){ return 'th'; } }
+function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[] }; }
 function load(){
   try{
     const r = JSON.parse(localStorage.getItem(KEY));
-    if(r && typeof r==='object'){ const b=blank(); return {...b, ...r, settings:{...DEFAULTS, ...(r.settings||{})}, sessions:r.sessions||[]}; }
+    if(r && typeof r==='object'){
+      const b=blank();
+      const settings = {...DEFAULTS, ...(r.settings||{})};
+      if(!settings.lang) settings.lang = 'th';   // existing users have been using Thai
+      return {...b, ...r, settings, sessions:r.sessions||[]};
+    }
   }catch(e){}
   return blank();
 }
 let S = load();
+lang = S.settings.lang==='en' ? 'en' : 'th';
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
 /* ---------- helpers ---------- */
@@ -460,21 +591,15 @@ const keyOf = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())
 const fromKey = k => { const [y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d,12); };
 const addDays = (d,n) => { const x=new Date(d); x.setDate(x.getDate()+n); return x; };
 const atTime = (base,hhmm) => { const [h,m]=hhmm.split(':').map(Number); const d=new Date(base); d.setHours(h,m,0,0); return d; };
-const pick = a => a[Math.floor(Math.random()*a.length)];
 const icon = (id,cls='i') => `<svg class="${cls}"><use href="#i-${id}"/></svg>`;
-const baht = n => '฿' + Math.round(n).toLocaleString('th-TH');
-const TH_DAY = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
-const TH_DAY_S = ['อา','จ','อ','พ','พฤ','ศ','ส'];
-const WEEK_HEAD = ['จ','อ','พ','พฤ','ศ','ส','อา'];
-const TH_MON = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-const TH_MON_L = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
-const thDate = d => `${d.getDate()} ${TH_MON[d.getMonth()]}`;
+const baht = n => '฿' + Math.round(n).toLocaleString(L().locale);
 const mondayOf = d => addDays(d, -((d.getDay()+6)%7));
 function hms(ms){ const s=Math.max(0,Math.floor(ms/1000)); return `${Math.floor(s/3600)}:${pad(Math.floor(s/60)%60)}:${pad(s%60)}`; }
 function ms(msv){ const s=Math.max(0,Math.floor(msv/1000)); return `${Math.floor(s/60)}:${pad(s%60)}`; }
-function hrsMin(msv){ const m=Math.max(0,Math.round(msv/60000)); const h=Math.floor(m/60), mm=m%60; return h ? `${h} ชม. ${mm} นาที` : `${mm} นาที`; }
+function hrsMin(msv){ const m=Math.max(0,Math.round(msv/60000)); const h=Math.floor(m/60), mm=m%60; return h ? t('hm',{h,m:mm}) : t('mOnly',{m:mm}); }
 function fastHours(){ const [ch,cm]=S.settings.cutoff.split(':').map(Number), [bh,bm]=S.settings.breakfast.split(':').map(Number);
-  const mins=((bh*60+bm)+1440-(ch*60+cm))%1440; return Math.round(mins/6)/10; }
+  const mins=((bh*60+bm)+1440-(ch*60+cm))%1440; return t('hours',{n:Math.round(mins/6)/10}); }
+const unit = (n,u) => `${n}<span class="u">${t(u)}</span>`;
 
 function nightKey(now=new Date()){ return keyOf(now < atTime(now,S.settings.breakfast) ? addDays(now,-1) : now); }
 function fastingState(now=new Date()){
@@ -493,17 +618,17 @@ function streak(){
   let n=0; while(S.log[keyOf(d)]==='ok'||S.log[keyOf(d)]==='light'){ n++; d=addDays(d,-1); }
   return n;
 }
-function levelInfo(xp){ let L=1; while(xp >= 50*(L+1)*L) L++; const base=50*L*(L-1), next=50*(L+1)*L; return {L,cur:xp-base,need:next-base}; }
-const levelName = L => LEVELS[Math.min(L,LEVELS.length)-1];
+function levelInfo(xp){ let Lv=1; while(xp >= 50*(Lv+1)*Lv) Lv++; const base=50*Lv*(Lv-1), next=50*(Lv+1)*Lv; return {L:Lv,cur:xp-base,need:next-base}; }
+const levelName = Lv => L().levels[Math.min(Lv,L().levels.length)-1];
 
 /* ---------- feedback ---------- */
 let toastT;
-function toast(msg){ $('toastText').textContent=msg; const t=$('toast'); t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2400); }
+function toast(msg){ $('toastText').textContent=msg; const el=$('toast'); el.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),2400); }
 function gainXP(n){
   const before = levelInfo(S.xp).L;
   S.xp = Math.max(0, S.xp+n);
   const after = levelInfo(S.xp).L;
-  if(after>before) setTimeout(()=>toast(`เลื่อนระดับ: ${levelName(after)} · Lv.${after}`), 2600);
+  if(after>before) setTimeout(()=>toast(t('levelUp',{name:levelName(after), l:after})), 2600);
 }
 function checkBadges(){
   S.best = Math.max(S.best||0, streak());
@@ -511,7 +636,7 @@ function checkBadges(){
   for(const b of BADGES){
     if(!S.badges.includes(b.id) && b.test(S)){
       S.badges.push(b.id);
-      delay += 2600; setTimeout(()=>toast(`ได้รับความสำเร็จ: ${b.n}`), delay);
+      delay += 2600; setTimeout(()=>toast(t('badgeGot',{name:L().badges[b.id]})), delay);
     }
   }
 }
@@ -521,10 +646,10 @@ function checkinTarget(){
   const now=new Date(), fs=fastingState(now);
   if(!fs.fasting){
     const last = keyOf(addDays(now,-1));
-    if(!S.log[last]) return { key:last, label:'เมื่อคืน', open:true };
-    return { key:keyOf(now), label:'คืนนี้', open:false };
+    if(!S.log[last]) return { key:last, title:'ciLastNight', open:true };
+    return { key:keyOf(now), title:'ciTonight', open:false };
   }
-  return { key:nightKey(now), label:'คืนนี้', open:true };
+  return { key:nightKey(now), title:'ciTonight', open:true };
 }
 function setStatus(key,status){
   const old = S.log[key];
@@ -533,37 +658,55 @@ function setStatus(key,status){
   checkBadges(); save(); renderAll();
 }
 
+/* ---------- static text ---------- */
+function applyStatic(){
+  document.documentElement.lang = lang;
+  document.title = t('appTitle');
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>el.placeholder = t(el.dataset.i18nPh));
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>el.setAttribute('aria-label', t(el.dataset.i18nAria)));
+  $('navTitle').textContent = t($('tab-'+tab).dataset.title);
+  $('langBtnText').textContent = lang==='th' ? 'EN' : 'ไทย';
+  document.querySelectorAll('#langSeg button').forEach(b=>b.classList.toggle('sel', b.dataset.lang===lang));
+}
+function setLang(l){
+  if(l===lang) return;
+  lang = l; S.settings.lang = l; save();
+  applyStatic(); renderAll();
+  if($('sos').classList.contains('open')){ showMission(); if(sos) tickSOS(); }
+  toast(t('langSwitched'));
+}
+
 /* ---------- render: home ---------- */
 function renderHome(){
   const now=new Date();
-  $('homeDate').textContent = `วัน${TH_DAY[now.getDay()]}ที่ ${now.getDate()} ${TH_MON_L[now.getMonth()]}`;
-  $('homeTitle').textContent = S.settings.name ? `สวัสดี ${S.settings.name}` : 'วันนี้';
-  $('phaseRange').textContent = `${S.settings.cutoff} – ${S.settings.breakfast} · ${fastHours()} ชม.`;
+  $('homeDate').textContent = L().homeDate(now, L());
+  $('homeTitle').textContent = S.settings.name ? t('hello',{name:S.settings.name}) : t('tabToday');
+  $('phaseRange').textContent = `${S.settings.cutoff} – ${S.settings.breakfast} · ${fastHours()}`;
   renderTimer();
 
-  const t=checkinTarget(), cur=S.log[t.key];
-  $('ciTitle').textContent = `เช็คอิน${t.label}`;
-  $('ciDate').textContent = `${TH_DAY_S[fromKey(t.key).getDay()]} ${thDate(fromKey(t.key))}`;
-  $('seg').classList.toggle('locked', !t.open);
+  const tg=checkinTarget(), cur=S.log[tg.key];
+  $('ciTitle').textContent = t(tg.title);
+  $('ciDate').textContent = `${L().daysShort[fromKey(tg.key).getDay()]} ${fmtDate(fromKey(tg.key))}`;
+  $('seg').classList.toggle('locked', !tg.open);
   document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('sel', b.dataset.s===cur));
-  $('ciNote').textContent = !t.open ? `เช็คอินได้หลัง ${S.settings.cutoff} น.`
-    : cur ? `บันทึกแล้ว · +${XP_VAL[cur]} XP` : 'งดได้ +50 XP · กินเบาๆ +20 XP และยังรักษาสตรีค · พลาด +5 XP';
+  $('ciNote').textContent = !tg.open ? t('ciLocked',{t:S.settings.cutoff})
+    : cur ? t('ciSaved',{xp:XP_VAL[cur]}) : t('ciHint');
 
-  // week strip
   const tonight=fromKey(nightKey(now)), mon=mondayOf(tonight);
   let html='', cnt=0;
   for(let i=0;i<7;i++){
     const d=addDays(mon,i), k=keyOf(d), s=S.log[k];
     if(s==='ok'||s==='light') cnt++;
     const inner = s==='ok'||s==='light' ? icon('check') : d.getDate();
-    html += `<div><div class="wd">${WEEK_HEAD[i]}</div><div class="dotday ${s||''} ${k===keyOf(tonight)?'today':''}">${inner}</div></div>`;
+    html += `<div><div class="wd">${L().weekHead[i]}</div><div class="dotday ${s||''} ${k===keyOf(tonight)?'today':''}">${inner}</div></div>`;
   }
   $('week').innerHTML = html;
-  $('weekCount').textContent = `${cnt}/7 คืน`;
+  $('weekCount').textContent = t('weekCount',{n:cnt});
 
-  $('stStreak').innerHTML = `${streak()}<span class="u">คืน</span>`;
+  $('stStreak').innerHTML = unit(streak(),'nights');
   $('stSaved').textContent = baht(saved());
-  $('stFought').innerHTML = `${S.cravings}<span class="u">ครั้ง</span>`;
+  $('stFought').innerHTML = unit(S.cravings,'times');
 }
 
 function renderTimer(){
@@ -571,22 +714,22 @@ function renderTimer(){
   const pill=$('phasePill');
   if(fs.fasting){
     const total=fs.end-fs.start, done=now-fs.start;
-    pill.classList.add('live'); $('phaseText').textContent='กำลังงด';
-    $('heroLabel').textContent='งดมาแล้ว';
+    pill.classList.add('live'); $('phaseText').textContent=t('fasting');
+    $('heroLabel').textContent=t('fastingFor');
     $('heroTime').textContent=hms(done);
     $('heroBar').style.width=Math.min(100,done/total*100)+'%';
     $('heroStart').textContent=S.settings.cutoff;
     $('heroEnd').textContent=S.settings.breakfast;
-    $('heroRemain').innerHTML=`เหลือ <b>${hrsMin(fs.end-now)}</b>`;
+    $('heroRemain').innerHTML=t('left',{t:hrsMin(fs.end-now)});
   }else{
     const total=fs.start-fs.since, left=fs.start-now;
-    pill.classList.remove('live'); $('phaseText').textContent='ช่วงกินได้';
-    $('heroLabel').textContent='ปิดครัวในอีก';
+    pill.classList.remove('live'); $('phaseText').textContent=t('eating');
+    $('heroLabel').textContent=t('closesIn');
     $('heroTime').textContent=hms(left);
     $('heroBar').style.width=Math.min(100,(1-left/total)*100)+'%';
     $('heroStart').textContent=S.settings.breakfast;
     $('heroEnd').textContent=S.settings.cutoff;
-    $('heroRemain').textContent = left<3600000 ? 'ใกล้ถึงมื้อสุดท้ายแล้ว' : 'กินกลางวันให้อิ่มพอดี';
+    $('heroRemain').textContent = left<3600000 ? t('lastMealSoon') : t('eatLunch');
   }
 }
 
@@ -594,46 +737,44 @@ function renderTimer(){
 let calMonth = (()=>{ const d=fromKey(nightKey()); return new Date(d.getFullYear(), d.getMonth(), 1); })();
 
 function renderProgress(){
-  // month summary (calendar month of "tonight")
-  const t=fromKey(nightKey()), y=t.getFullYear(), m=t.getMonth();
+  const tn=fromKey(nightKey()), y=tn.getFullYear(), m=tn.getMonth();
   const entries = Object.entries(S.log).filter(([k])=>{ const d=fromKey(k); return d.getFullYear()===y && d.getMonth()===m; });
   const good = entries.filter(([,s])=>s==='ok'||s==='light').length;
-  $('pmNights').innerHTML = `${entries.filter(([,s])=>s==='ok').length}<span class="u">คืน</span>`;
+  $('pmNights').innerHTML = unit(entries.filter(([,s])=>s==='ok').length,'nights');
   $('pmRate').textContent = entries.length ? Math.round(good/entries.length*100)+'%' : '–';
   $('pmSaved').textContent = baht(entries.reduce((a,[,s])=>a+nightSaving(s),0));
-
-  renderChart(t); renderCal(); renderFeed();
+  renderChart(tn); renderCal(); renderFeed();
 }
 
 function renderChart(tonight){
   const W=320, H=150, padL=18, padB=22, padT=8, weeks=8, slot=(W-padL)/weeks, bw=slot*.5;
   const mon=mondayOf(tonight);
   const y = v => padT + (H-padT-padB)*(1-v/7);
-  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="จำนวนคืนที่งดได้ต่อสัปดาห์">`;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t('chartAria')}">`;
   for(const v of [0,3.5,7]){ svg += `<line class="grid" x1="${padL}" x2="${W}" y1="${y(v)}" y2="${y(v)}"${v?' stroke-dasharray="2 3"':''}/>`; }
   svg += `<text x="0" y="${y(7)+3}">7</text><text x="0" y="${y(0)+3}">0</text>`;
   for(let w=0; w<weeks; w++){
     const ws=addDays(mon,-7*(weeks-1-w)); let ok=0, li=0;
     for(let i=0;i<7;i++){ const s=S.log[keyOf(addDays(ws,i))]; if(s==='ok') ok++; else if(s==='light') li++; }
     const x = padL + w*slot + (slot-bw)/2;
-    if(ok) svg += `<rect class="bar-ok" x="${x}" y="${y(ok)}" width="${bw}" height="${y(0)-y(ok)}" rx="3"><title>${thDate(ws)}: งดได้ ${ok} คืน</title></rect>`;
+    if(ok) svg += `<rect class="bar-ok" x="${x}" y="${y(ok)}" width="${bw}" height="${y(0)-y(ok)}" rx="3"><title>${fmtDate(ws)}: ${ok}</title></rect>`;
     if(li) svg += `<rect class="bar-light" x="${x}" y="${y(ok+li)}" width="${bw}" height="${y(ok)-y(ok+li)}" rx="3"/>`;
     if(!ok && !li) svg += `<rect fill="var(--fill)" x="${x}" y="${y(0)-3}" width="${bw}" height="3" rx="1.5"/>`;
-    if(w%2===1 || w===weeks-1) svg += `<text x="${x+bw/2}" y="${H-6}" text-anchor="middle">${w===weeks-1?'สัปดาห์นี้':thDate(ws)}</text>`;
+    if(w%2===1 || w===weeks-1) svg += `<text x="${x+bw/2}" y="${H-6}" text-anchor="middle">${w===weeks-1?t('thisWk'):fmtDate(ws)}</text>`;
   }
   $('chart').innerHTML = svg + '</svg>';
 }
 
 function renderCal(){
   const y=calMonth.getFullYear(), m=calMonth.getMonth();
-  $('calTitle').textContent = `${TH_MON_L[m]} ${y+543}`;
+  $('calTitle').textContent = L().monthYear(m,y,L());
   const tonight=fromKey(nightKey()), first=new Date(y,m,1,12), days=new Date(y,m+1,0).getDate();
   const lead=(first.getDay()+6)%7;
-  const cal=$('cal'); cal.innerHTML = WEEK_HEAD.map(d=>`<div class="wd">${d}</div>`).join('') + '<div class="blank"></div>'.repeat(lead);
+  const cal=$('cal'); cal.innerHTML = L().weekHead.map(d=>`<div class="wd">${d}</div>`).join('') + '<div class="blank"></div>'.repeat(lead);
   for(let i=1;i<=days;i++){
     const d=new Date(y,m,i,12), k=keyOf(d), s=S.log[k], future=d>tonight;
     const b=document.createElement('div');
-    b.innerHTML = `<button class="dotday ${s||''} ${k===keyOf(tonight)?'today':''} ${future?'future':''}" ${future?'disabled':''} aria-label="${thDate(d)}">${i}</button>`;
+    b.innerHTML = `<button class="dotday ${s||''} ${k===keyOf(tonight)?'today':''} ${future?'future':''}" ${future?'disabled':''} aria-label="${fmtDate(d)}">${i}</button>`;
     if(!future) b.firstChild.onclick = ()=>{
       const order=[undefined,'ok','light','miss'];
       setStatus(k, order[(order.indexOf(S.log[k])+1)%order.length]);
@@ -646,26 +787,26 @@ function renderCal(){
 
 function renderFeed(){
   const keys = Object.keys(S.log).sort().reverse().slice(0,12);
-  if(!keys.length){ $('feed').innerHTML = '<div class="empty">ยังไม่มีบันทึก เช็คอินคืนแรกได้ที่หน้า "วันนี้"</div>'; return; }
-  const T = { ok:'งดมื้อเย็นสำเร็จ', light:'กินเบาๆ', miss:'พลาดมื้อเย็น' };
+  if(!keys.length){ $('feed').innerHTML = `<div class="empty">${t('empty')}</div>`; return; }
+  const T = { ok:'feedOk', light:'feedLight', miss:'feedMiss' };
   const I = { ok:'check', light:'cup', miss:'x' };
   $('feed').innerHTML = keys.map(k=>{
     const s=S.log[k], d=fromKey(k);
     const fights = S.sessions.filter(x=>nightKey(new Date(x.t))===k).length;
-    const sub = `${TH_DAY_S[d.getDay()]} ${thDate(d)}` + (s==='ok'?` · ${fastHours()} ชม.`:'') + (fights?` · ต้านหิว ${fights} ครั้ง`:'');
+    const sub = `${L().daysShort[d.getDay()]} ${fmtDate(d)}` + (s==='ok'?` · ${fastHours()}`:'') + (fights?` · ${t('feedFights',{n:fights})}`:'');
     const r = nightSaving(s) ? baht(nightSaving(s)) : '';
-    return `<div class="row"><div class="ic ${s}">${icon(I[s])}</div><div class="t"><b>${T[s]}</b><span>${sub}</span></div><div class="r num">${r}</div></div>`;
+    return `<div class="row"><div class="ic ${s}">${icon(I[s])}</div><div class="t"><b>${t(T[s])}</b><span>${sub}</span></div><div class="r num">${r}</div></div>`;
   }).join('');
 }
 
 /* ---------- render: profile ---------- */
 function renderProfile(){
-  const li=levelInfo(S.xp), name=S.settings.name||'ผู้ใช้';
+  const li=levelInfo(S.xp);
   $('avatar').textContent = (S.settings.name||'?').trim().charAt(0).toUpperCase() || '?';
-  $('pName').textContent = name;
+  $('pName').textContent = S.settings.name || t('user');
   $('pLevel').textContent = `Lv.${li.L} · ${levelName(li.L)}`;
-  $('xpLabel').textContent = `${S.xp.toLocaleString('th-TH')} XP`;
-  $('xpNext').textContent = `อีก ${li.need-li.cur} XP ถึง Lv.${li.L+1}`;
+  $('xpLabel').textContent = `${S.xp.toLocaleString(L().locale)} XP`;
+  $('xpNext').textContent = t('xpNext',{n:li.need-li.cur, l:li.L+1});
   $('xpBar').style.width = (li.cur/li.need*100)+'%';
   $('pTotal').textContent = countStatus('ok');
   $('pBest').textContent = S.best||0;
@@ -675,7 +816,7 @@ function renderProfile(){
   $('badges').innerHTML = BADGES.map(b=>{
     const has=S.badges.includes(b.id);
     const inner = b.icon ? icon(b.icon) : b.txt;
-    return `<div class="${has?'':'locked'}"><div class="medal ${has?'got':''}">${inner}</div><div class="n">${b.n}</div></div>`;
+    return `<div class="${has?'':'locked'}"><div class="medal ${has?'got':''}">${inner}</div><div class="n">${L().badges[b.id]}</div></div>`;
   }).join('');
   if(document.activeElement?.tagName!=='INPUT'){
     $('fName').value=S.settings.name; $('fCut').value=S.settings.cutoff; $('fBreak').value=S.settings.breakfast; $('fCost').value=S.settings.cost;
@@ -690,7 +831,7 @@ function showTab(name){
   tab=name;
   document.querySelectorAll('.tab').forEach(s=>s.hidden = s.id!=='tab-'+name);
   document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('on', b.dataset.tab===name));
-  $('navTitle').textContent = $('tab-'+name).dataset.title;
+  $('navTitle').textContent = t($('tab-'+name).dataset.title);
   window.scrollTo(0,0); onScroll();
 }
 document.querySelectorAll('#tabbar button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
@@ -698,37 +839,44 @@ function onScroll(){ $('nav').classList.toggle('show', window.scrollY>48); }
 window.addEventListener('scroll', onScroll, {passive:true});
 
 /* ---------- events ---------- */
+$('langBtn').onclick = ()=>setLang(lang==='th' ? 'en' : 'th');
+document.querySelectorAll('#langSeg button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+
 document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{
-  const t=checkinTarget(); if(!t.open) return;
-  const s=b.dataset.s; if(S.log[t.key]===s) return;
-  setStatus(t.key,s);
-  toast(s==='ok' ? `เยี่ยมมาก · +${XP_VAL.ok} XP` : s==='light' ? `รักษาสตรีคไว้ได้ · +${XP_VAL.light} XP` : 'ไม่เป็นไร พรุ่งนี้เริ่มใหม่');
+  const tg=checkinTarget(); if(!tg.open) return;
+  const s=b.dataset.s; if(S.log[tg.key]===s) return;
+  setStatus(tg.key,s);
+  toast(s==='ok' ? t('toastOk',{xp:XP_VAL.ok}) : s==='light' ? t('toastLight',{xp:XP_VAL.light}) : t('toastMiss'));
 });
 $('calPrev').onclick=()=>{ calMonth=new Date(calMonth.getFullYear(), calMonth.getMonth()-1, 1); renderCal(); };
 $('calNext').onclick=()=>{ calMonth=new Date(calMonth.getFullYear(), calMonth.getMonth()+1, 1); renderCal(); };
 
 function bindSetting(id, apply){
-  $(id).addEventListener('change', ()=>{ if(apply($(id).value)!==false){ save(); renderAll(); toast('บันทึกการตั้งค่าแล้ว'); } else renderProfile(); });
+  $(id).addEventListener('change', ()=>{ if(apply($(id).value)!==false){ save(); renderAll(); toast(t('settingsSaved')); } else renderProfile(); });
 }
 bindSetting('fName', v=>{ S.settings.name=v.trim(); });
-bindSetting('fCut', v=>{ if(!v||v<=S.settings.breakfast){ toast('เวลาปิดครัวต้องหลังมื้อเช้า'); return false; } S.settings.cutoff=v; });
-bindSetting('fBreak', v=>{ if(!v||v>=S.settings.cutoff){ toast('มื้อเช้าต้องก่อนเวลาปิดครัว'); return false; } S.settings.breakfast=v; });
+bindSetting('fCut', v=>{ if(!v||v<=S.settings.breakfast){ toast(t('errCut')); return false; } S.settings.cutoff=v; });
+bindSetting('fBreak', v=>{ if(!v||v>=S.settings.cutoff){ toast(t('errBreak')); return false; } S.settings.breakfast=v; });
 bindSetting('fCost', v=>{ S.settings.cost=Math.max(0,Number(v)||0); });
-$('resetAll').onclick=()=>{ if(confirm('ล้างประวัติ XP และความสำเร็จทั้งหมด? ย้อนกลับไม่ได้')){ S=blank(); save(); renderAll(); toast('ล้างข้อมูลแล้ว'); } };
+$('resetAll').onclick=()=>{ if(confirm(t('resetConfirm'))){ const l=lang; S=blank(); S.settings.lang=l; save(); renderAll(); toast(t('resetDone')); } };
 
 /* ---------- SOS ---------- */
-let sos = null, sosTimer = null, mission = null;
-function newMission(){ let n; do{ n=pick(MISSIONS); }while(n===mission); mission=n; $('mText').textContent=n; $('mDone').disabled=false; $('mDone').textContent='ทำแล้ว'; }
+let sos = null, sosTimer = null, missionIdx = -1;
+function showMission(){ $('mText').textContent = L().missionList[missionIdx] || ''; }
+function newMission(){
+  const n = L().missionList.length; let i;
+  do{ i=Math.floor(Math.random()*n); }while(n>1 && i===missionIdx);
+  missionIdx=i; showMission(); $('mDone').disabled=false; $('mDone').textContent=t('mDone');
+}
 function tickSOS(){
   const el=Date.now()-sos.start, left=WAVE_MS-el;
   $('sosClock').textContent = left>0 ? ms(left+999) : ms(el);
-  $('sosCue').textContent = (el/1000)%10 < 4 ? 'หายใจเข้า' : 'หายใจออกช้าๆ';
-  if(left<=0) $('sosSub').textContent = 'ครบ 10 นาทีแล้ว ความอยากน่าจะเบาลง เก่งมาก';
+  $('sosCue').textContent = (el/1000)%10 < 4 ? t('breatheIn') : t('breatheOut');
+  $('sosSub').textContent = left>0 ? t('sosSub') : t('sosSubDone');
 }
 $('sosBtn').onclick = ()=>{
   sos = { start:Date.now(), missions:0, xp:0 };
   newMission();
-  $('sosSub').textContent = 'ความอยากมักมาเป็นระลอกแล้วค่อยๆ จางลง หายใจตามวงกลมไปก่อน';
   const br=$('breath'); br.classList.remove('go'); void br.offsetWidth; br.classList.add('go');
   $('sos').classList.remove('done'); $('sos').classList.add('open');
   document.body.style.overflow='hidden';
@@ -739,7 +887,7 @@ $('sosClose').onclick = closeSOS;
 $('mShuffle').onclick = newMission;
 $('mDone').onclick = ()=>{
   S.challenges++; gainXP(10); sos.missions++; sos.xp+=10; checkBadges(); save();
-  $('mDone').disabled=true; $('mDone').textContent='เยี่ยม ✓';
+  $('mDone').disabled=true; $('mDone').textContent=t('mDoneOk');
   setTimeout(newMission, 900);
 };
 $('sosFinish').onclick = ()=>{
@@ -750,13 +898,13 @@ $('sosFinish').onclick = ()=>{
   $('sumTime').textContent = ms(dur);
   $('sumMissions').textContent = sos.missions;
   $('sumXP').textContent = '+'+sos.xp;
-  $('sumMsg').textContent = `ครั้งที่ ${S.cravings} ที่คุณชนะความหิว`;
+  $('sumMsg').textContent = t('sumMsg',{n:S.cravings});
   $('sos').classList.add('done');
 };
 $('sosDone').onclick = closeSOS;
 
 /* ---------- boot ---------- */
-checkBadges(); save(); renderAll(); showTab('home');
+applyStatic(); checkBadges(); save(); renderAll(); showTab('home');
 setInterval(()=>{ if(tab==='home') renderTimer(); }, 1000);
 let lastNight = nightKey();
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden){ renderAll(); } });
