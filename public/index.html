@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#f4f4f6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -19,27 +19,28 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f2f2f4; --card:#ffffff; --ink:#111113; --ink2:#3c3c43; --muted:#8a8a8f; --line:#e4e4e8; --fill:#efeff2;
-  --accent:#ff5a1f; --accent-2:#ff8a5c; --accent-soft:#fff0ea; --on-accent:#ffffff;
-  --light:#ffb595; --miss:#c9c9ce;
-  --nav:rgba(255,255,255,.82);
+  --bg:#f4f4f6; --card:#ffffff; --ink:#0f0f12; --ink2:#3a3a40; --muted:#8a8a92; --line:rgba(0,0,0,.07); --fill:#ededf1;
+  --accent:#ff5a1f; --accent2:#ff9a62; --grad:linear-gradient(135deg,#ff3d00 0%,#ff6a2b 45%,#ff9a62 100%);
+  --accent-soft:#fff0e9; --light:#ffb595; --miss:#c9c9cf;
+  --shadow:0 1px 2px rgba(16,16,20,.04),0 12px 32px rgba(16,16,20,.06);
+  --nav:rgba(244,244,246,.78); --hero:#121215; --sheet:#ffffff;
   --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#000000; --card:#1c1c1e; --ink:#f5f5f7; --ink2:#d1d1d6; --muted:#8e8e93; --line:#2c2c2e; --fill:#2c2c2e;
-    --accent:#ff6a33; --accent-2:#ff8f63; --accent-soft:#3a1d12; --on-accent:#ffffff;
-    --light:#8a4a30; --miss:#48484a;
-    --nav:rgba(18,18,20,.78);
+    --bg:#000000; --card:#131316; --ink:#f5f5f7; --ink2:#d1d1d6; --muted:#8e8e96; --line:rgba(255,255,255,.08); --fill:#232328;
+    --accent:#ff6a33; --accent2:#ffa070; --accent-soft:#3a1d12; --light:#8a4a30; --miss:#46464c;
+    --shadow:0 0 0 1px rgba(255,255,255,.05);
+    --nav:rgba(8,8,10,.72); --hero:#17171b; --sheet:#1c1c1f;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#000000; --card:#1c1c1e; --ink:#f5f5f7; --ink2:#d1d1d6; --muted:#8e8e93; --line:#2c2c2e; --fill:#2c2c2e;
-  --accent:#ff6a33; --accent-2:#ff8f63; --accent-soft:#3a1d12; --on-accent:#ffffff;
-  --light:#8a4a30; --miss:#48484a;
-  --nav:rgba(18,18,20,.78);
+  --bg:#000000; --card:#131316; --ink:#f5f5f7; --ink2:#d1d1d6; --muted:#8e8e96; --line:rgba(255,255,255,.08); --fill:#232328;
+  --accent:#ff6a33; --accent2:#ffa070; --accent-soft:#3a1d12; --light:#8a4a30; --miss:#46464c;
+  --shadow:0 0 0 1px rgba(255,255,255,.05);
+  --nav:rgba(8,8,10,.72); --hero:#17171b; --sheet:#1c1c1f;
   color-scheme:dark;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -52,210 +53,267 @@ body{
   overscroll-behavior-y:none; touch-action:manipulation;
 }
 button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer;-webkit-user-select:none;user-select:none}
-svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.num{font-family:-apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;font-weight:700}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.num{font-family:-apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.03em;font-weight:700}
+.press{transition:transform .15s cubic-bezier(.3,1.4,.5,1),opacity .15s}
+.press:active{transform:scale(.97);opacity:.9}
 
-/* compact nav that fades in on scroll */
+/* nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(var(--sat) + 10px) 16px 10px;text-align:center;
   font-weight:600;font-size:16px;background:var(--nav);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
   border-bottom:.5px solid var(--line);opacity:0;pointer-events:none;transition:opacity .2s}
 .nav.show{opacity:1}
 
-main{max-width:560px;margin:0 auto;padding:calc(var(--sat) + 20px) 16px calc(var(--sab) + 96px)}
+main{max-width:560px;margin:0 auto;padding:calc(var(--sat) + 18px) 16px calc(var(--sab) + 100px)}
 .tab[hidden]{display:none}
-.eyebrow{font-size:13px;color:var(--muted);font-weight:500}
-h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;letter-spacing:-.01em}
-.section{display:flex;align-items:baseline;justify-content:space-between;margin:26px 4px 8px}
-.section h2{font-size:20px;font-weight:700;margin:0}
-.section .aside{font-size:14px;color:var(--muted)}
-.card{background:var(--card);border-radius:16px;padding:16px}
-.muted{color:var(--muted)}
+.head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.head>div{min-width:0}
+.eyebrow{font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.01em}
+h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;letter-spacing:-.02em}
+.head-actions{display:flex;gap:8px;margin-top:4px;flex:none}
+.chip-btn{height:34px;padding:0 12px;border-radius:99px;background:var(--card);box-shadow:var(--shadow);font-size:13px;font-weight:700;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.chip-btn svg{width:16px;height:16px}
+.mini-avatar{width:34px;height:34px;border-radius:50%;background:var(--grad);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center;box-shadow:var(--shadow)}
+
+.section{display:flex;align-items:baseline;justify-content:space-between;margin:28px 4px 10px}
+.section h2{font-size:20px;font-weight:700;margin:0;letter-spacing:-.01em}
+.section .aside{font-size:13px;color:var(--muted)}
+.card{background:var(--card);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
 .label{font-size:13px;color:var(--muted);font-weight:500}
 
-/* hero timer */
-.hero-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:5px 10px;border-radius:99px;background:var(--fill);color:var(--ink2)}
-.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--muted)}
-.pill.live{background:var(--accent-soft);color:var(--accent)}
-.pill.live .dot{background:var(--accent);animation:pulse 1.6s infinite}
-@keyframes pulse{50%{opacity:.25}}
-.bignum{font-size:56px;line-height:1.05;margin:2px 0 16px}
-.bar{height:6px;border-radius:99px;background:var(--fill);overflow:hidden}
-.bar>i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .6s}
-.bar-meta{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px}
-.bar-meta b{color:var(--ink);font-weight:600}
+/* ===== hero ===== */
+.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--hero);color:#fff;border-radius:28px;padding:18px 18px 16px;
+  box-shadow:0 20px 50px rgba(255,90,31,.16),0 2px 6px rgba(0,0,0,.1)}
+.hero::before{content:"";position:absolute;z-index:-1;right:-120px;top:-140px;width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,31,.55),rgba(255,90,31,0) 65%);transition:opacity .6s}
+.hero::after{content:"";position:absolute;z-index:-1;left:-140px;bottom:-180px;width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,154,98,.18),rgba(255,154,98,0) 65%)}
+.hero.day::before{opacity:.45}
+.hero-top{display:flex;justify-content:space-between;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8)}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5)}
+.hero.live .pill{background:rgba(255,90,31,.18);color:#ffb08a}
+.hero.live .pill .dot{background:#ff6a33;box-shadow:0 0 0 0 rgba(255,106,51,.6);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 8px rgba(255,106,51,0)}100%{box-shadow:0 0 0 0 rgba(255,106,51,0)}}
+.hero-top .range{font-size:13px;color:rgba(255,255,255,.55);font-weight:500}
+.ring-wrap{position:relative;width:min(64vw,240px);aspect-ratio:1;margin:10px auto 6px}
+.ring-wrap svg{width:100%;height:100%;overflow:visible}
+.ring-track{stroke:rgba(255,255,255,.08)}
+.ring-arc{filter:drop-shadow(0 0 8px rgba(255,90,31,.55));transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ring-center .lbl{font-size:13px;color:rgba(255,255,255,.6);font-weight:500}
+.ring-center .time{font-size:clamp(38px,12vw,48px);line-height:1.05;margin:4px 0 6px;color:#fff}
+.ring-center .sub{font-size:13px;color:#ffb08a;font-weight:600}
+.hero-metrics{display:grid;grid-template-columns:repeat(3,1fr);margin-top:8px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+.hero-metrics>div{display:flex;flex-direction:column;align-items:center;gap:3px}
+.hero-metrics svg{width:18px;height:18px;color:#ff8a5c}
+.hero-metrics .k{font-size:12px;color:rgba(255,255,255,.5)}
+.hero-metrics .v{font-size:16px;color:#fff}
 
-.cta{width:100%;margin-top:12px;height:54px;border-radius:14px;background:var(--ink);color:var(--card);
-  display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:17px;transition:transform .1s,opacity .1s}
-.cta:active{transform:scale(.98);opacity:.85}
+.cta{position:relative;overflow:hidden;width:100%;margin-top:12px;height:56px;border-radius:18px;background:var(--grad);color:#fff;
+  display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:17px;box-shadow:0 12px 28px rgba(255,90,31,.35)}
+.cta::after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-80px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 4.5s ease-in-out infinite 1.5s}
+@keyframes shine{0%{left:-80px}25%,100%{left:120%}}
 
-/* segmented check-in */
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--fill);border-radius:12px;padding:4px}
-.seg button{height:44px;border-radius:9px;font-size:15px;font-weight:600;color:var(--ink2);transition:background .15s,color .15s}
-.seg button.sel{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
-.seg button.sel[data-s="ok"]{background:var(--accent);color:var(--on-accent)}
+/* segmented with sliding thumb */
+.seg{position:relative;display:grid;grid-template-columns:repeat(3,1fr);background:var(--fill);border-radius:14px;padding:4px}
+.seg .thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/3);border-radius:10px;background:var(--card);
+  box-shadow:0 2px 8px rgba(0,0,0,.12);opacity:0;transition:transform .45s cubic-bezier(.3,1.35,.5,1),opacity .2s,background .3s}
+.seg .thumb.ok{background:var(--grad);box-shadow:0 6px 16px rgba(255,90,31,.35)}
+.seg button{position:relative;z-index:1;height:46px;border-radius:10px;font-size:15px;font-weight:600;color:var(--ink2);transition:color .25s}
+.seg button.sel{color:var(--ink)}
+.seg button.sel[data-s="ok"]{color:#fff}
 .seg.locked button{opacity:.4;pointer-events:none}
-.hint{font-size:13px;color:var(--muted);margin-top:10px}
+.hint{font-size:13px;color:var(--muted);margin-top:10px;display:flex;gap:6px;align-items:center}
+.hint svg{width:15px;height:15px}
 
 /* week strip */
 .week{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;gap:4px}
-.week .wd{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:6px}
-.dotday{width:34px;height:34px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600;
-  background:var(--fill);color:var(--muted)}
-.dotday.ok{background:var(--accent);color:var(--on-accent)}
+.week .wd{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:8px}
+.dotday{width:36px;height:36px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600;background:var(--fill);color:var(--muted)}
+.dotday.ok{background:var(--grad);color:#fff;box-shadow:0 4px 10px rgba(255,90,31,.3)}
 .dotday.light{background:var(--light);color:#fff}
 .dotday.miss{background:transparent;border:1.5px solid var(--miss);color:var(--muted)}
 .dotday.today{box-shadow:0 0 0 2px var(--card),0 0 0 3.5px var(--ink)}
-.dotday svg{width:16px;height:16px;stroke-width:2.6}
+.dotday svg{width:16px;height:16px;stroke-width:3}
 
-/* 3-up stats */
-.stats3{display:grid;grid-template-columns:repeat(3,1fr);padding:14px 0}
-.stats3>div{padding:0 14px}
-.stats3>div+div{border-left:.5px solid var(--line)}
-.stats3 .v{font-size:26px;line-height:1.2;margin-top:2px}
-.stats3 .u{font-size:13px;color:var(--muted);font-weight:500;margin-left:2px}
+/* stats */
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);padding:16px 0}
+.stats3>div{padding:0 14px;min-width:0}
+.stats3>div+div{border-left:1px solid var(--line)}
+.stats3 .v{font-size:26px;line-height:1.2;margin-top:4px;white-space:nowrap}
+.stats3 .u{font-size:13px;color:var(--muted);font-weight:600;margin-left:3px;letter-spacing:0}
+.stat-ic{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);margin-bottom:8px}
+.stat-ic svg{width:16px;height:16px}
 
-/* progress tab */
-.seg-small{display:inline-grid;grid-auto-flow:column;gap:2px;background:var(--fill);border-radius:9px;padding:2px}
-.chart svg{width:100%;height:auto;display:block}
-.chart .grid{stroke:var(--line);stroke-width:1}
-.chart text{fill:var(--muted);font-size:10px;font-family:-apple-system,"Inter",sans-serif}
-.chart .bar-ok{fill:var(--accent)}
-.chart .bar-light{fill:var(--light)}
+/* charts */
+.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+.chart-head .big{font-size:26px;line-height:1.15;margin-top:2px}
+.chart-head .u{font-size:13px;color:var(--muted);font-weight:600;margin-left:5px;letter-spacing:0}
+.chart-box{position:relative;height:180px}
+.chart-box.sm{height:150px}
+.legend{display:flex;gap:12px;font-size:12px;color:var(--muted);flex-wrap:wrap;justify-content:flex-end}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
 
+/* calendar */
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.cal-head b{font-size:17px;font-weight:600}
+.cal-head b{font-size:17px;font-weight:700}
 .icon-btn{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--fill)}
-.icon-btn:active{opacity:.6}
-.cal{display:grid;grid-template-columns:repeat(7,1fr);row-gap:6px;text-align:center}
-.cal .wd{font-size:12px;color:var(--muted);font-weight:500;padding-bottom:4px}
-.cal .dotday{width:36px;height:36px}
+.icon-btn svg{width:18px;height:18px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);row-gap:8px;text-align:center}
+.cal .wd{font-size:12px;color:var(--muted);font-weight:600;padding-bottom:2px}
 .cal .dotday.future{opacity:.35}
 .cal .blank{height:36px}
-.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:14px;flex-wrap:wrap}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
 
-.list{background:var(--card);border-radius:16px;overflow:hidden}
-.row{display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:56px;position:relative}
-.row+.row::before{content:"";position:absolute;top:0;left:64px;right:0;border-top:.5px solid var(--line)}
-.row .ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--fill);color:var(--muted)}
-.row .ic.ok{background:var(--accent);color:var(--on-accent)}
+/* list */
+.list{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.row{display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:60px;position:relative}
+.row+.row::before{content:"";position:absolute;top:0;left:66px;right:0;border-top:1px solid var(--line)}
+.row .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;background:var(--fill);color:var(--muted)}
+.row .ic.ok{background:var(--grad);color:#fff}
 .row .ic.light{background:var(--light);color:#fff}
-.row .ic svg{width:18px;height:18px;stroke-width:2.2}
+.row .ic svg{width:18px;height:18px}
 .row .t{flex:1;min-width:0}
 .row .t b{display:block;font-weight:600;font-size:15px}
 .row .t span{font-size:13px;color:var(--muted)}
-.row .r{font-size:15px;font-weight:600}
+.row .r{font-size:15px;color:var(--accent)}
 .empty{padding:28px 16px;text-align:center;color:var(--muted);font-size:14px}
 
 /* profile */
-.profile{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;display:grid;place-items:center;font-size:26px;font-weight:700;flex:none}
-.profile b{font-size:22px;font-weight:700;display:block;line-height:1.2}
-.level{font-size:14px;color:var(--muted)}
-.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 8px;text-align:center}
-.medal{width:56px;height:56px;margin:0 auto 6px;border-radius:50%;display:grid;place-items:center;
-  background:var(--fill);color:var(--muted);font-weight:800;font-size:18px;position:relative}
+.profile-card{display:flex;align-items:center;gap:16px}
+.av-wrap{position:relative;width:84px;height:84px;flex:none}
+.av-wrap svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.av-wrap .avatar{position:absolute;inset:8px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:700}
+.profile-card b{font-size:22px;font-weight:700;display:block;line-height:1.2}
+.level{font-size:14px;color:var(--accent);font-weight:600;margin-top:2px}
+.xp{font-size:13px;color:var(--muted);margin-top:2px}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 8px;text-align:center}
+.medal{position:relative;overflow:hidden;width:58px;height:58px;margin:0 auto 7px;border-radius:50%;display:grid;place-items:center;
+  background:var(--fill);color:var(--muted);font-weight:800;font-size:18px}
 .medal svg{width:24px;height:24px}
-.medal.got{background:linear-gradient(145deg,var(--accent-2),var(--accent));color:#fff;box-shadow:0 4px 12px rgba(255,90,31,.28)}
-.badges .n{font-size:11px;line-height:1.3;color:var(--ink2)}
+.medal.got{background:var(--grad);color:#fff;box-shadow:0 8px 18px rgba(255,90,31,.32)}
+.medal.got::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(150deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,0) 45%)}
+.badges .n{font-size:11px;line-height:1.3;color:var(--ink2);font-weight:500}
 .badges .locked .n{color:var(--muted)}
-
-.form .row{min-height:50px;padding:0 16px}
+.form .row{min-height:52px;padding:0 16px}
 .form .row+.row::before{left:16px}
 .form label{flex:1;font-size:16px}
 .form input{border:0;background:transparent;color:var(--muted);font:inherit;font-size:16px;text-align:right;min-width:0;width:50%;padding:12px 0;outline:none}
 .form input:focus{color:var(--accent)}
-.danger{width:100%;height:50px;color:#ff3b30;font-weight:500;background:var(--card);border-radius:16px;margin-top:12px}
+.seg-mini{display:inline-grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--fill);border-radius:10px;padding:2px;flex:none}
+.seg-mini button{height:30px;min-width:64px;padding:0 10px;border-radius:8px;font-size:14px;font-weight:600;color:var(--muted)}
+.seg-mini button.sel{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.danger{width:100%;height:52px;color:#ff3b30;font-weight:600;background:var(--card);border-radius:16px;margin-top:12px;box-shadow:var(--shadow)}
 .footnote{font-size:13px;color:var(--muted);margin:14px 4px 0;line-height:1.55}
 
 /* tab bar */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:space-around;
   padding:6px 8px calc(var(--sab) + 6px);background:var(--nav);
   -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:.5px solid var(--line)}
-.tabbar button{flex:1;max-width:120px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:500;color:var(--muted);padding:4px 0}
-.tabbar button svg{width:26px;height:26px}
+.tabbar button{flex:1;max-width:120px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--muted);padding:4px 0}
+.tabbar button svg{width:25px;height:25px;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
 .tabbar button.on{color:var(--accent)}
+.tabbar button.on svg{transform:translateY(-1px) scale(1.06)}
 
-/* SOS full screen */
-.sos{position:fixed;inset:0;z-index:50;background:#0c0c0e;color:#f5f5f7;display:none;flex-direction:column;
+/* action sheet */
+.sheet-wrap{position:fixed;inset:0;z-index:60;display:none}
+.sheet-wrap.open{display:block}
+.sheet-bg{position:absolute;inset:0;background:rgba(0,0,0,.35);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.sheet{position:absolute;left:8px;right:8px;bottom:calc(var(--sab) + 8px);max-width:540px;margin:0 auto}
+.sheet-group{background:var(--sheet);border-radius:16px;overflow:hidden;margin-bottom:8px}
+.sheet-title{padding:14px 16px;text-align:center;font-size:13px;color:var(--muted);font-weight:500;border-bottom:1px solid var(--line)}
+.sheet-group button{width:100%;height:56px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:17px;font-weight:500;color:var(--accent)}
+.sheet-group button+button{border-top:1px solid var(--line)}
+.sheet-group button svg{width:19px;height:19px}
+.sheet-group button.cur{font-weight:700}
+.sheet-group button.destructive{color:#ff3b30}
+.sheet-cancel{width:100%;height:56px;border-radius:16px;background:var(--sheet);font-size:17px;font-weight:700;color:var(--accent)}
+
+/* SOS */
+.sos{position:fixed;inset:0;z-index:50;background:#0a0a0c;color:#f5f5f7;display:none;flex-direction:column;
   padding:calc(var(--sat) + 8px) 20px calc(var(--sab) + 16px);overflow:auto}
-.sos.open{display:flex;animation:fadein .25s ease-out}
-@keyframes fadein{from{opacity:0;transform:translateY(16px)}}
-.sos-top{display:flex;align-items:center;justify-content:space-between;height:44px}
+.sos::before{content:"";position:fixed;left:50%;top:22%;width:520px;height:520px;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,31,.22),rgba(255,90,31,0) 62%);pointer-events:none}
+.sos.open{display:flex}
+.sos-top{position:relative;display:flex;align-items:center;justify-content:space-between;height:44px}
 .sos-top .ttl{font-weight:600}
-.sos .icon-btn{background:#232326;color:#f5f5f7}
-.breath{position:relative;width:min(72vw,300px);aspect-ratio:1;margin:12px auto 6px;display:grid;place-items:center}
-.breath .ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(255,106,51,.28),rgba(255,106,51,.06) 70%);
-  border:1px solid rgba(255,106,51,.45);transform:scale(.72)}
-.breath.go .ring{animation:breathe 10s ease-in-out infinite}
+.sos .icon-btn{background:rgba(255,255,255,.09);color:#f5f5f7}
+.breath{position:relative;width:min(76vw,300px);aspect-ratio:1;margin:14px auto 4px;display:grid;place-items:center}
+.breath svg.cd{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.breath .orb{position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle at 50% 40%,rgba(255,138,92,.38),rgba(255,90,31,.08) 70%);
+  border:1px solid rgba(255,106,51,.35);transform:scale(.72)}
+.breath.go .orb{animation:breathe 10s ease-in-out infinite}
 @keyframes breathe{0%{transform:scale(.72)}40%{transform:scale(1)}100%{transform:scale(.72)}}
 .breath .in{position:relative;text-align:center}
 .breath .clock{font-size:64px;line-height:1}
-.breath .cue{font-size:15px;color:#ff8f63;margin-top:6px;font-weight:500}
-.sos .sub{text-align:center;color:#a1a1a6;font-size:14px;margin:4px 0 18px}
-.mission{background:#1c1c1f;border-radius:16px;padding:16px}
-.mission .label{color:#8e8e93}
-.mission p{margin:6px 0 14px;font-size:17px;font-weight:500;line-height:1.4}
+.breath .cue{font-size:15px;color:#ff9a62;margin-top:8px;font-weight:600;display:flex;align-items:center;gap:6px;justify-content:center}
+.breath .cue svg{width:16px;height:16px}
+.sos .sub{position:relative;text-align:center;color:#a1a1a6;font-size:14px;margin:4px 0 18px}
+.mission{position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:16px}
+.mission .label{color:#8e8e93;display:flex;gap:6px;align-items:center}
+.mission .label svg{width:15px;height:15px;color:#ff8a5c}
+.mission p{margin:8px 0 14px;font-size:17px;font-weight:600;line-height:1.4;min-height:48px}
 .mission .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.mission .btns button{height:44px;border-radius:12px;background:#2c2c2f;font-weight:600;font-size:15px}
-.mission .btns button.done{background:#f5f5f7;color:#0c0c0e}
-.mission .btns button:disabled{opacity:.5}
+.mission .btns button{height:46px;border-radius:14px;background:rgba(255,255,255,.08);font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:6px}
+.mission .btns button svg{width:17px;height:17px}
+.mission .btns button.done{background:#f5f5f7;color:#0a0a0c}
+.mission .btns button:disabled{opacity:.55}
 .sos .spacer{flex:1;min-height:20px}
-.finish{height:58px;border-radius:29px;background:var(--accent);color:#fff;font-weight:700;font-size:17px;width:100%}
-.finish:active{transform:scale(.98)}
-.run{display:flex;flex-direction:column;flex:1}
-.summary{display:none;flex:1;flex-direction:column;align-items:center;text-align:center;padding-top:10vh}
-.summary .ok{width:84px;height:84px;border-radius:50%;background:var(--accent);display:grid;place-items:center;margin-bottom:18px;animation:pop .4s cubic-bezier(.2,1.4,.4,1)}
-.summary .ok svg{width:40px;height:40px;stroke:#fff;stroke-width:3}
-@keyframes pop{from{transform:scale(.3);opacity:0}}
-.summary h2{font-size:26px;margin:0 0 6px}
-.summary .stats3{width:100%;margin:26px 0;background:#1c1c1f;border-radius:16px}
-.summary .stats3>div+div{border-color:#333}
+.finish{position:relative;height:58px;border-radius:29px;background:var(--grad);color:#fff;font-weight:700;font-size:17px;width:100%;box-shadow:0 12px 30px rgba(255,90,31,.4)}
+.run{position:relative;display:flex;flex-direction:column;flex:1}
+.summary{position:relative;display:none;flex:1;flex-direction:column;align-items:center;text-align:center;padding-top:9vh}
+.summary .ok{width:92px;height:92px;border-radius:50%;background:var(--grad);display:grid;place-items:center;margin-bottom:20px;box-shadow:0 16px 40px rgba(255,90,31,.45)}
+.summary .ok svg{width:44px;height:44px;stroke:#fff}
+.summary h2{font-size:28px;margin:0 0 6px;letter-spacing:-.02em}
+.summary .stats3{width:100%;margin:26px 0;background:rgba(255,255,255,.06);border-radius:20px}
+.summary .stats3>div+div{border-color:rgba(255,255,255,.1)}
 .summary .stats3 .label{color:#8e8e93}
 .sos.done .run{display:none}
 .sos.done .summary{display:flex}
 
 /* toast */
-.toast{position:fixed;left:16px;right:16px;margin:0 auto;width:max-content;top:calc(var(--sat) + 10px);z-index:90;transform:translateY(-160%);
-  background:var(--card);color:var(--ink);padding:10px 16px;border-radius:99px;font-size:14px;font-weight:600;
-  box-shadow:0 8px 30px rgba(0,0,0,.16);display:flex;gap:8px;align-items:center;transition:transform .35s cubic-bezier(.2,1,.3,1);max-width:calc(100% - 32px)}
+.toast{position:fixed;left:16px;right:16px;margin:0 auto;width:max-content;max-width:calc(100% - 32px);top:calc(var(--sat) + 10px);z-index:90;
+  transform:translateY(-160%);background:var(--card);color:var(--ink);padding:10px 16px;border-radius:99px;font-size:14px;font-weight:600;
+  box-shadow:0 10px 34px rgba(0,0,0,.18);display:flex;gap:8px;align-items:center;transition:transform .45s cubic-bezier(.2,1.2,.3,1)}
 .toast.show{transform:translateY(0)}
-.toast svg{width:18px;height:18px;color:var(--accent);stroke-width:2.4}
+.toast svg{width:18px;height:18px;color:var(--accent);stroke-width:2.5}
 
-/* header with language switch */
-.head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.head>div{min-width:0}
-.lang-btn{margin-top:2px;height:32px;padding:0 12px;border-radius:99px;background:var(--card);font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--ink2);display:flex;align-items:center;gap:6px;flex:none}
-.lang-btn svg{width:16px;height:16px;stroke-width:2}
-.lang-btn:active{opacity:.6}
-.seg-mini{display:inline-grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--fill);border-radius:9px;padding:2px;flex:none}
-.seg-mini button{height:30px;min-width:64px;padding:0 10px;border-radius:7px;font-size:14px;font-weight:600;color:var(--muted)}
-.seg-mini button.sel{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
-html[lang="en"] .stats3 .u{margin-left:4px}
-
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:100}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/></symbol>
-  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V11M10 20V5M16 20v-6M21 20H3"/></symbol>
-  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.6-4 3.8-6 7.5-6s6.9 2 7.5 6"/></symbol>
-  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.8-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.7-7.5-9.5V6z"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
-  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h1.5a2.5 2.5 0 0 1 0 5H16"/></symbol>
-  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
-  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
-  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
-  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c.8 3.5 5.5 5.6 5.5 11a5.5 5.5 0 0 1-11 0c0-2.6 1.4-4.3 2.6-5.3.1 1.7.9 2.8 2 3.1-.3-3 .2-5.9.9-8.8z"/></symbol>
-  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.5 9h-3.2a1.8 1.8 0 0 0 0 3.6h1.4a1.8 1.8 0 0 1 0 3.6H9.5M12 7.5V9M12 16.2v1.3"/></symbol>
-  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></symbol>
-  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 11 11 5 19.5 4.5 19 13 13 19 5 19zM5 19l7.5-7.5"/></symbol>
-  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></symbol>
-  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 1 1 9.4 4.5a6.3 6.3 0 0 0 10.1 10.1z"/></symbol>
-  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.6 3.5 5.4 3.5 8.5s-1.1 5.9-3.5 8.5c-2.4-2.6-3.5-5.4-3.5-8.5s1.1-5.9 3.5-8.5z"/></symbol>
+<symbol id="i-house" viewBox="0 0 24 24"> <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
+<symbol id="i-chart-no-axes-column" viewBox="0 0 24 24"> <line x1="18" x2="18" y1="20" y2="10" /> <line x1="12" x2="12" y1="20" y2="4" /> <line x1="6" x2="6" y1="20" y2="14" /></symbol>
+<symbol id="i-user-round" viewBox="0 0 24 24"> <circle cx="12" cy="8" r="5" /> <path d="M20 21a8 8 0 0 0-16 0" /></symbol>
+<symbol id="i-shield-check" viewBox="0 0 24 24"> <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"> <path d="M20 6 9 17l-5-5" /></symbol>
+<symbol id="i-coffee" viewBox="0 0 24 24"> <path d="M10 2v2" /> <path d="M14 2v2" /> <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" /> <path d="M6 2v2" /></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"> <path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol>
+<symbol id="i-chevron-left" viewBox="0 0 24 24"> <path d="m15 18-6-6 6-6" /></symbol>
+<symbol id="i-chevron-right" viewBox="0 0 24 24"> <path d="m9 18 6-6-6-6" /></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"> <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" /></symbol>
+<symbol id="i-coins" viewBox="0 0 24 24"> <circle cx="8" cy="8" r="6" /> <path d="M18.09 10.37A6 6 0 1 1 10.34 18" /> <path d="M7 6h1v4" /> <path d="m16.71 13.88.7.71-2.82 2.82" /></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></symbol>
+<symbol id="i-sprout" viewBox="0 0 24 24"> <path d="M7 20h10" /> <path d="M10 20c5.5-2.5.8-6.4 3-10" /> <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" /> <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" /></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"> <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></symbol>
+<symbol id="i-moon-star" viewBox="0 0 24 24"> <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9" /> <path d="M20 3v4" /> <path d="M22 5h-4" /></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol>
+<symbol id="i-sunrise" viewBox="0 0 24 24"> <path d="M12 2v8" /> <path d="m4.93 10.93 1.41 1.41" /> <path d="M2 18h2" /> <path d="M20 18h2" /> <path d="m19.07 10.93-1.41 1.41" /> <path d="M22 22H2" /> <path d="m8 6 4-4 4 4" /> <path d="M16 18a4 4 0 0 0-8 0" /></symbol>
+<symbol id="i-sunset" viewBox="0 0 24 24"> <path d="M12 10V2" /> <path d="m4.93 10.93 1.41 1.41" /> <path d="M2 18h2" /> <path d="M20 18h2" /> <path d="m19.07 10.93-1.41 1.41" /> <path d="M22 22H2" /> <path d="m16 6-4 4-4-4" /> <path d="M16 18a4 4 0 0 0-8 0" /></symbol>
+<symbol id="i-timer" viewBox="0 0 24 24"> <line x1="10" x2="14" y1="2" y2="2" /> <line x1="12" x2="15" y1="14" y2="11" /> <circle cx="12" cy="14" r="8" /></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"> <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /> <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /> <path d="M4 22h16" /> <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" /> <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" /> <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" /></symbol>
+<symbol id="i-wind" viewBox="0 0 24 24"> <path d="M12.8 19.6A2 2 0 1 0 14 16H2" /> <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" /> <path d="M9.8 4.4A2 2 0 1 1 11 8H2" /></symbol>
+<symbol id="i-shuffle" viewBox="0 0 24 24"> <path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22" /> <path d="m18 2 4 4-4 4" /> <path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2" /> <path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8" /> <path d="m18 14 4 4-4 4" /></symbol>
+<symbol id="i-utensils-crossed" viewBox="0 0 24 24"> <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" /> <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" /> <path d="m2.1 21.8 6.4-6.3" /> <path d="m19 5-7 7" /></symbol>
+<symbol id="i-calendar-days" viewBox="0 0 24 24"> <path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="M8 14h.01" /> <path d="M12 14h.01" /> <path d="M16 14h.01" /> <path d="M8 18h.01" /> <path d="M12 18h.01" /> <path d="M16 18h.01" /></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24"> <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /> <path d="M20 3v4" /> <path d="M22 5h-4" /> <path d="M4 17v2" /> <path d="M5 18H3" /></symbol>
+<symbol id="i-piggy-bank" viewBox="0 0 24 24"> <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z" /> <path d="M2 9v1c0 1.1.9 2 2 2h1" /> <path d="M16 11h.01" /></symbol>
+  <defs>
+    <linearGradient id="gArc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb37f"/><stop offset=".5" stop-color="#ff6a2b"/><stop offset="1" stop-color="#ff3d00"/></linearGradient>
+  </defs>
 </svg>
 
 <header class="nav" id="nav"><span id="navTitle"></span></header>
@@ -263,30 +321,48 @@ html[lang="en"] .stats3 .u{margin-left:4px}
 <main>
   <!-- ============ HOME ============ -->
   <section class="tab" id="tab-home" data-title="tabToday">
-    <div class="head">
+    <div class="head anim">
       <div>
         <div class="eyebrow" id="homeDate"></div>
         <h1 class="large" id="homeTitle"></h1>
       </div>
-      <button class="lang-btn" id="langBtn" aria-label="Language / ภาษา"><svg class="i"><use href="#i-globe"/></svg><span id="langBtnText">EN</span></button>
-    </div>
-
-    <div class="card">
-      <div class="hero-top">
-        <span class="pill" id="phasePill"><span class="dot"></span><span id="phaseText"></span></span>
-        <span class="label" id="phaseRange"></span>
+      <div class="head-actions">
+        <button class="chip-btn press" id="langBtn" aria-label="Language / ภาษา"><svg class="i"><use href="#i-globe"/></svg><span id="langBtnText">EN</span></button>
+        <button class="mini-avatar press" id="miniAvatar" data-i18n-aria="tabProfile">?</button>
       </div>
-      <div class="label" id="heroLabel"></div>
-      <div class="bignum num" id="heroTime">0:00:00</div>
-      <div class="bar"><i id="heroBar"></i></div>
-      <div class="bar-meta"><span id="heroStart"></span><span id="heroRemain"></span><span id="heroEnd"></span></div>
     </div>
 
-    <button class="cta" id="sosBtn"><svg class="i"><use href="#i-shield"/></svg><span data-i18n="sosCta"></span></button>
+    <div class="hero anim" id="hero">
+      <div class="hero-top">
+        <span class="pill"><span class="dot"></span><span id="phaseText"></span></span>
+        <span class="range" id="phaseRange"></span>
+      </div>
+      <div class="ring-wrap">
+        <svg viewBox="0 0 240 240" aria-hidden="true">
+          <circle class="ring-track" cx="120" cy="120" r="104" fill="none" stroke-width="14"/>
+          <circle class="ring-arc" id="ringArc" cx="120" cy="120" r="104" fill="none" stroke="url(#gArc)" stroke-width="14" stroke-linecap="round"
+            stroke-dasharray="653.45" stroke-dashoffset="653.45" transform="rotate(-90 120 120)"/>
+          <circle id="ringKnob" cx="120" cy="16" r="9" fill="#fff" stroke="#ff5a1f" stroke-width="4"/>
+        </svg>
+        <div class="ring-center">
+          <div class="lbl" id="heroLabel"></div>
+          <div class="time num" id="heroTime">0:00:00</div>
+          <div class="sub" id="heroSub"></div>
+        </div>
+      </div>
+      <div class="hero-metrics">
+        <div><svg class="i"><use href="#i-sunset"/></svg><span class="k" data-i18n="lblClose"></span><span class="v num" id="mClose"></span></div>
+        <div><svg class="i"><use href="#i-sunrise"/></svg><span class="k" data-i18n="lblBreak"></span><span class="v num" id="mBreak"></span></div>
+        <div><svg class="i"><use href="#i-timer"/></svg><span class="k" data-i18n="lblGoal"></span><span class="v num" id="mGoal"></span></div>
+      </div>
+    </div>
 
-    <div class="section"><h2 id="ciTitle"></h2><span class="aside" id="ciDate"></span></div>
-    <div class="card">
+    <button class="cta press anim" id="sosBtn"><svg class="i"><use href="#i-shield-check"/></svg><span data-i18n="sosCta"></span></button>
+
+    <div class="section anim"><h2 id="ciTitle"></h2><span class="aside" id="ciDate"></span></div>
+    <div class="card anim">
       <div class="seg" id="seg">
+        <span class="thumb" id="segThumb"></span>
         <button data-s="ok" data-i18n="stOk"></button>
         <button data-s="light" data-i18n="stLight"></button>
         <button data-s="miss" data-i18n="stMiss"></button>
@@ -294,77 +370,92 @@ html[lang="en"] .stats3 .u{margin-left:4px}
       <div class="hint" id="ciNote"></div>
     </div>
 
-    <div class="section"><h2 data-i18n="thisWeek"></h2><span class="aside" id="weekCount"></span></div>
-    <div class="card week" id="week"></div>
+    <div class="section anim"><h2 data-i18n="thisWeek"></h2><span class="aside" id="weekCount"></span></div>
+    <div class="card week anim" id="week"></div>
 
-    <div class="card stats3" style="margin-top:12px">
-      <div><div class="label" data-i18n="streak"></div><div class="v num" id="stStreak"></div></div>
-      <div><div class="label" data-i18n="saved"></div><div class="v num" id="stSaved"></div></div>
-      <div><div class="label" data-i18n="resisted"></div><div class="v num" id="stFought"></div></div>
+    <div class="card stats3 anim" style="margin-top:12px">
+      <div><div class="stat-ic"><svg class="i"><use href="#i-flame"/></svg></div><div class="label" data-i18n="streak"></div><div class="v num" id="stStreak"></div></div>
+      <div><div class="stat-ic"><svg class="i"><use href="#i-piggy-bank"/></svg></div><div class="label" data-i18n="saved"></div><div class="v num" id="stSaved"></div></div>
+      <div><div class="stat-ic"><svg class="i"><use href="#i-shield-check"/></svg></div><div class="label" data-i18n="resisted"></div><div class="v num" id="stFought"></div></div>
     </div>
   </section>
 
   <!-- ============ PROGRESS ============ -->
   <section class="tab" id="tab-progress" data-title="tabProgress" hidden>
-    <div class="eyebrow" data-i18n="overview"></div>
-    <h1 class="large" data-i18n="tabProgress"></h1>
+    <div class="anim">
+      <div class="eyebrow" data-i18n="overview"></div>
+      <h1 class="large" data-i18n="tabProgress"></h1>
+    </div>
 
-    <div class="card stats3">
+    <div class="card stats3 anim">
       <div><div class="label" data-i18n="thisMonth"></div><div class="v num" id="pmNights"></div></div>
       <div><div class="label" data-i18n="successRate"></div><div class="v num" id="pmRate"></div></div>
       <div><div class="label" data-i18n="saved"></div><div class="v num" id="pmSaved"></div></div>
     </div>
 
-    <div class="section"><h2 data-i18n="last8"></h2><span class="aside" data-i18n="perWeek"></span></div>
-    <div class="card chart" id="chart"></div>
-
-    <div class="section"><h2 data-i18n="calendar"></h2><span class="aside" data-i18n="tapToEdit"></span></div>
-    <div class="card">
-      <div class="cal-head">
-        <button class="icon-btn" id="calPrev" data-i18n-aria="prevMonth"><svg class="i" style="width:18px;height:18px"><use href="#i-left"/></svg></button>
-        <b id="calTitle"></b>
-        <button class="icon-btn" id="calNext" data-i18n-aria="nextMonth"><svg class="i" style="width:18px;height:18px"><use href="#i-right"/></svg></button>
+    <div class="card anim" style="margin-top:12px">
+      <div class="chart-head">
+        <div><div class="label" data-i18n="weeklyTitle"></div><div class="big num" id="weekAvg"></div></div>
+        <div class="legend"><span><i style="background:var(--accent)"></i><span data-i18n="stOk"></span></span><span><i style="background:var(--light)"></i><span data-i18n="stLight"></span></span></div>
       </div>
-      <div class="cal" id="cal"></div>
-      <div class="legend">
-        <span><i style="background:var(--accent)"></i><span data-i18n="stOk"></span></span>
-        <span><i style="background:var(--light)"></i><span data-i18n="stLight"></span></span>
-        <span><i style="border:1.5px solid var(--miss)"></i><span data-i18n="stMiss"></span></span>
-      </div>
+      <div class="chart-box"><canvas id="weekChart" role="img" data-i18n-aria="weeklyTitle"></canvas></div>
     </div>
 
-    <div class="section"><h2 data-i18n="recent"></h2></div>
-    <div class="list" id="feed"></div>
+    <div class="card anim" style="margin-top:12px">
+      <div class="chart-head">
+        <div><div class="label" data-i18n="savingsTitle"></div><div class="big num" id="saveTotal"></div></div>
+        <span class="label" data-i18n="last30"></span>
+      </div>
+      <div class="chart-box sm"><canvas id="saveChart" role="img" data-i18n-aria="savingsTitle"></canvas></div>
+    </div>
+
+    <div class="section anim"><h2 data-i18n="calendar"></h2><span class="aside" data-i18n="tapToEdit"></span></div>
+    <div class="card anim">
+      <div class="cal-head">
+        <button class="icon-btn press" id="calPrev" data-i18n-aria="prevMonth"><svg class="i"><use href="#i-chevron-left"/></svg></button>
+        <b id="calTitle"></b>
+        <button class="icon-btn press" id="calNext" data-i18n-aria="nextMonth"><svg class="i"><use href="#i-chevron-right"/></svg></button>
+      </div>
+      <div class="cal" id="cal"></div>
+    </div>
+
+    <div class="section anim"><h2 data-i18n="recent"></h2></div>
+    <div class="list anim" id="feed"></div>
   </section>
 
   <!-- ============ PROFILE ============ -->
   <section class="tab" id="tab-profile" data-title="tabProfile" hidden>
-    <div class="eyebrow" data-i18n="yourAccount"></div>
-    <h1 class="large" data-i18n="tabProfile"></h1>
+    <div class="anim">
+      <div class="eyebrow" data-i18n="yourAccount"></div>
+      <h1 class="large" data-i18n="tabProfile"></h1>
+    </div>
 
-    <div class="profile">
-      <div class="avatar" id="avatar">?</div>
+    <div class="card profile-card anim">
+      <div class="av-wrap">
+        <svg viewBox="0 0 84 84" aria-hidden="true">
+          <circle cx="42" cy="42" r="39" fill="none" stroke="var(--fill)" stroke-width="4"/>
+          <circle id="lvRing" cx="42" cy="42" r="39" fill="none" stroke="url(#gArc)" stroke-width="4" stroke-linecap="round" stroke-dasharray="245.04" stroke-dashoffset="245.04" style="transition:stroke-dashoffset 1s cubic-bezier(.2,.8,.2,1)"/>
+        </svg>
+        <div class="avatar" id="avatar">?</div>
+      </div>
       <div style="flex:1;min-width:0">
         <b id="pName"></b>
         <div class="level" id="pLevel"></div>
+        <div class="xp" id="pXP"></div>
       </div>
     </div>
-    <div class="card">
-      <div style="display:flex;justify-content:space-between" class="label"><span id="xpLabel"></span><span id="xpNext"></span></div>
-      <div class="bar" style="margin-top:8px"><i id="xpBar"></i></div>
+
+    <div class="card stats3 anim" style="margin-top:12px">
+      <div><div class="label" data-i18n="totalFasted"></div><div class="v num" id="pTotal"></div></div>
+      <div><div class="label" data-i18n="bestStreak"></div><div class="v num" id="pBest"></div></div>
+      <div><div class="label" data-i18n="missions"></div><div class="v num" id="pMissions"></div></div>
     </div>
 
-    <div class="card stats3" style="margin-top:12px">
-      <div><div class="label" data-i18n="totalFasted"></div><div class="v num" id="pTotal">0</div></div>
-      <div><div class="label" data-i18n="bestStreak"></div><div class="v num" id="pBest">0</div></div>
-      <div><div class="label" data-i18n="missions"></div><div class="v num" id="pMissions">0</div></div>
-    </div>
+    <div class="section anim"><h2 data-i18n="achievements"></h2><span class="aside" id="badgeCount"></span></div>
+    <div class="card badges anim" id="badges"></div>
 
-    <div class="section"><h2 data-i18n="achievements"></h2><span class="aside" id="badgeCount"></span></div>
-    <div class="card badges" id="badges"></div>
-
-    <div class="section"><h2 data-i18n="settings"></h2></div>
-    <div class="list form">
+    <div class="section anim"><h2 data-i18n="settings"></h2></div>
+    <div class="list form anim">
       <div class="row"><label data-i18n="language"></label>
         <div class="seg-mini" id="langSeg"><button data-lang="th">ไทย</button><button data-lang="en">English</button></div>
       </div>
@@ -373,40 +464,62 @@ html[lang="en"] .stats3 .u{margin-left:4px}
       <div class="row"><label for="fBreak" data-i18n="fBreak"></label><input id="fBreak" type="time"></div>
       <div class="row"><label for="fCost" data-i18n="fCost"></label><input id="fCost" type="number" inputmode="numeric" min="0" step="10"></div>
     </div>
-    <button class="danger" id="resetAll" data-i18n="reset"></button>
-    <p class="footnote" data-i18n="footnote"></p>
+    <button class="danger press anim" id="resetAll" data-i18n="reset"></button>
+    <p class="footnote anim" data-i18n="footnote"></p>
   </section>
 </main>
 
 <nav class="tabbar" id="tabbar">
-  <button data-tab="home" class="on"><svg class="i"><use href="#i-home"/></svg><span data-i18n="tabToday"></span></button>
-  <button data-tab="progress"><svg class="i"><use href="#i-chart"/></svg><span data-i18n="tabProgress"></span></button>
-  <button data-tab="profile"><svg class="i"><use href="#i-user"/></svg><span data-i18n="tabProfile"></span></button>
+  <button data-tab="home" class="on"><svg class="i"><use href="#i-house"/></svg><span data-i18n="tabToday"></span></button>
+  <button data-tab="progress"><svg class="i"><use href="#i-chart-no-axes-column"/></svg><span data-i18n="tabProgress"></span></button>
+  <button data-tab="profile"><svg class="i"><use href="#i-user-round"/></svg><span data-i18n="tabProfile"></span></button>
 </nav>
+
+<!-- ============ ACTION SHEET ============ -->
+<div class="sheet-wrap" id="sheet" role="dialog" aria-modal="true">
+  <div class="sheet-bg" id="sheetBg"></div>
+  <div class="sheet" id="sheetPanel">
+    <div class="sheet-group">
+      <div class="sheet-title" id="sheetTitle"></div>
+      <button data-s="ok"><svg class="i"><use href="#i-check"/></svg><span data-i18n="stOk"></span></button>
+      <button data-s="light"><svg class="i"><use href="#i-coffee"/></svg><span data-i18n="stLight"></span></button>
+      <button data-s="miss"><svg class="i"><use href="#i-utensils-crossed"/></svg><span data-i18n="stMiss"></span></button>
+      <button data-s="" class="destructive" id="sheetClear"><span data-i18n="sheetClear"></span></button>
+    </div>
+    <button class="sheet-cancel" id="sheetCancel" data-i18n="cancel"></button>
+  </div>
+</div>
 
 <!-- ============ SOS ============ -->
 <div class="sos" id="sos" role="dialog" aria-modal="true" data-i18n-aria="sosTitle">
   <div class="run">
     <div class="sos-top">
-      <button class="icon-btn" id="sosClose" data-i18n-aria="close"><svg class="i" style="width:18px;height:18px"><use href="#i-x"/></svg></button>
+      <button class="icon-btn press" id="sosClose" data-i18n-aria="close"><svg class="i"><use href="#i-x"/></svg></button>
       <span class="ttl" data-i18n="sosTitle"></span>
       <span style="width:36px"></span>
     </div>
     <div class="breath" id="breath">
-      <div class="ring"></div>
-      <div class="in"><div class="clock num" id="sosClock">10:00</div><div class="cue" id="sosCue"></div></div>
+      <svg class="cd" viewBox="0 0 300 300" aria-hidden="true">
+        <circle cx="150" cy="150" r="146" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="3"/>
+        <circle id="cdArc" cx="150" cy="150" r="146" fill="none" stroke="url(#gArc)" stroke-width="3" stroke-linecap="round" stroke-dasharray="917.35" stroke-dashoffset="0"/>
+      </svg>
+      <div class="orb"></div>
+      <div class="in"><div class="clock num" id="sosClock">10:00</div><div class="cue"><svg class="i"><use href="#i-wind"/></svg><span id="sosCue"></span></div></div>
     </div>
     <div class="sub" id="sosSub"></div>
     <div class="mission">
-      <div class="label" data-i18n="missionLabel"></div>
+      <div class="label"><svg class="i"><use href="#i-sparkles"/></svg><span data-i18n="missionLabel"></span></div>
       <p id="mText"></p>
-      <div class="btns"><button id="mShuffle" data-i18n="shuffle"></button><button class="done" id="mDone"></button></div>
+      <div class="btns">
+        <button class="press" id="mShuffle"><svg class="i"><use href="#i-shuffle"/></svg><span data-i18n="shuffle"></span></button>
+        <button class="done press" id="mDone"><svg class="i"><use href="#i-check"/></svg><span id="mDoneText"></span></button>
+      </div>
     </div>
     <div class="spacer"></div>
-    <button class="finish" id="sosFinish" data-i18n="sosFinish"></button>
+    <button class="finish press" id="sosFinish" data-i18n="sosFinish"></button>
   </div>
   <div class="summary">
-    <div class="ok"><svg class="i"><use href="#i-check"/></svg></div>
+    <div class="ok"><svg class="i"><use href="#i-trophy"/></svg></div>
     <h2 data-i18n="sumTitle"></h2>
     <div style="color:#a1a1a6" id="sumMsg"></div>
     <div class="stats3">
@@ -415,17 +528,24 @@ html[lang="en"] .stats3 .u{margin-left:4px}
       <div><div class="label">XP</div><div class="v num" id="sumXP">+0</div></div>
     </div>
     <div class="spacer"></div>
-    <button class="finish" id="sosDone" style="max-width:420px" data-i18n="done"></button>
+    <button class="finish press" id="sosDone" style="max-width:420px" data-i18n="done"></button>
   </div>
 </div>
 
 <div class="toast" id="toast"><svg class="i"><use href="#i-check"/></svg><span id="toastText"></span></div>
+<canvas id="confetti"></canvas>
 
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/chart.umd.min.js"></script>
+<script src="vendor/confetti.browser.min.js"></script>
 <script>
 const KEY = 'skipdinner.v1';
 const DEFAULTS = { name:'', cutoff:'17:00', breakfast:'07:00', cost:80, lang:'' };
 const XP_VAL = { ok:50, light:20, miss:5 };
 const WAVE_MS = 10*60*1000;
+const RING_C = 2*Math.PI*104, LV_C = 2*Math.PI*39, CD_C = 2*Math.PI*146;
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const HAS_GSAP = !!window.gsap && !REDUCE;
 
 /* ---------- translations ---------- */
 const I18N = {
@@ -446,21 +566,24 @@ const I18N = {
     nights:'คืน', times:'ครั้ง',
     fasting:'กำลังงด', eating:'ช่วงกินได้',
     fastingFor:'งดมาแล้ว', closesIn:'ปิดครัวในอีก',
-    left:'เหลือ <b>{t}</b>', lastMealSoon:'ใกล้ถึงมื้อสุดท้ายแล้ว', eatLunch:'กินกลางวันให้อิ่มพอดี',
+    left:'เหลือ {t}', lastMealSoon:'ใกล้มื้อสุดท้ายแล้ว', eatLunch:'กินกลางวันให้อิ่มพอดี',
+    lblClose:'ปิดครัว', lblBreak:'มื้อเช้า', lblGoal:'เป้าหมาย',
     sosCta:'หิวอยู่? เริ่มโหมดต้านหิว',
     ciTonight:'เช็คอินคืนนี้', ciLastNight:'เช็คอินเมื่อคืน',
     ciLocked:'เช็คอินได้หลัง {t} น.', ciSaved:'บันทึกแล้ว · +{xp} XP',
-    ciHint:'งดได้ +50 XP · กินเบาๆ +20 XP และยังรักษาสตรีค · พลาด +5 XP',
+    ciHint:'งดได้ +50 XP · กินเบาๆ +20 XP · พลาด +5 XP',
     stOk:'งดได้', stLight:'กินเบาๆ', stMiss:'พลาด',
     thisWeek:'สัปดาห์นี้', weekCount:'{n}/7 คืน',
     streak:'สตรีค', saved:'ประหยัด', resisted:'ต้านหิว',
     overview:'ภาพรวม', thisMonth:'เดือนนี้', successRate:'สำเร็จ',
-    last8:'8 สัปดาห์ล่าสุด', perWeek:'คืนต่อสัปดาห์', thisWk:'สัปดาห์นี้', chartAria:'จำนวนคืนที่งดได้ต่อสัปดาห์',
+    weeklyTitle:'คืนที่งดได้ต่อสัปดาห์', perWk:'คืน/สัปดาห์ (เฉลี่ย)', thisWk:'สัปดาห์นี้',
+    savingsTitle:'เงินที่ประหยัดสะสม', last30:'30 วันล่าสุด',
     calendar:'ปฏิทิน', tapToEdit:'แตะวันเพื่อแก้ไข', prevMonth:'เดือนก่อน', nextMonth:'เดือนถัดไป',
     recent:'บันทึกล่าสุด', empty:'ยังไม่มีบันทึก เช็คอินคืนแรกได้ที่หน้า "วันนี้"',
     feedOk:'งดมื้อเย็นสำเร็จ', feedLight:'กินเบาๆ', feedMiss:'พลาดมื้อเย็น', feedFights:'ต้านหิว {n} ครั้ง',
+    sheetClear:'ลบบันทึกวันนี้', cancel:'ยกเลิก',
     yourAccount:'บัญชีของคุณ', user:'ผู้ใช้',
-    xpNext:'อีก {n} XP ถึง Lv.{l}',
+    xpLine:'{xp} XP · อีก {n} XP ถึง Lv.{l}',
     totalFasted:'งดได้ทั้งหมด', bestStreak:'สตรีคสูงสุด', missions:'ภารกิจ',
     achievements:'ความสำเร็จ', settings:'ตั้งค่า', language:'ภาษา',
     fName:'ชื่อ', fNamePh:'ใส่ชื่อ', fCut:'เวลาปิดครัว', fBreak:'มื้อเช้า', fCost:'ค่ามื้อเย็น (บาท)',
@@ -473,7 +596,7 @@ const I18N = {
     sosSub:'ความอยากมักมาเป็นระลอกแล้วค่อยๆ จางลง หายใจตามวงกลมไปก่อน',
     sosSubDone:'ครบ 10 นาทีแล้ว ความอยากน่าจะเบาลง เก่งมาก',
     breatheIn:'หายใจเข้า', breatheOut:'หายใจออกช้าๆ',
-    missionLabel:'ภารกิจระหว่างรอ', shuffle:'สุ่มใหม่', mDone:'ทำแล้ว', mDoneOk:'เยี่ยม ✓',
+    missionLabel:'ภารกิจระหว่างรอ', shuffle:'สุ่มใหม่', mDone:'ทำแล้ว', mDoneOk:'เยี่ยม',
     sosFinish:'ผ่านไปได้แล้ว', sumTitle:'ต้านความหิวสำเร็จ', sumMsg:'ครั้งที่ {n} ที่คุณชนะความหิว', time:'เวลา', done:'เสร็จสิ้น',
     langSwitched:'เปลี่ยนเป็นภาษาไทยแล้ว',
     levels:['มือใหม่','เริ่มจับทาง','มีวินัย','สม่ำเสมอ','แข็งแกร่ง','ตัวจริง','ระดับโปร','ตำนาน'],
@@ -502,21 +625,24 @@ const I18N = {
     nights:'nights', times:'times',
     fasting:'Fasting', eating:'Eating window',
     fastingFor:'Fasting for', closesIn:'Kitchen closes in',
-    left:'<b>{t}</b> left', lastMealSoon:'Last meal soon', eatLunch:'Have a solid lunch',
+    left:'{t} left', lastMealSoon:'Last meal soon', eatLunch:'Have a solid lunch',
+    lblClose:'Closes', lblBreak:'Breakfast', lblGoal:'Goal',
     sosCta:'Hungry? Start craving mode',
     ciTonight:'Check in tonight', ciLastNight:'Check in last night',
     ciLocked:'Check-in opens at {t}', ciSaved:'Saved · +{xp} XP',
-    ciHint:'Fasted +50 XP · Light meal +20 XP and keeps your streak · Missed +5 XP',
+    ciHint:'Fasted +50 XP · Light +20 XP · Missed +5 XP',
     stOk:'Fasted', stLight:'Light', stMiss:'Missed',
     thisWeek:'This week', weekCount:'{n}/7 nights',
     streak:'Streak', saved:'Saved', resisted:'Resisted',
     overview:'Overview', thisMonth:'This month', successRate:'Success',
-    last8:'Last 8 weeks', perWeek:'nights per week', thisWk:'This wk', chartAria:'Nights fasted per week',
+    weeklyTitle:'Nights fasted per week', perWk:'nights/wk avg', thisWk:'This wk',
+    savingsTitle:'Total saved', last30:'Last 30 days',
     calendar:'Calendar', tapToEdit:'Tap a day to edit', prevMonth:'Previous month', nextMonth:'Next month',
     recent:'Recent', empty:'No entries yet. Check in your first night on the Today tab.',
     feedOk:'Skipped dinner', feedLight:'Light meal', feedMiss:'Had dinner', feedFights:'{n} cravings resisted',
+    sheetClear:'Clear entry', cancel:'Cancel',
     yourAccount:'Your account', user:'You',
-    xpNext:'{n} XP to Lv.{l}',
+    xpLine:'{xp} XP · {n} XP to Lv.{l}',
     totalFasted:'Total fasted', bestStreak:'Best streak', missions:'Missions',
     achievements:'Achievements', settings:'Settings', language:'Language',
     fName:'Name', fNamePh:'Your name', fCut:'Kitchen closes', fBreak:'Breakfast', fCost:'Dinner cost (฿)',
@@ -529,7 +655,7 @@ const I18N = {
     sosSub:'Cravings come in waves and fade. Breathe with the circle for now.',
     sosSubDone:'10 minutes done — the craving should be easing. Nice work.',
     breatheIn:'Breathe in', breatheOut:'Breathe out slowly',
-    missionLabel:'While you wait', shuffle:'Shuffle', mDone:'Done', mDoneOk:'Nice ✓',
+    missionLabel:'While you wait', shuffle:'Shuffle', mDone:'Done', mDoneOk:'Nice',
     sosFinish:'I made it', sumTitle:'Craving resisted', sumMsg:'Craving #{n} beaten', time:'Time', done:'Done',
     langSwitched:'Switched to English',
     levels:['Beginner','Finding rhythm','Disciplined','Consistent','Strong','The real deal','Pro','Legend'],
@@ -551,18 +677,18 @@ function t(key, vars={}){
 const fmtDate = d => L().date(d, L());
 
 const BADGES = [
-  { id:'first', icon:'leaf',  test:()=>countStatus('ok')>=1 },
-  { id:'s3',    txt:'3',      test:s=>s.best>=3 },
-  { id:'s7',    txt:'7',      test:s=>s.best>=7 },
-  { id:'s14',   txt:'14',     test:s=>s.best>=14 },
-  { id:'s30',   txt:'30',     test:s=>s.best>=30 },
-  { id:'n20',   icon:'moon',  test:()=>countStatus('ok')>=20 },
-  { id:'f1',    icon:'shield',test:s=>s.cravings>=1 },
-  { id:'f10',   icon:'flame', test:s=>s.cravings>=10 },
-  { id:'c10',   icon:'target',test:s=>s.challenges>=10 },
-  { id:'b500',  icon:'coin',  test:()=>saved()>=500 },
-  { id:'b2000', txt:'฿',      test:()=>saved()>=2000 },
-  { id:'honest',icon:'heart', test:()=>countStatus('miss')>=1 },
+  { id:'first', icon:'sprout',       test:()=>countStatus('ok')>=1 },
+  { id:'s3',    txt:'3',             test:s=>s.best>=3 },
+  { id:'s7',    txt:'7',             test:s=>s.best>=7 },
+  { id:'s14',   txt:'14',            test:s=>s.best>=14 },
+  { id:'s30',   txt:'30',            test:s=>s.best>=30 },
+  { id:'n20',   icon:'moon-star',    test:()=>countStatus('ok')>=20 },
+  { id:'f1',    icon:'shield-check', test:s=>s.cravings>=1 },
+  { id:'f10',   icon:'flame',        test:s=>s.cravings>=10 },
+  { id:'c10',   icon:'target',       test:s=>s.challenges>=10 },
+  { id:'b500',  icon:'piggy-bank',   test:()=>saved()>=500 },
+  { id:'b2000', icon:'coins',        test:()=>saved()>=2000 },
+  { id:'honest',icon:'heart',        test:()=>countStatus('miss')>=1 },
 ];
 
 /* ---------- state ---------- */
@@ -572,10 +698,9 @@ function load(){
   try{
     const r = JSON.parse(localStorage.getItem(KEY));
     if(r && typeof r==='object'){
-      const b=blank();
       const settings = {...DEFAULTS, ...(r.settings||{})};
-      if(!settings.lang) settings.lang = 'th';   // existing users have been using Thai
-      return {...b, ...r, settings, sessions:r.sessions||[]};
+      if(!settings.lang) settings.lang = 'th';
+      return {...blank(), ...r, settings, sessions:r.sessions||[]};
     }
   }catch(e){}
   return blank();
@@ -591,15 +716,15 @@ const keyOf = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())
 const fromKey = k => { const [y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d,12); };
 const addDays = (d,n) => { const x=new Date(d); x.setDate(x.getDate()+n); return x; };
 const atTime = (base,hhmm) => { const [h,m]=hhmm.split(':').map(Number); const d=new Date(base); d.setHours(h,m,0,0); return d; };
-const icon = (id,cls='i') => `<svg class="${cls}"><use href="#i-${id}"/></svg>`;
+const icon = id => `<svg class="i"><use href="#i-${id}"/></svg>`;
 const baht = n => '฿' + Math.round(n).toLocaleString(L().locale);
 const mondayOf = d => addDays(d, -((d.getDay()+6)%7));
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function hms(ms){ const s=Math.max(0,Math.floor(ms/1000)); return `${Math.floor(s/3600)}:${pad(Math.floor(s/60)%60)}:${pad(s%60)}`; }
-function ms(msv){ const s=Math.max(0,Math.floor(msv/1000)); return `${Math.floor(s/60)}:${pad(s%60)}`; }
+function mmss(msv){ const s=Math.max(0,Math.floor(msv/1000)); return `${Math.floor(s/60)}:${pad(s%60)}`; }
 function hrsMin(msv){ const m=Math.max(0,Math.round(msv/60000)); const h=Math.floor(m/60), mm=m%60; return h ? t('hm',{h,m:mm}) : t('mOnly',{m:mm}); }
 function fastHours(){ const [ch,cm]=S.settings.cutoff.split(':').map(Number), [bh,bm]=S.settings.breakfast.split(':').map(Number);
   const mins=((bh*60+bm)+1440-(ch*60+cm))%1440; return t('hours',{n:Math.round(mins/6)/10}); }
-const unit = (n,u) => `${n}<span class="u">${t(u)}</span>`;
 
 function nightKey(now=new Date()){ return keyOf(now < atTime(now,S.settings.breakfast) ? addDays(now,-1) : now); }
 function fastingState(now=new Date()){
@@ -621,6 +746,29 @@ function streak(){
 function levelInfo(xp){ let Lv=1; while(xp >= 50*(Lv+1)*Lv) Lv++; const base=50*Lv*(Lv-1), next=50*(Lv+1)*Lv; return {L:Lv,cur:xp-base,need:next-base}; }
 const levelName = Lv => L().levels[Math.min(Lv,L().levels.length)-1];
 
+/* ---------- motion ---------- */
+function countTo(el, to, fmt=v=>Math.round(v), unitKey){
+  const from = el.dataset.v==null ? 0 : Number(el.dataset.v);
+  el.dataset.v = to;
+  const draw = v => { el.innerHTML = fmt(v) + (unitKey ? `<span class="u">${t(unitKey)}</span>` : ''); };
+  if(el._tw) el._tw.kill();
+  if(!HAS_GSAP || from===to){ draw(to); return; }
+  const o={v:from}; el._tw = gsap.to(o,{v:to,duration:1.1,ease:'power3.out',onUpdate:()=>draw(o.v)});
+}
+function animateIn(section){
+  if(!HAS_GSAP) return;
+  gsap.fromTo(section.querySelectorAll('.anim'), {opacity:0,y:18}, {opacity:1,y:0,duration:.55,stagger:.05,ease:'power3.out',clearProps:'transform,opacity'});
+}
+let fire = null;
+function celebrate(power=1){
+  if(REDUCE || !window.confetti) return;
+  if(!fire) fire = confetti.create($('confetti'), {resize:true, useWorker:true});
+  const colors=['#ff3d00','#ff6a2b','#ff9a62','#ffd2bf','#ffffff'];
+  fire({particleCount:Math.round(70*power), spread:70, startVelocity:42, origin:{y:.72}, colors, scalar:.9, ticks:220});
+  setTimeout(()=>fire({particleCount:Math.round(40*power), spread:110, origin:{y:.6}, colors, scalar:.75, ticks:200}), 160);
+}
+function pop(el){ if(HAS_GSAP && el) gsap.fromTo(el,{scale:.85},{scale:1,duration:.5,ease:'back.out(3)'}); }
+
 /* ---------- feedback ---------- */
 let toastT;
 function toast(msg){ $('toastText').textContent=msg; const el=$('toast'); el.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),2400); }
@@ -628,7 +776,7 @@ function gainXP(n){
   const before = levelInfo(S.xp).L;
   S.xp = Math.max(0, S.xp+n);
   const after = levelInfo(S.xp).L;
-  if(after>before) setTimeout(()=>toast(t('levelUp',{name:levelName(after), l:after})), 2600);
+  if(after>before) setTimeout(()=>{ toast(t('levelUp',{name:levelName(after), l:after})); celebrate(1.2); }, 2600);
 }
 function checkBadges(){
   S.best = Math.max(S.best||0, streak());
@@ -636,7 +784,7 @@ function checkBadges(){
   for(const b of BADGES){
     if(!S.badges.includes(b.id) && b.test(S)){
       S.badges.push(b.id);
-      delay += 2600; setTimeout(()=>toast(t('badgeGot',{name:L().badges[b.id]})), delay);
+      delay += 2600; setTimeout(()=>{ toast(t('badgeGot',{name:L().badges[b.id]})); celebrate(.6); }, delay);
     }
   }
 }
@@ -672,8 +820,9 @@ function applyStatic(){
 function setLang(l){
   if(l===lang) return;
   lang = l; S.settings.lang = l; save();
-  applyStatic(); renderAll();
-  if($('sos').classList.contains('open')){ showMission(); if(sos) tickSOS(); }
+  applyStatic(); destroyCharts(); renderAll();
+  if(tab==='progress') renderCharts(fromKey(nightKey()));
+  if($('sos').classList.contains('open') && sos){ showMission(); tickSOS(); }
   toast(t('langSwitched'));
 }
 
@@ -682,16 +831,21 @@ function renderHome(){
   const now=new Date();
   $('homeDate').textContent = L().homeDate(now, L());
   $('homeTitle').textContent = S.settings.name ? t('hello',{name:S.settings.name}) : t('tabToday');
-  $('phaseRange').textContent = `${S.settings.cutoff} – ${S.settings.breakfast} · ${fastHours()}`;
+  $('miniAvatar').textContent = (S.settings.name||'?').trim().charAt(0).toUpperCase() || '?';
+  $('phaseRange').textContent = `${S.settings.cutoff} – ${S.settings.breakfast}`;
+  $('mClose').textContent = S.settings.cutoff; $('mBreak').textContent = S.settings.breakfast; $('mGoal').textContent = fastHours();
   renderTimer();
 
   const tg=checkinTarget(), cur=S.log[tg.key];
   $('ciTitle').textContent = t(tg.title);
   $('ciDate').textContent = `${L().daysShort[fromKey(tg.key).getDay()]} ${fmtDate(fromKey(tg.key))}`;
   $('seg').classList.toggle('locked', !tg.open);
+  const idx = ['ok','light','miss'].indexOf(cur), th=$('segThumb');
+  th.style.opacity = idx<0 ? 0 : 1; th.className = 'thumb ' + (cur||'');
+  if(idx>=0) th.style.transform = `translateX(${idx*100}%)`;
   document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('sel', b.dataset.s===cur));
-  $('ciNote').textContent = !tg.open ? t('ciLocked',{t:S.settings.cutoff})
-    : cur ? t('ciSaved',{xp:XP_VAL[cur]}) : t('ciHint');
+  $('ciNote').innerHTML = (!tg.open ? icon('timer') + t('ciLocked',{t:S.settings.cutoff})
+    : cur ? icon('check') + t('ciSaved',{xp:XP_VAL[cur]}) : icon('sparkles') + t('ciHint'));
 
   const tonight=fromKey(nightKey(now)), mon=mondayOf(tonight);
   let html='', cnt=0;
@@ -704,65 +858,106 @@ function renderHome(){
   $('week').innerHTML = html;
   $('weekCount').textContent = t('weekCount',{n:cnt});
 
-  $('stStreak').innerHTML = unit(streak(),'nights');
-  $('stSaved').textContent = baht(saved());
-  $('stFought').innerHTML = unit(S.cravings,'times');
+  countTo($('stStreak'), streak(), undefined, 'nights');
+  countTo($('stSaved'), saved(), baht);
+  countTo($('stFought'), S.cravings, undefined, 'times');
 }
 
 function renderTimer(){
-  const now=new Date(), fs=fastingState(now);
-  const pill=$('phasePill');
+  const now=new Date(), fs=fastingState(now), hero=$('hero');
+  let p;
   if(fs.fasting){
-    const total=fs.end-fs.start, done=now-fs.start;
-    pill.classList.add('live'); $('phaseText').textContent=t('fasting');
+    const total=fs.end-fs.start, done=now-fs.start; p=Math.min(1,done/total);
+    hero.classList.add('live'); hero.classList.remove('day');
+    $('phaseText').textContent=t('fasting');
     $('heroLabel').textContent=t('fastingFor');
     $('heroTime').textContent=hms(done);
-    $('heroBar').style.width=Math.min(100,done/total*100)+'%';
-    $('heroStart').textContent=S.settings.cutoff;
-    $('heroEnd').textContent=S.settings.breakfast;
-    $('heroRemain').innerHTML=t('left',{t:hrsMin(fs.end-now)});
+    $('heroSub').textContent=t('left',{t:hrsMin(fs.end-now)});
   }else{
-    const total=fs.start-fs.since, left=fs.start-now;
-    pill.classList.remove('live'); $('phaseText').textContent=t('eating');
+    const total=fs.start-fs.since, left=fs.start-now; p=Math.min(1,Math.max(0,1-left/total));
+    hero.classList.remove('live'); hero.classList.add('day');
+    $('phaseText').textContent=t('eating');
     $('heroLabel').textContent=t('closesIn');
     $('heroTime').textContent=hms(left);
-    $('heroBar').style.width=Math.min(100,(1-left/total)*100)+'%';
-    $('heroStart').textContent=S.settings.breakfast;
-    $('heroEnd').textContent=S.settings.cutoff;
-    $('heroRemain').textContent = left<3600000 ? t('lastMealSoon') : t('eatLunch');
+    $('heroSub').textContent = left<3600000 ? t('lastMealSoon') : t('eatLunch');
   }
+  $('ringArc').style.strokeDashoffset = RING_C*(1-p);
+  const a = (-90 + 360*p) * Math.PI/180;
+  $('ringKnob').setAttribute('cx', 120 + 104*Math.cos(a));
+  $('ringKnob').setAttribute('cy', 120 + 104*Math.sin(a));
 }
 
 /* ---------- render: progress ---------- */
 let calMonth = (()=>{ const d=fromKey(nightKey()); return new Date(d.getFullYear(), d.getMonth(), 1); })();
+let weekChart=null, saveChart=null;
+function destroyCharts(){ weekChart?.destroy(); saveChart?.destroy(); weekChart=saveChart=null; }
 
 function renderProgress(){
   const tn=fromKey(nightKey()), y=tn.getFullYear(), m=tn.getMonth();
   const entries = Object.entries(S.log).filter(([k])=>{ const d=fromKey(k); return d.getFullYear()===y && d.getMonth()===m; });
   const good = entries.filter(([,s])=>s==='ok'||s==='light').length;
-  $('pmNights').innerHTML = unit(entries.filter(([,s])=>s==='ok').length,'nights');
-  $('pmRate').textContent = entries.length ? Math.round(good/entries.length*100)+'%' : '–';
-  $('pmSaved').textContent = baht(entries.reduce((a,[,s])=>a+nightSaving(s),0));
-  renderChart(tn); renderCal(); renderFeed();
+  countTo($('pmNights'), entries.filter(([,s])=>s==='ok').length, undefined, 'nights');
+  if(entries.length) countTo($('pmRate'), Math.round(good/entries.length*100), v=>Math.round(v)+'%');
+  else { $('pmRate').textContent='–'; delete $('pmRate').dataset.v; }
+  countTo($('pmSaved'), entries.reduce((a,[,s])=>a+nightSaving(s),0), baht);
+  if(tab==='progress') renderCharts(tn);
+  renderCal(); renderFeed();
 }
 
-function renderChart(tonight){
-  const W=320, H=150, padL=18, padB=22, padT=8, weeks=8, slot=(W-padL)/weeks, bw=slot*.5;
-  const mon=mondayOf(tonight);
-  const y = v => padT + (H-padT-padB)*(1-v/7);
-  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t('chartAria')}">`;
-  for(const v of [0,3.5,7]){ svg += `<line class="grid" x1="${padL}" x2="${W}" y1="${y(v)}" y2="${y(v)}"${v?' stroke-dasharray="2 3"':''}/>`; }
-  svg += `<text x="0" y="${y(7)+3}">7</text><text x="0" y="${y(0)+3}">0</text>`;
-  for(let w=0; w<weeks; w++){
-    const ws=addDays(mon,-7*(weeks-1-w)); let ok=0, li=0;
-    for(let i=0;i<7;i++){ const s=S.log[keyOf(addDays(ws,i))]; if(s==='ok') ok++; else if(s==='light') li++; }
-    const x = padL + w*slot + (slot-bw)/2;
-    if(ok) svg += `<rect class="bar-ok" x="${x}" y="${y(ok)}" width="${bw}" height="${y(0)-y(ok)}" rx="3"><title>${fmtDate(ws)}: ${ok}</title></rect>`;
-    if(li) svg += `<rect class="bar-light" x="${x}" y="${y(ok+li)}" width="${bw}" height="${y(ok)-y(ok+li)}" rx="3"/>`;
-    if(!ok && !li) svg += `<rect fill="var(--fill)" x="${x}" y="${y(0)-3}" width="${bw}" height="3" rx="1.5"/>`;
-    if(w%2===1 || w===weeks-1) svg += `<text x="${x+bw/2}" y="${H-6}" text-anchor="middle">${w===weeks-1?t('thisWk'):fmtDate(ws)}</text>`;
+function gradFill(ctx, area, a, b){ const g=ctx.createLinearGradient(0,area.bottom,0,area.top); g.addColorStop(0,a); g.addColorStop(1,b); return g; }
+
+function renderCharts(tonight){
+  if(!window.Chart) return;
+  const th = { muted:cssVar('--muted'), line:cssVar('--line'), light:cssVar('--light'), card:cssVar('--card'), ink:cssVar('--ink') };
+  Chart.defaults.font.family = '-apple-system,BlinkMacSystemFont,"Inter","IBM Plex Sans Thai",sans-serif';
+  Chart.defaults.color = th.muted;
+  const tooltip = { backgroundColor:th.ink, titleColor:th.card, bodyColor:th.card, padding:10, cornerRadius:10, displayColors:false };
+
+  // weekly bars (last 8 weeks)
+  const mon=mondayOf(tonight), labels=[], ok=[], li=[];
+  for(let w=7; w>=0; w--){
+    const ws=addDays(mon,-7*w); let o=0, l=0;
+    for(let i=0;i<7;i++){ const s=S.log[keyOf(addDays(ws,i))]; if(s==='ok') o++; else if(s==='light') l++; }
+    labels.push(w===0 ? t('thisWk') : fmtDate(ws)); ok.push(o); li.push(l);
   }
-  $('chart').innerHTML = svg + '</svg>';
+  const avg = Math.round(ok.slice(4).reduce((a,b)=>a+b,0)/4*10)/10;
+  countTo($('weekAvg'), avg, v=>(Math.round(v*10)/10).toLocaleString(L().locale,{minimumFractionDigits:1,maximumFractionDigits:1}), 'perWk');
+  if(weekChart){ weekChart.data.labels=labels; weekChart.data.datasets[0].data=ok; weekChart.data.datasets[1].data=li; weekChart.update(); }
+  else weekChart = new Chart($('weekChart'), {
+    type:'bar',
+    data:{ labels, datasets:[
+      { label:t('stOk'), data:ok, borderRadius:7, borderSkipped:false, barPercentage:.58, categoryPercentage:.9,
+        backgroundColor:c=>{ const {ctx,chartArea}=c.chart; return chartArea ? gradFill(ctx,chartArea,'#ff3d00','#ff9a62') : '#ff5a1f'; } },
+      { label:t('stLight'), data:li, borderRadius:7, borderSkipped:false, barPercentage:.58, categoryPercentage:.9, backgroundColor:th.light },
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false, animation:{duration:REDUCE?0:900, easing:'easeOutQuart'},
+      plugins:{ legend:{display:false}, tooltip },
+      scales:{ x:{ stacked:true, grid:{display:false}, border:{display:false}, ticks:{font:{size:10}, maxRotation:0, autoSkip:true, maxTicksLimit:5} },
+               y:{ stacked:true, min:0, max:7, ticks:{stepSize:7, font:{size:10}}, grid:{color:th.line}, border:{display:false} } } }
+  });
+
+  // cumulative savings, last 30 days
+  const sLabels=[], sData=[], keys=Object.keys(S.log).sort(), start=addDays(tonight,-29);
+  let run=0, ki=0;
+  while(ki<keys.length && keys[ki]<keyOf(start)){ run+=nightSaving(S.log[keys[ki]]); ki++; }
+  for(let i=0;i<30;i++){
+    const d=addDays(start,i), k=keyOf(d);
+    while(ki<keys.length && keys[ki]<=k){ run+=nightSaving(S.log[keys[ki]]); ki++; }
+    sLabels.push(fmtDate(d)); sData.push(run);
+  }
+  countTo($('saveTotal'), saved(), baht);
+  if(saveChart){ saveChart.data.labels=sLabels; saveChart.data.datasets[0].data=sData; saveChart.update(); }
+  else saveChart = new Chart($('saveChart'), {
+    type:'line',
+    data:{ labels:sLabels, datasets:[{ data:sData, borderColor:'#ff5a1f', borderWidth:2.5, tension:.38, pointRadius:0, pointHoverRadius:5,
+      pointHoverBackgroundColor:'#ff5a1f', pointHoverBorderColor:'#fff', pointHoverBorderWidth:2, fill:true,
+      backgroundColor:c=>{ const {ctx,chartArea}=c.chart; return chartArea ? gradFill(ctx,chartArea,'rgba(255,90,31,0)','rgba(255,90,31,.28)') : 'rgba(255,90,31,.15)'; } }]},
+    options:{ responsive:true, maintainAspectRatio:false, animation:{duration:REDUCE?0:1100, easing:'easeOutQuart'},
+      interaction:{mode:'index', intersect:false},
+      plugins:{ legend:{display:false}, tooltip:{...tooltip, callbacks:{label:c=>baht(c.parsed.y)}} },
+      scales:{ x:{ grid:{display:false}, border:{display:false}, ticks:{font:{size:10}, maxRotation:0, maxTicksLimit:4} },
+               y:{ beginAtZero:true, ticks:{font:{size:10}, maxTicksLimit:4, callback:v=>'฿'+Number(v).toLocaleString(L().locale)}, grid:{color:th.line}, border:{display:false} } } }
+  });
 }
 
 function renderCal(){
@@ -774,11 +969,8 @@ function renderCal(){
   for(let i=1;i<=days;i++){
     const d=new Date(y,m,i,12), k=keyOf(d), s=S.log[k], future=d>tonight;
     const b=document.createElement('div');
-    b.innerHTML = `<button class="dotday ${s||''} ${k===keyOf(tonight)?'today':''} ${future?'future':''}" ${future?'disabled':''} aria-label="${fmtDate(d)}">${i}</button>`;
-    if(!future) b.firstChild.onclick = ()=>{
-      const order=[undefined,'ok','light','miss'];
-      setStatus(k, order[(order.indexOf(S.log[k])+1)%order.length]);
-    };
+    b.innerHTML = `<button class="dotday press ${s||''} ${k===keyOf(tonight)?'today':''} ${future?'future':''}" ${future?'disabled':''} aria-label="${fmtDate(d)}">${i}</button>`;
+    if(!future) b.firstChild.onclick = ()=>openSheet(k);
     cal.appendChild(b);
   }
   const nextMonth = new Date(y,m+1,1);
@@ -789,15 +981,36 @@ function renderFeed(){
   const keys = Object.keys(S.log).sort().reverse().slice(0,12);
   if(!keys.length){ $('feed').innerHTML = `<div class="empty">${t('empty')}</div>`; return; }
   const T = { ok:'feedOk', light:'feedLight', miss:'feedMiss' };
-  const I = { ok:'check', light:'cup', miss:'x' };
+  const I = { ok:'check', light:'coffee', miss:'utensils-crossed' };
   $('feed').innerHTML = keys.map(k=>{
     const s=S.log[k], d=fromKey(k);
     const fights = S.sessions.filter(x=>nightKey(new Date(x.t))===k).length;
     const sub = `${L().daysShort[d.getDay()]} ${fmtDate(d)}` + (s==='ok'?` · ${fastHours()}`:'') + (fights?` · ${t('feedFights',{n:fights})}`:'');
-    const r = nightSaving(s) ? baht(nightSaving(s)) : '';
+    const r = nightSaving(s) ? '+'+baht(nightSaving(s)) : '';
     return `<div class="row"><div class="ic ${s}">${icon(I[s])}</div><div class="t"><b>${t(T[s])}</b><span>${sub}</span></div><div class="r num">${r}</div></div>`;
   }).join('');
 }
+
+/* ---------- action sheet ---------- */
+let sheetKey=null;
+function openSheet(k){
+  sheetKey=k; const d=fromKey(k);
+  $('sheetTitle').textContent = `${L().days[d.getDay()]} · ${fmtDate(d)}`;
+  document.querySelectorAll('#sheet [data-s]').forEach(b=>b.classList.toggle('cur', !!b.dataset.s && b.dataset.s===S.log[k]));
+  $('sheetClear').style.display = S.log[k] ? '' : 'none';
+  $('sheet').classList.add('open');
+  if(HAS_GSAP){ gsap.fromTo('#sheetBg',{opacity:0},{opacity:1,duration:.25}); gsap.fromTo('#sheetPanel',{y:'110%'},{y:0,duration:.45,ease:'power4.out'}); }
+}
+function closeSheet(){
+  if(!HAS_GSAP){ $('sheet').classList.remove('open'); return; }
+  gsap.to('#sheetBg',{opacity:0,duration:.2});
+  gsap.to('#sheetPanel',{y:'110%',duration:.3,ease:'power3.in',onComplete:()=>$('sheet').classList.remove('open')});
+}
+document.querySelectorAll('#sheet [data-s]').forEach(b=>b.onclick=()=>{
+  const s=b.dataset.s||undefined, k=sheetKey; closeSheet();
+  if(S.log[k]!==s){ setStatus(k,s); if(s==='ok') celebrate(.5); }
+});
+$('sheetBg').onclick = closeSheet; $('sheetCancel').onclick = closeSheet;
 
 /* ---------- render: profile ---------- */
 function renderProfile(){
@@ -805,18 +1018,16 @@ function renderProfile(){
   $('avatar').textContent = (S.settings.name||'?').trim().charAt(0).toUpperCase() || '?';
   $('pName').textContent = S.settings.name || t('user');
   $('pLevel').textContent = `Lv.${li.L} · ${levelName(li.L)}`;
-  $('xpLabel').textContent = `${S.xp.toLocaleString(L().locale)} XP`;
-  $('xpNext').textContent = t('xpNext',{n:li.need-li.cur, l:li.L+1});
-  $('xpBar').style.width = (li.cur/li.need*100)+'%';
-  $('pTotal').textContent = countStatus('ok');
-  $('pBest').textContent = S.best||0;
-  $('pMissions').textContent = S.challenges;
+  $('pXP').textContent = t('xpLine',{xp:S.xp.toLocaleString(L().locale), n:li.need-li.cur, l:li.L+1});
+  $('lvRing').style.strokeDashoffset = LV_C*(1-li.cur/li.need);
+  countTo($('pTotal'), countStatus('ok'));
+  countTo($('pBest'), S.best||0);
+  countTo($('pMissions'), S.challenges);
   const got = BADGES.filter(b=>S.badges.includes(b.id)).length;
   $('badgeCount').textContent = `${got}/${BADGES.length}`;
   $('badges').innerHTML = BADGES.map(b=>{
     const has=S.badges.includes(b.id);
-    const inner = b.icon ? icon(b.icon) : b.txt;
-    return `<div class="${has?'':'locked'}"><div class="medal ${has?'got':''}">${inner}</div><div class="n">${L().badges[b.id]}</div></div>`;
+    return `<div class="${has?'':'locked'}"><div class="medal ${has?'got':''}">${b.icon ? icon(b.icon) : b.txt}</div><div class="n">${L().badges[b.id]}</div></div>`;
   }).join('');
   if(document.activeElement?.tagName!=='INPUT'){
     $('fName').value=S.settings.name; $('fCut').value=S.settings.cutoff; $('fBreak').value=S.settings.breakfast; $('fCost').value=S.settings.cost;
@@ -828,13 +1039,16 @@ function renderAll(){ renderHome(); renderProgress(); renderProfile(); }
 /* ---------- tabs & nav ---------- */
 let tab='home';
 function showTab(name){
-  tab=name;
+  const changed = name!==tab; tab=name;
   document.querySelectorAll('.tab').forEach(s=>s.hidden = s.id!=='tab-'+name);
   document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('on', b.dataset.tab===name));
   $('navTitle').textContent = t($('tab-'+name).dataset.title);
   window.scrollTo(0,0); onScroll();
+  if(name==='progress') renderCharts(fromKey(nightKey()));
+  if(changed) animateIn($('tab-'+name));
 }
 document.querySelectorAll('#tabbar button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+$('miniAvatar').onclick = ()=>showTab('profile');
 function onScroll(){ $('nav').classList.toggle('show', window.scrollY>48); }
 window.addEventListener('scroll', onScroll, {passive:true});
 
@@ -846,7 +1060,8 @@ document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{
   const tg=checkinTarget(); if(!tg.open) return;
   const s=b.dataset.s; if(S.log[tg.key]===s) return;
   setStatus(tg.key,s);
-  toast(s==='ok' ? t('toastOk',{xp:XP_VAL.ok}) : s==='light' ? t('toastLight',{xp:XP_VAL.light}) : t('toastMiss'));
+  if(s==='ok'){ celebrate(); toast(t('toastOk',{xp:XP_VAL.ok})); }
+  else toast(s==='light' ? t('toastLight',{xp:XP_VAL.light}) : t('toastMiss'));
 });
 $('calPrev').onclick=()=>{ calMonth=new Date(calMonth.getFullYear(), calMonth.getMonth()-1, 1); renderCal(); };
 $('calNext').onclick=()=>{ calMonth=new Date(calMonth.getFullYear(), calMonth.getMonth()+1, 1); renderCal(); };
@@ -858,7 +1073,9 @@ bindSetting('fName', v=>{ S.settings.name=v.trim(); });
 bindSetting('fCut', v=>{ if(!v||v<=S.settings.breakfast){ toast(t('errCut')); return false; } S.settings.cutoff=v; });
 bindSetting('fBreak', v=>{ if(!v||v>=S.settings.cutoff){ toast(t('errBreak')); return false; } S.settings.breakfast=v; });
 bindSetting('fCost', v=>{ S.settings.cost=Math.max(0,Number(v)||0); });
-$('resetAll').onclick=()=>{ if(confirm(t('resetConfirm'))){ const l=lang; S=blank(); S.settings.lang=l; save(); renderAll(); toast(t('resetDone')); } };
+$('resetAll').onclick=()=>{ if(confirm(t('resetConfirm'))){ const l=lang; S=blank(); S.settings.lang=l; save(); destroyCharts(); renderAll(); toast(t('resetDone')); } };
+
+try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ()=>{ destroyCharts(); renderAll(); }); }catch(e){}
 
 /* ---------- SOS ---------- */
 let sos = null, sosTimer = null, missionIdx = -1;
@@ -866,13 +1083,15 @@ function showMission(){ $('mText').textContent = L().missionList[missionIdx] || 
 function newMission(){
   const n = L().missionList.length; let i;
   do{ i=Math.floor(Math.random()*n); }while(n>1 && i===missionIdx);
-  missionIdx=i; showMission(); $('mDone').disabled=false; $('mDone').textContent=t('mDone');
+  missionIdx=i; showMission(); $('mDone').disabled=false; $('mDoneText').textContent=t('mDone');
+  if(HAS_GSAP) gsap.fromTo('#mText',{opacity:0,y:8},{opacity:1,y:0,duration:.35,ease:'power2.out'});
 }
 function tickSOS(){
   const el=Date.now()-sos.start, left=WAVE_MS-el;
-  $('sosClock').textContent = left>0 ? ms(left+999) : ms(el);
+  $('sosClock').textContent = left>0 ? mmss(left+999) : mmss(el);
   $('sosCue').textContent = (el/1000)%10 < 4 ? t('breatheIn') : t('breatheOut');
   $('sosSub').textContent = left>0 ? t('sosSub') : t('sosSubDone');
+  $('cdArc').style.strokeDashoffset = CD_C*(1-Math.max(0,left)/WAVE_MS);
 }
 $('sosBtn').onclick = ()=>{
   sos = { start:Date.now(), missions:0, xp:0 };
@@ -881,13 +1100,22 @@ $('sosBtn').onclick = ()=>{
   $('sos').classList.remove('done'); $('sos').classList.add('open');
   document.body.style.overflow='hidden';
   tickSOS(); clearInterval(sosTimer); sosTimer=setInterval(tickSOS,250);
+  if(HAS_GSAP){
+    gsap.fromTo('#sos',{opacity:0},{opacity:1,duration:.3});
+    gsap.fromTo('#sos .run > *',{opacity:0,y:24},{opacity:1,y:0,duration:.6,stagger:.07,ease:'power3.out',clearProps:'transform,opacity'});
+  }
 };
-function closeSOS(){ clearInterval(sosTimer); $('sos').classList.remove('open'); document.body.style.overflow=''; renderAll(); }
+function closeSOS(){
+  clearInterval(sosTimer);
+  const done=()=>{ $('sos').classList.remove('open'); document.body.style.overflow=''; renderAll(); };
+  if(HAS_GSAP) gsap.to('#sos',{opacity:0,duration:.25,onComplete:()=>{ done(); gsap.set('#sos',{clearProps:'opacity'}); }}); else done();
+}
 $('sosClose').onclick = closeSOS;
 $('mShuffle').onclick = newMission;
 $('mDone').onclick = ()=>{
   S.challenges++; gainXP(10); sos.missions++; sos.xp+=10; checkBadges(); save();
-  $('mDone').disabled=true; $('mDone').textContent=t('mDoneOk');
+  $('mDone').disabled=true; $('mDoneText').textContent=t('mDoneOk');
+  pop($('mDone'));
   setTimeout(newMission, 900);
 };
 $('sosFinish').onclick = ()=>{
@@ -895,16 +1123,21 @@ $('sosFinish').onclick = ()=>{
   const dur = Date.now()-sos.start;
   S.cravings++; S.sessions.push({ t:Date.now(), d:Math.round(dur/1000) }); if(S.sessions.length>300) S.sessions.shift();
   gainXP(10); sos.xp+=10; checkBadges(); save();
-  $('sumTime').textContent = ms(dur);
+  $('sumTime').textContent = mmss(dur);
   $('sumMissions').textContent = sos.missions;
   $('sumXP').textContent = '+'+sos.xp;
   $('sumMsg').textContent = t('sumMsg',{n:S.cravings});
   $('sos').classList.add('done');
+  if(HAS_GSAP){
+    gsap.fromTo('#sos .summary .ok',{scale:.2,opacity:0,rotate:-30},{scale:1,opacity:1,rotate:0,duration:.7,ease:'back.out(2.2)'});
+    gsap.fromTo('#sos .summary > :not(.ok)',{opacity:0,y:20},{opacity:1,y:0,duration:.5,stagger:.08,delay:.2,ease:'power3.out',clearProps:'transform,opacity'});
+  }
+  celebrate(1.1);
 };
 $('sosDone').onclick = closeSOS;
 
 /* ---------- boot ---------- */
-applyStatic(); checkBadges(); save(); renderAll(); showTab('home');
+applyStatic(); checkBadges(); save(); renderAll(); showTab('home'); animateIn($('tab-home'));
 setInterval(()=>{ if(tab==='home') renderTimer(); }, 1000);
 let lastNight = nightKey();
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden){ renderAll(); } });

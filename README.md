@@ -11,3 +11,10 @@ Webapp เล็กๆ ช่วยงดมื้อเย็นแบบสน
 
 - Build command: *(เว้นว่าง)*
 - Deploy command: `npx wrangler deploy`
+
+## ไลบรารีที่ใช้ (เก็บไว้ใน `public/vendor/` ไม่โหลดจาก CDN ตอนใช้งาน)
+
+- [GSAP 3.12.5](https://gsap.com) — แอนิเมชัน (ตัวเลขนับขึ้น, เปลี่ยนหน้า, action sheet)
+- [Chart.js 4.4.1](https://www.chartjs.org) — กราฟรายสัปดาห์และเงินที่ประหยัดสะสม
+- [canvas-confetti 1.9.3](https://github.com/catdad/canvas-confetti) — เอฟเฟกต์ฉลอง
+- [Lucide 0.460.0](https://lucide.dev) — ไอคอน (ฝังเป็น SVG sprite ใน `index.html`)
