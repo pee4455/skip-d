@@ -272,7 +272,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .sos.done .summary{display:flex}
 
 /* toast */
-.toast{position:fixed;left:16px;right:16px;margin:0 auto;width:max-content;max-width:calc(100% - 32px);top:calc(var(--sat) + 10px);z-index:90;
+.toast{position:fixed;left:16px;right:16px;margin:0 auto;width:max-content;max-width:calc(100% - 32px);top:calc(var(--sat) + 10px);z-index:140;
   transform:translateY(-160%);background:var(--card);color:var(--ink);padding:10px 16px;border-radius:99px;font-size:14px;font-weight:600;
   box-shadow:0 10px 34px rgba(0,0,0,.18);display:flex;gap:8px;align-items:center;transition:transform .45s cubic-bezier(.2,1.2,.3,1)}
 .toast.show{transform:translateY(0)}
@@ -346,7 +346,185 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .form .row.link{cursor:pointer;color:var(--accent);font-weight:600}
 .form .row.link svg{width:20px;height:20px}
 
-#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:100}
+/* ===== rewards: wallet / machine / quests / collection ===== */
+.tabbar button{position:relative}
+.tab-dot{position:absolute;top:3px;left:calc(50% + 7px);width:10px;height:10px;border-radius:50%;background:#ff3b30;border:2px solid var(--bg)}
+.tab-dot[hidden]{display:none}
+.wallet{display:grid;grid-template-columns:repeat(3,1fr);padding:14px 0}
+.wallet>div{padding:0 14px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.wallet>div+div{border-left:1px solid var(--line)}
+.wallet .wv{font-size:24px;display:flex;align-items:center;gap:6px;line-height:1.2}
+.wallet .wv svg{width:20px;height:20px;color:var(--accent)}
+.wallet .wv.gold svg{color:#f5a300}
+.wallet .wv.star b{color:#8b5cf6;font-size:19px}
+.ex-btn{margin-top:4px;font-size:11.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:4px 9px;align-self:flex-start;white-space:nowrap}
+.ex-btn:disabled{opacity:.4}
+.machine-card{position:relative;overflow:hidden;isolation:isolate;background:var(--hero);color:#fff;border-radius:28px;padding:16px 16px 16px;margin-top:12px;
+  box-shadow:0 20px 50px rgba(139,92,246,.16),0 2px 6px rgba(0,0,0,.1)}
+.machine-card::before{content:"";position:absolute;z-index:-1;left:-120px;top:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.45),rgba(139,92,246,0) 65%)}
+.machine-card::after{content:"";position:absolute;z-index:-1;right:-120px;bottom:-140px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,31,.4),rgba(255,90,31,0) 65%)}
+.mc-head{display:flex;justify-content:space-between;align-items:center}
+.mc-head b{font-size:17px}
+.info-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:rgba(255,255,255,.7);background:rgba(255,255,255,.09);padding:6px 10px;border-radius:99px}
+.info-btn svg{width:14px;height:14px}
+#machineSvg{display:block;width:min(54vw,200px);margin:8px auto 4px;overflow:visible}
+.pity{text-align:center;font-size:12.5px;color:rgba(255,255,255,.62);margin-bottom:12px}
+.pity b{color:#ffb08a}
+.pull-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pull-btn{height:54px;border-radius:16px;font-weight:700;font-size:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;line-height:1.15;background:rgba(255,255,255,.1);color:#fff}
+.pull-btn.main{background:var(--grad);box-shadow:0 10px 24px rgba(255,90,31,.35)}
+.pull-btn small{font-size:11.5px;font-weight:700;opacity:.85;display:flex;gap:3px;align-items:center}
+.pull-btn small svg{width:13px;height:13px}
+.pull-btn:disabled{opacity:.4}
+.pull-btn.gold{grid-column:1/-1;background:linear-gradient(135deg,#ffe066,#f5a300);color:#3a2600;box-shadow:0 10px 24px rgba(245,163,0,.35)}
+.pull-btn[hidden]{display:none}
+
+.q-group{margin-bottom:14px}
+.q-head{display:flex;align-items:center;gap:7px;margin:0 4px 8px;font-size:14px}
+.q-head svg{width:16px;height:16px;color:var(--accent)}
+.q-head span{margin-left:auto;font-size:12px;color:var(--muted)}
+.q-row{display:flex;align-items:center;gap:12px;padding:12px 14px;position:relative}
+.q-row+.q-row::before{content:"";position:absolute;top:0;left:62px;right:0;border-top:1px solid var(--line)}
+.q-ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--fill);color:var(--muted);flex:none}
+.q-ic svg{width:18px;height:18px}
+.q-row.is-ready .q-ic{background:var(--grad);color:#fff}
+.q-main{flex:1;min-width:0}
+.q-main b{font-size:14.5px;font-weight:600;display:block;line-height:1.3}
+.q-bar{height:5px;border-radius:99px;background:var(--fill);margin-top:7px;overflow:hidden}
+.q-bar i{display:block;height:100%;background:var(--grad);border-radius:99px}
+.q-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+.q-rw{display:flex;gap:4px}
+.rw{display:inline-flex;align-items:center;gap:2px;font-size:12px;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.rw svg{width:12px;height:12px}
+.rw.g{background:rgba(245,163,0,.15);color:#c98200}
+.rw.s{background:rgba(139,92,246,.13);color:#7c5cff}
+.q-claim{height:30px;min-width:58px;padding:0 12px;border-radius:99px;font-size:13px;font-weight:700;background:var(--fill);color:var(--muted)}
+.q-row.is-ready .q-claim{background:var(--grad);color:#fff;box-shadow:0 6px 14px rgba(255,90,31,.35);animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:scale(1.07)}}
+.q-done{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted);font-weight:600}
+.q-done svg{width:14px;height:14px}
+.q-row.is-claimed{opacity:.55}
+.fly{position:fixed;left:0;top:0;z-index:120;width:22px;height:22px;color:var(--accent);pointer-events:none}
+.fly svg{width:22px;height:22px}
+
+.rw-strip{display:flex;align-items:center;gap:12px;width:100%;margin-top:12px;text-align:left}
+.rw-strip .ic{position:relative;width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#8b5cf6,#ff5a1f);color:#fff;display:grid;place-items:center;flex:none}
+.rw-strip .ic svg{width:21px;height:21px}
+.rw-strip.hot .ic::after{content:"";position:absolute;top:-3px;right:-3px;width:11px;height:11px;border-radius:50%;background:#ff3b30;border:2px solid var(--card)}
+.rw-strip .tx{flex:1;min-width:0}
+.rw-strip .tx b{display:block;font-size:15px;font-weight:600}
+.rw-strip .tx span{font-size:13px;color:var(--muted)}
+.rw-strip>svg{width:18px;height:18px;color:var(--muted)}
+
+/* tiers (shared by cards, chips) */
+.t-salt{--t1:#eceef3;--t2:#9fa4b0;--tg:rgba(200,204,214,.28)}
+.t-common{--t1:#8ff0ff;--t2:#1597ab;--tg:rgba(43,183,201,.32)}
+.t-rare{--t1:#d6c2ff;--t2:#7c3aed;--tg:rgba(139,92,246,.42)}
+.t-sr{--t1:#fff1a8;--t2:#f59e0b;--tg:rgba(245,163,0,.45)}
+.t-legend{--t1:#ffd1ec;--t2:#ff3d7f;--tg:rgba(255,77,141,.45)}
+.tier-prog{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tp{display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:99px;background:var(--fill);color:var(--ink2);white-space:nowrap}
+.tp i{display:inline-block;width:9px;height:9px;border-radius:50%;background:linear-gradient(150deg,var(--t1),var(--t2));margin-right:5px}
+.coll-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cslot{display:block;width:100%}
+.holo,.gcard.t-legend,.mcard.t-legend{background:linear-gradient(120deg,#ff4d8d,#ffb347,#fff35c,#4dff88,#4dc3ff,#9b5cff,#ff4d8d)!important;background-size:300% 300%!important;animation:holo 3s linear infinite}
+@keyframes holo{to{background-position:300% 0}}
+
+/* mini card */
+.mcard{position:relative;aspect-ratio:5/7;border-radius:13px;padding:2px;background:linear-gradient(150deg,var(--t1),var(--t2))}
+.mcard-in{position:relative;height:100%;border-radius:11px;background:radial-gradient(circle at 50% 38%,var(--tg),transparent 70%),#17171c;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:4px}
+.mc-art{width:78%}
+.mc-art svg{width:100%;height:auto;display:block}
+.mc-stars{font-size:8px;color:var(--t1);letter-spacing:1px;margin-top:2px}
+.mc-name{font-size:10.5px;color:#fff;font-weight:600;text-align:center;line-height:1.25;margin-top:1px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mc-cnt{position:absolute;top:5px;right:5px;font-size:10px;font-weight:800;color:#fff;background:rgba(255,255,255,.16);padding:1px 6px;border-radius:99px}
+.mc-buddy{position:absolute;top:5px;left:5px;color:#ff6b8a}
+.mc-buddy svg{width:13px;height:13px;fill:#ff6b8a}
+.mc-new{position:absolute;top:4px;left:4px;font-size:8.5px;font-weight:800;color:#fff;background:#ff3b30;padding:1px 5px;border-radius:99px}
+.mcard.tiny .mc-name{display:none}
+.mcard.tiny .mc-art{width:86%}
+.mcard.locked{background:var(--fill)}
+.mcard.locked .mcard-in{background:var(--card)}
+.mcard.locked svg{filter:brightness(0);opacity:.1}
+.mcard.locked .mc-name{color:var(--muted)}
+
+/* big card */
+.gcard{position:relative;width:min(68vw,250px);aspect-ratio:5/7;border-radius:20px;padding:3px;background:linear-gradient(150deg,var(--t1),var(--t2));box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.gcard-in{position:relative;height:100%;border-radius:17px;background:linear-gradient(180deg,#1d1d23,#121216);overflow:hidden;display:flex;flex-direction:column}
+.gc-top{display:flex;justify-content:space-between;align-items:center;padding:11px 12px 0}
+.tier-pill{font-size:11px;font-weight:800;letter-spacing:.03em;padding:3px 9px;border-radius:99px;background:linear-gradient(150deg,var(--t1),var(--t2));color:#17171c}
+.t-legend .tier-pill{background:linear-gradient(120deg,#ff4d8d,#ffb347,#fff35c,#4dc3ff);color:#2a0a18}
+.gc-no{font-size:11px;color:rgba(255,255,255,.45);font-weight:700}
+.gc-art{flex:1;display:grid;place-items:center;background:radial-gradient(circle at 50% 50%,var(--tg),transparent 66%);min-height:0}
+.gc-art svg{width:74%;height:auto;filter:drop-shadow(0 8px 12px rgba(0,0,0,.35))}
+.gc-meta{padding:0 14px 14px;text-align:center}
+.gc-stars{color:var(--t1);font-size:13px;letter-spacing:2px}
+.gc-name{font-size:19px;font-weight:700;margin-top:2px;color:#fff}
+.gc-desc{font-size:12.5px;color:rgba(255,255,255,.66);line-height:1.45;margin-top:4px}
+.gc-new{position:absolute;top:22px;right:-34px;transform:rotate(38deg);background:#ff3b30;color:#fff;font-size:11px;font-weight:800;padding:3px 38px;box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.t-sr .gcard-in::after,.t-legend .gcard-in::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.26) 45%,transparent 60%);background-size:250% 100%;animation:sweep 2.6s ease-in-out infinite}
+@keyframes sweep{0%{background-position:150% 0}60%,100%{background-position:-60% 0}}
+.gc-under{margin-top:14px;text-align:center;font-weight:700;color:rgba(255,255,255,.85);font-size:14px;min-height:20px}
+.gc-quip{color:#ffb08a;margin-top:4px;font-size:16px}
+
+/* stage */
+.stage{position:fixed;inset:0;z-index:96;display:none;flex-direction:column;align-items:center;justify-content:center;color:#fff;overflow:hidden;
+  background:radial-gradient(circle at 50% 42%,#2a1a24 0%,#0b0b0e 68%);padding:calc(var(--sat) + 20px) 20px calc(var(--sab) + 20px)}
+.stage.open{display:flex}
+.stage-center{position:relative;flex:1;width:100%;display:grid;place-items:center;perspective:900px}
+.stage-center>*{grid-area:1/1}
+.stage-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:3}
+.burst{position:absolute;left:50%;top:44%;width:820px;height:820px;margin:-410px 0 0 -410px;border-radius:50%;opacity:0;pointer-events:none;
+  background:repeating-conic-gradient(from 0deg,var(--bc,rgba(255,255,255,.2)) 0deg 7deg,transparent 7deg 18deg);
+  -webkit-mask:radial-gradient(circle,#000 0%,transparent 62%);mask:radial-gradient(circle,#000 0%,transparent 62%);animation:spin 16s linear infinite;transition:opacity .5s}
+.burst.on{opacity:.6}
+.burst[data-tier="salt"]{--bc:rgba(200,204,214,.22)}
+.burst[data-tier="common"]{--bc:rgba(43,183,201,.35)}
+.burst[data-tier="rare"]{--bc:rgba(139,92,246,.5)}
+.burst[data-tier="sr"]{--bc:rgba(255,200,0,.6)}
+.burst[data-tier="legend"]{--bc:rgba(255,77,141,.6)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.capsule{position:relative;width:136px;height:136px;cursor:pointer;filter:drop-shadow(0 18px 30px rgba(0,0,0,.55))}
+.cap-top,.cap-bot{position:absolute;left:0;right:0;height:50%}
+.cap-top{top:0;border-radius:999px 999px 0 0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95),var(--c1,#eee) 30%,var(--c2,#aaa) 100%)}
+.cap-bot{bottom:0;border-radius:0 0 999px 999px;background:radial-gradient(circle at 40% 0%,#fff 0%,#ececf1 55%,#c4c5ce 100%);border-top:4px solid rgba(0,0,0,.16)}
+.cap-shine{position:absolute;left:22%;top:13%;width:20%;height:14%;border-radius:50%;background:rgba(255,255,255,.75);pointer-events:none}
+.capsule[data-tier="salt"]{--c1:#eceef2;--c2:#a7acb8}
+.capsule[data-tier="common"]{--c1:#6fe0ee;--c2:#128fa3}
+.capsule[data-tier="rare"]{--c1:#b79bff;--c2:#5b2bd6;filter:drop-shadow(0 0 18px rgba(139,92,246,.6))}
+.capsule[data-tier="sr"]{--c1:#ffe066;--c2:#e08600;filter:drop-shadow(0 0 26px rgba(255,200,0,.75))}
+.capsule[data-tier="legend"]{filter:drop-shadow(0 0 32px rgba(255,77,141,.8))}
+.capsule[data-tier="legend"] .cap-top{background:linear-gradient(120deg,#ff4d8d,#ffb347,#fff35c,#4dff88,#4dc3ff,#9b5cff,#ff4d8d);background-size:300% 300%;animation:holo 2s linear infinite}
+.capsule.sm{width:100%;height:auto;aspect-ratio:1;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
+.capsule.sm .cap-bot{border-top-width:2px}
+.reveal{display:flex;flex-direction:column;align-items:center}
+.multi{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;width:min(94vw,470px)}
+.multi:empty,.reveal:empty{display:none}
+.mslot{aspect-ratio:5/7;display:grid;place-items:center}
+.mslot>.mcard{width:100%}
+.stage-hint{min-height:24px;margin:10px 0 12px;color:rgba(255,255,255,.78);font-weight:600;text-align:center;font-size:15px;animation:pulseTxt 1.6s ease-in-out infinite}
+@keyframes pulseTxt{50%{opacity:.5}}
+.stage-actions{display:flex;gap:10px;width:min(92vw,420px);min-height:56px}
+.st-btn{flex:1;height:54px;border-radius:27px;background:var(--grad);color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 10px 26px rgba(255,90,31,.35)}
+.st-btn svg{width:18px;height:18px}
+.st-btn.ghost{background:rgba(255,255,255,.1);box-shadow:none}
+.st-btn:disabled{opacity:.6}
+
+/* drop-rates sheet */
+.rmodal{position:fixed;inset:0;z-index:97;display:none;align-items:flex-end;justify-content:center}
+.rmodal.open{display:flex}
+.rm-bg{position:absolute;inset:0;background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.rm-panel{position:relative;width:100%;max-width:560px;background:var(--sheet);border-radius:24px 24px 0 0;padding:20px 18px calc(var(--sab) + 18px)}
+.rm-panel h3{margin:0 0 10px;font-size:19px}
+.rate-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.rate-row .stars{font-size:11px;color:var(--muted);letter-spacing:1px}
+.rate-row .pct{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
+.rate-notes{font-size:13px;color:var(--muted);margin:12px 0 16px;padding-left:18px;line-height:1.55}
+.rate-notes li{margin:4px 0}
+.mini-avatar svg,.av-wrap .avatar svg{width:88%;height:88%}
+
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:145}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -379,6 +557,15 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 <symbol id="i-calendar-days" viewBox="0 0 24 24"> <path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="M8 14h.01" /> <path d="M12 14h.01" /> <path d="M16 14h.01" /> <path d="M8 18h.01" /> <path d="M12 18h.01" /> <path d="M16 18h.01" /></symbol>
 <symbol id="i-sparkles" viewBox="0 0 24 24"> <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /> <path d="M20 3v4" /> <path d="M22 5h-4" /> <path d="M4 17v2" /> <path d="M5 18H3" /></symbol>
 <symbol id="i-piggy-bank" viewBox="0 0 24 24"> <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z" /> <path d="M2 9v1c0 1.1.9 2 2 2h1" /> <path d="M16 11h.01" /></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24"> <rect x="3" y="8" width="18" height="4" rx="1" /> <path d="M12 8v13" /> <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" /> <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" /></symbol>
+<symbol id="i-ticket" viewBox="0 0 24 24"> <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" /> <path d="M13 5v2" /> <path d="M13 17v2" /> <path d="M13 11v2" /></symbol>
+<symbol id="i-gem" viewBox="0 0 24 24"> <path d="M6 3h12l4 6-10 13L2 9Z" /> <path d="M11 3 8 9l4 13 4-13-3-6" /> <path d="M2 9h20" /></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol>
+<symbol id="i-book-open" viewBox="0 0 24 24"> <path d="M12 7v14" /> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></symbol>
+<symbol id="i-medal" viewBox="0 0 24 24"> <path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15" /> <path d="M11 12 5.12 2.2" /> <path d="m13 12 5.88-9.8" /> <path d="M8 7h8" /> <circle cx="12" cy="17" r="5" /> <path d="M12 18v-2h-.5" /></symbol>
+<symbol id="i-calendar-check" viewBox="0 0 24 24"> <path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="m9 16 2 2 4-4" /></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"> <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z" /> <path d="M5 21h14" /></symbol>
 <symbol id="i-circle-help" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol>
   <defs>
     <linearGradient id="gArc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb37f"/><stop offset=".5" stop-color="#ff6a2b"/><stop offset="1" stop-color="#ff3d00"/></linearGradient>
@@ -447,6 +634,61 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
       <div><div class="stat-ic"><svg class="i"><use href="#i-flame"/></svg></div><div class="label" data-i18n="streak"></div><div class="v num" id="stStreak"></div></div>
       <div><div class="stat-ic"><svg class="i"><use href="#i-piggy-bank"/></svg></div><div class="label" data-i18n="saved"></div><div class="v num" id="stSaved"></div></div>
       <div><div class="stat-ic"><svg class="i"><use href="#i-shield-check"/></svg></div><div class="label" data-i18n="resisted"></div><div class="v num" id="stFought"></div></div>
+    </div>
+
+    <button class="card rw-strip press anim" id="rwStrip"><span class="ic"><svg class="i"><use href="#i-gift"/></svg></span><span class="tx"><b data-i18n="rwStripTitle"></b><span id="rwStripText"></span></span><svg class="i"><use href="#i-chevron-right"/></svg></button>
+  </section>
+
+  <!-- ============ REWARDS (quests + gacha) ============ -->
+  <section class="tab" id="tab-rewards" data-title="tabRewards" hidden>
+    <div class="anim">
+      <div class="eyebrow" data-i18n="rwEyebrow"></div>
+      <h1 class="large" data-i18n="tabRewards"></h1>
+    </div>
+
+    <div class="card wallet anim" id="wallet">
+      <div><span class="label" data-i18n="tickets"></span><span class="wv num"><svg class="i"><use href="#i-ticket"/></svg><span id="wTickets">0</span></span></div>
+      <div><span class="label" data-i18n="gold"></span><span class="wv num gold"><svg class="i"><use href="#i-ticket"/></svg><span id="wGold">0</span></span></div>
+      <div><span class="label" data-i18n="shards"></span><span class="wv num star"><b>✦</b><span id="wShards">0</span></span><button class="ex-btn press" id="exBtn" data-i18n="exchange"></button></div>
+    </div>
+
+    <div class="machine-card anim" id="machineCard">
+      <div class="mc-head"><b data-i18n="machineTitle"></b><button class="info-btn press" id="ratesBtn"><svg class="i"><use href="#i-info"/></svg><span data-i18n="rates"></span></button></div>
+      <svg id="machineSvg" viewBox="0 0 200 250" aria-hidden="true">
+        <defs>
+          <clipPath id="domeClip"><circle cx="100" cy="88" r="69"/></clipPath>
+          <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7a3d"/><stop offset="1" stop-color="#e2410f"/></linearGradient>
+        </defs>
+        <ellipse cx="100" cy="243" rx="72" ry="6" fill="rgba(0,0,0,.4)"/>
+        <rect x="70" y="10" width="60" height="12" rx="6" fill="#e2410f"/>
+        <circle cx="100" cy="88" r="72" fill="rgba(255,255,255,.06)"/>
+        <g clip-path="url(#domeClip)"><g id="domeCaps"></g></g>
+        <circle cx="100" cy="88" r="72" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="3"/>
+        <path d="M50 52 a62 62 0 0 1 38 -28" stroke="rgba(255,255,255,.5)" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <rect x="42" y="150" width="116" height="14" rx="5" fill="#c8380c"/>
+        <rect x="30" y="158" width="140" height="80" rx="18" fill="url(#gBody)"/>
+        <rect x="36" y="162" width="128" height="5" rx="2.5" fill="rgba(255,255,255,.22)"/>
+        <text x="100" y="182" text-anchor="middle" font-size="9" font-weight="800" fill="rgba(255,255,255,.9)" letter-spacing="2.5" font-family="-apple-system,Inter,sans-serif">MOON GACHA</text>
+        <g id="knob"><circle cx="72" cy="208" r="17" fill="#fff" stroke="#f1d5c8" stroke-width="2"/><rect x="58" y="204" width="28" height="8" rx="4" fill="#ff9a62"/><circle cx="72" cy="208" r="4" fill="#e2410f"/></g>
+        <rect x="108" y="196" width="42" height="30" rx="8" fill="#17171c"/>
+        <rect x="112" y="200" width="34" height="9" rx="4" fill="#2a2a31"/>
+        <path d="M151 176 a9 9 0 1 0 6 15 a7 7 0 1 1 -6 -15z" fill="#ffe08a"/>
+      </svg>
+      <div class="pity" id="pityText"></div>
+      <div class="pull-btns">
+        <button class="pull-btn main press" id="pull1"><span data-i18n="pull1"></span><small><svg class="i"><use href="#i-ticket"/></svg>1</small></button>
+        <button class="pull-btn press" id="pull10"><span data-i18n="pull10"></span><small><svg class="i"><use href="#i-ticket"/></svg>10</small></button>
+        <button class="pull-btn gold press" id="pullGold" hidden><span data-i18n="pullGold"></span><small data-i18n="rateGoldShort"></small></button>
+      </div>
+    </div>
+
+    <div class="section anim"><h2 data-i18n="questsTitle"></h2><span class="aside" id="questCount"></span></div>
+    <div id="questList" class="anim"></div>
+
+    <div class="section anim"><h2 data-i18n="collection"></h2><span class="aside" id="collCount"></span></div>
+    <div class="card anim">
+      <div class="tier-prog" id="tierProg"></div>
+      <div class="coll-grid" id="collGrid"></div>
     </div>
   </section>
 
@@ -542,6 +784,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 
 <nav class="tabbar" id="tabbar">
   <button data-tab="home" class="on"><svg class="i"><use href="#i-house"/></svg><span data-i18n="tabToday"></span></button>
+  <button data-tab="rewards"><svg class="i"><use href="#i-gift"/></svg><span data-i18n="tabRewards"></span><i class="tab-dot" id="rwDot" hidden></i></button>
   <button data-tab="progress"><svg class="i"><use href="#i-chart-no-axes-column"/></svg><span data-i18n="tabProgress"></span></button>
   <button data-tab="profile"><svg class="i"><use href="#i-user-round"/></svg><span data-i18n="tabProfile"></span></button>
 </nav>
@@ -600,6 +843,29 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
     </div>
     <div class="spacer"></div>
     <button class="finish press" id="sosDone" style="max-width:420px" data-i18n="done"></button>
+  </div>
+</div>
+
+<!-- ============ GACHA STAGE ============ -->
+<div class="stage" id="stage" role="dialog" aria-modal="true">
+  <div class="burst" id="burst"></div>
+  <div class="stage-flash" id="stageFlash"></div>
+  <div class="stage-center">
+    <div class="capsule" id="capsule" style="display:none"><div class="cap-top"></div><div class="cap-bot"></div><div class="cap-shine"></div></div>
+    <div class="reveal" id="reveal"></div>
+    <div class="multi" id="multi"></div>
+  </div>
+  <div class="stage-hint" id="stageHint"></div>
+  <div class="stage-actions" id="stageActions"></div>
+</div>
+
+<!-- ============ DROP RATES ============ -->
+<div class="rmodal" id="rates" role="dialog" aria-modal="true">
+  <div class="rm-bg" id="ratesBg"></div>
+  <div class="rm-panel">
+    <h3 data-i18n="rates"></h3>
+    <div id="ratesBody"></div>
+    <button class="st-btn press" id="ratesClose" data-i18n="close"></button>
   </div>
 </div>
 
@@ -737,6 +1003,28 @@ const I18N = {
     missionLabel:'ภารกิจระหว่างรอ', shuffle:'สุ่มใหม่', mDone:'ทำแล้ว', mDoneOk:'เยี่ยม',
     sosFinish:'ผ่านไปได้แล้ว', sumTitle:'ต้านความหิวสำเร็จ', sumMsg:'ครั้งที่ {n} ที่คุณชนะความหิว', time:'เวลา', done:'เสร็จสิ้น',
     langSwitched:'เปลี่ยนเป็นภาษาไทยแล้ว',
+    tabRewards:'รางวัล', rwEyebrow:'เควส & กาชา', rwStripTitle:'เควส & ตู้กาชา', homeRewards:'ตั๋ว {t} ใบ · เควสพร้อมรับ {q}',
+    tickets:'ตั๋ว', gold:'ตั๋วทอง', shards:'เศษดาว', exchange:'แลก 10✦ → ตั๋ว', exchanged:'แลกเศษดาวเป็นตั๋ว 1 ใบแล้ว',
+    machineTitle:'ตู้กาชาพระจันทร์', rates:'อัตราการออก', pull1:'หมุน 1 ครั้ง', pull10:'หมุน 10 ครั้ง', pullGold:'ใช้ตั๋วทอง', rateGoldShort:'การันตี SR ขึ้นไป',
+    pity:'การันตี SR+ ภายใน {n} ครั้ง', noTickets:'ตั๋วไม่พอ ทำเควสเพื่อรับตั๋วเพิ่มนะ',
+    questsTitle:'เควส', readyCount:'พร้อมรับ {n}', qDaily:'ประจำคืน', qWeekly:'ประจำสัปดาห์', qMilestone:'เป้าหมายพิเศษ', nightOf:'คืน{d}',
+    qCheckin:'เช็คอิน (ผลไหนก็ได้)', qFast:'งดมื้อเย็นได้', qSos:'ใช้โหมดต้านหิวจนจบ (ถ้าหิว)',
+    qWeek3:'งดได้ 3 คืนในสัปดาห์', qWeek5:'งดได้ 5 คืนในสัปดาห์', qWeekLog:'เช็คอินครบ 7 คืน',
+    qStreak:'สตรีคถึง {n} คืน', qTotal:'งดได้รวม {n} คืน', qCollect:'สะสมตัวละคร {n} ตัว', qWelcome:'ของขวัญต้อนรับสู่ตู้กาชา',
+    claim:'รับ', claimed:'รับแล้ว', claimedToast:'ได้รับ {r}',
+    collection:'สมุดสะสม', collected:'{n}/{m} ตัว',
+    tier_salt:'เกลือ', tier_common:'ธรรมดา', tier_rare:'แรร์', tier_sr:'ซูเปอร์แรร์', tier_legend:'ตำนาน',
+    tapToOpen:'แตะเพื่อเปิด', tapAgain:'เอ๊ะ!? แคปซูลสั่น… แตะอีกที!', openAll:'เปิดทั้งหมด',
+    again:'หมุนอีกครั้ง', keep:'เก็บเข้าสมุด', newTag:'ใหม่!', dupe:'ได้ซ้ำ → +{n} ✦', owned:'มีอยู่ ×{n}',
+    setBuddy:'ตั้งเป็นคู่หู', isBuddy:'คู่หูของคุณ', buddySet:'{name} เป็นคู่หูของคุณแล้ว!',
+    multiSummary:'ตัวใหม่ {n} ตัว · ได้เศษดาว ✦{s}',
+    ratePity:'ถ้าไม่ได้ SR ขึ้นไปติดกัน 9 ครั้ง ครั้งที่ 10 การันตี SR ขึ้นไป',
+    rate10:'หมุน 10 ครั้ง การันตีแรร์ขึ้นไปอย่างน้อย 1 ตัว',
+    rateGold:'ตั๋วทองการันตี SR ขึ้นไปทุกครั้ง (ได้จากเป้าหมายพิเศษ)',
+    rateDupe:'ได้ตัวซ้ำจะเปลี่ยนเป็นเศษดาว ✦ (เกลือ 1 · ธรรมดา 2 · แรร์ 4 · SR 10 · ตำนาน 25) สะสม 10✦ แลกตั๋วได้ 1 ใบ',
+    saltQuips:['เค็มอีกแล้ว…','เกลือมาตามนัด','ไม่เป็นไร เกลือก็มีประโยชน์ (นิดนึง)','ตู้นี้ชอบเกลือจริงๆ','ความเค็ม +1'],
+    quip_common:'เพื่อนใหม่มาแล้ว!', quip_rare:'โอ้โห! ได้แรร์!', quip_sr:'ซูเปอร์แรร์!! ดวงดีสุดๆ', quip_legend:'ตำนานปรากฏตัวแล้ว!!!',
+    t_gacha:'ทำเควสแล้วจะได้ตั๋วมาหมุนตู้กาชา สะสมตัวละครให้ครบ 18 ตัว!\nระวัง "เกลือ" ด้วยนะ ออกบ่อยมาก',
     mascotName:'มูนนี่', tourSkip:'ข้าม', tourNext:'ต่อไป', tourStart:'เริ่มเลย!', tourOk:'ตกลง', tourNoName:'ไม่บอกดีกว่า',
     helpAria:'วิธีใช้', replayTour:'ดูวิธีใช้อีกครั้ง', tourGift:'ของขวัญต้อนรับ +20 XP',
     t_welcome:'สวัสดี! เราชื่อ "มูนนี่" เป็นเชฟประจำแอปปิดครัว\nเดี๋ยวเราพาทัวร์สั้นๆ แค่ 1 นาทีนะ',
@@ -811,6 +1099,28 @@ const I18N = {
     missionLabel:'While you wait', shuffle:'Shuffle', mDone:'Done', mDoneOk:'Nice',
     sosFinish:'I made it', sumTitle:'Craving resisted', sumMsg:'Craving #{n} beaten', time:'Time', done:'Done',
     langSwitched:'Switched to English',
+    tabRewards:'Rewards', rwEyebrow:'Quests & Gacha', rwStripTitle:'Quests & Gachapon', homeRewards:'{t} tickets · {q} quests ready',
+    tickets:'Tickets', gold:'Gold', shards:'Stardust', exchange:'10✦ → ticket', exchanged:'Traded stardust for 1 ticket',
+    machineTitle:'Moon Gachapon', rates:'Drop rates', pull1:'Pull ×1', pull10:'Pull ×10', pullGold:'Use gold ticket', rateGoldShort:'SR or better guaranteed',
+    pity:'SR+ guaranteed within {n} pulls', noTickets:'Not enough tickets — complete quests to earn more',
+    questsTitle:'Quests', readyCount:'{n} ready', qDaily:'Tonight', qWeekly:'This week', qMilestone:'Milestones', nightOf:'Night of {d}',
+    qCheckin:'Check in (any result)', qFast:'Skip dinner', qSos:'Finish craving mode (if hungry)',
+    qWeek3:'Fast 3 nights this week', qWeek5:'Fast 5 nights this week', qWeekLog:'Check in all 7 nights',
+    qStreak:'Reach a {n}-night streak', qTotal:'Fast {n} nights in total', qCollect:'Collect {n} characters', qWelcome:'Welcome gift for the gachapon',
+    claim:'Claim', claimed:'Claimed', claimedToast:'Received {r}',
+    collection:'Collection', collected:'{n}/{m}',
+    tier_salt:'Salt', tier_common:'Common', tier_rare:'Rare', tier_sr:'Super Rare', tier_legend:'Legend',
+    tapToOpen:'Tap to open', tapAgain:'Wait… it is shaking! Tap again!', openAll:'Open all',
+    again:'Pull again', keep:'Add to collection', newTag:'NEW!', dupe:'Duplicate → +{n} ✦', owned:'Owned ×{n}',
+    setBuddy:'Set as buddy', isBuddy:'Your buddy', buddySet:'{name} is now your buddy!',
+    multiSummary:'{n} new · +{s} stardust',
+    ratePity:'If 9 pulls in a row miss SR+, the 10th is guaranteed SR or better',
+    rate10:'A 10-pull guarantees at least one Rare or better',
+    rateGold:'Gold tickets always give SR or better (earned from milestones)',
+    rateDupe:'Duplicates turn into stardust ✦ (Salt 1 · Common 2 · Rare 4 · SR 10 · Legend 25). Trade 10✦ for a ticket.',
+    saltQuips:['Salty again…','Salt arrives right on schedule','Salt has its uses (kind of)','This machine really loves salt','+1 saltiness'],
+    quip_common:'A new friend appears!', quip_rare:'Ooh — a Rare!', quip_sr:'SUPER RARE!! What luck!', quip_legend:'A LEGEND has appeared!!!',
+    t_gacha:'Complete quests to earn tickets for the gachapon. Collect all 18 characters!\nWatch out for "Salt" — it drops a lot.',
     mascotName:'Moonie', tourSkip:'Skip', tourNext:'Next', tourStart:"Let's go!", tourOk:'OK', tourNoName:'Skip',
     helpAria:'How to use', replayTour:'Replay tutorial', tourGift:'Welcome gift +20 XP',
     t_welcome:"Hi there! I'm Moonie, the chef of Kitchen Closed.\nLet me give you a quick 1-minute tour.",
@@ -861,14 +1171,14 @@ const BADGES = [
 
 /* ---------- state ---------- */
 function detectLang(){ try{ return (navigator.language||'').toLowerCase().startsWith('th') ? 'th' : 'en'; }catch(e){ return 'th'; } }
-function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false }; }
+function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}} }; }
 function load(){
   try{
     const r = JSON.parse(localStorage.getItem(KEY));
     if(r && typeof r==='object'){
       const settings = {...DEFAULTS, ...(r.settings||{})};
       if(!settings.lang) settings.lang = 'th';
-      return {...blank(), ...r, settings, sessions:r.sessions||[]};
+      const b=blank(); return {...b, ...r, settings, sessions:r.sessions||[], gacha:{...b.gacha, ...(r.gacha||{}), owned:{...((r.gacha||{}).owned||{})}}, quests:{claimed:{...((r.quests||{}).claimed||{})}}};
     }
   }catch(e){}
   return blank();
@@ -999,7 +1309,7 @@ function renderHome(){
   const now=new Date();
   $('homeDate').textContent = L().homeDate(now, L());
   $('homeTitle').textContent = S.settings.name ? t('hello',{name:S.settings.name}) : t('tabToday');
-  $('miniAvatar').textContent = (S.settings.name||'?').trim().charAt(0).toUpperCase() || '?';
+  $('miniAvatar').innerHTML = avatarHTML();
   $('phaseRange').textContent = `${S.settings.cutoff} – ${S.settings.breakfast}`;
   $('mClose').textContent = S.settings.cutoff; $('mBreak').textContent = S.settings.breakfast; $('mGoal').textContent = fastHours();
   renderTimer();
@@ -1183,7 +1493,7 @@ $('sheetBg').onclick = closeSheet; $('sheetCancel').onclick = closeSheet;
 /* ---------- render: profile ---------- */
 function renderProfile(){
   const li=levelInfo(S.xp);
-  $('avatar').textContent = (S.settings.name||'?').trim().charAt(0).toUpperCase() || '?';
+  $('avatar').innerHTML = avatarHTML();
   $('pName').textContent = S.settings.name || t('user');
   $('pLevel').textContent = `Lv.${li.L} · ${levelName(li.L)}`;
   $('pXP').textContent = t('xpLine',{xp:S.xp.toLocaleString(L().locale), n:li.need-li.cur, l:li.L+1});
@@ -1202,7 +1512,7 @@ function renderProfile(){
   }
 }
 
-function renderAll(){ renderHome(); renderProgress(); renderProfile(); }
+function renderAll(){ renderHome(); renderProgress(); renderProfile(); renderRewards(); }
 
 /* ---------- tabs & nav ---------- */
 let tab='home';
@@ -1304,6 +1614,545 @@ $('sosFinish').onclick = ()=>{
 };
 $('sosDone').onclick = closeSOS;
 
+/* ---------- gacha: tiers & characters ---------- */
+const TIERS = {
+  salt:   { rate:45, shard:1,  stars:1 },
+  common: { rate:32, shard:2,  stars:2 },
+  rare:   { rate:16, shard:4,  stars:3 },
+  sr:     { rate:6,  shard:10, stars:4 },
+  legend: { rate:1,  shard:25, stars:5 },
+};
+const TIER_ORDER = ['salt','common','rare','sr','legend'];
+const PITY = 10;
+const tierIdx = k => TIER_ORDER.indexOf(k);
+
+const INK = '#2b1d16';
+function F(cx,cy,s=1,e='open',mo='smile'){
+  const ex=8.5*s, sw=(2.3*s).toFixed(2), my=cy+6.5*s;
+  const P=d=>`<path d="${d}" stroke="${INK}" stroke-width="${sw}" fill="none" stroke-linecap="round"/>`;
+  let o='';
+  if(e==='happy') o+=P(`M${cx-ex-3.4*s} ${cy+s} q${3.4*s} ${-4*s} ${6.8*s} 0 M${cx+ex-3.4*s} ${cy+s} q${3.4*s} ${-4*s} ${6.8*s} 0`);
+  else if(e==='sleepy') o+=P(`M${cx-ex-3.4*s} ${cy} q${3.4*s} ${3*s} ${6.8*s} 0 M${cx+ex-3.4*s} ${cy} q${3.4*s} ${3*s} ${6.8*s} 0`);
+  else if(e==='flat') o+=P(`M${cx-ex-3*s} ${cy} h${6*s} M${cx+ex-3*s} ${cy} h${6*s}`);
+  else o+=`<ellipse cx="${cx-ex}" cy="${cy}" rx="${3*s}" ry="${3.9*s}" fill="${INK}"/><ellipse cx="${cx+ex}" cy="${cy}" rx="${3*s}" ry="${3.9*s}" fill="${INK}"/><circle cx="${cx-ex+1.1*s}" cy="${cy-1.4*s}" r="${1.1*s}" fill="#fff"/><circle cx="${cx+ex+1.1*s}" cy="${cy-1.4*s}" r="${1.1*s}" fill="#fff"/>`;
+  o+=`<ellipse cx="${cx-ex-4.5*s}" cy="${cy+5*s}" rx="${3.4*s}" ry="${2.1*s}" fill="#ff8a7a" opacity=".55"/><ellipse cx="${cx+ex+4.5*s}" cy="${cy+5*s}" rx="${3.4*s}" ry="${2.1*s}" fill="#ff8a7a" opacity=".55"/>`;
+  if(mo==='smile') o+=P(`M${cx-4*s} ${my} q${4*s} ${4.5*s} ${8*s} 0`);
+  else if(mo==='sad') o+=P(`M${cx-4*s} ${my+2.5*s} q${4*s} ${-4*s} ${8*s} 0`);
+  else if(mo==='flat') o+=P(`M${cx-3.5*s} ${my+s} h${7*s}`);
+  else if(mo==='o') o+=`<ellipse cx="${cx}" cy="${my+s}" rx="${1.9*s}" ry="${2.3*s}" fill="#7a2618"/>`;
+  else if(mo==='open') o+=`<path d="M${cx-4.5*s} ${my-s} q${4.5*s} ${7.5*s} ${9*s} 0 z" fill="#7a2618" stroke="${INK}" stroke-width="${(1.2*s).toFixed(2)}" stroke-linejoin="round"/>`;
+  return o;
+}
+function starPath(cx,cy,r){ let d=''; for(let i=0;i<10;i++){ const a=-Math.PI/2+i*Math.PI/5, rr=i%2?r*.45:r; d+=(i?'L':'M')+(cx+rr*Math.cos(a)).toFixed(1)+' '+(cy+rr*Math.sin(a)).toFixed(1); } return d+'Z'; }
+
+const CHARS = [
+  { id:'salt', tier:'salt', name:{th:'เกลือป่น',en:'Salty'},
+    desc:{th:'ออกบ่อยที่สุดในตู้ ใครๆ ก็เรียกว่า "เกลือ" แต่เค็มอย่างมีวินัยนะ',en:'The most common pull of all. Everyone calls it "salty", but it is salty with discipline.'},
+    art:()=>`<g fill="#fff" stroke="#c7cad3" stroke-width=".8"><rect x="18" y="22" width="4" height="4" transform="rotate(25 20 24)"/><rect x="78" y="30" width="3.5" height="3.5" transform="rotate(-20 80 32)"/><rect x="24" y="12" width="3" height="3"/><rect x="74" y="16" width="3" height="3" transform="rotate(40 75 17)"/></g>
+      <path d="M32 44 q0 -22 18 -22 q18 0 18 22z" fill="#c4c9d2" stroke="#a3a9b5" stroke-width="2"/>
+      <circle cx="44" cy="33" r="1.7" fill="#7f8692"/><circle cx="50" cy="29" r="1.7" fill="#7f8692"/><circle cx="56" cy="33" r="1.7" fill="#7f8692"/>
+      <rect x="29" y="42" width="42" height="48" rx="12" fill="#f8f8fb" stroke="#c7cad3" stroke-width="2"/>
+      <rect x="31" y="44" width="38" height="5" rx="2.5" fill="#e3e5eb"/>
+      ${F(50,64,1,'open','sad')}<path d="M69 52 q3 5 0 7 q-3 -2 0 -7z" fill="#8fd0ff"/>` },
+  { id:'soy', tier:'salt', name:{th:'ซองซีอิ๊ว',en:'Soy Packet'},
+    desc:{th:'ติดมากับกล่องข้าวทุกกล่อง แต่ไม่เคยมีใครแกะใช้',en:'Comes with every takeout box. Nobody ever opens it.'},
+    art:()=>`<path d="M24 28 l5.2 -4 5.2 4 5.2 -4 5.2 4 5.2 -4 5.2 4 5.2 -4 5.2 4 5.2 -4 5.2 4 V82 a6 6 0 0 1 -6 6 H30 a6 6 0 0 1 -6 -6z" fill="#6b4330" stroke="#4a2c1f" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="31" y="40" width="38" height="32" rx="7" fill="#f3dfbf"/>
+      <text x="50" y="83" text-anchor="middle" font-size="6.5" font-weight="800" fill="#f3dfbf" font-family="sans-serif">SOY</text>
+      ${F(50,54,.85,'flat','flat')}` },
+  { id:'pick', tier:'salt', name:{th:'ไม้จิ้มฟัน',en:'Toothpick'},
+    desc:{th:'ผอมเพรียวที่สุดในแก๊ง เพราะไม่เคยกินมื้อเย็นเลยสักครั้ง',en:'The slimmest of the gang — never had dinner in its life.'},
+    art:()=>`<path d="M50 4 L56 20 V80 L50 96 L44 80 V20 Z" fill="#ecc994" stroke="#c39a5f" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M47 26 V74" stroke="#f6dcb2" stroke-width="2" stroke-linecap="round"/>${F(50,48,.5,'open','smile')}` },
+  { id:'tissue', tier:'salt', name:{th:'ทิชชู่',en:'Tissue'},
+    desc:{th:'พร้อมซับน้ำตาเวลาเผลอดูคลิปรีวิวอาหารตอนดึก',en:'Here to wipe your tears when food reviews pop up at midnight.'},
+    art:()=>`<path d="M22 42 q6 -18 28 -12 q22 -8 28 12 l-5 44 q-23 8 -46 0z" fill="#fff" stroke="#d3d6de" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M34 34 q16 12 32 -2" stroke="#e7e9ef" stroke-width="2.5" fill="none"/>
+      ${F(52,60,1,'sleepy','o')}<path d="M40 66 q2.5 4 0 6 q-2.5 -2 0 -6z" fill="#8fd0ff"/>` },
+  { id:'spoon', tier:'salt', name:{th:'ช้อนพลาสติก',en:'Plastic Spoon'},
+    desc:{th:'ร่างกายใช้ครั้งเดียวทิ้ง แต่ใจสู้ไม่เคยทิ้ง',en:'Single-use body, reusable fighting spirit.'},
+    art:()=>`<rect x="45" y="52" width="10" height="42" rx="5" fill="#f5f5f8" stroke="#cfd2da" stroke-width="2"/>
+      <ellipse cx="50" cy="34" rx="21" ry="25" fill="#f5f5f8" stroke="#cfd2da" stroke-width="2"/>
+      <ellipse cx="41" cy="23" rx="4.5" ry="7.5" fill="#fff" transform="rotate(20 41 23)"/>
+      ${F(50,36,.9,'open','smile')}<path d="M64 42 l-4 4 3 3" stroke="#cfd2da" stroke-width="1.5" fill="none"/>` },
+
+  { id:'glass', tier:'common', name:{th:'น้องน้ำเปล่า',en:'Glassy'},
+    desc:{th:'หิวเมื่อไหร่ ดื่มเราก่อน 1 แก้วนะ',en:'Hungry? Drink me first — one full glass.'},
+    art:()=>`<path d="M27 18 H73 L66 90 H34 Z" fill="#eef9ff" stroke="#9fd2f2" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M30.6 44 H69.4 L66 90 H34 Z" fill="#62bdf8"/>
+      <path d="M30.6 44 q9.7 -5 19.4 0 t19.4 0 V48 H30.6z" fill="#9fd8ff"/>
+      <rect x="35" y="24" width="5" height="56" rx="2.5" fill="#fff" opacity=".6"/>
+      <circle cx="59" cy="80" r="2.4" fill="#d6f0ff"/><circle cx="63" cy="72" r="1.6" fill="#d6f0ff"/>${F(51,62,1,'open','smile')}` },
+  { id:'tea', tier:'common', name:{th:'ชาอุ่น',en:'Warm Tea'},
+    desc:{th:'อุ่นท้อง อุ่นใจ ขอแบบไม่ใส่น้ำตาลนะ',en:'Warms your tummy and your heart. No sugar, please.'},
+    art:()=>`<ellipse cx="50" cy="88" rx="36" ry="7" fill="#dcebe1" stroke="#bdd6c5" stroke-width="2"/>
+      <path d="M76 52 q15 0 13 13 q-2 10 -15 8" fill="none" stroke="#c7ddcd" stroke-width="5" stroke-linecap="round"/>
+      <path d="M22 46 H78 V62 a28 24 0 0 1 -56 0 Z" fill="#fff" stroke="#c7ddcd" stroke-width="2.5"/>
+      <ellipse cx="50" cy="46" rx="28" ry="6.5" fill="#a5cc6b" stroke="#c7ddcd" stroke-width="2"/>
+      <path d="M40 36 q-6 -7 0 -13 q6 -6 0 -13 M58 38 q-6 -7 0 -13 q6 -6 0 -13" stroke="#d4dad6" stroke-width="3" fill="none" stroke-linecap="round"/>
+      ${F(50,63,1,'happy','smile')}` },
+  { id:'brush', tier:'common', name:{th:'แปรงจัง',en:'Brushy'},
+    desc:{th:'แปรงฟันเสร็จเมื่อไหร่ ครัวก็ปิดตามไปด้วย',en:'Once your teeth are brushed, the kitchen is closed.'},
+    art:()=>`<rect x="39" y="36" width="22" height="58" rx="11" fill="#4aa5ff" stroke="#2c83de" stroke-width="2"/>
+      <rect x="38" y="8" width="24" height="30" rx="8" fill="#fff" stroke="#cdd3dd" stroke-width="2"/>
+      <path d="M43 12 V26 M50 12 V26 M57 12 V26" stroke="#79d0ff" stroke-width="3.2" stroke-linecap="round"/>
+      <circle cx="33" cy="10" r="3" fill="#fff" stroke="#dbe6f2"/><circle cx="68" cy="14" r="3.5" fill="#fff" stroke="#dbe6f2"/><circle cx="29" cy="20" r="2" fill="#fff" stroke="#dbe6f2"/>
+      ${F(50,60,.7,'open','smile')}` },
+  { id:'pillow', tier:'common', name:{th:'หมอนนุ่ม',en:'Pillow Pal'},
+    desc:{th:'นอนเร็ว = หิวน้อย สูตรลับของคนงดมื้อเย็น',en:'Sleep early, crave less. The secret recipe.'},
+    art:()=>`<path d="M14 34 q36 -12 72 0 q7 17 0 34 q-36 12 -72 0 q-7 -17 0 -34z" fill="#efe7ff" stroke="#c6b3f0" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M22 40 q28 -6 56 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>
+      <text x="76" y="24" font-size="13" font-weight="800" fill="#a78bfa" font-family="sans-serif">z</text><text x="86" y="14" font-size="9" font-weight="800" fill="#c4b0fb" font-family="sans-serif">z</text>
+      ${F(50,52,1,'sleepy','o')}` },
+  { id:'shoe', tier:'common', name:{th:'รองเท้าวิ่ง',en:'Sneaky'},
+    desc:{th:'พาไปเดินย่อยเบาๆ 5 นาที ความอยากหายเกลี้ยง',en:'A gentle 5-minute walk and cravings vanish.'},
+    art:()=>`<path d="M2 50 h8 M0 58 h6" stroke="#ffb3aa" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M12 72 q0 -28 20 -34 l18 -4 q4 12 18 14 l14 4 q12 4 12 16 v4 z" fill="#ff6a5c" stroke="#d9473a" stroke-width="2.5" stroke-linejoin="round"/>
+      <rect x="10" y="70" width="84" height="12" rx="6" fill="#fff" stroke="#d6d7dd" stroke-width="2"/>
+      <path d="M38 42 l8 6 M43 38 l8 6 M48 36 l7 5" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M62 62 q10 -2 20 2" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>${F(31,58,.75,'open','smile')}` },
+
+  { id:'owl', tier:'rare', name:{th:'นกฮูกยามดึก',en:'Night Owl'},
+    desc:{th:'เฝ้าครัวทั้งคืน ใครแอบเปิดตู้เย็น นกฮูกเห็นหมดนะ',en:'Guards the kitchen all night. Opening the fridge? The owl sees you.'},
+    art:()=>`<path d="M84 6 a14 14 0 1 0 10 24 a11 11 0 1 1 -10 -24z" fill="#ffe08a"/>
+      <path d="M28 34 L30 14 L44 28 Z M72 34 L70 14 L56 28 Z" fill="#5a4a8c" stroke="#3f3270" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M22 54 q-8 18 6 30 q4 -14 2 -30z M78 54 q8 18 -6 30 q-4 -14 -2 -30z" fill="#4f4080"/>
+      <ellipse cx="50" cy="58" rx="30" ry="33" fill="#6a5aa3" stroke="#463a80" stroke-width="2"/>
+      <ellipse cx="50" cy="70" rx="18" ry="19" fill="#ddd4f7"/>
+      <path d="M43 66 l3 3 3 -3 M51 66 l3 3 3 -3 M47 74 l3 3 3 -3" stroke="#b5a8e6" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <circle cx="38" cy="46" r="11" fill="#ffd56b" stroke="#463a80" stroke-width="2"/><circle cx="62" cy="46" r="11" fill="#ffd56b" stroke="#463a80" stroke-width="2"/>
+      <circle cx="39" cy="47" r="5.5" fill="${INK}"/><circle cx="61" cy="47" r="5.5" fill="${INK}"/><circle cx="41" cy="45" r="1.8" fill="#fff"/><circle cx="63" cy="45" r="1.8" fill="#fff"/>
+      <path d="M46 55 L50 62 L54 55 Z" fill="#ff9a3c" stroke="#d9741c" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M42 90 v4 M46 90 v4 M54 90 v4 M58 90 v4" stroke="#ff9a3c" stroke-width="2.5" stroke-linecap="round"/>` },
+  { id:'cat', tier:'rare', name:{th:'แมวเชฟ',en:'Chef Cat'},
+    desc:{th:'เชฟผู้ปิดครัวตรงเวลาทุกวัน ไม่รับออเดอร์หลังปิดเด็ดขาด',en:'Closes the kitchen on time, every time. No orders after hours.'},
+    art:()=>`<path d="M24 46 L28 20 L46 34 Z M76 46 L72 20 L54 34 Z" fill="#ffb066" stroke="#df8a3a" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M29 38 L31 26 L40 33 Z M71 38 L69 26 L60 33 Z" fill="#ffd1d9"/>
+      <ellipse cx="50" cy="62" rx="31" ry="27" fill="#ffb066" stroke="#df8a3a" stroke-width="2"/>
+      <path d="M43 40 q7 4 14 0 M41 46 q9 4 18 0" stroke="#e5913f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <circle cx="38" cy="20" r="9" fill="#fff" stroke="#e5dcd2" stroke-width="1.2"/><circle cx="62" cy="20" r="9" fill="#fff" stroke="#e5dcd2" stroke-width="1.2"/><circle cx="50" cy="14" r="11" fill="#fff" stroke="#e5dcd2" stroke-width="1.2"/>
+      <rect x="34" y="23" width="32" height="10" rx="4" fill="#fff" stroke="#e5dcd2" stroke-width="1.2"/><rect x="34.6" y="28" width="30.8" height="3" fill="#ff6a2b"/>
+      <path d="M18 64 h12 M18 70 l12 -2 M82 64 h-12 M82 70 l-12 -2" stroke="#b86b25" stroke-width="1.6" stroke-linecap="round"/>
+      ${F(50,58,1,'happy','smile')}<path d="M48 60.5 h4 l-2 2.4z" fill="#ff7a8a"/>` },
+  { id:'bunny', tier:'rare', name:{th:'กระต่ายจันทร์',en:'Moon Bunny'},
+    desc:{th:'ตำข้าวอยู่บนดวงจันทร์ แต่ไม่เคยกินตอนดึกเลย',en:'Pounds rice cakes on the moon — but never eats them after dark.'},
+    art:()=>`<path d="M70 8 a28 28 0 1 0 22 44 a22 22 0 1 1 -22 -44z" fill="#ffe28a"/>
+      <path d="${starPath(16,18,4.5)}" fill="#ffe28a"/><path d="${starPath(26,8,2.5)}" fill="#ffe28a"/>
+      <ellipse cx="38" cy="28" rx="8" ry="21" fill="#fff" stroke="#e2dbe6" stroke-width="2" transform="rotate(-8 38 28)"/><ellipse cx="38" cy="30" rx="3.8" ry="14" fill="#ffc6d3" transform="rotate(-8 38 30)"/>
+      <ellipse cx="62" cy="28" rx="8" ry="21" fill="#fff" stroke="#e2dbe6" stroke-width="2" transform="rotate(8 62 28)"/><ellipse cx="62" cy="30" rx="3.8" ry="14" fill="#ffc6d3" transform="rotate(8 62 30)"/>
+      <ellipse cx="50" cy="68" rx="27" ry="24" fill="#fff" stroke="#e2dbe6" stroke-width="2"/>
+      <ellipse cx="76" cy="88" rx="8" ry="5" fill="#fff6e0" stroke="#efd9a6" stroke-width="1.5"/>${F(50,66,1,'open','smile')}` },
+  { id:'firefly', tier:'rare', name:{th:'หิ่งห้อย',en:'Firefly'},
+    desc:{th:'แสงเล็กๆ ที่คอยส่องทางในคืนที่หิวที่สุด',en:'A tiny light to guide you through the hungriest nights.'},
+    art:()=>`<circle cx="50" cy="74" r="26" fill="#eaff7a" opacity=".16"/><circle cx="50" cy="74" r="17" fill="#eaff7a" opacity=".28"/>
+      <ellipse cx="33" cy="44" rx="14" ry="9" fill="#d6ecff" opacity=".9" stroke="#a9cdf0" stroke-width="1.5" transform="rotate(-25 33 44)"/>
+      <ellipse cx="67" cy="44" rx="14" ry="9" fill="#d6ecff" opacity=".9" stroke="#a9cdf0" stroke-width="1.5" transform="rotate(25 67 44)"/>
+      <ellipse cx="50" cy="72" rx="13" ry="11" fill="#e8ff6e" stroke="#bcd63a" stroke-width="2"/>
+      <ellipse cx="50" cy="57" rx="15" ry="12" fill="#7c72d8" stroke="#5a50b8" stroke-width="2"/>
+      <path d="M44 27 q-4 -10 -10 -12 M56 27 q4 -10 10 -12" stroke="#5a50b8" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="34" cy="15" r="3" fill="#e8ff6e"/><circle cx="66" cy="15" r="3" fill="#e8ff6e"/>
+      <circle cx="50" cy="40" r="15" fill="#958cec" stroke="#5a50b8" stroke-width="2"/>${F(50,40,.85,'happy','smile')}` },
+
+  { id:'fox', tier:'sr', name:{th:'จิ้งจอกดาวตก',en:'Comet Fox'},
+    desc:{th:'พุ่งผ่านฟ้ามาเฉพาะคืนที่มีวินัยสุดๆ เท่านั้น',en:'Streaks across the sky only on nights of true discipline.'},
+    art:()=>`<path d="M54 76 q26 4 40 -40 q-8 20 -26 22 q10 -10 12 -24 q-10 18 -28 20 z" fill="#ffd35c" opacity=".95"/>
+      <path d="${starPath(88,20,9)}" fill="#fff3a8" stroke="#ffcf3d" stroke-width="1.5"/><circle cx="76" cy="10" r="1.6" fill="#fff3a8"/><circle cx="96" cy="40" r="1.4" fill="#fff3a8"/>
+      <path d="M26 44 L24 16 L44 32 Z M66 44 L68 16 L48 32 Z" fill="#ff8a3d" stroke="#d8641c" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M29 36 L28 24 L38 31Z M63 36 L64 24 L54 31Z" fill="#fff0de"/>
+      <path d="M18 52 q0 -22 28 -22 q28 0 28 22 q0 16 -28 30 q-28 -14 -28 -30z" fill="#ff8a3d" stroke="#d8641c" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M30 60 q16 6 32 0 q-4 14 -16 20 q-12 -6 -16 -20z" fill="#fff4e8"/>
+      ${F(46,51,1,'happy','none')}<ellipse cx="46" cy="66" rx="3" ry="2.2" fill="${INK}"/>
+      <path d="M43 70 q3 3 6 0" stroke="${INK}" stroke-width="2" fill="none" stroke-linecap="round"/>` },
+  { id:'whale', tier:'sr', name:{th:'วาฬเมฆ',en:'Cloud Whale'},
+    desc:{th:'ว่ายอยู่บนฟ้ายามค่ำ คอยร้องเพลงกล่อมให้หลับสบาย',en:'Swims across the night sky, singing you to sleep.'},
+    art:()=>`<path d="${starPath(12,14,4)}" fill="#ffe28a"/><path d="${starPath(88,10,3)}" fill="#ffe28a"/>
+      <path d="M50 30 v-7" stroke="#9fd8ff" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="17" r="7" fill="#fff" stroke="#dfe8f2"/><circle cx="60" cy="17" r="7" fill="#fff" stroke="#dfe8f2"/><circle cx="50" cy="12" r="9" fill="#fff" stroke="#dfe8f2"/>
+      <path d="M14 60 L2 46 L6 62 L2 78 Z" fill="#6fb8ff" stroke="#4b95e0" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M10 62 q0 -30 40 -30 q36 0 38 30 q1 18 -14 22 H26 q-16 -4 -16 -22z" fill="#78bfff" stroke="#4b95e0" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M24 74 q26 10 56 0 q-4 10 -8 10 H30 q-5 -2 -6 -10z" fill="#d4ecff"/>
+      <path d="M34 78 v5 M42 79 v5 M50 79 v5 M58 79 v5 M66 78 v5" stroke="#a9d4fb" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M40 66 q-8 10 4 13" fill="#5aa7f2" stroke="#4b95e0" stroke-width="1.5"/>
+      <circle cx="22" cy="93" r="6" fill="#fff" opacity=".9"/><circle cx="33" cy="95" r="7" fill="#fff" opacity=".9"/><circle cx="80" cy="93" r="6" fill="#fff" opacity=".9"/>
+      ${F(64,56,1,'happy','smile')}` },
+  { id:'ninja', tier:'sr', name:{th:'นินจาตะเกียบ',en:'Chopstick Ninja'},
+    desc:{th:'ปัดป้องขนมทุกชิ้นด้วยวิชาตะเกียบไร้เงา',en:'Deflects every late-night snack with the shadowless chopstick art.'},
+    art:()=>`<rect x="47" y="0" width="6" height="100" rx="3" fill="#c98a4b" stroke="#9b6330" stroke-width="1.2" transform="rotate(32 50 50)"/>
+      <rect x="47" y="0" width="6" height="100" rx="3" fill="#c98a4b" stroke="#9b6330" stroke-width="1.2" transform="rotate(-32 50 50)"/>
+      <circle cx="50" cy="56" r="29" fill="#2c2c3a" stroke="#18181f" stroke-width="2"/>
+      <rect x="25" y="47" width="50" height="17" rx="8.5" fill="#f6d3b3"/>
+      <rect x="21" y="35" width="58" height="7" rx="3.5" fill="#ff3d3d"/>
+      <path d="M78 38 q10 -2 14 -10 M78 40 q12 2 16 -4" stroke="#ff3d3d" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M33 50 l9 2.5 M67 50 l-9 2.5" stroke="${INK}" stroke-width="2.2" stroke-linecap="round"/>
+      <ellipse cx="40" cy="56" rx="3" ry="3.6" fill="${INK}"/><ellipse cx="60" cy="56" rx="3" ry="3.6" fill="${INK}"/>
+      <circle cx="41" cy="54.6" r="1" fill="#fff"/><circle cx="61" cy="54.6" r="1" fill="#fff"/>` },
+
+  { id:'goldmoon', tier:'legend', name:{th:'มูนนี่ทองคำ',en:'Golden Moonie'},
+    desc:{th:'ตำนานแห่งครัวปิด ปรากฏตัวเฉพาะกับคนที่ไม่ยอมแพ้',en:'Legend of the closed kitchen. Appears only to those who never give up.'},
+    art:()=>`<path d="${starPath(12,42,5)}" fill="#fff3a8"/><path d="${starPath(89,38,6)}" fill="#fff3a8"/><path d="${starPath(86,86,4)}" fill="#fff3a8"/>
+      <circle cx="50" cy="58" r="34" fill="#ffd34d" stroke="#d99a00" stroke-width="2.5"/>
+      <ellipse cx="37" cy="44" rx="10" ry="6" fill="#fff3b8" opacity=".7" transform="rotate(-30 37 44)"/>
+      <circle cx="68" cy="74" r="5" fill="#f2b81f" opacity=".7"/><circle cx="33" cy="78" r="3.4" fill="#f2b81f" opacity=".7"/><circle cx="73" cy="50" r="2.8" fill="#f2b81f" opacity=".7"/>
+      <path d="M30 30 L34 10 L42 20 L50 6 L58 20 L66 10 L70 30 Z" fill="#ffe680" stroke="#d99a00" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="50" cy="19" r="2.6" fill="#ff4d6d"/><circle cx="38" cy="24" r="2" fill="#4dc3ff"/><circle cx="62" cy="24" r="2" fill="#4dc3ff"/>
+      ${F(50,58,1.1,'happy','open')}` },
+];
+CHARS.forEach((c,i)=>c.no=i+1);
+const CHAR_BY_ID = Object.fromEntries(CHARS.map(c=>[c.id,c]));
+const _artCache = {};
+const charSVG = ch => `<svg viewBox="0 0 100 100" aria-hidden="true">${_artCache[ch.id] ||= ch.art()}</svg>`;
+const ownedCount = () => CHARS.filter(c=>S.gacha.owned[c.id]).length;
+function avatarHTML(){
+  const b = S.gacha.buddy && CHAR_BY_ID[S.gacha.buddy];
+  return b ? charSVG(b) : escapeHtml((S.settings.name||'?').trim().charAt(0).toUpperCase() || '?');
+}
+
+/* ---------- quests ---------- */
+function questNight(){
+  const now=new Date();
+  if(fastingState(now).fasting) return nightKey(now);
+  const y=keyOf(addDays(now,-1));
+  const pending = dailyQuests(y).some(q=>q.cur>=q.goal && !S.quests.claimed[q.id]);
+  return (!S.log[y] || pending) ? y : keyOf(now);
+}
+const nightHadSos = k => S.sessions.some(x=>nightKey(new Date(x.t))===k);
+function dailyQuests(k){ return [
+  { id:`d:${k}:checkin`, icon:'check',        title:t('qCheckin'), cur:S.log[k]?1:0,        goal:1, reward:{shards:1} },
+  { id:`d:${k}:fast`,    icon:'moon-star',    title:t('qFast'),    cur:S.log[k]==='ok'?1:0, goal:1, reward:{shards:3} },
+  { id:`d:${k}:sos`,     icon:'shield-check', title:t('qSos'),     cur:nightHadSos(k)?1:0,  goal:1, reward:{shards:2} },
+]; }
+function weeklyQuests(k){
+  const mon=mondayOf(fromKey(k)), wk=keyOf(mon); let ok=0, logged=0;
+  for(let i=0;i<7;i++){ const s=S.log[keyOf(addDays(mon,i))]; if(s) logged++; if(s==='ok') ok++; }
+  return [
+    { id:`w:${wk}:fast3`, icon:'flame',          title:t('qWeek3'),   cur:Math.min(ok,3), goal:3, reward:{tickets:1} },
+    { id:`w:${wk}:fast5`, icon:'flame',          title:t('qWeek5'),   cur:Math.min(ok,5), goal:5, reward:{tickets:2} },
+    { id:`w:${wk}:log7`,  icon:'calendar-check', title:t('qWeekLog'), cur:logged,         goal:7, reward:{tickets:1} },
+  ];
+}
+const MILESTONES = [
+  { track:'streak',  icon:'flame',     val:()=>Math.max(S.best||0, streak()), title:n=>t('qStreak',{n}),
+    items:[[3,{tickets:1}],[7,{tickets:2}],[14,{tickets:3}],[21,{tickets:3}],[30,{tickets:3,gold:1}],[60,{tickets:5,gold:1}],[100,{tickets:8,gold:2}]] },
+  { track:'total',   icon:'moon-star', val:()=>countStatus('ok'), title:n=>t('qTotal',{n}),
+    items:[[1,{tickets:1}],[10,{tickets:2}],[25,{tickets:3}],[50,{tickets:3,gold:1}],[100,{tickets:5,gold:1}]] },
+  { track:'collect', icon:'book-open', val:()=>ownedCount(), title:n=>t('qCollect',{n}),
+    items:[[6,{tickets:1}],[12,{tickets:2}],[18,{tickets:3,gold:1}]] },
+];
+function milestoneQuests(){
+  const out=[];
+  if(!S.quests.claimed['m:welcome']) out.push({ id:'m:welcome', icon:'gift', title:t('qWelcome'), cur:1, goal:1, reward:{tickets:1} });
+  for(const tr of MILESTONES){
+    const v=tr.val(); let lockedShown=false;
+    for(const [n,reward] of tr.items){
+      const id=`m:${tr.track}:${n}`;
+      if(S.quests.claimed[id]) continue;
+      if(v>=n) out.push({ id, icon:tr.icon, title:tr.title(n), cur:n, goal:n, reward });
+      else if(!lockedShown){ out.push({ id, icon:tr.icon, title:tr.title(n), cur:v, goal:n, reward }); lockedShown=true; }
+    }
+  }
+  return out;
+}
+function allQuests(){ const k=questNight(); return { k, daily:dailyQuests(k), weekly:weeklyQuests(k), milestones:milestoneQuests() }; }
+const isClaimable = q => q.cur>=q.goal && !S.quests.claimed[q.id];
+function claimableCount(){ const a=allQuests(); return [...a.daily,...a.weekly,...a.milestones].filter(isClaimable).length; }
+
+function rewardChips(r){
+  let h='';
+  if(r.tickets) h+=`<span class="rw t">${icon('ticket')}${r.tickets}</span>`;
+  if(r.gold) h+=`<span class="rw g">${icon('ticket')}${r.gold}</span>`;
+  if(r.shards) h+=`<span class="rw s">✦${r.shards}</span>`;
+  return h;
+}
+function rewardText(r){
+  const p=[];
+  if(r.tickets) p.push(`${t('tickets')} ×${r.tickets}`);
+  if(r.gold) p.push(`${t('gold')} ×${r.gold}`);
+  if(r.shards) p.push(`✦ ×${r.shards}`);
+  return p.join(' · ');
+}
+let questIndex = {};
+function claimQuest(id, btn){
+  const q=questIndex[id]; if(!q || !isClaimable(q)) return;
+  S.quests.claimed[id]=true;
+  const g=S.gacha; g.tickets+=q.reward.tickets||0; g.gold+=q.reward.gold||0; g.shards+=q.reward.shards||0;
+  save(); flyReward(btn); toast(t('claimedToast',{r:rewardText(q.reward)}));
+  renderRewards();
+}
+function flyReward(btn){
+  if(!HAS_GSAP || !btn) return;
+  const from=btn.getBoundingClientRect(), to=$('wallet').getBoundingClientRect();
+  for(let i=0;i<6;i++){
+    const d=document.createElement('div'); d.className='fly'; d.innerHTML=icon('ticket'); document.body.appendChild(d);
+    gsap.fromTo(d,{x:from.left+from.width/2-11, y:from.top, scale:.6, opacity:1},
+      {x:to.left+to.width*(.2+Math.random()*.6), y:to.top+to.height/2, scale:1, opacity:.2, duration:.7+Math.random()*.25, delay:i*.04, ease:'power2.in', onComplete:()=>d.remove()});
+  }
+  setTimeout(()=>pop($('wallet')), 750);
+}
+
+/* ---------- gacha pulls ---------- */
+let gBusy=false;
+function rollTier(force){
+  if(force) return Math.random()<.85 ? 'sr' : 'legend';
+  let r=Math.random()*100;
+  for(const k of TIER_ORDER){ r-=TIERS[k].rate; if(r<0) return k; }
+  return 'salt';
+}
+function grant(tier){
+  const g=S.gacha, pool=CHARS.filter(c=>c.tier===tier), ch=pool[Math.floor(Math.random()*pool.length)];
+  const isNew=!g.owned[ch.id];
+  g.owned[ch.id]=(g.owned[ch.id]||0)+1; g.pulls++;
+  const shards=isNew?0:TIERS[tier].shard; g.shards+=shards;
+  return { ch, tier, isNew, shards };
+}
+function pullOne(gold){
+  const g=S.gacha, tier=rollTier(gold || g.pity>=PITY-1);
+  g.pity = tierIdx(tier)>=3 ? 0 : g.pity+1;
+  return grant(tier);
+}
+function pullTen(){
+  const res=[]; for(let i=0;i<10;i++) res.push(pullOne(false));
+  if(!res.some(r=>tierIdx(r.tier)>=2)){
+    const last=res[9], g=S.gacha;
+    g.owned[last.ch.id]--; if(!g.owned[last.ch.id]) delete g.owned[last.ch.id];
+    g.shards-=last.shards; g.pulls--;
+    res[9]=grant('rare');
+  }
+  return res;
+}
+async function startPull(kind){
+  if(gBusy) return;
+  const g=S.gacha, cost = kind==='ten' ? 10 : 1, fromStage=$('stage').classList.contains('open');
+  if(kind==='gold'){ if(g.gold<1) return; g.gold--; }
+  else if(g.tickets<cost){ toast(t('noTickets')); if(HAS_GSAP) gsap.fromTo('#machineSvg',{x:-6},{x:0,duration:.4,ease:'elastic.out(1,.3)'}); return; }
+  else g.tickets-=cost;
+  gBusy=true;
+  const results = kind==='ten' ? pullTen() : [pullOne(kind==='gold')];
+  checkBadges(); save(); renderRewards();
+  if(!fromStage) await machineAnim();
+  openStage(results);
+}
+function machineAnim(){
+  if(!HAS_GSAP) return Promise.resolve();
+  return new Promise(res=>{
+    const tl=gsap.timeline({onComplete:res});
+    tl.to('#knob',{rotation:'+=360', svgOrigin:'72 206', duration:.85, ease:'power2.inOut'},0)
+      .to('#machineSvg',{x:'random(-4,4)', duration:.05, repeat:12, yoyo:true, repeatRefresh:true},0)
+      .to('#domeCaps .cj',{y:'random(-10,4)', x:'random(-5,5)', rotation:'random(-30,30)', duration:.12, repeat:5, yoyo:true, repeatRefresh:true, stagger:.01},0)
+      .set('#machineSvg',{x:0})
+      .set('#domeCaps .cj',{x:0,y:0,rotation:0});
+  });
+}
+function renderMachine(){
+  const box=$('domeCaps'); if(box.childElementCount) return;
+  const cols=['#f0f1f5','#f0f1f5','#5fd3e2','#5fd3e2','#a98bff','#ffd24d','#ff7a3d','#f0f1f5','#5fd3e2','#a98bff','#ff9fc8','#ffd24d','#5fd3e2','#f0f1f5','#a98bff','#ff7a3d'];
+  let h='';
+  for(let i=0;i<16;i++){
+    const row=Math.floor(i/5), x=46+((i%5)*27)+(row%2?13:0), y=142-row*22-(Math.random()*4), a=Math.round(Math.random()*360);
+    h+=`<g transform="translate(${x} ${y})"><g class="cj"><g transform="rotate(${a})"><circle r="12" fill="${cols[i]}"/><path d="M-12 0 a12 12 0 0 0 24 0z" fill="#fff"/><circle r="12" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1.2"/><ellipse cx="-4" cy="-6" rx="3.5" ry="2" fill="rgba(255,255,255,.7)"/></g></g></g>`;
+  }
+  box.innerHTML=h;
+}
+
+/* ---------- stage (capsule → card reveal) ---------- */
+function stageReset(){
+  $('reveal').innerHTML=''; $('multi').innerHTML=''; $('stageActions').innerHTML=''; $('stageHint').textContent='';
+  $('burst').className='burst'; const cap=$('capsule');
+  if(HAS_GSAP) gsap.set(cap,{clearProps:'all'});
+  cap.querySelectorAll('.cap-top,.cap-bot').forEach(e=>e.removeAttribute('style'));
+  cap.style.display='none'; cap.onclick=null;
+}
+function stageOpen(){
+  stageReset();
+  const st=$('stage');
+  if(!st.classList.contains('open')){ st.classList.add('open'); document.body.style.overflow='hidden'; if(HAS_GSAP) gsap.fromTo(st,{opacity:0},{opacity:1,duration:.3}); }
+}
+function closeStage(){
+  gBusy=false;
+  const done=()=>{ $('stage').classList.remove('open'); stageReset(); document.body.style.overflow=''; renderAll(); };
+  if(HAS_GSAP) gsap.to('#stage',{opacity:0,duration:.25,onComplete:()=>{ done(); gsap.set('#stage',{clearProps:'opacity'}); }}); else done();
+}
+function openStage(results){
+  stageOpen();
+  if(results.length===1) showCapsule(results[0]); else showMulti(results);
+}
+function flash(){ if(HAS_GSAP) gsap.fromTo('#stageFlash',{opacity:.85},{opacity:0,duration:.7,ease:'power2.out'}); }
+function showCapsule(r){
+  const real=r.tier, cap=$('capsule');
+  let shown=real;
+  if(tierIdx(real)>=3 && Math.random()<.5) shown = Math.random()<.5 ? 'common' : 'rare';
+  else if(real==='legend' && Math.random()<.6) shown='sr';
+  cap.dataset.tier=shown; cap.style.display='';
+  $('stageHint').textContent=t('tapToOpen');
+  if(HAS_GSAP) gsap.fromTo(cap,{y:-innerHeight*.7,rotation:-240,scale:.8},{y:0,rotation:0,scale:1,duration:1.1,ease:'bounce.out'});
+  let busy=false;
+  cap.onclick = async ()=>{
+    if(busy) return; busy=true;
+    if(cap.dataset.tier!==real){
+      $('stageHint').textContent=t('tapAgain');
+      if(HAS_GSAP){ await gsap.to(cap,{x:'random(-14,14)',rotation:'random(-18,18)',duration:.06,repeat:11,yoyo:true,repeatRefresh:true}); gsap.set(cap,{x:0,rotation:0}); }
+      flash();
+      const next = TIER_ORDER[Math.min(tierIdx(real), Math.max(tierIdx(cap.dataset.tier)+1, 3))];
+      cap.dataset.tier=next;
+      if(HAS_GSAP) gsap.fromTo(cap,{scale:1.4},{scale:1,duration:.6,ease:'back.out(3)'});
+      if(navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) try{ navigator.vibrate(40); }catch(e){}
+      if(next===real) $('stageHint').textContent=t('tapToOpen');
+      busy=false; return;
+    }
+    await openCapsule(cap, r);
+  };
+}
+async function openCapsule(cap, r){
+  $('stageHint').textContent='';
+  if(HAS_GSAP){
+    await gsap.to(cap,{rotation:14,duration:.07,repeat:5,yoyo:true,ease:'power1.inOut'});
+    gsap.set(cap,{rotation:0});
+    gsap.to(cap.querySelector('.cap-top'),{y:-160,rotation:-50,opacity:0,duration:.6,ease:'power2.out'});
+    gsap.to(cap.querySelector('.cap-bot'),{y:160,rotation:35,opacity:0,duration:.6,ease:'power2.out'});
+    flash();
+    await new Promise(res=>setTimeout(res,220));
+  }
+  cap.style.display='none';
+  revealCard(r);
+}
+function quipFor(tier){
+  if(tier==='salt'){ const q=L().saltQuips; return q[Math.floor(Math.random()*q.length)]; }
+  return t('quip_'+tier);
+}
+function revealCard(r){
+  const b=$('burst'); b.dataset.tier=r.tier; b.className='burst on';
+  $('reveal').innerHTML = cardHTML(r.ch, { isNew:r.isNew, shards:r.shards, count:S.gacha.owned[r.ch.id], quip:quipFor(r.tier) });
+  const card=$('reveal').querySelector('.gcard');
+  if(HAS_GSAP){
+    gsap.fromTo(card,{rotationY:180,scale:.4,opacity:0},{rotationY:0,scale:1,opacity:1,duration:.9,ease:'back.out(1.4)'});
+    gsap.fromTo('#reveal .gc-under',{opacity:0,y:10},{opacity:1,y:0,duration:.4,delay:.6});
+  }
+  const ti=tierIdx(r.tier);
+  if(ti>=3) celebrate(ti===4?2.2:1.3); else if(ti===2) celebrate(.6);
+  if(navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) try{ navigator.vibrate(ti>=3?[50,40,120]:25); }catch(e){}
+  const again = S.gacha.tickets>=1 ? `<button class="st-btn ghost press" id="stAgain">${icon('sparkles')}${t('again')}</button>` : '';
+  $('stageActions').innerHTML = again + `<button class="st-btn press" id="stKeep">${t('keep')}</button>`;
+  if($('stAgain')) $('stAgain').onclick=()=>{ gBusy=false; startPull('one'); };
+  $('stKeep').onclick=closeStage;
+}
+function showMulti(res){
+  const m=$('multi');
+  m.innerHTML=res.map(r=>`<div class="mslot"><div class="capsule sm" data-tier="${r.tier}"><div class="cap-top"></div><div class="cap-bot"></div><div class="cap-shine"></div></div></div>`).join('');
+  if(HAS_GSAP) gsap.fromTo('#multi .capsule',{y:-innerHeight,rotation:-180},{y:0,rotation:0,duration:.9,stagger:.06,ease:'bounce.out'});
+  $('stageActions').innerHTML=`<button class="st-btn press" id="stOpenAll">${t('openAll')}</button>`;
+  $('stOpenAll').onclick=()=>openAll(res);
+}
+async function openAll(res){
+  $('stageActions').innerHTML='';
+  const slots=[...document.querySelectorAll('#multi .mslot')];
+  for(let i=0;i<slots.length;i++){
+    const r=res[i];
+    slots[i].innerHTML=miniCardHTML(r.ch,{isNew:r.isNew, tiny:true});
+    if(HAS_GSAP){
+      gsap.fromTo(slots[i].firstElementChild,{rotationY:180,scale:.5,opacity:0},{rotationY:0,scale:1,opacity:1,duration:.45,ease:'back.out(1.7)'});
+      if(tierIdx(r.tier)>=3){ flash(); await new Promise(x=>setTimeout(x,420)); } else await new Promise(x=>setTimeout(x,130));
+    }
+  }
+  const best=Math.max(...res.map(r=>tierIdx(r.tier)));
+  const b=$('burst'); b.dataset.tier=TIER_ORDER[best]; b.className='burst on';
+  celebrate(best>=4?2.2:best>=3?1.3:.7);
+  $('stageHint').textContent=t('multiSummary',{n:res.filter(r=>r.isNew).length, s:res.reduce((a,r)=>a+r.shards,0)});
+  $('stageActions').innerHTML=`<button class="st-btn press" id="stKeep">${t('keep')}</button>`;
+  $('stKeep').onclick=closeStage;
+}
+function showDetail(id){
+  const ch=CHAR_BY_ID[id], cnt=S.gacha.owned[id]; if(!ch || !cnt) return;
+  stageOpen();
+  const b=$('burst'); b.dataset.tier=ch.tier; b.className='burst on';
+  $('reveal').innerHTML=cardHTML(ch,{count:cnt});
+  if(HAS_GSAP) gsap.fromTo('#reveal .gcard',{scale:.7,opacity:0,rotationY:-30},{scale:1,opacity:1,rotationY:0,duration:.55,ease:'back.out(1.6)'});
+  const isB=S.gacha.buddy===id;
+  $('stageActions').innerHTML=`<button class="st-btn ghost press" id="stBuddy" ${isB?'disabled':''}>${icon('heart')}${isB?t('isBuddy'):t('setBuddy')}</button><button class="st-btn press" id="stKeep">${t('close')}</button>`;
+  $('stBuddy').onclick=()=>{ S.gacha.buddy=id; save(); renderAll(); toast(t('buddySet',{name:ch.name[lang]})); closeStage(); };
+  $('stKeep').onclick=closeStage;
+}
+
+/* ---------- card markup ---------- */
+function cardHTML(ch,o={}){
+  const under = o.isNew===false && o.shards ? t('dupe',{n:o.shards}) : o.count ? t('owned',{n:o.count}) : '';
+  return `<div class="gcard t-${ch.tier}"><div class="gcard-in">
+      <div class="gc-top"><span class="tier-pill">${t('tier_'+ch.tier)}</span><span class="gc-no">#${String(ch.no).padStart(2,'0')}</span></div>
+      <div class="gc-art">${charSVG(ch)}</div>
+      <div class="gc-meta"><div class="gc-stars">${'★'.repeat(TIERS[ch.tier].stars)}</div><div class="gc-name">${ch.name[lang]}</div><div class="gc-desc">${ch.desc[lang]}</div></div>
+      ${o.isNew?`<span class="gc-new">${t('newTag')}</span>`:''}
+    </div></div>
+    <div class="gc-under">${under}${o.quip?`<div class="gc-quip">${o.quip}</div>`:''}</div>`;
+}
+function miniCardHTML(ch,o={}){
+  if(o.locked) return `<div class="mcard locked"><div class="mcard-in"><div class="mc-art">${charSVG(ch)}</div><div class="mc-name">???</div></div></div>`;
+  return `<div class="mcard t-${ch.tier} ${o.tiny?'tiny':''}"><div class="mcard-in">
+      ${o.count>1?`<span class="mc-cnt">×${o.count}</span>`:''}${o.buddy?`<span class="mc-buddy">${icon('heart')}</span>`:''}${o.isNew?`<span class="mc-new">${t('newTag')}</span>`:''}
+      <div class="mc-art">${charSVG(ch)}</div><div class="mc-stars">${'★'.repeat(TIERS[ch.tier].stars)}</div><div class="mc-name">${ch.name[lang]}</div>
+    </div></div>`;
+}
+
+/* ---------- render rewards tab ---------- */
+function renderRewards(){
+  const g=S.gacha;
+  renderMachine();
+  countTo($('wTickets'), g.tickets); countTo($('wGold'), g.gold); countTo($('wShards'), g.shards);
+  $('exBtn').disabled = g.shards<10;
+  $('pityText').innerHTML = t('pity',{n:`<b>${PITY-g.pity}</b>`});
+  $('pull1').disabled = g.tickets<1; $('pull10').disabled = g.tickets<10;
+  $('pullGold').hidden = g.gold<1;
+
+  // quests
+  const a=allQuests(); questIndex={};
+  [...a.daily,...a.weekly,...a.milestones].forEach(q=>questIndex[q.id]=q);
+  const d=fromKey(a.k), mon=mondayOf(d);
+  const group=(ic,title,aside,list)=> list.length ? `<div class="q-group"><div class="q-head">${icon(ic)}<b>${title}</b><span>${aside}</span></div><div class="list">${list.map(questRow).join('')}</div></div>` : '';
+  $('questList').innerHTML =
+    group('sun', t('qDaily'), t('nightOf',{d:`${L().daysShort[d.getDay()]} ${fmtDate(d)}`}), a.daily) +
+    group('calendar-check', t('qWeekly'), `${fmtDate(mon)} – ${fmtDate(addDays(mon,6))}`, a.weekly) +
+    group('medal', t('qMilestone'), '', a.milestones);
+  const ready=[...a.daily,...a.weekly,...a.milestones].filter(isClaimable).length;
+  $('questCount').textContent = ready ? t('readyCount',{n:ready}) : '';
+
+  // collection
+  const own=ownedCount();
+  $('collCount').textContent = t('collected',{n:own, m:CHARS.length});
+  $('tierProg').innerHTML = TIER_ORDER.map(k=>{
+    const all=CHARS.filter(c=>c.tier===k), got=all.filter(c=>g.owned[c.id]).length;
+    return `<span class="tp t-${k}"><i></i>${t('tier_'+k)} ${got}/${all.length}</span>`;
+  }).join('');
+  $('collGrid').innerHTML = CHARS.map(c=>`<button class="cslot press" data-id="${c.id}" aria-label="${g.owned[c.id]?escapeHtml(c.name[lang]):'???'}">${miniCardHTML(c,{locked:!g.owned[c.id], count:g.owned[c.id], buddy:g.buddy===c.id})}</button>`).join('');
+
+  // badges / strip
+  const dot = ready>0 || g.tickets>0 || g.gold>0;
+  $('rwDot').hidden = !dot;
+  $('rwStripText').textContent = t('homeRewards',{t:g.tickets, q:ready});
+  $('rwStrip').classList.toggle('hot', dot);
+}
+function questRow(q){
+  const claimed=!!S.quests.claimed[q.id], ready=isClaimable(q), pct=Math.min(100,q.cur/q.goal*100);
+  const btn = claimed ? `<span class="q-done">${icon('check')}${t('claimed')}</span>`
+    : `<button class="q-claim press" data-q="${q.id}" ${ready?'':'disabled'}>${ready?t('claim'):`${Math.min(q.cur,q.goal)}/${q.goal}`}</button>`;
+  return `<div class="q-row ${claimed?'is-claimed':''} ${ready?'is-ready':''}"><div class="q-ic">${icon(q.icon)}</div>
+    <div class="q-main"><b>${q.title}</b><div class="q-bar"><i style="width:${pct}%"></i></div></div>
+    <div class="q-side"><span class="q-rw">${rewardChips(q.reward)}</span>${btn}</div></div>`;
+}
+function showRates(){
+  const rows = TIER_ORDER.slice().reverse().map(k=>`<div class="rate-row"><span class="tp t-${k}"><i></i>${t('tier_'+k)}</span><span class="stars">${'★'.repeat(TIERS[k].stars)}</span><span class="pct">${TIERS[k].rate}%</span></div>`).join('');
+  $('ratesBody').innerHTML = rows + `<ul class="rate-notes"><li>${t('ratePity')}</li><li>${t('rate10')}</li><li>${t('rateGold')}</li><li>${t('rateDupe')}</li></ul>`;
+  $('rates').classList.add('open');
+  if(HAS_GSAP) gsap.fromTo('#rates .rm-panel',{y:'100%'},{y:0,duration:.45,ease:'power4.out'});
+}
+
+$('questList').addEventListener('click', e=>{ const b=e.target.closest('.q-claim'); if(b && !b.disabled) claimQuest(b.dataset.q, b); });
+$('collGrid').addEventListener('click', e=>{ const b=e.target.closest('.cslot'); if(b) showDetail(b.dataset.id); });
+$('pull1').onclick=()=>startPull('one');
+$('pull10').onclick=()=>startPull('ten');
+$('pullGold').onclick=()=>startPull('gold');
+$('exBtn').onclick=()=>{ const g=S.gacha; if(g.shards<10) return; g.shards-=10; g.tickets++; save(); renderRewards(); pop($('wallet')); toast(t('exchanged')); };
+$('ratesBtn').onclick=showRates;
+$('ratesClose').onclick=$('ratesBg').onclick=()=>$('rates').classList.remove('open');
+$('rwStrip').onclick=()=>showTab('rewards');
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('stage').classList.contains('open') && !$('capsule').offsetParent) closeStage(); });
+
 /* ---------- onboarding tour (NPC guide "Moonie") ---------- */
 const STEPS = [
   { key:'t_welcome', mood:'excited', wave:true },
@@ -1316,6 +2165,7 @@ const STEPS = [
   { key:'t_charts',  mood:'think',   tab:'progress', target:'#weekCard' },
   { key:'t_cal',     mood:'wink',    tab:'progress', target:'#calCard' },
   { key:'t_badges',  mood:'excited', tab:'profile', target:'#badges' },
+  { key:'t_gacha',   mood:'excited', tab:'rewards', target:'#machineCard' },
   { key:'t_help',    mood:'happy',   tab:'home', target:'#helpBtn', round:true },
   { key:'t_done',    mood:'excited', wave:true, final:true },
 ];
