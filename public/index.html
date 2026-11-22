@@ -205,6 +205,42 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .seg-mini button.sel{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .danger{width:100%;height:52px;color:#ff3b30;font-weight:600;background:var(--card);border-radius:16px;margin-top:12px;box-shadow:var(--shadow)}
 .footnote{font-size:13px;color:var(--muted);margin:14px 4px 0;line-height:1.55}
+/* account & cloud */
+.acct .row{cursor:pointer}
+.acct .ic.cloud{background:var(--accent-soft);color:var(--accent)}
+.acct .ic.warn{background:rgba(255,59,48,.12);color:#ff3b30}
+.acct .t b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acct .t span{display:flex;align-items:center;gap:6px}
+.acct .dot{width:7px;height:7px;border-radius:50%;background:#34c759;flex:none}
+.acct .dot.busy{background:var(--accent);animation:blink 1s ease-in-out infinite}
+.acct .dot.warn{background:#ff3b30}
+.acct .chev{width:18px;height:18px;color:var(--muted);flex:none}
+.acct .sync-ic{width:34px;height:34px;display:grid;place-items:center;color:var(--muted);flex:none}
+.acct .sync-ic svg{width:18px;height:18px}
+.acct .sync-ic.spin svg{animation:spin .9s linear infinite}
+.acct .danger-row b,.acct .danger-row .ic{color:#ff3b30}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{50%{opacity:.35}}
+.auth-panel{text-align:center;padding-top:30px}
+.auth-x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:var(--fill);display:grid;place-items:center;color:var(--muted)}
+.auth-x svg{width:16px;height:16px}
+.auth-badge{width:58px;height:58px;border-radius:18px;background:var(--grad);color:#fff;display:grid;place-items:center;margin:0 auto 14px;box-shadow:0 10px 24px rgba(255,90,31,.3)}
+.auth-badge svg{width:28px;height:28px}
+.auth-panel h3{margin-bottom:6px}
+.auth-lead{color:var(--muted);font-size:14.5px;line-height:1.5;margin:0 10px 18px;overflow-wrap:anywhere}
+.auth-lead b{color:var(--ink);font-weight:600}
+.auth-panel form{display:flex;flex-direction:column;gap:10px}
+.auth-panel form[hidden]{display:none}
+.auth-panel input{height:54px;border-radius:14px;background:var(--fill);border:1.5px solid transparent;padding:0 16px;font:inherit;font-size:17px;color:var(--ink);text-align:center;outline:none;width:100%}
+.auth-panel input:focus{border-color:var(--accent);background:var(--card)}
+.auth-panel input.code-in{font-size:26px;font-weight:700;letter-spacing:.32em;text-indent:.32em;font-variant-numeric:tabular-nums}
+.auth-panel .st-btn{flex:none;width:100%}
+.auth-links{display:flex;justify-content:space-between;gap:8px}
+.auth-links button{font-size:14px;font-weight:600;color:var(--accent);padding:8px 4px}
+.auth-links button:disabled{color:var(--muted);cursor:default}
+.auth-err{color:#ff3b30;font-size:13.5px;font-weight:500;min-height:1.2em;margin:10px 0 0}
+.auth-err:empty{display:none}
+.auth-note{color:var(--muted);font-size:12.5px;margin:12px 6px 0;line-height:1.5}
 
 /* tab bar */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:space-around;
@@ -531,6 +567,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="m2 2 20 20" /> <path d="M5.782 5.782A7 7 0 0 0 9 19h8.5a4.5 4.5 0 0 0 1.307-.193" /> <path d="M21.532 16.5A4.5 4.5 0 0 0 17.5 10h-1.79A7.008 7.008 0 0 0 10 5.07" /></symbol><symbol id="i-log-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /> <polyline points="16 17 21 12 16 7" /> <line x1="21" x2="9" y1="12" y2="12" /></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2" /> <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></symbol><symbol id="i-trash-2" viewBox="0 0 24 24"><path d="M3 6h18" /> <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /> <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /> <line x1="10" x2="10" y1="11" y2="17" /> <line x1="14" x2="14" y1="11" y2="17" /></symbol><symbol id="i-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /> <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /> <path d="M8 16H3v5" /></symbol>
 <symbol id="i-house" viewBox="0 0 24 24"> <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
 <symbol id="i-chart-no-axes-column" viewBox="0 0 24 24"> <line x1="18" x2="18" y1="20" y2="10" /> <line x1="12" x2="12" y1="20" y2="4" /> <line x1="6" x2="6" y1="20" y2="14" /></symbol>
 <symbol id="i-user-round" viewBox="0 0 24 24"> <circle cx="12" cy="8" r="5" /> <path d="M20 21a8 8 0 0 0-16 0" /></symbol>
@@ -766,6 +803,9 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
     <div class="section anim"><h2 data-i18n="achievements"></h2><span class="aside" id="badgeCount"></span></div>
     <div class="card badges anim" id="badges"></div>
 
+    <div class="section anim" id="acctHead" hidden><h2 data-i18n="acctTitle"></h2></div>
+    <div class="list acct anim" id="acct" hidden></div>
+
     <div class="section anim"><h2 data-i18n="settings"></h2></div>
     <div class="list form anim">
       <div class="row"><label data-i18n="language"></label>
@@ -869,6 +909,28 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
   </div>
 </div>
 
+<!-- ============ SIGN IN ============ -->
+<div class="rmodal" id="auth" role="dialog" aria-modal="true" aria-labelledby="authH">
+  <div class="rm-bg" id="authBg"></div>
+  <div class="rm-panel auth-panel">
+    <button class="auth-x press" id="authClose" type="button" data-i18n-aria="close"><svg class="i"><use href="#i-x"/></svg></button>
+    <div class="auth-badge"><svg class="i"><use href="#i-cloud"/></svg></div>
+    <h3 id="authH"></h3>
+    <p class="auth-lead" id="authLead"></p>
+    <form id="authStep1" novalidate>
+      <input id="authEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="you@email.com" aria-label="Email">
+      <button class="st-btn press" id="authSend" type="submit"><svg class="i"><use href="#i-mail"/></svg><span data-i18n="sendCode"></span></button>
+    </form>
+    <form id="authStep2" novalidate hidden>
+      <input id="authCode" class="code-in" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="------" data-i18n-aria="codeAria">
+      <button class="st-btn press" id="authVerify" type="submit"><span data-i18n="verify"></span></button>
+      <div class="auth-links"><button type="button" id="authBack" data-i18n="changeEmail"></button><button type="button" id="authResend"></button></div>
+    </form>
+    <p class="auth-err" id="authErr" role="alert"></p>
+    <p class="auth-note" id="authNote"></p>
+  </div>
+</div>
+
 <!-- ============ ONBOARDING TOUR (NPC) ============ -->
 <div class="tour" id="tour" aria-live="polite">
   <div class="shade" id="shade"></div>
@@ -944,6 +1006,11 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 <script src="vendor/confetti.browser.min.js"></script>
 <script>
 const KEY = 'skipdinner.v1';
+/* Supabase project (Project Settings → API). The publishable/anon key is meant
+   to ship in the page: row level security keeps each user's data private.
+   Leave both empty to turn cloud sync off. Never put the secret/service_role key here. */
+const CLOUD = { url:'https://acfamivfwkpihgqrmfui.supabase.co', key:'sb_publishable__yvE3Bg8EwsYPxoDbKGpZQ_vf-N7k0W' };
+const SYNC_KEY = 'skipdinner.sync';
 const DEFAULTS = { name:'', cutoff:'17:00', breakfast:'07:00', cost:80, lang:'' };
 const XP_VAL = { ok:50, light:20, miss:5 };
 const WAVE_MS = 10*60*1000;
@@ -992,7 +1059,7 @@ const I18N = {
     achievements:'ความสำเร็จ', settings:'ตั้งค่า', language:'ภาษา',
     fName:'ชื่อ', fNamePh:'ใส่ชื่อ', fCut:'เวลาปิดครัว', fBreak:'มื้อเช้า', fCost:'ค่ามื้อเย็น (บาท)',
     reset:'ล้างข้อมูลทั้งหมด', resetConfirm:'ล้างประวัติ XP และความสำเร็จทั้งหมด? ย้อนกลับไม่ได้', resetDone:'ล้างข้อมูลแล้ว',
-    footnote:'ฟังร่างกายตัวเองเสมอ ถ้าเวียนหัว ใจสั่น มือสั่น มีโรคประจำตัว (เช่น เบาหวาน กรดไหลย้อน) หรือกำลังตั้งครรภ์ ให้กินได้เลยและปรึกษาแพทย์ก่อนงดมื้อเป็นประจำ · ข้อมูลทั้งหมดเก็บไว้ในเครื่องนี้เท่านั้น',
+    footnote:'ฟังร่างกายตัวเองเสมอ ถ้าเวียนหัว ใจสั่น มือสั่น มีโรคประจำตัว (เช่น เบาหวาน กรดไหลย้อน) หรือกำลังตั้งครรภ์ ให้กินได้เลยและปรึกษาแพทย์ก่อนงดมื้อเป็นประจำ · ข้อมูลเก็บไว้ในเครื่องนี้ และขึ้นคลาวด์เฉพาะเมื่อคุณล็อกอิน',
     settingsSaved:'บันทึกการตั้งค่าแล้ว', errCut:'เวลาปิดครัวต้องหลังมื้อเช้า', errBreak:'มื้อเช้าต้องก่อนเวลาปิดครัว',
     toastOk:'เยี่ยมมาก · +{xp} XP', toastLight:'รักษาสตรีคไว้ได้ · +{xp} XP', toastMiss:'ไม่เป็นไร พรุ่งนี้เริ่มใหม่',
     levelUp:'เลื่อนระดับ: {name} · Lv.{l}', badgeGot:'ได้รับความสำเร็จ: {name}',
@@ -1027,6 +1094,15 @@ const I18N = {
     t_gacha:'ทำเควสแล้วจะได้ตั๋วมาหมุนตู้กาชา สะสมตัวละครให้ครบ 18 ตัว!\nระวัง "เกลือ" ด้วยนะ ออกบ่อยมาก',
     mascotName:'มูนนี่', tourSkip:'ข้าม', tourNext:'ต่อไป', tourStart:'เริ่มเลย!', tourOk:'ตกลง', tourNoName:'ไม่บอกดีกว่า',
     helpAria:'วิธีใช้', replayTour:'ดูวิธีใช้อีกครั้ง', tourGift:'ของขวัญต้อนรับ +20 XP',
+    acctTitle:'บัญชีและคลาวด์', cloudCta:'สำรองข้อมูลขึ้นคลาวด์', cloudCtaSub:'ล็อกอินด้วยอีเมล ข้อมูลไม่หาย ใช้ได้หลายเครื่อง',
+    syncOk:'ซิงก์แล้ว · {time}', syncBusy:'กำลังซิงก์…', syncOffline:'ออฟไลน์ · จะซิงก์เมื่อต่อเน็ต', syncErr:'ซิงก์ไม่สำเร็จ · แตะเพื่อลองใหม่', syncWait:'กำลังเชื่อมต่อ…',
+    signOut:'ออกจากระบบ', signedOut:'ออกจากระบบแล้ว ข้อมูลยังอยู่ในเครื่องนี้', signedIn:'ล็อกอินแล้ว กำลังซิงก์ข้อมูล',
+    delCloud:'ลบบัญชีและข้อมูลบนคลาวด์', delCloudConfirm:'ลบบัญชีและข้อมูลบนคลาวด์ถาวร? ข้อมูลในเครื่องนี้ยังอยู่', delCloudDone:'ลบบัญชีแล้ว',
+    cloudPulled:'ดึงข้อมูลจากคลาวด์แล้ว',
+    authTitle:'ล็อกอินหรือสมัคร', authLead:'ไม่ต้องตั้งรหัสผ่าน เราจะส่งรหัสยืนยันไปที่อีเมลของคุณ', authNote:'ใช้อีเมลเดิมในทุกเครื่องเพื่อซิงก์ข้อมูลเดียวกัน',
+    sendCode:'ส่งรหัส', codeTitle:'ใส่รหัสจากอีเมล', codeLead:'ส่งรหัสไปที่ <b>{email}</b> แล้ว', codeHint:'ไม่เจออีเมล? ลองดูในโฟลเดอร์สแปม', codeAria:'รหัสยืนยัน',
+    verify:'ยืนยัน', resend:'ส่งรหัสใหม่', resendIn:'ส่งใหม่ได้ใน {s} วิ', changeEmail:'เปลี่ยนอีเมล',
+    errEmail:'อีเมลไม่ถูกต้อง', errCode:'รหัสไม่ถูกต้องหรือหมดอายุ', errSend:'ส่งไม่สำเร็จ ลองใหม่อีกครั้ง', errRate:'ส่งบ่อยเกินไป รอสักครู่แล้วลองใหม่', errNet:'เชื่อมต่อไม่ได้ ตรวจอินเทอร์เน็ต', errGeneric:'มีบางอย่างผิดพลาด ลองใหม่อีกครั้ง',
     t_welcome:'สวัสดี! เราชื่อ "มูนนี่" เป็นเชฟประจำแอปปิดครัว\nเดี๋ยวเราพาทัวร์สั้นๆ แค่ 1 นาทีนะ',
     t_name:'ก่อนอื่นเลย… ให้เราเรียกคุณว่าอะไรดี?',
     t_hero:'{hi}นี่คือนาฬิกาปิดครัว กลางวันจะนับถอยหลังถึงเวลาปิดครัว พอถึงเวลาแล้ว วงแหวนจะนับว่างดมาแล้วกี่ชั่วโมง',
@@ -1088,7 +1164,7 @@ const I18N = {
     achievements:'Achievements', settings:'Settings', language:'Language',
     fName:'Name', fNamePh:'Your name', fCut:'Kitchen closes', fBreak:'Breakfast', fCost:'Dinner cost (฿)',
     reset:'Reset all data', resetConfirm:'Erase all history, XP and achievements? This cannot be undone.', resetDone:'All data cleared',
-    footnote:'Listen to your body. If you feel dizzy, shaky or your heart races, have a medical condition (e.g. diabetes, acid reflux) or are pregnant — eat, and talk to a doctor before skipping meals regularly. · All data stays on this device.',
+    footnote:'Listen to your body. If you feel dizzy, shaky or your heart races, have a medical condition (e.g. diabetes, acid reflux) or are pregnant — eat, and talk to a doctor before skipping meals regularly. · Your data stays on this device and goes to the cloud only if you sign in.',
     settingsSaved:'Settings saved', errCut:'Kitchen must close after breakfast', errBreak:'Breakfast must be before kitchen closes',
     toastOk:'Great job · +{xp} XP', toastLight:'Streak kept · +{xp} XP', toastMiss:'No worries — fresh start tomorrow',
     levelUp:'Level up: {name} · Lv.{l}', badgeGot:'Achievement unlocked: {name}',
@@ -1123,6 +1199,15 @@ const I18N = {
     t_gacha:'Complete quests to earn tickets for the gachapon. Collect all 18 characters!\nWatch out for "Salt" — it drops a lot.',
     mascotName:'Moonie', tourSkip:'Skip', tourNext:'Next', tourStart:"Let's go!", tourOk:'OK', tourNoName:'Skip',
     helpAria:'How to use', replayTour:'Replay tutorial', tourGift:'Welcome gift +20 XP',
+    acctTitle:'Account & cloud', cloudCta:'Back up to the cloud', cloudCtaSub:'Sign in with email to keep your data safe on every device',
+    syncOk:'Synced · {time}', syncBusy:'Syncing…', syncOffline:'Offline · will sync when online', syncErr:'Sync failed · tap to retry', syncWait:'Connecting…',
+    signOut:'Sign out', signedOut:'Signed out. Your data stays on this device.', signedIn:'Signed in. Syncing your data.',
+    delCloud:'Delete account & cloud data', delCloudConfirm:'Permanently delete your account and cloud data? Data on this device stays.', delCloudDone:'Account deleted',
+    cloudPulled:'Loaded your data from the cloud',
+    authTitle:'Sign in or sign up', authLead:"No password needed. We'll email you a sign-in code.", authNote:'Use the same email on every device to sync the same data.',
+    sendCode:'Send code', codeTitle:'Enter the code', codeLead:'We sent a code to <b>{email}</b>', codeHint:"Can't find it? Check your spam folder.", codeAria:'Sign-in code',
+    verify:'Verify', resend:'Resend code', resendIn:'Resend in {s}s', changeEmail:'Change email',
+    errEmail:'That email looks wrong', errCode:'Wrong or expired code', errSend:"Couldn't send. Try again.", errRate:'Too many tries. Wait a moment and try again.', errNet:'No connection. Check your internet.', errGeneric:'Something went wrong. Try again.',
     t_welcome:"Hi there! I'm Moonie, the chef of Kitchen Closed.\nLet me give you a quick 1-minute tour.",
     t_name:'First things first… what should I call you?',
     t_hero:'{hi}This is your kitchen clock. During the day it counts down to closing time — after that, the ring shows how long you have fasted.',
@@ -1171,21 +1256,31 @@ const BADGES = [
 
 /* ---------- state ---------- */
 function detectLang(){ try{ return (navigator.language||'').toLowerCase().startsWith('th') ? 'th' : 'en'; }catch(e){ return 'th'; } }
-function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}} }; }
+function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, logAt:{}, epoch:0, updatedAt:0, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}} }; }
+function shape(r){
+  const b=blank();
+  if(!r || typeof r!=='object') return b;
+  const settings = {...DEFAULTS, ...(r.settings||{})};
+  if(!settings.lang) settings.lang = 'th';
+  const g = r.gacha||{};
+  return {...b, ...r, settings, log:{...(r.log||{})}, logAt:{...(r.logAt||{})}, badges:[...(r.badges||[])], sessions:[...(r.sessions||[])],
+    gacha:{...b.gacha, ...g, owned:{...(g.owned||{})}}, quests:{claimed:{...((r.quests||{}).claimed||{})}}};
+}
 function load(){
-  try{
-    const r = JSON.parse(localStorage.getItem(KEY));
-    if(r && typeof r==='object'){
-      const settings = {...DEFAULTS, ...(r.settings||{})};
-      if(!settings.lang) settings.lang = 'th';
-      const b=blank(); return {...b, ...r, settings, sessions:r.sessions||[], gacha:{...b.gacha, ...(r.gacha||{}), owned:{...((r.gacha||{}).owned||{})}}, quests:{claimed:{...((r.quests||{}).claimed||{})}}};
-    }
-  }catch(e){}
+  try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r && typeof r==='object') return shape(r); }catch(e){}
   return blank();
 }
 let S = load();
 lang = S.settings.lang==='en' ? 'en' : 'th';
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+/* updatedAt moves only when something really changed, so cloud merges can tell which copy is newer */
+const snapOf = s => JSON.stringify({...s, updatedAt:0});
+var lastSnap = snapOf(S);
+function persist(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function save(){
+  const snap = snapOf(S);
+  if(snap===lastSnap) return;
+  S.updatedAt = Date.now(); lastSnap = snap; persist(); scheduleSync();
+}
 
 /* ---------- helpers ---------- */
 const $ = id => document.getElementById(id);
@@ -1281,6 +1376,7 @@ function setStatus(key,status){
   const old = S.log[key];
   if(old) gainXP(-XP_VAL[old]);
   if(status){ S.log[key]=status; gainXP(XP_VAL[status]); } else delete S.log[key];
+  S.logAt[key] = Date.now();
   checkBadges(); save(); renderAll();
 }
 
@@ -1512,7 +1608,7 @@ function renderProfile(){
   }
 }
 
-function renderAll(){ renderHome(); renderProgress(); renderProfile(); renderRewards(); }
+function renderAll(){ renderHome(); renderProgress(); renderProfile(); renderRewards(); renderAccount(); }
 
 /* ---------- tabs & nav ---------- */
 let tab='home';
@@ -1551,7 +1647,7 @@ bindSetting('fName', v=>{ S.settings.name=v.trim(); });
 bindSetting('fCut', v=>{ if(!v||v<=S.settings.breakfast){ toast(t('errCut')); return false; } S.settings.cutoff=v; });
 bindSetting('fBreak', v=>{ if(!v||v>=S.settings.cutoff){ toast(t('errBreak')); return false; } S.settings.breakfast=v; });
 bindSetting('fCost', v=>{ S.settings.cost=Math.max(0,Number(v)||0); });
-$('resetAll').onclick=()=>{ if(confirm(t('resetConfirm'))){ const l=lang; S=blank(); S.settings.lang=l; save(); destroyCharts(); renderAll(); toast(t('resetDone')); } };
+$('resetAll').onclick=()=>{ if(confirm(t('resetConfirm'))){ const l=lang; S=blank(); S.settings.lang=l; S.epoch=Date.now(); save(); destroyCharts(); renderAll(); toast(t('resetDone')); } };
 
 try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ()=>{ destroyCharts(); renderAll(); }); }catch(e){}
 
@@ -2321,10 +2417,237 @@ window.addEventListener('resize', ()=>{ if(tour) layoutStep(false); });
 $('helpBtn').onclick = ()=>startTour();
 $('replayTour').onclick = ()=>{ showTab('home'); setTimeout(startTour, 350); };
 
+/* ---------- cloud sync (Supabase) ----------
+   Local-first: the app always runs from localStorage. When signed in, the whole
+   state is mirrored to one row per user in public.user_state (see supabase/schema.sql). */
+var sb = null, cloudUser = null, syncState = 'wait', syncAt = 0, syncT = null, syncBusy = false, syncAgain = false, cloudLoading = null;
+const cloudOn = () => !!(CLOUD.url && CLOUD.key);
+const escHTML = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function syncMeta(){ try{ return JSON.parse(localStorage.getItem(SYNC_KEY)) || {}; }catch(e){ return {}; } }
+function setSyncMeta(m){ try{ localStorage.setItem(SYNC_KEY, JSON.stringify(m)); }catch(e){} }
+/* JSON with sorted keys: Postgres jsonb does not keep key order */
+function stable(v){ return JSON.stringify(v, (k,x)=> x && typeof x==='object' && !Array.isArray(x) ? Object.keys(x).sort().reduce((o,key)=>(o[key]=x[key],o),{}) : x); }
+const pristine = s => !Object.keys(s.log).length && !s.gacha.pulls && !Object.keys(s.quests.claimed).length && !s.sessions.length;
+
+/* Merge two copies of the state.
+   - A reset (newer epoch) wins outright.
+   - Nights: last write wins per night (logAt), so edits and clears on either device survive.
+   - Things that only grow (badges, claimed quests, owned characters, sessions, XP, records): union / max.
+   - Everything else (wallet, pity, settings, buddy) comes from the copy changed most recently.
+   keepA: treat `a` as the base whatever the timestamps (first sign-in on a device). */
+function mergeState(a, b, keepA){
+  a = shape(a); b = shape(b);
+  if(!keepA && (a.epoch||0)!==(b.epoch||0)) return (a.epoch||0) > (b.epoch||0) ? a : b;
+  const [n, o] = keepA || (a.updatedAt||0) >= (b.updatedAt||0) ? [a, b] : [b, a];
+  const m = shape(JSON.parse(JSON.stringify(n)));
+  m.log = {}; m.logAt = {};
+  new Set([...Object.keys(n.log), ...Object.keys(o.log), ...Object.keys(n.logAt), ...Object.keys(o.logAt)]).forEach(k=>{
+    const tn = n.logAt[k]||0, to = o.logAt[k]||0;
+    const v = (tn||to) ? (to > tn ? o.log[k] : n.log[k]) : (n.log[k] || o.log[k]);
+    if(v) m.log[k] = v;
+    if(tn||to) m.logAt[k] = Math.max(tn, to);
+  });
+  m.badges = [...new Set([...n.badges, ...o.badges])];
+  const seen = new Set(n.sessions.map(x=>x.t));
+  m.sessions = [...n.sessions, ...o.sessions.filter(x=>!seen.has(x.t))].sort((x,y)=>x.t-y.t).slice(-300);
+  m.quests.claimed = {...o.quests.claimed, ...n.quests.claimed};
+  for(const [id,c] of Object.entries(o.gacha.owned)) m.gacha.owned[id] = Math.max(m.gacha.owned[id]||0, c);
+  m.gacha.pulls = Math.max(n.gacha.pulls||0, o.gacha.pulls||0);
+  for(const f of ['xp','best','challenges','cravings']) m[f] = Math.max(n[f]||0, o[f]||0);
+  m.tourDone = !!(n.tourDone || o.tourDone);
+  m.updatedAt = Math.max(n.updatedAt||0, o.updatedAt||0);
+  return m;
+}
+
+function scheduleSync(ms=1500){ if(!sb || !cloudUser) return; clearTimeout(syncT); syncT = setTimeout(cloudSync, ms); }
+async function cloudSync(){
+  if(!sb || !cloudUser) return;
+  if(syncBusy){ syncAgain = true; return; }
+  clearTimeout(syncT); syncT = null; syncBusy = true; setSync('busy');
+  const uid = cloudUser.id;
+  try{
+    const { data:row, error } = await sb.from('user_state').select('data').eq('user_id', uid).maybeSingle();
+    if(error) throw error;
+    if(!cloudUser || cloudUser.id!==uid) return;
+    const first = syncMeta().uid !== uid;
+    const remote = row ? shape(row.data) : null;
+    const next = !remote ? S : first ? (pristine(S) ? remote : mergeState(remote, S, true)) : mergeState(S, remote);
+    next.settings.lang = lang;   // language is a per-device choice
+    if(stable(next)!==stable(S)){
+      S = next; lastSnap = snapOf(S); persist();
+      destroyCharts(); renderAll();
+      if(first) toast(t('cloudPulled'));
+    }
+    if(!remote || stable(S)!==stable(remote)){
+      const { error:e2 } = await sb.from('user_state').upsert({ user_id:uid, data:S, updated_at:new Date().toISOString() });
+      if(e2) throw e2;
+    }
+    setSyncMeta({ uid }); syncAt = Date.now(); setSync('ok');
+  }catch(e){
+    console.warn('cloud sync failed', e);
+    setSync(navigator.onLine===false ? 'offline' : 'err');
+  }finally{
+    syncBusy = false;
+    if(syncAgain){ syncAgain = false; scheduleSync(300); }
+  }
+}
+function setSync(s){ syncState = s; renderAccount(); }
+
+function renderAccount(){
+  if(!cloudOn()) return;
+  $('acctHead').hidden = $('acct').hidden = false;
+  if(!cloudUser){
+    $('acct').innerHTML = `<div class="row" data-act="signin" role="button" tabindex="0"><div class="ic cloud">${icon('cloud')}</div><div class="t"><b>${t('cloudCta')}</b><span>${t('cloudCtaSub')}</span></div><svg class="i chev"><use href="#i-chevron-right"/></svg></div>`;
+    return;
+  }
+  const st = syncState, warn = st==='err' || st==='offline';
+  const time = syncAt ? new Date(syncAt).toLocaleTimeString(L().locale, { hour:'2-digit', minute:'2-digit' }) : '';
+  const label = st==='busy' ? t('syncBusy') : st==='offline' ? t('syncOffline') : st==='err' ? t('syncErr') : st==='ok' ? t('syncOk',{time}) : t('syncWait');
+  const dot = warn ? 'warn' : st==='ok' ? '' : 'busy';
+  $('acct').innerHTML =
+    `<div class="row" data-act="sync" role="button" tabindex="0"><div class="ic ${warn?'warn':'cloud'}">${icon(warn?'cloud-off':'cloud')}</div><div class="t"><b>${escHTML(cloudUser.email||'')}</b><span><i class="dot ${dot}"></i>${label}</span></div><span class="sync-ic ${st==='busy'?'spin':''}">${icon('refresh-cw')}</span></div>`+
+    `<div class="row" data-act="signout" role="button" tabindex="0"><div class="ic">${icon('log-out')}</div><div class="t"><b>${t('signOut')}</b></div></div>`+
+    `<div class="row danger-row" data-act="delete" role="button" tabindex="0"><div class="ic">${icon('trash-2')}</div><div class="t"><b>${t('delCloud')}</b></div></div>`;
+}
+
+function loadScript(src){
+  return new Promise((ok, no)=>{ const s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=()=>{ s.remove(); no(new Error('could not load '+src)); }; document.head.appendChild(s); });
+}
+function cloudLoad(){
+  if(sb) return Promise.resolve(sb);
+  if(!cloudLoading) cloudLoading = (window.supabase ? Promise.resolve() : loadScript('vendor/supabase.min.js')).then(()=>{
+    sb = window.supabase.createClient(CLOUD.url, CLOUD.key, {
+      auth:{ persistSession:true, autoRefreshToken:true, detectSessionInUrl:true, flowType:'implicit', storageKey:'skipdinner.auth' }
+    });
+    sb.auth.onAuthStateChange((ev, session)=>{
+      const u = session?.user || null, was = cloudUser?.id;
+      cloudUser = u;
+      if(!u){ clearTimeout(syncT); syncT = null; syncState = 'wait'; }
+      renderAccount();
+      if(u && u.id!==was) setTimeout(cloudSync, 0);   // don't await Supabase calls inside this callback
+    });
+    return sb;
+  }).catch(e=>{ cloudLoading = null; throw e; });
+  return cloudLoading;
+}
+function cloudInit(){
+  if(!cloudOn()) return;
+  renderAccount();
+  cloudLoad().catch(()=>{ syncState = 'offline'; renderAccount(); });
+  document.addEventListener('visibilitychange', ()=>{
+    if(!cloudUser) return;
+    if(document.hidden){ if(syncT) cloudSync(); }
+    else if(Date.now() - syncAt > 15000) cloudSync();
+  });
+  window.addEventListener('online', ()=>{ if(cloudUser) cloudSync(); else cloudLoad().catch(()=>{}); });
+}
+
+async function signOut(){
+  if(syncT) await cloudSync();
+  try{ await sb.auth.signOut({ scope:'local' }); }catch(e){}
+  cloudUser = null; syncState = 'wait'; renderAccount(); toast(t('signedOut'));
+}
+async function deleteAccount(){
+  if(!confirm(t('delCloudConfirm'))) return;
+  setSync('busy');
+  const { error } = await sb.rpc('delete_my_account');
+  if(error){ console.warn(error); setSync('err'); toast(t(errKey(error) || 'errGeneric')); return; }
+  clearTimeout(syncT); syncT = null; setSyncMeta({});
+  try{ await sb.auth.signOut({ scope:'local' }); }catch(e){}
+  cloudUser = null; syncState = 'wait'; renderAccount(); toast(t('delCloudDone'));
+}
+$('acct').addEventListener('click', e=>{
+  const r = e.target.closest('[data-act]'); if(!r) return;
+  const a = r.dataset.act;
+  if(a==='signin') openAuth();
+  else if(a==='sync'){ if(syncState!=='busy') cloudSync(); }
+  else if(a==='signout') signOut();
+  else if(a==='delete') deleteAccount();
+});
+$('acct').addEventListener('keydown', e=>{ if((e.key==='Enter' || e.key===' ') && e.target.dataset.act){ e.preventDefault(); e.target.click(); } });
+
+/* ---------- sign-in sheet: email → 6-digit code (works inside the home-screen app, unlike links) ---------- */
+let authEmail = '', resendAt = 0, resendTick = null;
+const errKey = err => navigator.onLine===false ? 'errNet' : err?.status===429 ? 'errRate' : null;
+function openAuth(){
+  authStep(1); $('authEmail').value = authEmail;
+  $('auth').classList.add('open');
+  if(HAS_GSAP) gsap.fromTo('#auth .rm-panel', {y:'100%'}, {y:0, duration:.45, ease:'power4.out'});
+  cloudLoad().catch(()=>authErr('errNet'));
+}
+function closeAuth(){
+  clearInterval(resendTick);
+  if(!HAS_GSAP){ $('auth').classList.remove('open'); return; }
+  gsap.to('#auth .rm-panel', {y:'100%', duration:.3, ease:'power3.in', onComplete:()=>$('auth').classList.remove('open')});
+}
+function authStep(n){
+  $('authStep1').hidden = n!==1; $('authStep2').hidden = n!==2;
+  $('authH').textContent = t(n===1 ? 'authTitle' : 'codeTitle');
+  $('authLead').innerHTML = n===1 ? escHTML(t('authLead')) : t('codeLead', { email:escHTML(authEmail) });
+  $('authNote').textContent = t(n===1 ? 'authNote' : 'codeHint');
+  $('authErr').textContent = '';
+  if(n===2){ $('authCode').value = ''; tickResend(); } else clearInterval(resendTick);
+}
+function authErr(k){
+  $('authErr').textContent = t(k);
+  if(HAS_GSAP) gsap.fromTo('#auth .rm-panel', {x:-7}, {x:0, duration:.5, ease:'elastic.out(1,.3)'});
+}
+function authBusy(btn, on){ btn.disabled = on; }
+function sendOtp(email){
+  return sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:true, emailRedirectTo: location.origin + location.pathname } });
+}
+function tickResend(){
+  clearInterval(resendTick);
+  const draw = ()=>{
+    const s = Math.ceil((resendAt - Date.now())/1000), b = $('authResend');
+    b.disabled = s>0; b.textContent = s>0 ? t('resendIn',{s}) : t('resend');
+    if(s<=0) clearInterval(resendTick);
+  };
+  draw(); resendTick = setInterval(draw, 1000);
+}
+$('authStep1').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const email = $('authEmail').value.trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return authErr('errEmail');
+  const btn = $('authSend'); authBusy(btn, true);
+  try{
+    await cloudLoad();
+    const { error } = await sendOtp(email);
+    if(error) throw error;
+    authEmail = email; resendAt = Date.now() + 60000; authStep(2);
+    setTimeout(()=>$('authCode').focus(), 60);
+  }catch(err){ console.warn(err); authErr(errKey(err) || 'errSend'); }
+  finally{ authBusy(btn, false); }
+});
+$('authStep2').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const token = $('authCode').value.replace(/\D/g, '');
+  if(token.length < 6) return authErr('errCode');
+  const btn = $('authVerify'); authBusy(btn, true);
+  try{
+    const { error } = await sb.auth.verifyOtp({ email:authEmail, token, type:'email' });
+    if(error) throw error;
+    closeAuth(); toast(t('signedIn'));
+  }catch(err){ console.warn(err); authErr(errKey(err) || 'errCode'); }
+  finally{ authBusy(btn, false); }
+});
+$('authCode').addEventListener('input', e=>{ e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); $('authErr').textContent = ''; });
+$('authEmail').addEventListener('input', ()=>{ $('authErr').textContent = ''; });
+$('authBack').onclick = ()=>{ authStep(1); $('authEmail').value = authEmail; $('authEmail').focus(); };
+$('authResend').onclick = async ()=>{
+  if(Date.now() < resendAt) return;
+  resendAt = Date.now() + 60000; tickResend();
+  const { error } = await sendOtp(authEmail);
+  if(error){ resendAt = 0; tickResend(); authErr(errKey(error) || 'errSend'); }
+};
+$('authClose').onclick = $('authBg').onclick = closeAuth;
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('auth').classList.contains('open')) closeAuth(); });
+
 /* ---------- boot ---------- */
 applyStatic(); checkBadges(); save(); renderAll(); showTab('home'); animateIn($('tab-home'));
 setInterval(()=>{ if(tab==='home') renderTimer(); }, 1000);
 if(!S.tourDone) setTimeout(startTour, 900);
+cloudInit();
 let lastNight = nightKey();
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden){ renderAll(); } });
 setInterval(()=>{ const n=nightKey(); if(n!==lastNight){ lastNight=n; renderAll(); } }, 60000);
