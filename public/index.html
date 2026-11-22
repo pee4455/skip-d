@@ -462,6 +462,25 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .tp{display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:99px;background:var(--fill);color:var(--ink2);white-space:nowrap}
 .tp i{display:inline-block;width:9px;height:9px;border-radius:50%;background:linear-gradient(150deg,var(--t1),var(--t2));margin-right:5px}
 .coll-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.coll-sets{display:flex;flex-direction:column;gap:22px}
+.cset-head{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.cset-ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;color:#fff;
+  background:linear-gradient(145deg,color-mix(in srgb,var(--sc) 70%,#fff),var(--sc));box-shadow:0 6px 14px color-mix(in srgb,var(--sc) 35%,transparent)}
+.cset-ic svg{width:19px;height:19px}
+.cset-t{flex:1;min-width:0}
+.cset-t b{display:block;font-size:15.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cset-sub{display:flex;align-items:center;gap:8px;margin-top:5px}
+.cset-sub span{font-size:12px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.cset-bar{flex:1;max-width:120px;height:5px;border-radius:99px;background:var(--fill);overflow:hidden}
+.cset-bar i{display:block;height:100%;border-radius:inherit;background:var(--sc);transition:width .5s}
+.cset-side{flex:none;display:flex;align-items:center}
+.cset-side .q-rw{display:flex;gap:4px}
+.cset-done{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--sc)}
+.cset-done svg{width:14px;height:14px}
+.cset.is-ready .cset-claim{background:var(--grad);color:#fff;box-shadow:0 6px 14px rgba(255,90,31,.35);animation:nudge 1.6s ease-in-out infinite}
+.gc-set{display:inline-flex;align-items:center;gap:4px;margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:.02em;
+  color:color-mix(in srgb,var(--sc) 55%,#fff);background:color-mix(in srgb,var(--sc) 22%,transparent);padding:2px 8px;border-radius:99px}
+.gc-set svg{width:11px;height:11px}
 .cslot{display:block;width:100%}
 .holo,.gcard.t-legend,.mcard.t-legend{background:linear-gradient(120deg,#ff4d8d,#ffb347,#fff35c,#4dff88,#4dc3ff,#9b5cff,#ff4d8d)!important;background-size:300% 300%!important;animation:holo 3s linear infinite}
 @keyframes holo{to{background-position:300% 0}}
@@ -834,7 +853,7 @@ html:has(#splash){overflow:hidden}
     <div class="section anim"><h2 data-i18n="collection"></h2><span class="aside" id="collCount"></span></div>
     <div class="card anim">
       <div class="tier-prog" id="tierProg"></div>
-      <div class="coll-grid" id="collGrid"></div>
+      <div class="coll-sets" id="collGrid"></div>
     </div>
   </section>
 
@@ -1188,7 +1207,7 @@ const I18N = {
     qWeek3:'งดได้ 3 คืนในสัปดาห์', qWeek5:'งดได้ 5 คืนในสัปดาห์', qWeekLog:'เช็คอินครบ 7 คืน',
     qStreak:'สตรีคถึง {n} คืน', qTotal:'งดได้รวม {n} คืน', qCollect:'สะสมตัวละคร {n} ตัว', qWelcome:'ของขวัญต้อนรับสู่ตู้กาชา',
     claim:'รับ', claimed:'รับแล้ว', claimedToast:'ได้รับ {r}',
-    collection:'สมุดสะสม', collected:'{n}/{m} ตัว',
+    collection:'สมุดสะสม', collected:'{n}/{m} ตัว', qSet:'สะสมครบชุด "{name}"', setDone:'ครบชุด',
     tier_salt:'เกลือ', tier_common:'ธรรมดา', tier_rare:'แรร์', tier_sr:'ซูเปอร์แรร์', tier_legend:'ตำนาน',
     tapToOpen:'แตะเพื่อเปิด', tapAgain:'เอ๊ะ!? แคปซูลสั่น… แตะอีกที!', openAll:'เปิดทั้งหมด',
     again:'หมุนอีกครั้ง', keep:'เก็บเข้าสมุด', newTag:'ใหม่!', dupe:'ได้ซ้ำ → +{n} ✦', owned:'มีอยู่ ×{n}',
@@ -1200,7 +1219,7 @@ const I18N = {
     rateDupe:'ได้ตัวซ้ำจะเปลี่ยนเป็นเศษดาว ✦ (เกลือ 1 · ธรรมดา 2 · แรร์ 4 · SR 10 · ตำนาน 25) สะสม 10✦ แลกตั๋วได้ 1 ใบ',
     saltQuips:['เค็มอีกแล้ว…','เกลือมาตามนัด','ไม่เป็นไร เกลือก็มีประโยชน์ (นิดนึง)','ตู้นี้ชอบเกลือจริงๆ','ความเค็ม +1'],
     quip_common:'เพื่อนใหม่มาแล้ว!', quip_rare:'โอ้โห! ได้แรร์!', quip_sr:'ซูเปอร์แรร์!! ดวงดีสุดๆ', quip_legend:'ตำนานปรากฏตัวแล้ว!!!',
-    t_gacha:'ทำเควสแล้วจะได้ตั๋วมาหมุนตู้กาชา สะสมตัวละครให้ครบ 18 ตัว!\nระวัง "เกลือ" ด้วยนะ ออกบ่อยมาก',
+    t_gacha:'ทำเควสแล้วจะได้ตั๋วมาหมุนตู้กาชา สะสมตัวละครให้ครบทั้ง 6 คอลเลกชัน!\nระวัง "เกลือ" ด้วยนะ ออกบ่อยมาก',
     mascotName:'มูนนี่', tourSkip:'ข้าม', tourNext:'ต่อไป', tourStart:'เริ่มเลย!', tourOk:'ตกลง', tourNoName:'ไม่บอกดีกว่า',
     helpAria:'วิธีใช้', replayTour:'ดูวิธีใช้อีกครั้ง', tourGift:'ของขวัญต้อนรับ +20 XP',
     acctTitle:'บัญชีและคลาวด์', cloudCta:'สำรองข้อมูลขึ้นคลาวด์', cloudCtaSub:'ล็อกอินด้วยอีเมล ข้อมูลไม่หาย ใช้ได้หลายเครื่อง',
@@ -1293,7 +1312,7 @@ const I18N = {
     qWeek3:'Fast 3 nights this week', qWeek5:'Fast 5 nights this week', qWeekLog:'Check in all 7 nights',
     qStreak:'Reach a {n}-night streak', qTotal:'Fast {n} nights in total', qCollect:'Collect {n} characters', qWelcome:'Welcome gift for the gachapon',
     claim:'Claim', claimed:'Claimed', claimedToast:'Received {r}',
-    collection:'Collection', collected:'{n}/{m}',
+    collection:'Collection', collected:'{n}/{m}', qSet:'Complete the "{name}" set', setDone:'Complete',
     tier_salt:'Salt', tier_common:'Common', tier_rare:'Rare', tier_sr:'Super Rare', tier_legend:'Legend',
     tapToOpen:'Tap to open', tapAgain:'Wait… it is shaking! Tap again!', openAll:'Open all',
     again:'Pull again', keep:'Add to collection', newTag:'NEW!', dupe:'Duplicate → +{n} ✦', owned:'Owned ×{n}',
@@ -1305,7 +1324,7 @@ const I18N = {
     rateDupe:'Duplicates turn into stardust ✦ (Salt 1 · Common 2 · Rare 4 · SR 10 · Legend 25). Trade 10✦ for a ticket.',
     saltQuips:['Salty again…','Salt arrives right on schedule','Salt has its uses (kind of)','This machine really loves salt','+1 saltiness'],
     quip_common:'A new friend appears!', quip_rare:'Ooh — a Rare!', quip_sr:'SUPER RARE!! What luck!', quip_legend:'A LEGEND has appeared!!!',
-    t_gacha:'Complete quests to earn tickets for the gachapon. Collect all 18 characters!\nWatch out for "Salt" — it drops a lot.',
+    t_gacha:'Complete quests to earn tickets for the gachapon. Complete all 6 collections!\nWatch out for "Salt" — it drops a lot.',
     mascotName:'Moonie', tourSkip:'Skip', tourNext:'Next', tourStart:"Let's go!", tourOk:'OK', tourNoName:'Skip',
     helpAria:'How to use', replayTour:'Replay tutorial', tourGift:'Welcome gift +20 XP',
     acctTitle:'Account & cloud', cloudCta:'Back up to the cloud', cloudCtaSub:'Sign in with email to keep your data safe on every device',
@@ -2001,11 +2020,204 @@ const CHARS = [
       <path d="M30 30 L34 10 L42 20 L50 6 L58 20 L66 10 L70 30 Z" fill="#ffe680" stroke="#d99a00" stroke-width="2" stroke-linejoin="round"/>
       <circle cx="50" cy="19" r="2.6" fill="#ff4d6d"/><circle cx="38" cy="24" r="2" fill="#4dc3ff"/><circle cx="62" cy="24" r="2" fill="#4dc3ff"/>
       ${F(50,58,1.1,'happy','open')}` },
+
+  /* ----- added with collections ----- */
+  { id:'fridge', set:'kitchen', tier:'common', name:{th:'ตู้เย็นล็อกแน่น',en:'Locked Fridge'},
+    desc:{th:'ถึงเวลาปิดครัวปุ๊บ ล็อกตัวเองปั๊บ ไว้เจอกันตอนเช้านะ',en:'Locks itself the moment the kitchen closes. See you at breakfast!'},
+    art:()=>`<rect x="26" y="8" width="48" height="86" rx="9" fill="#eef3f8" stroke="#b9c6d4" stroke-width="2.5"/>
+      <path d="M26 38 H74" stroke="#b9c6d4" stroke-width="2.5"/>
+      <rect x="64" y="15" width="4" height="15" rx="2" fill="#b9c6d4"/><rect x="64" y="45" width="4" height="10" rx="2" fill="#b9c6d4"/>
+      <path d="M20 60 q30 -10 60 0" stroke="#9aa3ad" stroke-width="3.5" fill="none" stroke-dasharray="5 3" stroke-linecap="round"/>
+      <path d="M44 63 v-5 a6 6 0 0 1 12 0 v5" stroke="#d99a00" stroke-width="3" fill="none"/>
+      <rect x="41" y="62" width="18" height="15" rx="3.5" fill="#ffc83d" stroke="#d99a00" stroke-width="2"/><circle cx="50" cy="69" r="2" fill="#a06a00"/>
+      ${F(45,22,.85,'open','flat')}` },
+  { id:'mask', set:'bedtime', tier:'rare', name:{th:'ผ้าปิดตาฝันดี',en:'Dream Mask'},
+    desc:{th:'ใส่แล้วหลับปุ๊บ ไม่เห็นแม้แต่แสงจากตู้เย็น',en:'Put it on and you are out — not even the fridge light gets through.'},
+    art:()=>`<path d="M30 80 a8 8 0 1 0 8 10 a6 6 0 1 1 -8 -10z" fill="#ffe28a"/>
+      <path d="${starPath(18,20,5)}" fill="#ffe28a"/><path d="${starPath(84,24,4)}" fill="#ffe28a"/><path d="${starPath(74,86,3.5)}" fill="#ffe28a"/>
+      <path d="M6 50 q14 -6 20 -2 M94 50 q-14 -6 -20 -2" stroke="#9b8cf0" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M22 40 q28 -14 56 0 q10 6 6 18 q-4 12 -18 10 q-10 -2 -16 -8 q-6 6 -16 8 q-14 2 -18 -10 q-4 -12 6 -18z" fill="#7c6ae6" stroke="#5a48c8" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M30 40 q20 -8 40 0" stroke="#a99cf5" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M31 51 q7 6 14 0 M55 51 q7 6 14 0" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <path d="M32 55 l-2 3 M37 57 v3 M42 55 l2 3 M56 55 l-2 3 M61 57 v3 M66 55 l2 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+      <text x="80" y="14" font-size="12" font-weight="800" fill="#c4b0fb" font-family="sans-serif">z</text>` },
+  { id:'bat', set:'critters', tier:'common', name:{th:'ค้างคาวง่วงนอน',en:'Sleepy Bat'},
+    desc:{th:'ตื่นตอนกลางคืนก็จริง แต่ไม่เคยแวะครัวสักครั้ง',en:'Up all night, yet never once visits the kitchen.'},
+    art:()=>`<path d="M80 72 a10 10 0 1 0 10 14 a8 8 0 1 1 -10 -14z" fill="#ffe08a"/>
+      <path d="M36 50 q-14 -14 -30 -6 q6 4 4 10 q8 -2 10 6 q8 -4 16 4z" fill="#5b4a78" stroke="#3e3158" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M64 50 q14 -14 30 -6 q-6 4 -4 10 q-8 -2 -10 6 q-8 -4 -16 4z" fill="#5b4a78" stroke="#3e3158" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M38 30 L35 14 L47 25Z M62 30 L65 14 L53 25Z" fill="#6e5b90" stroke="#3e3158" stroke-width="2" stroke-linejoin="round"/>
+      <ellipse cx="50" cy="52" rx="20" ry="24" fill="#6e5b90" stroke="#3e3158" stroke-width="2"/>
+      <ellipse cx="50" cy="64" rx="11" ry="10" fill="#a594c4"/>
+      ${F(50,46,.85,'sleepy','smile')}` },
+
+  { id:'crumb', set:'cravings', tier:'salt', name:{th:'เศษขนมปัง',en:'Bread Crumb'},
+    desc:{th:'เหลืออยู่แค่นี้แหละ… ไม่พอให้ใครหิวหรอก',en:'This is all that is left. Not enough to tempt anyone.'},
+    art:()=>`<path d="M28 74 q-4 -32 22 -34 q26 -2 24 30 q0 10 -10 12 H38 q-10 0 -10 -8z" fill="#e8b46a" stroke="#b9823b" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M35 68 q0 -19 15 -20 q17 -1 16 19 q0 7 -7 8 H42 q-7 0 -7 -7z" fill="#fbe3b8"/>
+      <circle cx="20" cy="86" r="2.5" fill="#e8b46a"/><circle cx="82" cy="88" r="2" fill="#e8b46a"/><circle cx="76" cy="80" r="1.6" fill="#e8b46a"/>
+      ${F(51,62,.8,'open','o')}` },
+  { id:'chips', set:'cravings', tier:'common', name:{th:'ถุงมันฝรั่ง',en:'Chip Bag'},
+    desc:{th:'เสียงกรอบแกรบตอนดึกคือกับดัก! ตอนนี้กลับใจมาเชียร์คุณแล้ว',en:'That midnight crunch is a trap! Now reformed and cheering you on.'},
+    art:()=>`<path d="M58 8 q8 -6 14 2 q-8 4 -14 -2z" fill="#f7d26b" stroke="#d9a63a" stroke-width="1.2"/><path d="M30 6 q6 -4 10 2 q-6 3 -10 -2z" fill="#f7d26b" stroke="#d9a63a" stroke-width="1.2"/>
+      <path d="M26 14 H74 L70 52 L74 90 H26 L30 52 Z" fill="#ffcf33" stroke="#e0a400" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M26 14 H74 L73.4 20 H26.6Z M26.6 84 H73.4 L74 90 H26Z" fill="#ff5a3c"/>
+      <ellipse cx="50" cy="72" rx="16" ry="7" fill="#fff3c4"/>
+      <text x="50" y="74.5" text-anchor="middle" font-size="7" font-weight="900" fill="#ff5a3c" font-family="sans-serif">CRUNCH</text>
+      ${F(50,44,1,'open','open')}` },
+  { id:'boba', set:'cravings', tier:'common', name:{th:'ชานมไข่มุก',en:'Boba Buddy'},
+    desc:{th:'หวานเกินไปสำหรับตอนดึก ขอเป็นแค่เพื่อนกันนะ',en:'Too sweet for late nights. Let us just be friends.'},
+    art:()=>`<rect x="55" y="0" width="7" height="34" rx="3.5" fill="#ff7aa8" transform="rotate(12 58 17)"/>
+      <path d="M28 30 H72 L66 92 H34 Z" fill="#f3d9b8" stroke="#c99e6e" stroke-width="2.5" stroke-linejoin="round"/>
+      <rect x="25" y="23" width="50" height="9" rx="4" fill="#fff" stroke="#d8c9b5" stroke-width="2"/>
+      <g fill="#3b2418"><circle cx="40" cy="84" r="3.6"/><circle cx="48" cy="86.5" r="3.6"/><circle cx="56" cy="84" r="3.6"/><circle cx="61" cy="78" r="3.4"/><circle cx="43" cy="77" r="3.4"/><circle cx="52" cy="79" r="3.4"/></g>
+      ${F(50,52,1,'happy','smile')}` },
+  { id:'noodle', set:'cravings', tier:'rare', name:{th:'บะหมี่เที่ยงคืน',en:'Midnight Noodles'},
+    desc:{th:'แค่ 3 นาทีก็พังวินัยได้… แต่คืนนี้ขอนอนอยู่ในตู้เฉยๆ',en:'Three minutes to wreck a streak… tonight it stays in the cupboard.'},
+    art:()=>`<path d="M38 22 q-5 -6 0 -12 M50 20 q-5 -6 0 -12 M62 22 q-5 -6 0 -12" stroke="#d4dad6" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M74 6 L64 34" stroke="#bfc6d0" stroke-width="3" stroke-linecap="round"/>
+      <path d="M22 34 H78 L72 90 H28 Z" fill="#fff" stroke="#d6d0c8" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M23.6 34 q6 -8 12 0 q6 -8 12 0 q6 -8 12 0 q6 -8 12 0 q4 -6 4.8 0" stroke="#f4c95d" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M24.8 62 H75.2 L73.8 76 H26.2 Z" fill="#ff4d3d"/>
+      <text x="50" y="72.5" text-anchor="middle" font-size="8" font-weight="900" fill="#fff" font-family="sans-serif">3 MIN</text>
+      ${F(50,48,.9,'happy','smile')}` },
+  { id:'donut', set:'cravings', tier:'rare', name:{th:'โดนัทยั่วใจ',en:'Tempting Donut'},
+    desc:{th:'ส่งสายตาหวานๆ มาทุกคืน แต่ตอนนี้ใจคุณแข็งพอแล้ว',en:'Makes sweet eyes at you every night. Your willpower is strong enough now.'},
+    art:()=>`<circle cx="50" cy="54" r="36" fill="#e9b26a" stroke="#c98a3e" stroke-width="2.5"/>
+      <path d="M16 52 q2 -32 34 -33 q32 1 34 33 q-4 6 -8 2 q-4 8 -10 2 q-6 6 -12 0 q-6 6 -12 0 q-6 6 -10 -2 q-6 4 -12 -2z" fill="#ff8ab8" stroke="#e5689a" stroke-width="2" stroke-linejoin="round"/>
+      <ellipse cx="50" cy="44" rx="9" ry="6.5" fill="#1d1d23" stroke="#e5689a" stroke-width="2"/>
+      <g stroke-width="2.6" stroke-linecap="round"><path d="M28 38 l4 -2" stroke="#4dc3ff"/><path d="M38 28 l3 3" stroke="#fff35c"/><path d="M62 28 l4 1" stroke="#4dff88"/><path d="M72 40 l2 4" stroke="#fff"/><path d="M24 48 l3 3" stroke="#9b5cff"/><path d="M68 50 l4 -2" stroke="#4dc3ff"/></g>
+      ${F(50,72,.9,'happy','open')}` },
+  { id:'pizza', set:'cravings', tier:'sr', name:{th:'พิซซ่าจอมยั่ว',en:'Pizza Fiend'},
+    desc:{th:'บอสใหญ่แห่งของกินดึก! เอาชนะได้แล้วก็กลายเป็นเพื่อนซี้',en:'The final boss of late-night food! Beat it and it becomes your best friend.'},
+    art:()=>`<path d="M24 20 L17 3 L33 15Z M76 20 L83 3 L67 15Z" fill="#ff4d4d" stroke="#c42f2f" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M50 94 L14 24 Q50 8 86 24 Z" fill="#ffd36b" stroke="#e0a43a" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M14 24 Q50 8 86 24 L82 32 Q50 17 18 32 Z" fill="#d98c3a" stroke="#b86e25" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="34" cy="40" r="6" fill="#e0443a"/><circle cx="66" cy="38" r="5.5" fill="#e0443a"/><circle cx="51" cy="76" r="4.5" fill="#e0443a"/>
+      <path d="M38 64 q2 10 0 14 q-3 -2 -2 -14z M62 60 q2 8 0 11 q-3 -2 -2 -11z" fill="#ffe08a"/>
+      ${F(50,52,1,'happy','open')}` },
+
+  { id:'cucumber', set:'fresh', tier:'salt', name:{th:'แตงกวาใจเย็น',en:'Chill Cucumber'},
+    desc:{th:'เย็นสบาย ใจเย็น หิวเมื่อไหร่เคี้ยวเราแทนได้',en:'Cool as can be. Crunch me instead of a snack.'},
+    art:()=>`<circle cx="79" cy="79" r="12" fill="#c8f0b4" stroke="#4caf50" stroke-width="3"/><g fill="#f5fff0"><circle cx="79" cy="73" r="2"/><circle cx="73" cy="81" r="2"/><circle cx="85" cy="81" r="2"/></g>
+      <rect x="35" y="8" width="30" height="84" rx="15" fill="#4caf50" stroke="#2f8a35" stroke-width="2.5"/>
+      <g fill="#7fd081"><circle cx="42" cy="22" r="1.8"/><circle cx="58" cy="30" r="1.8"/><circle cx="43" cy="76" r="1.8"/><circle cx="57" cy="83" r="1.8"/><circle cx="56" cy="68" r="1.6"/></g>
+      ${F(50,48,.8,'flat','smile')}` },
+  { id:'apple', set:'fresh', tier:'common', name:{th:'แอปเปิ้ลแดง',en:'Apple Pal'},
+    desc:{th:'กินวันละผล หมอไม่ต้องมา ความหิวตอนดึกก็ไม่ต้องมาเหมือนกัน',en:'An apple a day keeps the late-night cravings away.'},
+    art:()=>`<path d="M50 30 q-4 -12 4 -22" stroke="#7a4b2a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M54 18 q14 -10 22 0 q-12 8 -22 0z" fill="#5cc85c" stroke="#3a9a3a" stroke-width="1.5"/>
+      <path d="M50 30 q-12 -8 -24 -2 q-16 10 -10 34 q6 24 22 28 q6 2 12 -2 q6 4 12 2 q16 -4 22 -28 q6 -24 -10 -34 q-12 -6 -24 2z" fill="#ff5252" stroke="#d63030" stroke-width="2.5" stroke-linejoin="round"/>
+      <ellipse cx="31" cy="46" rx="5" ry="9" fill="#fff" opacity=".35" transform="rotate(20 31 46)"/>
+      ${F(50,58,1,'open','smile')}` },
+  { id:'banana', set:'fresh', tier:'common', name:{th:'กล้วยหอม',en:'Banana Buddy'},
+    desc:{th:'พลังงานพอดีๆ ช่วยให้อิ่มถึงเวลาปิดครัว',en:'Just the right energy to keep you full until closing time.'},
+    art:()=>`<path d="M20 30 q-8 44 32 58 q32 10 46 -12 q-30 12 -48 -12 q-14 -18 -10 -38z" fill="#ffe14d" stroke="#d9b200" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M30 32 q-2 26 14 42" stroke="#fff3a0" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>
+      <path d="M19 30 l-3 -10 8 3z" fill="#6b4a2a" stroke="#6b4a2a" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="97" cy="76" r="2.6" fill="#6b4a2a"/>
+      ${F(37,60,.72,'happy','smile')}` },
+  { id:'carrot', set:'fresh', tier:'rare', name:{th:'แครอทตาดี',en:'Sharp-eyed Carrot'},
+    desc:{th:'มองเห็นชัดแม้ในที่มืด เห็นแม้กระทั่งมือที่แอบเอื้อมไปหาขนม',en:'Sees clearly in the dark — even the hand sneaking toward the snacks.'},
+    art:()=>`<path d="M50 28 q-14 -14 -8 -24 q8 8 8 24z M50 28 q2 -18 14 -22 q0 14 -14 22z M50 28 q-18 -6 -24 -2 q10 8 24 2z" fill="#4caf50" stroke="#2f8a35" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M26 32 q24 -10 48 0 q-6 34 -24 64 q-18 -30 -24 -64z" fill="#ff8a2b" stroke="#d9651a" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M36 60 h6 M58 68 h-6 M45 80 h5" stroke="#d9651a" stroke-width="2" stroke-linecap="round"/>
+      ${F(50,42,.8,'open','smile')}
+      <g fill="none" stroke="${INK}" stroke-width="2"><circle cx="43.2" cy="42" r="6"/><circle cx="56.8" cy="42" r="6"/><path d="M49.2 42 h1.6 M37.2 41 l-5 -2 M62.8 41 l5 -2"/></g>` },
+  { id:'broccoli', set:'fresh', tier:'rare', name:{th:'บร็อคโคลี่ฮีโร่',en:'Broccoli Hero'},
+    desc:{th:'ฮีโร่ผู้ปกป้องท้องอิ่มนาน กินมื้อกลางวันดีๆ ตกเย็นก็ไม่หิว',en:'Guardian of the full tummy. Eat a good lunch and evening hunger fades.'},
+    art:()=>`<path d="M36 56 L16 94 H84 L64 56 Z" fill="#ff3d3d" stroke="#c42f2f" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M37 52 H63 L59 90 H41 Z" fill="#9bd36a" stroke="#5f9e35" stroke-width="2.5" stroke-linejoin="round"/>
+      <g fill="#3fae49" stroke="#2a8a33" stroke-width="2"><circle cx="29" cy="40" r="14"/><circle cx="71" cy="40" r="14"/><circle cx="50" cy="28" r="18"/><circle cx="40" cy="48" r="11"/><circle cx="60" cy="48" r="11"/></g>
+      <g fill="#6fd06f"><circle cx="44" cy="22" r="2"/><circle cx="58" cy="26" r="2"/><circle cx="26" cy="36" r="2"/><circle cx="73" cy="36" r="2"/><circle cx="50" cy="40" r="1.8"/></g>
+      ${F(50,70,.7,'open','smile')}` },
+  { id:'melon', set:'fresh', tier:'sr', name:{th:'แตงโมซัมเมอร์',en:'Summer Melon'},
+    desc:{th:'เป็นน้ำ 92% เท่สุดในแก๊ง ดื่มน้ำเยอะๆ แล้วจะเจอเรา',en:'92% water, 100% cool. Stay hydrated and you will find me.'},
+    art:()=>`<path d="${starPath(16,16,5)}" fill="#fff3a8"/><path d="${starPath(86,14,4)}" fill="#fff3a8"/><path d="${starPath(90,34,2.5)}" fill="#fff3a8"/>
+      <path d="M6 36 A44 44 0 0 0 94 36 Z" fill="#3fae49"/>
+      <path d="M11 36 A39 39 0 0 0 89 36 Z" fill="#e8ffd8"/>
+      <path d="M15 36 A35 35 0 0 0 85 36 Z" fill="#ff5d6c"/>
+      <g fill="${INK}"><ellipse cx="26" cy="50" rx="1.8" ry="3" transform="rotate(-25 26 50)"/><ellipse cx="74" cy="50" rx="1.8" ry="3" transform="rotate(25 74 50)"/><ellipse cx="36" cy="63" rx="1.8" ry="3" transform="rotate(-12 36 63)"/><ellipse cx="64" cy="63" rx="1.8" ry="3" transform="rotate(12 64 63)"/><ellipse cx="50" cy="68" rx="1.8" ry="3"/></g>
+      <path d="M33 40 h15 v3 a7 6 0 0 1 -15 0z M52 40 h15 v3 a7 6 0 0 1 -15 0z" fill="${INK}"/><path d="M47 41 h6" stroke="${INK}" stroke-width="2"/>
+      <path d="M36 41.5 l4 -1 M55 41.5 l4 -1" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+      <path d="M44 53 q6 6 12 0" stroke="${INK}" stroke-width="2.3" fill="none" stroke-linecap="round"/>` },
+
+  { id:'star', set:'sky', tier:'salt', name:{th:'ดาวจิ๋ว',en:'Tiny Star'},
+    desc:{th:'ดวงเล็กที่สุดบนฟ้า แต่ส่องแสงทุกคืนไม่เคยขาด',en:'The smallest star in the sky, shining every single night.'},
+    art:()=>`<path d="${starPath(50,54,40)}" fill="#ffe26b" stroke="#e0b300" stroke-width="2.5" stroke-linejoin="round"/>
+      ${F(50,58,.85,'open','smile')}` },
+  { id:'cloud', set:'sky', tier:'common', name:{th:'เมฆฝันดี',en:'Dream Cloud'},
+    desc:{th:'ลอยมาห่มให้ตอนหลับ จะฝันถึงอาหารก็ให้อยู่แค่ในฝันพอ',en:'Floats over to tuck you in. Dream about food — but only in dreams.'},
+    art:()=>`<path d="${starPath(82,22,5)}" fill="#ffe26b"/><path d="M16 24 a7 7 0 1 0 7 9 a5 5 0 1 1 -7 -9z" fill="#ffe26b"/>
+      <g fill="#fff" stroke="#d5dcef" stroke-width="5"><circle cx="30" cy="60" r="16"/><circle cx="50" cy="48" r="20"/><circle cx="70" cy="60" r="16"/><rect x="20" y="58" width="60" height="20" rx="10"/></g>
+      <g fill="#fff"><circle cx="30" cy="60" r="16"/><circle cx="50" cy="48" r="20"/><circle cx="70" cy="60" r="16"/><rect x="20" y="58" width="60" height="20" rx="10"/></g>
+      ${F(50,60,1,'sleepy','smile')}` },
+  { id:'saturn', set:'sky', tier:'rare', name:{th:'ดาวเสาร์วงแหวน',en:'Ringed Saturn'},
+    desc:{th:'วงแหวนคือนาฬิกา หมุนครบรอบเมื่อไหร่ ก็ถึงเวลาปิดครัว',en:'Its ring is a clock. One full turn and the kitchen closes.'},
+    art:()=>`<path d="${starPath(14,18,4)}" fill="#ffe26b"/><path d="${starPath(86,86,3.5)}" fill="#ffe26b"/>
+      <ellipse cx="50" cy="54" rx="44" ry="12" fill="none" stroke="#b58cf5" stroke-width="5" transform="rotate(-14 50 54)"/>
+      <circle cx="50" cy="52" r="26" fill="#ffb86b" stroke="#e08a3a" stroke-width="2.5"/>
+      <path d="M28 40 q22 5 44 0 M29 66 q21 5 42 0" stroke="#ffd29a" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M6 54 A44 12 0 0 0 94 54" fill="none" stroke="#c9a2ff" stroke-width="5" stroke-linecap="round" transform="rotate(-14 50 54)"/>
+      ${F(50,51,.9,'happy','smile')}` },
+  { id:'ufo', set:'sky', tier:'rare', name:{th:'จานบินดูดขนม',en:'Snack-napper UFO'},
+    desc:{th:'ดูดขนมทุกชิ้นในบ้านขึ้นยานไปหมด คุณจะได้ไม่ต้องกิน',en:'Beams up every snack in the house so you do not have to eat them.'},
+    art:()=>`<defs><linearGradient id="gBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4ffb0" stop-opacity=".75"/><stop offset="1" stop-color="#b8ff6b" stop-opacity=".08"/></linearGradient></defs>
+      <path d="M38 56 L20 96 H80 L62 56 Z" fill="url(#gBeam)"/>
+      <circle cx="50" cy="84" r="7" fill="#d99a4e" stroke="#a86a2a" stroke-width="1.5"/><g fill="#5a3a1a"><circle cx="47" cy="82" r="1.2"/><circle cx="53" cy="86" r="1.2"/><circle cx="52" cy="81" r="1"/></g>
+      <path d="M32 46 a18 18 0 0 1 36 0 z" fill="#bfe8ff" stroke="#7cc3ea" stroke-width="2" opacity=".95"/>
+      <path d="M46 31 l-3 -6 M54 31 l3 -6" stroke="#5fbf45" stroke-width="1.6" stroke-linecap="round"/><circle cx="43" cy="24" r="1.8" fill="#8de36b"/><circle cx="57" cy="24" r="1.8" fill="#8de36b"/>
+      <circle cx="50" cy="39" r="9" fill="#8de36b"/>${F(50,39,.5,'open','smile')}
+      <ellipse cx="50" cy="50" rx="40" ry="11" fill="#a7b3c6" stroke="#6e7a8e" stroke-width="2.5"/><ellipse cx="50" cy="47" rx="30" ry="5" fill="#c9d3e2"/>
+      <g fill="#ffe26b"><circle cx="22" cy="52" r="2.6"/><circle cx="36" cy="56" r="2.6"/><circle cx="50" cy="57.5" r="2.6"/><circle cx="64" cy="56" r="2.6"/><circle cx="78" cy="52" r="2.6"/></g>` },
+  { id:'aurora', set:'sky', tier:'sr', name:{th:'แมงกะพรุนแสงเหนือ',en:'Aurora Jelly'},
+    desc:{th:'ล่องลอยในทะเลแสงเหนือ เรืองแสงทุกครั้งที่คุณผ่านคืนที่ยากไปได้',en:'Drifts through aurora seas, glowing every time you beat a tough night.'},
+    art:()=>`<defs><linearGradient id="gAur" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7dffd8"/><stop offset=".5" stop-color="#8ab4ff"/><stop offset="1" stop-color="#d48aff"/></linearGradient></defs>
+      <path d="${starPath(10,12,4)}" fill="#fff3a8"/><path d="${starPath(90,20,3)}" fill="#fff3a8"/><path d="${starPath(88,76,3.5)}" fill="#fff3a8"/>
+      <circle cx="50" cy="40" r="36" fill="#7dffd8" opacity=".12"/>
+      <path d="M32 50 q-6 14 2 24 q6 10 -2 20 M44 52 q-4 14 2 22 q4 10 0 18 M56 52 q4 14 -2 22 q-4 10 0 18 M68 50 q6 14 -2 24 q-6 10 2 20" stroke="url(#gAur)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M18 50 q0 -36 32 -36 q32 0 32 36 q-5 5 -10.6 0 q-5.3 5 -10.7 0 q-5.4 5 -10.7 0 q-5.3 5 -10.7 0 q-5.4 5 -10.7 0 q-4.6 5 -10.6 0z" fill="url(#gAur)" stroke="#9fe0ff" stroke-width="2" stroke-linejoin="round"/>
+      <ellipse cx="34" cy="28" rx="7" ry="4" fill="#fff" opacity=".45" transform="rotate(-30 34 28)"/>
+      ${F(50,38,1,'happy','smile')}` },
+  { id:'dragon', set:'sky', tier:'legend', name:{th:'มังกรจันทรา',en:'Moon Dragon'},
+    desc:{th:'ตำนานผู้เฝ้าดวงจันทร์ พ่นแสงดาวแทนไฟ และไม่เคยกินอะไรหลังพระอาทิตย์ตก',en:'Legendary guardian of the moon. Breathes starlight, not fire, and never eats after sunset.'},
+    art:()=>`<path d="${starPath(16,20,5)}" fill="#fff3a8"/><path d="${starPath(30,46,3)}" fill="#fff3a8"/><path d="${starPath(88,90,3)}" fill="#fff3a8"/>
+      <circle cx="56" cy="44" r="38" fill="#5fe0b4" opacity=".12"/>
+      <path d="M14 84 q-8 2 -8 10 q6 -2 10 -6z" fill="#ffd34d"/>
+      <path d="M14 84 q10 -22 30 -14 q20 8 30 -10 q6 -12 -4 -22" stroke="#2fa57e" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <path d="M14 84 q10 -22 30 -14 q20 8 30 -10 q6 -12 -4 -22" stroke="#4dd6a8" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M14 84 q10 -22 30 -14 q20 8 30 -10 q6 -12 -4 -22" stroke="#c8ffe9" stroke-width="3" fill="none" stroke-dasharray="3 6" stroke-linecap="round"/>
+      <path d="M52 22 L45 5 L59 17Z M68 20 L72 3 L77 19Z" fill="#ffd34d" stroke="#d99a00" stroke-width="1.5" stroke-linejoin="round"/>
+      <ellipse cx="62" cy="34" rx="20" ry="16" fill="#5fe0b4" stroke="#2fa57e" stroke-width="2.5"/>
+      <ellipse cx="76" cy="40" rx="8" ry="6" fill="#8ff0cc" stroke="#2fa57e" stroke-width="1.5"/><circle cx="74" cy="39" r="1.2" fill="${INK}"/><circle cx="79" cy="39" r="1.2" fill="${INK}"/>
+      <path d="M83 43 q8 2 12 10 M83 37 q8 -4 14 -1" stroke="#ffd34d" stroke-width="2" fill="none" stroke-linecap="round"/>
+      ${F(58,32,.8,'happy','none')}` },
 ];
+/* collections: every character belongs to exactly one set (the first 18 are mapped here) */
+const SETS = [
+  { id:'kitchen',  icon:'utensils-crossed', color:'#ff7a45', name:{th:'ครัวปิดแล้ว',en:'Closed Kitchen'},     reward:{tickets:3} },
+  { id:'bedtime',  icon:'moon-star',        color:'#8b7cf6', name:{th:'แก๊งก่อนนอน',en:'Bedtime Crew'},       reward:{tickets:2} },
+  { id:'critters', icon:'heart',            color:'#e86aa8', name:{th:'สัตว์ราตรี',en:'Night Critters'},      reward:{tickets:4, gold:1} },
+  { id:'cravings', icon:'flame',            color:'#ff4d3d', name:{th:'ปีศาจของกินดึก',en:'Midnight Cravings'}, reward:{tickets:3} },
+  { id:'fresh',    icon:'sprout',           color:'#3fae49', name:{th:'ผักผลไม้สดใส',en:'Fresh Friends'},     reward:{tickets:3} },
+  { id:'sky',      icon:'sparkles',         color:'#4aa5ff', name:{th:'ท้องฟ้ายามค่ำ',en:'Night Sky'},         reward:{tickets:5, gold:2} },
+];
+const SET_BY_ID = Object.fromEntries(SETS.map(s=>[s.id,s]));
+const FIRST_SETS = { salt:'kitchen', soy:'kitchen', pick:'kitchen', spoon:'kitchen', cat:'kitchen', ninja:'kitchen',
+  tissue:'bedtime', glass:'bedtime', tea:'bedtime', brush:'bedtime', pillow:'bedtime', shoe:'bedtime',
+  owl:'critters', bunny:'critters', firefly:'critters', fox:'critters', whale:'critters', goldmoon:'sky' };
+CHARS.forEach(c=>{ c.set ||= FIRST_SETS[c.id]; });
+CHARS.sort((a,b)=> SETS.indexOf(SET_BY_ID[a.set]) - SETS.indexOf(SET_BY_ID[b.set]) || tierIdx(a.tier) - tierIdx(b.tier));
 CHARS.forEach((c,i)=>c.no=i+1);
 const CHAR_BY_ID = Object.fromEntries(CHARS.map(c=>[c.id,c]));
 const _artCache = {};
-const charSVG = ch => `<svg viewBox="0 0 100 100" aria-hidden="true">${_artCache[ch.id] ||= ch.art()}</svg>`;
+let _artUid = 0;
+function charSVG(ch){
+  let s = _artCache[ch.id] ||= ch.art();
+  // gradients need ids unique per copy: a copy inside a hidden tab would otherwise win and render nothing
+  if(s.includes(' id="')){ const u = ++_artUid; s = s.replace(/ id="(\w+)"/g, ` id="$1_${u}"`).replace(/url\(#(\w+)\)/g, `url(#$1_${u})`); }
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">${s}</svg>`;
+}
 const ownedCount = () => CHARS.filter(c=>S.gacha.owned[c.id]).length;
 function avatarHTML(){
   const b = S.gacha.buddy && CHAR_BY_ID[S.gacha.buddy];
@@ -2041,11 +2253,17 @@ const MILESTONES = [
   { track:'total',   icon:'moon-star', val:()=>countStatus('ok'), title:n=>t('qTotal',{n}),
     items:[[1,{tickets:1}],[10,{tickets:2}],[25,{tickets:3}],[50,{tickets:3,gold:1}],[100,{tickets:5,gold:1}]] },
   { track:'collect', icon:'book-open', val:()=>ownedCount(), title:n=>t('qCollect',{n}),
-    items:[[6,{tickets:1}],[12,{tickets:2}],[18,{tickets:3,gold:1}]] },
+    items:[[6,{tickets:1}],[12,{tickets:2}],[18,{tickets:3,gold:1}],[24,{tickets:3}],[30,{tickets:4,gold:1}],[36,{tickets:5,gold:2}]] },
 ];
+/* one quest per collection; it only shows in the quest list once the set is complete */
+function setQuest(s){
+  const all=CHARS.filter(c=>c.set===s.id);
+  return { id:`set:${s.id}`, icon:s.icon, title:t('qSet',{name:s.name[lang]}), cur:all.filter(c=>S.gacha.owned[c.id]).length, goal:all.length, reward:s.reward };
+}
 function milestoneQuests(){
   const out=[];
   if(!S.quests.claimed['m:welcome']) out.push({ id:'m:welcome', icon:'gift', title:t('qWelcome'), cur:1, goal:1, reward:{tickets:1} });
+  for(const s of SETS){ const q=setQuest(s); if(isClaimable(q)) out.push(q); }
   for(const tr of MILESTONES){
     const v=tr.val(); let lockedShown=false;
     for(const [n,reward] of tr.items){
@@ -2282,7 +2500,7 @@ function cardHTML(ch,o={}){
   return `<div class="gcard t-${ch.tier}"><div class="gcard-in">
       <div class="gc-top"><span class="tier-pill">${t('tier_'+ch.tier)}</span><span class="gc-no">#${String(ch.no).padStart(2,'0')}</span></div>
       <div class="gc-art">${charSVG(ch)}</div>
-      <div class="gc-meta"><div class="gc-stars">${'★'.repeat(TIERS[ch.tier].stars)}</div><div class="gc-name">${ch.name[lang]}</div><div class="gc-desc">${ch.desc[lang]}</div></div>
+      <div class="gc-meta"><div class="gc-stars">${'★'.repeat(TIERS[ch.tier].stars)}</div><div class="gc-set" style="--sc:${SET_BY_ID[ch.set].color}">${icon(SET_BY_ID[ch.set].icon)}${SET_BY_ID[ch.set].name[lang]}</div><div class="gc-name">${ch.name[lang]}</div><div class="gc-desc">${ch.desc[lang]}</div></div>
       ${o.isNew?`<span class="gc-new">${t('newTag')}</span>`:''}
     </div></div>
     <div class="gc-under">${under}${o.quip?`<div class="gc-quip">${o.quip}</div>`:''}</div>`;
@@ -2324,7 +2542,18 @@ function renderRewards(){
     const all=CHARS.filter(c=>c.tier===k), got=all.filter(c=>g.owned[c.id]).length;
     return `<span class="tp t-${k}"><i></i>${t('tier_'+k)} ${got}/${all.length}</span>`;
   }).join('');
-  $('collGrid').innerHTML = CHARS.map(c=>`<button class="cslot press" data-id="${c.id}" aria-label="${g.owned[c.id]?escapeHtml(c.name[lang]):'???'}">${miniCardHTML(c,{locked:!g.owned[c.id], count:g.owned[c.id], buddy:g.buddy===c.id})}</button>`).join('');
+  $('collGrid').innerHTML = SETS.map(s=>{
+    const q=setQuest(s), done=q.cur>=q.goal, claimed=!!S.quests.claimed[q.id], pct=Math.round(q.cur/q.goal*100);
+    const side = claimed ? `<span class="cset-done">${icon('check')}${t('setDone')}</span>`
+      : done ? `<button class="q-claim cset-claim press" data-q="${q.id}">${t('claim')}</button>`
+      : `<span class="q-rw">${rewardChips(s.reward)}</span>`;
+    const cards = CHARS.filter(c=>c.set===s.id).map(c=>`<button class="cslot press" data-id="${c.id}" aria-label="${g.owned[c.id]?escapeHtml(c.name[lang]):'???'}">${miniCardHTML(c,{locked:!g.owned[c.id], count:g.owned[c.id], buddy:g.buddy===c.id})}</button>`).join('');
+    return `<section class="cset ${done?'is-done':''} ${done&&!claimed?'is-ready':''}" style="--sc:${s.color}">
+      <div class="cset-head"><div class="cset-ic">${icon(s.icon)}</div>
+        <div class="cset-t"><b>${s.name[lang]}</b><div class="cset-sub"><div class="cset-bar"><i style="width:${pct}%"></i></div><span>${q.cur}/${q.goal}</span></div></div>
+        <div class="cset-side">${side}</div></div>
+      <div class="coll-grid">${cards}</div></section>`;
+  }).join('');
 
   // badges / strip
   const dot = ready>0 || g.tickets>0 || g.gold>0;
@@ -2348,7 +2577,10 @@ function showRates(){
 }
 
 $('questList').addEventListener('click', e=>{ const b=e.target.closest('.q-claim'); if(b && !b.disabled) claimQuest(b.dataset.q, b); });
-$('collGrid').addEventListener('click', e=>{ const b=e.target.closest('.cslot'); if(b) showDetail(b.dataset.id); });
+$('collGrid').addEventListener('click', e=>{
+  const c=e.target.closest('.cset-claim'); if(c){ questIndex[c.dataset.q] ||= setQuest(SET_BY_ID[c.dataset.q.slice(4)]); claimQuest(c.dataset.q, c); return; }
+  const b=e.target.closest('.cslot'); if(b) showDetail(b.dataset.id);
+});
 $('pull1').onclick=()=>startPull('one');
 $('pull10').onclick=()=>startPull('ten');
 $('pullGold').onclick=()=>startPull('gold');
