@@ -212,7 +212,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .acct .t b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .acct .t span{display:flex;align-items:center;gap:6px}
 .acct .dot{width:7px;height:7px;border-radius:50%;background:#34c759;flex:none}
-.acct .dot.busy{background:var(--accent);animation:blink 1s ease-in-out infinite}
+.acct .dot.busy{background:var(--accent);animation:dotpulse 1s ease-in-out infinite}
 .acct .dot.warn{background:#ff3b30}
 .acct .chev{width:18px;height:18px;color:var(--muted);flex:none}
 .acct .sync-ic{width:34px;height:34px;display:grid;place-items:center;color:var(--muted);flex:none}
@@ -220,7 +220,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .acct .sync-ic.spin svg{animation:spin .9s linear infinite}
 .acct .danger-row b,.acct .danger-row .ic{color:#ff3b30}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes blink{50%{opacity:.35}}
+@keyframes dotpulse{50%{opacity:.35}}
 .auth-panel{text-align:center;padding-top:30px}
 .auth-x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:var(--fill);display:grid;place-items:center;color:var(--muted)}
 .auth-x svg{width:16px;height:16px}
@@ -560,11 +560,120 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .rate-notes li{margin:4px 0}
 .mini-avatar svg,.av-wrap .avatar svg{width:88%;height:88%}
 
+/* ===== splash / loading screen (shown before the app is ready) ===== */
+.splash{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--bg);overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+.splash.out{opacity:0;transition:opacity .3s ease}
+html:has(#splash){overflow:hidden}
+.sp-glow{position:absolute;left:50%;top:45%;width:min(440px,125vw);aspect-ratio:1;border-radius:50%;pointer-events:none;
+  transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,106,43,.28),rgba(255,106,43,.09) 62%,rgba(255,106,43,0));
+  animation:spGlow 2.8s ease-in-out infinite}
+@keyframes spGlow{50%{transform:translate(-50%,-50%) scale(1.09);opacity:.7}}
+.sp-center{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:-7vh;padding:0 24px}
+.sp-hero{position:relative;animation:spPop .75s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes spPop{from{transform:translateY(24px) scale(.45);opacity:0}}
+.sp-hero .moonie{display:block;width:152px;height:auto}
+.sp-hero .st{position:absolute;color:var(--accent2);opacity:.8;animation:twinkle 2.2s ease-in-out infinite}
+.sp-hero .st svg{display:block;width:100%;height:100%}
+.sp-hero .st.a{width:16px;height:16px;left:-30px;top:44px}
+.sp-hero .st.b{width:11px;height:11px;right:-24px;top:20px;animation-delay:.7s}
+.sp-hero .st.c{width:13px;height:13px;right:-34px;top:108px;animation-delay:1.3s;color:#ffd36b}
+.sp-name{font-size:32px;line-height:1.2;font-weight:700;letter-spacing:-.02em;margin-top:10px;animation:spUp .6s .2s cubic-bezier(.2,.8,.2,1) both}
+.sp-tag{font-size:15px;color:var(--muted);margin-top:4px;animation:spUp .6s .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes spUp{from{transform:translateY(12px);opacity:0}}
+.sp-foot{position:absolute;left:0;right:0;bottom:calc(56px + var(--sab));display:flex;flex-direction:column;align-items:center;gap:12px;
+  animation:spUp .5s .45s ease-out both}
+.sp-bar{width:148px;height:5px;border-radius:99px;background:var(--fill);overflow:hidden}
+.sp-bar i{display:block;height:100%;border-radius:inherit;background:var(--grad);transform-origin:left center;transform:scaleX(.9);
+  animation:spLoad 3.2s cubic-bezier(.15,.7,.25,1) both}
+@keyframes spLoad{from{transform:scaleX(.05)}}
+.sp-msg{font-size:13.5px;font-weight:500;color:var(--muted);min-height:20px;padding:0 24px;text-align:center;transition:opacity .2s}
+.sp-msg.swap{opacity:0}
+
 #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:145}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+
+<!-- loading screen: painted first, removed by the app once it is ready (see "splash" in the script) -->
+<div class="splash" id="splash" role="status" aria-label="ปิดครัว กำลังโหลด">
+  <div class="sp-glow"></div>
+  <div class="sp-center">
+    <div class="sp-hero">
+      <svg class="moonie wave" id="spMoonie" viewBox="0 0 120 130" aria-hidden="true">
+        <defs>
+          <radialGradient id="spFace" cx="38%" cy="32%" r="75%">
+            <stop offset="0" stop-color="#fff6de"/><stop offset=".65" stop-color="#ffd98f"/><stop offset="1" stop-color="#ffb84d"/>
+          </radialGradient>
+        </defs>
+        <ellipse class="m-shadow" cx="60" cy="125" rx="28" ry="4.5" fill="rgba(0,0,0,.22)"/>
+        <g class="m-body">
+          <g class="m-arm"><ellipse cx="101" cy="86" rx="7.5" ry="9.5" fill="url(#spFace)" stroke="#e39a33" stroke-width="1.5"/></g>
+          <circle cx="60" cy="84" r="38" fill="url(#spFace)" stroke="#e39a33" stroke-width="1.5"/>
+          <circle cx="80" cy="100" r="5" fill="#f2b55a" opacity=".55"/>
+          <circle cx="42" cy="104" r="3.2" fill="#f2b55a" opacity=".55"/>
+          <circle cx="86" cy="76" r="2.6" fill="#f2b55a" opacity=".55"/>
+          <g transform="rotate(-7 60 48)">
+            <circle cx="43" cy="38" r="12" fill="#fff" stroke="#e8ddd2" stroke-width="1.2"/>
+            <circle cx="77" cy="38" r="12" fill="#fff" stroke="#e8ddd2" stroke-width="1.2"/>
+            <circle cx="60" cy="30" r="15" fill="#fff" stroke="#e8ddd2" stroke-width="1.2"/>
+            <rect x="36" y="42" width="48" height="13" rx="5" fill="#fff" stroke="#e8ddd2" stroke-width="1.2"/>
+            <rect x="36.6" y="48" width="46.8" height="4" fill="#ff6a2b"/>
+          </g>
+          <ellipse cx="37" cy="94" rx="6.5" ry="3.8" fill="#ff8a7a" opacity=".55"/>
+          <ellipse cx="83" cy="94" rx="6.5" ry="3.8" fill="#ff8a7a" opacity=".55"/>
+          <g class="e-open">
+            <ellipse cx="47" cy="81" rx="4.6" ry="6.2" fill="#2b1d16"/><ellipse cx="73" cy="81" rx="4.6" ry="6.2" fill="#2b1d16"/>
+            <circle cx="48.7" cy="78.4" r="1.7" fill="#fff"/><circle cx="74.7" cy="78.4" r="1.7" fill="#fff"/>
+          </g>
+          <g class="e-happy" fill="none" stroke="#2b1d16" stroke-width="3.2" stroke-linecap="round">
+            <path d="M41.5 83 q5.5 -8 11 0"/><path d="M67.5 83 q5.5 -8 11 0"/>
+          </g>
+          <path class="m-smile" d="M52 95 q8 8.5 16 0" fill="none" stroke="#2b1d16" stroke-width="3" stroke-linecap="round"/>
+          <g class="m-open"><path d="M51.5 93.5 q8.5 13 17 0 z" fill="#7a2618" stroke="#2b1d16" stroke-width="1.6" stroke-linejoin="round"/><ellipse cx="60" cy="99.5" rx="4" ry="2.2" fill="#ff7b6b"/></g>
+        </g>
+        <path class="m-spark" d="M101 30 l2.2 5.8 5.8 2.2 -5.8 2.2 -2.2 5.8 -2.2 -5.8 -5.8 -2.2 5.8 -2.2z" fill="#ffd36b"/>
+        <path class="m-spark s2" d="M16 52 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5z" fill="#ffb37f"/>
+      </svg>
+      <span class="st a"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z" fill="currentColor"/></svg></span>
+      <span class="st b"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z" fill="currentColor"/></svg></span>
+      <span class="st c"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z" fill="currentColor"/></svg></span>
+    </div>
+    <div class="sp-name" id="spName">ปิดครัว</div>
+    <div class="sp-tag" id="spTag">งดมื้อเย็นให้สนุกขึ้น</div>
+  </div>
+  <div class="sp-foot" aria-hidden="true">
+    <div class="sp-bar"><i id="spBar"></i></div>
+    <div class="sp-msg" id="spMsg"></div>
+  </div>
+</div>
+<script>
+/* Runs before the rest of the page loads: pick the language, rotate the fun
+   messages, and make sure the splash can never get stuck if the app fails to boot. */
+(function(){
+  var $ = function(id){ return document.getElementById(id); }, th = true, saved = null;
+  try{ saved = JSON.parse(localStorage.getItem('skipdinner.v1')); }catch(e){}
+  if(saved && typeof saved === 'object'){ var l = saved.settings && saved.settings.lang; th = !l || l === 'th'; }
+  else{ try{ th = (navigator.language || '').toLowerCase().indexOf('th') === 0; }catch(e){} }
+  var M = th ? ['กำลังล็อกตู้เย็น…', 'กำลังปิดเตา…', 'กำลังซ่อนขนม…', 'มูนนี่กำลังใส่หมวกเชฟ…']
+             : ['Locking the fridge…', 'Turning off the stove…', 'Hiding the snacks…', 'Moonie is putting on the chef hat…'];
+  if(!th){
+    $('spName').textContent = 'Kitchen Closed'; $('spTag').textContent = 'Skip dinner, the fun way';
+    $('splash').setAttribute('aria-label', 'Kitchen Closed is loading');
+  }
+  var msg = $('spMsg'), i = Math.floor(Math.random() * M.length);
+  msg.textContent = M[i];
+  window.__spTick = setInterval(function(){
+    msg.classList.add('swap');
+    setTimeout(function(){ if(window.__spStop) return; i = (i + 1) % M.length; msg.textContent = M[i]; msg.classList.remove('swap'); }, 200);
+  }, 1100);
+  function bail(){ if(window.__spArmed) return; clearInterval(window.__spTick); var s = $('splash'); if(s) s.remove(); }
+  addEventListener('error', function(){ setTimeout(bail, 0); });
+  addEventListener('load', function(){ setTimeout(bail, 0); });
+  setTimeout(bail, 15000);
+})();
+</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="m2 2 20 20" /> <path d="M5.782 5.782A7 7 0 0 0 9 19h8.5a4.5 4.5 0 0 0 1.307-.193" /> <path d="M21.532 16.5A4.5 4.5 0 0 0 17.5 10h-1.79A7.008 7.008 0 0 0 10 5.07" /></symbol><symbol id="i-log-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /> <polyline points="16 17 21 12 16 7" /> <line x1="21" x2="9" y1="12" y2="12" /></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2" /> <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></symbol><symbol id="i-trash-2" viewBox="0 0 24 24"><path d="M3 6h18" /> <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /> <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /> <line x1="10" x2="10" y1="11" y2="17" /> <line x1="14" x2="14" y1="11" y2="17" /></symbol><symbol id="i-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /> <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /> <path d="M8 16H3v5" /></symbol>
@@ -2421,6 +2530,9 @@ $('replayTour').onclick = ()=>{ showTab('home'); setTimeout(startTour, 350); };
    Local-first: the app always runs from localStorage. When signed in, the whole
    state is mirrored to one row per user in public.user_state (see supabase/schema.sql). */
 var sb = null, cloudUser = null, syncState = 'wait', syncAt = 0, syncT = null, syncBusy = false, syncAgain = false, cloudLoading = null;
+/* settles once the launch-time sync is over (or there is nothing to sync), so the splash can wait for fresh data */
+let cloudFirstSettled = false, cloudFirstDone;
+const cloudFirst = new Promise(r => { cloudFirstDone = () => { cloudFirstSettled = true; r(); }; });
 const cloudOn = () => !!(CLOUD.url && CLOUD.key);
 const escHTML = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function syncMeta(){ try{ return JSON.parse(localStorage.getItem(SYNC_KEY)) || {}; }catch(e){ return {}; } }
@@ -2487,7 +2599,7 @@ async function cloudSync(){
     console.warn('cloud sync failed', e);
     setSync(navigator.onLine===false ? 'offline' : 'err');
   }finally{
-    syncBusy = false;
+    syncBusy = false; cloudFirstDone();
     if(syncAgain){ syncAgain = false; scheduleSync(300); }
   }
 }
@@ -2522,7 +2634,7 @@ function cloudLoad(){
     sb.auth.onAuthStateChange((ev, session)=>{
       const u = session?.user || null, was = cloudUser?.id;
       cloudUser = u;
-      if(!u){ clearTimeout(syncT); syncT = null; syncState = 'wait'; }
+      if(!u){ clearTimeout(syncT); syncT = null; syncState = 'wait'; cloudFirstDone(); }
       renderAccount();
       if(u && u.id!==was) setTimeout(cloudSync, 0);   // don't await Supabase calls inside this callback
     });
@@ -2533,7 +2645,7 @@ function cloudLoad(){
 function cloudInit(){
   if(!cloudOn()) return;
   renderAccount();
-  cloudLoad().catch(()=>{ syncState = 'offline'; renderAccount(); });
+  cloudLoad().catch(()=>{ syncState = 'offline'; renderAccount(); cloudFirstDone(); });
   document.addEventListener('visibilitychange', ()=>{
     if(!cloudUser) return;
     if(document.hidden){ if(syncT) cloudSync(); }
@@ -2643,11 +2755,49 @@ $('authResend').onclick = async ()=>{
 $('authClose').onclick = $('authBg').onclick = closeAuth;
 document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('auth').classList.contains('open')) closeAuth(); });
 
+/* ---------- splash (loading screen) ----------
+   Stays up for at least ~1.3s from launch, until the fonts are in, and — when signed
+   in — until the launch sync has pulled fresh data (capped at 3s so offline never blocks). */
+function splashMsg(text){ window.__spStop = true; clearInterval(window.__spTick); const m = $('spMsg'); if(m){ m.classList.remove('swap'); m.textContent = text; } }
+function splashGate(){
+  window.__spArmed = true;
+  if(!$('splash')) return hideSplash();
+  const shown = sleep(Math.max(0, 1300 - performance.now()));
+  const fonts = document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, sleep(2000)]) : Promise.resolve();
+  let signedIn = false;
+  try{ signedIn = cloudOn() && !!localStorage.getItem('skipdinner.auth'); }catch(e){}
+  const cloud = signedIn ? Promise.race([cloudFirst, sleep(3000)]) : null;
+  Promise.all([shown, fonts])
+    .then(()=>{ if(cloud && !cloudFirstSettled) splashMsg(t('syncBusy')); return cloud; })
+    .then(hideSplash, hideSplash);
+}
+function hideSplash(){
+  const sp = $('splash');
+  if(!sp){ animateIn($('tab-home')); return afterSplash(); }
+  if(sp.dataset.out) return;
+  sp.dataset.out = '1';
+  window.__spStop = true; clearInterval(window.__spTick);
+  // finish the progress bar from wherever its CSS animation got to
+  const bar = $('spBar'), at = getComputedStyle(bar).transform;
+  bar.style.animation = 'none'; bar.style.transform = at === 'none' ? 'scaleX(.9)' : at;
+  void bar.offsetWidth;
+  bar.style.transition = 'transform .25s ease-out'; bar.style.transform = 'scaleX(1)';
+  const finish = ()=>{ sp.remove(); afterSplash(); };
+  if(!HAS_GSAP){ sp.classList.add('out'); animateIn($('tab-home')); setTimeout(finish, REDUCE ? 0 : 320); return; }
+  $('spMoonie').setAttribute('data-mood', 'excited');
+  gsap.timeline({ onComplete: finish })
+    .to('#spMoonie', { y:-16, duration:.18, ease:'power2.out' }, .12)
+    .to('#spMoonie', { y:0, duration:.34, ease:'bounce.out' })
+    .call(()=>animateIn($('tab-home')), null, '-=.1')
+    .to(sp, { opacity:0, scale:1.05, duration:.36, ease:'power2.inOut' }, '<');
+}
+function afterSplash(){ if(!S.tourDone) setTimeout(startTour, 450); }
+
 /* ---------- boot ---------- */
-applyStatic(); checkBadges(); save(); renderAll(); showTab('home'); animateIn($('tab-home'));
+applyStatic(); checkBadges(); save(); renderAll(); showTab('home');
 setInterval(()=>{ if(tab==='home') renderTimer(); }, 1000);
-if(!S.tourDone) setTimeout(startTour, 900);
 cloudInit();
+splashGate();
 let lastNight = nightKey();
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden){ renderAll(); } });
 setInterval(()=>{ const n=nightKey(); if(n!==lastNight){ lastNight=n; renderAll(); } }, 60000);
