@@ -227,7 +227,7 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .auth-badge{width:58px;height:58px;border-radius:18px;background:var(--grad);color:#fff;display:grid;place-items:center;margin:0 auto 14px;box-shadow:0 10px 24px rgba(255,90,31,.3)}
 .auth-badge svg{width:28px;height:28px}
 .auth-panel h3{margin-bottom:6px}
-.auth-lead{color:var(--muted);font-size:14.5px;line-height:1.5;margin:0 10px 18px;overflow-wrap:anywhere}
+.auth-lead{color:var(--muted);font-size:14.5px;line-height:1.5;margin:0 10px 18px;overflow-wrap:break-word}
 .auth-lead b{color:var(--ink);font-weight:600}
 .auth-panel form{display:flex;flex-direction:column;gap:10px}
 .auth-panel form[hidden]{display:none}
@@ -241,6 +241,19 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .auth-err{color:#ff3b30;font-size:13.5px;font-weight:500;min-height:1.2em;margin:10px 0 0}
 .auth-err:empty{display:none}
 .auth-note{color:var(--muted);font-size:12.5px;margin:12px 6px 0;line-height:1.5}
+/* full-screen sign-in page shown after the splash ("gate" mode of the same sheet) */
+.gate-hero,.gate-skip{display:none}
+.rmodal.gate{z-index:250;background:var(--bg);align-items:center;overflow-y:auto}
+.rmodal.gate .rm-bg,.rmodal.gate .auth-x,.rmodal.gate .auth-badge{display:none}
+.rmodal.gate .rm-panel{background:transparent;max-width:420px;margin:auto;padding:calc(var(--sat) + 24px) 24px calc(var(--sab) + 24px)}
+.rmodal.gate .gate-hero{display:block;position:relative;width:132px;margin:0 auto 6px}
+.rmodal.gate .gate-hero::before{content:"";position:absolute;left:50%;top:50%;width:260px;height:260px;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,106,43,.24),rgba(255,106,43,0));z-index:-1}
+.rmodal.gate .gate-hero svg{display:block;width:100%;height:auto}
+.rmodal.gate h3{font-size:26px;letter-spacing:-.02em;margin-bottom:8px}
+.rmodal.gate .auth-lead{white-space:pre-line}
+.rmodal.gate .gate-skip{display:block;margin:18px auto 0;font-size:14.5px;font-weight:600;color:var(--muted);padding:10px 14px}
+.rmodal.gate #authStep2:not([hidden]) ~ .gate-skip{display:none}
 
 /* tab bar */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:space-around;
@@ -1042,6 +1055,7 @@ html:has(#splash){overflow:hidden}
   <div class="rm-bg" id="authBg"></div>
   <div class="rm-panel auth-panel">
     <button class="auth-x press" id="authClose" type="button" data-i18n-aria="close"><svg class="i"><use href="#i-x"/></svg></button>
+    <div class="gate-hero" id="gateHero" aria-hidden="true"></div>
     <div class="auth-badge"><svg class="i"><use href="#i-cloud"/></svg></div>
     <h3 id="authH"></h3>
     <p class="auth-lead" id="authLead"></p>
@@ -1056,6 +1070,7 @@ html:has(#splash){overflow:hidden}
     </form>
     <p class="auth-err" id="authErr" role="alert"></p>
     <p class="auth-note" id="authNote"></p>
+    <button type="button" class="gate-skip press" id="authSkip" data-i18n="gateSkip"></button>
   </div>
 </div>
 
@@ -1227,6 +1242,7 @@ const I18N = {
     signOut:'ออกจากระบบ', signedOut:'ออกจากระบบแล้ว ข้อมูลยังอยู่ในเครื่องนี้', signedIn:'ล็อกอินแล้ว กำลังซิงก์ข้อมูล',
     delCloud:'ลบบัญชีและข้อมูลบนคลาวด์', delCloudConfirm:'ลบบัญชีและข้อมูลบนคลาวด์ถาวร? ข้อมูลในเครื่องนี้ยังอยู่', delCloudDone:'ลบบัญชีแล้ว',
     cloudPulled:'ดึงข้อมูลจากคลาวด์แล้ว',
+    gateTitle:'ยินดีต้อนรับสู่ปิดครัว', gateLead:'เก็บสตรีคและตัวละครไว้บนคลา⁠วด์\nเปิดเครื่องไหนก็เจอ ไม่ต้องตั้งรหัสผ่าน', gateSkip:'ใช้งานแบบไม่ล็อกอิน',
     authTitle:'ล็อกอินหรือสมัคร', authLead:'ไม่ต้องตั้งรหัสผ่าน เราจะส่งรหัสยืนยันไปที่อีเมลของคุณ', authNote:'ใช้อีเมลเดิมในทุกเครื่องเพื่อซิงก์ข้อมูลเดียวกัน',
     sendCode:'ส่งรหัส', codeTitle:'ใส่รหัสจากอีเมล', codeLead:'ส่งรหัสไปที่ <b>{email}</b> แล้ว', codeHint:'ไม่เจออีเมล? ลองดูในโฟลเดอร์สแปม', codeAria:'รหัสยืนยัน',
     verify:'ยืนยัน', resend:'ส่งรหัสใหม่', resendIn:'ส่งใหม่ได้ใน {s} วิ', changeEmail:'เปลี่ยนอีเมล',
@@ -1332,6 +1348,7 @@ const I18N = {
     signOut:'Sign out', signedOut:'Signed out. Your data stays on this device.', signedIn:'Signed in. Syncing your data.',
     delCloud:'Delete account & cloud data', delCloudConfirm:'Permanently delete your account and cloud data? Data on this device stays.', delCloudDone:'Account deleted',
     cloudPulled:'Loaded your data from the cloud',
+    gateTitle:'Welcome to Kitchen Closed', gateLead:'Keep your streak and characters safe in the cloud, on every device. No password needed.', gateSkip:'Use without an account',
     authTitle:'Sign in or sign up', authLead:"No password needed. We'll email you a sign-in code.", authNote:'Use the same email on every device to sync the same data.',
     sendCode:'Send code', codeTitle:'Enter the code', codeLead:'We sent a code to <b>{email}</b>', codeHint:"Can't find it? Check your spam folder.", codeAria:'Sign-in code',
     verify:'Verify', resend:'Resend code', resendIn:'Resend in {s}s', changeEmail:'Change email',
@@ -2765,6 +2782,8 @@ var sb = null, cloudUser = null, syncState = 'wait', syncAt = 0, syncT = null, s
 /* settles once the launch-time sync is over (or there is nothing to sync), so the splash can wait for fresh data */
 let cloudFirstSettled = false, cloudFirstDone;
 const cloudFirst = new Promise(r => { cloudFirstDone = () => { cloudFirstSettled = true; r(); }; });
+const syncWaiters = [];   // resolved after the next sync attempt finishes
+const nextSync = (cap=4000) => Promise.race([new Promise(r=>syncWaiters.push(r)), sleep(cap)]);
 const cloudOn = () => !!(CLOUD.url && CLOUD.key);
 const escHTML = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function syncMeta(){ try{ return JSON.parse(localStorage.getItem(SYNC_KEY)) || {}; }catch(e){ return {}; } }
@@ -2831,7 +2850,7 @@ async function cloudSync(){
     console.warn('cloud sync failed', e);
     setSync(navigator.onLine===false ? 'offline' : 'err');
   }finally{
-    syncBusy = false; cloudFirstDone();
+    syncBusy = false; cloudFirstDone(); syncWaiters.splice(0).forEach(f=>f());
     if(syncAgain){ syncAgain = false; scheduleSync(300); }
   }
 }
@@ -2911,9 +2930,11 @@ $('acct').addEventListener('click', e=>{
 $('acct').addEventListener('keydown', e=>{ if((e.key==='Enter' || e.key===' ') && e.target.dataset.act){ e.preventDefault(); e.target.click(); } });
 
 /* ---------- sign-in sheet: email → 6-digit code (works inside the home-screen app, unlike links) ---------- */
-let authEmail = '', resendAt = 0, resendTick = null;
+let authEmail = '', resendAt = 0, resendTick = null, gateMode = false, moonieHTML = '';
+const GATE_SKIP = 'skipdinner.noLogin';   // set when the user chooses to use the app without an account
 const errKey = err => navigator.onLine===false ? 'errNet' : err?.status===429 ? 'errRate' : null;
 function openAuth(){
+  gateMode = false; $('auth').classList.remove('gate');
   authStep(1); $('authEmail').value = authEmail;
   $('auth').classList.add('open');
   if(HAS_GSAP) gsap.fromTo('#auth .rm-panel', {y:'100%'}, {y:0, duration:.45, ease:'power4.out'});
@@ -2921,13 +2942,39 @@ function openAuth(){
 }
 function closeAuth(){
   clearInterval(resendTick);
-  if(!HAS_GSAP){ $('auth').classList.remove('open'); return; }
-  gsap.to('#auth .rm-panel', {y:'100%', duration:.3, ease:'power3.in', onComplete:()=>$('auth').classList.remove('open')});
+  const done = ()=>{ $('auth').classList.remove('open', 'gate'); window.gsap?.set('#auth', {clearProps:'opacity'}); };
+  if(!HAS_GSAP){ done(); return; }
+  if(gateMode) gsap.to('#auth', {opacity:0, duration:.35, ease:'power2.in', onComplete:done});
+  else gsap.to('#auth .rm-panel', {y:'100%', duration:.3, ease:'power3.in', onComplete:done});
 }
+/* ---- sign-in page after the splash: shown while signed out, unless the user chose to skip ---- */
+function hasSession(){ try{ return !!localStorage.getItem('skipdinner.auth'); }catch(e){ return false; } }
+function needGate(){
+  if(!cloudOn() || hasSession()) return false;
+  try{ return !localStorage.getItem(GATE_SKIP); }catch(e){ return false; }
+}
+function openGate(){
+  gateMode = true;
+  $('gateHero').innerHTML = moonieHTML;
+  $('auth').classList.add('gate', 'open');
+  authStep(1); $('authEmail').value = authEmail;
+  if(HAS_GSAP){
+    gsap.fromTo('#auth', {opacity:0}, {opacity:1, duration:.35});
+    gsap.fromTo('#auth .rm-panel > *', {opacity:0, y:14}, {opacity:1, y:0, duration:.5, stagger:.05, ease:'power3.out', clearProps:'opacity,transform'});
+  }
+  cloudLoad().catch(()=>authErr('errNet'));
+}
+function leaveGate(signedIn){
+  closeAuth(); gateMode = false;
+  // a fresh sign-in pulls cloud data first, so the tour only runs for people who really have not seen it
+  (signedIn ? nextSync() : Promise.resolve()).then(maybeTour);
+}
+function maybeTour(){ if(!S.tourDone) setTimeout(startTour, 450); }
+$('authSkip').onclick = ()=>{ try{ localStorage.setItem(GATE_SKIP, '1'); }catch(e){} leaveGate(false); };
 function authStep(n){
   $('authStep1').hidden = n!==1; $('authStep2').hidden = n!==2;
-  $('authH').textContent = t(n===1 ? 'authTitle' : 'codeTitle');
-  $('authLead').innerHTML = n===1 ? escHTML(t('authLead')) : t('codeLead', { email:escHTML(authEmail) });
+  $('authH').textContent = t(n===1 ? (gateMode ? 'gateTitle' : 'authTitle') : 'codeTitle');
+  $('authLead').innerHTML = n===1 ? escHTML(t(gateMode ? 'gateLead' : 'authLead')) : t('codeLead', { email:escHTML(authEmail) });
   $('authNote').textContent = t(n===1 ? 'authNote' : 'codeHint');
   $('authErr').textContent = '';
   if(n===2){ $('authCode').value = ''; tickResend(); } else clearInterval(resendTick);
@@ -2971,7 +3018,9 @@ $('authStep2').addEventListener('submit', async e=>{
   try{
     const { error } = await sb.auth.verifyOtp({ email:authEmail, token, type:'email' });
     if(error) throw error;
-    closeAuth(); toast(t('signedIn'));
+    try{ localStorage.removeItem(GATE_SKIP); }catch(e){}
+    if(gateMode) leaveGate(true); else closeAuth();
+    toast(t('signedIn'));
   }catch(err){ console.warn(err); authErr(errKey(err) || 'errCode'); }
   finally{ authBusy(btn, false); }
 });
@@ -2985,7 +3034,7 @@ $('authResend').onclick = async ()=>{
   if(error){ resendAt = 0; tickResend(); authErr(errKey(error) || 'errSend'); }
 };
 $('authClose').onclick = $('authBg').onclick = closeAuth;
-document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('auth').classList.contains('open')) closeAuth(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !gateMode && $('auth').classList.contains('open')) closeAuth(); });
 
 /* ---------- splash (loading screen) ----------
    Stays up for at least ~1.3s from launch, until the fonts are in, and — when signed
@@ -2993,6 +3042,8 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('auth').class
 function splashMsg(text){ window.__spStop = true; clearInterval(window.__spTick); const m = $('spMsg'); if(m){ m.classList.remove('swap'); m.textContent = text; } }
 function splashGate(){
   window.__spArmed = true;
+  const sm = $('spMoonie');   // keep a copy of Moonie for the sign-in page before the splash is removed
+  if(sm) moonieHTML = sm.outerHTML.replace(' id="spMoonie"', '').replace(/spFace/g, 'gtFace');
   if(!$('splash')) return hideSplash();
   const shown = sleep(Math.max(0, 1300 - performance.now()));
   const fonts = document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, sleep(2000)]) : Promise.resolve();
@@ -3023,7 +3074,7 @@ function hideSplash(){
     .call(()=>animateIn($('tab-home')), null, '-=.1')
     .to(sp, { opacity:0, scale:1.05, duration:.36, ease:'power2.inOut' }, '<');
 }
-function afterSplash(){ if(!S.tourDone) setTimeout(startTour, 450); }
+function afterSplash(){ if(needGate()) openGate(); else maybeTour(); }
 
 /* ---------- boot ---------- */
 applyStatic(); checkBadges(); save(); renderAll(); showTab('home');
