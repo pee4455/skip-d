@@ -144,6 +144,53 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .crane .blink{fill:#ff6a33;animation:dotpulse 1s ease-in-out infinite}
 .city-cap{text-align:center;font-size:12.5px;color:rgba(255,255,255,.55);font-weight:600;margin:4px 0 2px}
 .city-cap b{color:#ffb08a;font-weight:700}
+.city,.city-cap{cursor:pointer}
+.city-cap{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap}
+.city-cap svg{width:14px;height:14px}
+.cap-mat{display:inline-flex;align-items:center;gap:3px;margin-left:4px;padding:1px 8px 1px 6px;border-radius:99px;background:rgba(255,255,255,.08);color:#ffd2bf}
+.cap-mat svg{width:13px;height:13px}
+.deco.rise,.bhouse{transform-box:fill-box;transform-origin:50% 100%}
+.lamp .bulb{fill:#55556a;transition:fill 1.2s}
+.lamp .halo{fill:#ffd36b;opacity:0;transition:opacity 1.2s}
+.hero.live .lamp .bulb{fill:#ffe9a8}
+.hero.live .lamp .halo{opacity:.22}
+.fountain .jet{fill:none;stroke:#9fd8ff;stroke-width:1.1;stroke-linecap:round;stroke-dasharray:2 2;animation:jet .8s linear infinite}
+@keyframes jet{to{stroke-dashoffset:-4}}
+.bhouse .heart{fill:#ff4d6d;animation:dotpulse 1.6s ease-in-out infinite}
+.walker{animation:walk var(--dur) linear infinite var(--delay);transform-box:fill-box;transform-origin:center}
+@keyframes walk{0%{transform:translateX(var(--a)) scaleX(1)}49.9%{transform:translateX(var(--b)) scaleX(1)}50%{transform:translateX(var(--b)) scaleX(-1)}100%{transform:translateX(var(--a)) scaleX(-1)}}
+.walker .hop{animation:hop .45s ease-in-out infinite}
+@keyframes hop{50%{transform:translateY(-1.6px)}}
+/* city sheet */
+.cs-sub{font-size:13px;color:var(--muted);margin:0 0 14px}
+.cs-wallet{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cs-wallet>div{background:var(--fill);border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.cs-wallet .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;color:#fff}
+.cs-wallet .ic.brick{background:linear-gradient(145deg,#ff8a5c,#d9480f)}
+.cs-wallet .ic.wood{background:linear-gradient(145deg,#c9965f,#8a5a2b)}
+.cs-wallet .ic svg{width:20px;height:20px}
+.cs-wallet b{display:block;font-size:24px;line-height:1.1}
+.cs-wallet span{font-size:12.5px;color:var(--muted);font-weight:600}
+.cs-craft{width:100%;margin-top:10px;height:46px;border-radius:14px;background:var(--fill);font-weight:700;font-size:14.5px;color:var(--ink2);display:flex;align-items:center;justify-content:center;gap:8px}
+.cs-craft svg{width:17px;height:17px}
+.cs-craft:not(:disabled){color:var(--accent)}
+.cs-craft:disabled{opacity:.55}
+.cs-list{border-radius:16px;background:var(--fill);overflow:hidden}
+.cs-row{display:flex;align-items:center;gap:12px;padding:10px 12px;position:relative}
+.cs-row+.cs-row::before{content:"";position:absolute;top:0;left:60px;right:0;border-top:1px solid var(--line)}
+.cs-row .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;background:var(--card);color:var(--accent)}
+.cs-row .ic svg{width:19px;height:19px}
+.cs-row .t{flex:1;min-width:0}
+.cs-row .t b{display:block;font-size:15px;font-weight:600}
+.cs-row .t span{font-size:12.5px;color:var(--muted);display:inline-flex;align-items:center;gap:3px}
+.cs-row .t span svg{width:12px;height:12px}
+.cs-row button{height:34px;min-width:64px;padding:0 14px;border-radius:99px;font-size:13.5px;font-weight:700;background:var(--grad);color:#fff;box-shadow:0 6px 14px rgba(255,90,31,.3)}
+.cs-row button:disabled{background:var(--card);color:var(--muted);box-shadow:none}
+.cs-res{display:flex;flex-wrap:wrap;gap:8px}
+.cs-res>div{display:flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border-radius:99px;background:var(--fill);font-size:13px;font-weight:600}
+.cs-res svg{width:28px;height:28px;border-radius:50%;background:#17171c}
+.cs-res .bud{background:rgba(255,77,109,.14);color:#e5375d}
+.cs-note{font-size:12.5px;color:var(--muted);line-height:1.55;margin:14px 2px 0}
 .ring-track{stroke:rgba(255,255,255,.08)}
 .ring-arc{filter:drop-shadow(0 0 8px rgba(255,90,31,.55));transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)}
 .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
@@ -966,6 +1013,12 @@ html:has(#splash){overflow:hidden}
 <symbol id="i-square" viewBox="0 0 24 24"> <rect width="18" height="18" x="3" y="3" rx="2" /></symbol>
 <symbol id="i-trending-up" viewBox="0 0 24 24"> <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /> <polyline points="16 7 22 7 22 13" /></symbol>
 <symbol id="i-chevron-down" viewBox="0 0 24 24"> <path d="m6 9 6 6 6-6" /></symbol>
+<symbol id="i-brick" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 12h18M9 6v6M15 12v6"/></symbol>
+<symbol id="i-wood" viewBox="0 0 24 24"><ellipse cx="6.5" cy="12" rx="3.5" ry="5.5"/><path d="M6.5 6.5h11a3.5 5.5 0 0 1 0 11h-11"/><ellipse cx="6.5" cy="12" rx="1.2" ry="2"/></symbol>
+<symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 3 6.5 12H10l-3.5 6h11L14 12h3.5z"/><path d="M12 18v3"/></symbol>
+<symbol id="i-lamp" viewBox="0 0 24 24"><path d="M12 21V8"/><path d="M8.5 8h7L14 4.5h-4z"/><path d="M9 21h6"/></symbol>
+<symbol id="i-fountain" viewBox="0 0 24 24"><path d="M4 17h16v3H4z"/><path d="M12 17V9"/><path d="M12 9c-3.5 0-5.5 3-5.5 6M12 9c3.5 0 5.5 3 5.5 6"/><circle cx="12" cy="6" r="1.5"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1"/></symbol>
   <defs>
     <linearGradient id="gArc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb37f"/><stop offset=".5" stop-color="#ff6a2b"/><stop offset="1" stop-color="#ff3d00"/></linearGradient>
   </defs>
@@ -1394,6 +1447,14 @@ html:has(#splash){overflow:hidden}
   </div>
 </div>
 
+<div class="rmodal" id="citySheet" role="dialog" aria-modal="true" aria-labelledby="csH">
+  <div class="rm-bg" id="citySheetBg"></div>
+  <div class="rm-panel run-panel">
+    <div id="csBody"></div>
+    <div class="rd-actions"><button class="st-btn press" id="csClose" data-i18n="close"></button></div>
+  </div>
+</div>
+
 <!-- ============ GACHA STAGE ============ -->
 <div class="stage" id="stage" role="dialog" aria-modal="true">
   <div class="burst" id="burst"></div>
@@ -1643,7 +1704,13 @@ const I18N = {
     t_welcome:'สวัสดี! เราชื่อ "มูนนี่" เป็นเชฟประจำแอปปิดครัว\nเดี๋ยวเราพาทัวร์สั้นๆ แค่ 1 นาทีนะ',
     t_name:'ก่อนอื่นเลย… ให้เราเรียกคุณว่าอะไรดี?',
     t_hero:'{hi}นี่คือเมืองของคุณ! กลางวันพระอาทิตย์จะเดินข้ามฟ้าจนถึงเวลาปิดครัว พอถึงเวลา ดวงจันทร์จะนับว่างดมาแล้วกี่ชั่วโมง\nงดได้ 1 คืน = สร้างตึก 1 หลัง กินเบาๆ = ได้บ้านหลังเล็ก',
-    cityCap:'เมืองเดือน{m} · ตึก {b} · บ้าน {h}', cityEmpty:'งดมื้อเย็นได้ 1 คืน = สร้างตึก 1 หลังในเมืองนี้',
+    cityCap:'เมืองเดือน{m} · ตึก {b} · บ้าน {h}',
+    cityTitle:'เมืองเดือน{m}', citySub:'ตึก {b} · บ้าน {h} · ผู้อยู่อาศัย {r}', brick:'อิฐ', wood:'ไม้',
+    craft:'แปรรูปไม้ 3 ชิ้น → อิฐ 1 ก้อน', crafted:'ได้อิฐเพิ่ม 1 ก้อน', cityBuild:'สร้างในเมือง', slotsLeft:'ที่ว่างหน้าเมือง {n}',
+    upHouse:'อัปเกรดบ้านเป็นตึก', upHouseSub:'อัปเกรดได้ {n} หลัง', dTree:'ปลูกต้นไม้', dLamp:'เสาไฟถนน', dFountain:'น้ำพุกลางเมือง',
+    costBricks:'อิฐ {n}', build:'สร้าง', builtToast:'สร้างเสร็จแล้ว!', noBricks:'อิฐไม่พอ',
+    residents:'ผู้อยู่อาศัย', buddyHome:'บ้านของ{name}', noResidents:'หมุนกาชาเพื่อชวนตัวละครมาอยู่ในเมือง ตัวคู่หูจะได้บ้านของตัวเองด้วย',
+    cityHow:'งดได้ 1 คืน = อิฐ 2 ก้อน · กินเบาๆ = ไม้ 1 ชิ้น · พลาด = ไม่ได้วัสดุ ใช้อิฐอัปเกรดบ้านจากคืนที่กินเบาๆ ให้เป็นตึก หรือแต่งหน้าเมืองได้', cityEmpty:'งดมื้อเย็นได้ 1 คืน = สร้างตึก 1 หลังในเมืองนี้',
     t_cutoff:'ปกติอยากปิดครัวกี่โมงดี? เลือกได้เลย\n(เปลี่ยนทีหลังได้ในหน้าโปรไฟล์)',
     t_sos:'ตอนดึกๆ ถ้าหิวจนทนไม่ไหว กดปุ่มนี้เลย! เราจะพาหายใจ และให้ทำภารกิจเล็กๆ จนความอยากผ่านไป',
     t_checkin:'หลังเวลาปิดครัว มาเช็คอินตรงนี้ทุกคืนนะ\nงดได้รับ 50 XP · กินเบาๆ ก็ยังรักษาสตรีคไว้ได้',
@@ -1776,7 +1843,13 @@ const I18N = {
     t_welcome:"Hi there! I'm Moonie, the chef of Kitchen Closed.\nLet me give you a quick 1-minute tour.",
     t_name:'First things first… what should I call you?',
     t_hero:'{hi}This is your city! By day the sun crosses the sky until closing time, then the moon shows how long you have fasted.\nEach fasted night builds a tower, a light meal builds a small house.',
-    cityCap:'{m} city · {b} towers · {h} houses', cityEmpty:'Each fasted night builds a tower in this city',
+    cityCap:'{m} city · {b} towers · {h} houses',
+    cityTitle:'{m} city', citySub:'{b} towers · {h} houses · {r} residents', brick:'Bricks', wood:'Wood',
+    craft:'Turn 3 wood into 1 brick', crafted:'+1 brick', cityBuild:'Build', slotsLeft:'{n} spots left',
+    upHouse:'Upgrade a house to a tower', upHouseSub:'{n} can be upgraded', dTree:'Plant a tree', dLamp:'Street lamp', dFountain:'Town fountain',
+    costBricks:'{n} bricks', build:'Build', builtToast:'Built!', noBricks:'Not enough bricks',
+    residents:'Residents', buddyHome:"{name}'s house", noResidents:'Pull the gachapon to invite characters to live here. Your buddy gets a house of its own.',
+    cityHow:'A fasted night = 2 bricks · a light meal = 1 wood · a missed night = nothing. Spend bricks to turn light-meal houses into towers, or to decorate the street.', cityEmpty:'Each fasted night builds a tower in this city',
     t_cutoff:'What time do you usually want to close the kitchen? Pick one!\n(You can change it later in Profile.)',
     t_sos:'Late-night hunger getting loud? Tap this! I will breathe with you and give you small missions until the craving passes.',
     t_checkin:'After closing time, check in here every night.\nFasted earns 50 XP · a light meal still keeps your streak.',
@@ -1824,7 +1897,7 @@ const BADGES = [
 
 /* ---------- state ---------- */
 function detectLang(){ try{ return (navigator.language||'').toLowerCase().startsWith('th') ? 'th' : 'en'; }catch(e){ return 'th'; } }
-function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, logAt:{}, epoch:0, updatedAt:0, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}}, runs:[], runDel:{} }; }
+function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, logAt:{}, epoch:0, updatedAt:0, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}}, runs:[], runDel:{}, city:{crafted:0, brickUsed:0, woodUsed:0, up:{}, decor:{}} }; }
 function shape(r){
   const b=blank();
   if(!r || typeof r!=='object') return b;
@@ -1833,7 +1906,8 @@ function shape(r){
   const g = r.gacha||{};
   return {...b, ...r, settings, log:{...(r.log||{})}, logAt:{...(r.logAt||{})}, badges:[...(r.badges||[])], sessions:[...(r.sessions||[])],
     gacha:{...b.gacha, ...g, owned:{...(g.owned||{})}}, quests:{claimed:{...((r.quests||{}).claimed||{})}},
-    runs:(Array.isArray(r.runs) ? r.runs : []).map(x=>({...x, segs:(x.segs||[]).map(s=>[...s])})), runDel:{...(r.runDel||{})}};
+    runs:(Array.isArray(r.runs) ? r.runs : []).map(x=>({...x, segs:(x.segs||[]).map(s=>[...s])})), runDel:{...(r.runDel||{})},
+    city:{...b.city, ...(r.city||{}), up:{...((r.city||{}).up||{})}, decor:{...((r.city||{}).decor||{})}}};
 }
 function load(){
   try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r && typeof r==='object') return shape(r); }catch(e){}
@@ -2050,9 +2124,10 @@ function renderCity(){
     const k=keyOf(new Date(y,m,d,12)), s=S.log[k], r=cityHash(k), x=4+(d-1)*slot, w=Math.max(4, slot-1.3), cx=x+w/2;
     run = s==='ok'||s==='light' ? run+1 : 0;
     const grow = id=>{ now.add(id); return seen.has(id) && !first ? '' : ` rise" data-d="${first ? (d*.03).toFixed(2) : '.1'}`; };
-    if(s==='ok'){
+    const upg = s==='light' && S.city.up[k];   // a light-night house upgraded with bricks
+    if(s==='ok' || upg){
       towers++;
-      const land = run%7===0, h = land ? 70 : Math.round(30+r*26), top=G-h, tone=CITY_TONES[Math.floor(r*CITY_TONES.length)];
+      const land = s==='ok' && run%7===0, h = land ? 70 : Math.round((upg ? 26 : 30)+r*(upg ? 18 : 26)), top=G-h, tone = upg ? '#5b4034' : CITY_TONES[Math.floor(r*CITY_TONES.length)];
       let extra='';
       if(land) extra = `<path class="emblem" d="M${cx+1.5} ${top-14} a5 5 0 1 0 4 7.5 a3.9 3.9 0 1 1 -4 -7.5z"/><line class="ant" x1="${cx}" y1="${top}" x2="${cx}" y2="${top-5}"/>`;
       else if(r>.72) extra = `<line class="ant" x1="${cx}" y1="${top}" x2="${cx}" y2="${top-8}"/><circle class="blink" cx="${cx}" cy="${top-8.5}" r="1.1"/>`;
@@ -2070,12 +2145,108 @@ function renderCity(){
       out += `<rect class="plot" x="${x.toFixed(1)}" y="${G-1.5}" width="${w.toFixed(1)}" height="1.5"/>`;
     }
   }
+  out += cityFront(y, m, seen, now, first);
   $('skyline').innerHTML = out;
   $('skyline').querySelectorAll('[data-d]').forEach(g=>g.style.setProperty('--d', g.dataset.d+'s'));
   cityBuilt = now;
   const month = L().monthsLong[m];
-  $('cityCap').innerHTML = towers||houses ? t('cityCap',{m:month, b:`<b>${towers}</b>`, h:`<b>${houses}</b>`}) : t('cityEmpty');
+  const w = cityWallet();
+  $('cityCap').innerHTML = (towers||houses ? t('cityCap',{m:month, b:`<b>${towers}</b>`, h:`<b>${houses}</b>`}) : t('cityEmpty'))
+    + ` <span class="cap-mat">${icon('brick')}${w.brick}</span>${icon('chevron-right')}`;
+  cityStats = { month, towers, houses };
+  if($('citySheet').classList.contains('open')) renderCitySheet();
 }
+
+/* ---- city materials: fasted night = 2 bricks, light night = 1 wood (3 wood → 1 brick) ----
+   Earned amounts come from the log, so editing a night fixes the wallet too; only spending is stored. */
+let cityStats = { month:'', towers:0, houses:0 };
+const DECOR = { tree:{cost:1, icon:'tree'}, lamp:{cost:1, icon:'lamp'}, fountain:{cost:4, icon:'fountain'} };
+const DECOR_SLOTS = 10, UPGRADE_COST = 3;
+const cityMonth = () => nightKey().slice(0,7);
+function cityWallet(){
+  const c=S.city;
+  return { brick: Math.max(0, countStatus('ok')*2 + (c.crafted||0) - (c.brickUsed||0)), wood: Math.max(0, countStatus('light') - (c.woodUsed||0)) };
+}
+function monthDecor(ym=cityMonth()){
+  const out=[]; for(let i=0;i<DECOR_SLOTS;i++){ const v=S.city.decor[ym+':'+i]; if(v) out[i]=v; } return out;
+}
+function upgradableHouses(){
+  const ym=cityMonth(); return Object.keys(S.log).filter(k=>k.startsWith(ym) && S.log[k]==='light' && !S.city.up[k]).sort();
+}
+function cityResidents(){
+  const b = S.gacha.buddy && S.gacha.owned[S.gacha.buddy] ? CHAR_BY_ID[S.gacha.buddy] : null;
+  const seed = nightKey();   // a different crowd strolls by each day
+  const others = CHARS.filter(c=>S.gacha.owned[c.id] && c!==b).sort((a,c)=>cityHash(seed+a.id)-cityHash(seed+c.id));
+  return { buddy:b, walkers:others.slice(0, b ? 3 : 4), total: CHARS.filter(c=>S.gacha.owned[c.id]).length };
+}
+/* foreground street: decorations, the buddy's house, and residents walking up and down */
+function cityFront(y, m, seen, now, first){
+  const G=211, ym=cityMonth();
+  let out='';
+  monthDecor(ym).forEach((type,i)=>{
+    if(!type) return;
+    const x = 12 + i*27 + (i%2)*4, id='d'+ym+i; now.add(id);
+    const cls = seen.has(id) && !first ? '' : ' rise';
+    if(type==='tree') out += `<g class="deco${cls}"><rect x="${x-.8}" y="${G-6}" width="1.6" height="6" fill="#6b4a2a"/><circle cx="${x}" cy="${G-10}" r="5" fill="#2f8f4e"/><circle cx="${x-2.5}" cy="${G-8}" r="3.4" fill="#3fae5f"/><circle cx="${x+2.6}" cy="${G-8.5}" r="3.2" fill="#37a056"/></g>`;
+    else if(type==='lamp') out += `<g class="deco lamp${cls}"><line x1="${x}" y1="${G}" x2="${x}" y2="${G-15}" stroke="#8a8aa0" stroke-width="1.1"/><path d="M${x-2.6} ${G-15} h5.2 l-1 -2.4 h-3.2z" fill="#8a8aa0"/><circle class="bulb" cx="${x}" cy="${G-14}" r="1.6"/><circle class="halo" cx="${x}" cy="${G-13}" r="7"/></g>`;
+    else if(type==='fountain') out += `<g class="deco fountain${cls}"><path d="M${x-9} ${G-4} h18 v4 h-18z" fill="#7d8aa6"/><path class="jet" d="M${x} ${G-4} V${G-13} M${x} ${G-12} q-5 1 -7 8 M${x} ${G-12} q5 1 7 8"/><circle cx="${x}" cy="${G-14}" r="1.4" fill="#9fd8ff"/></g>`;
+  });
+  const res = cityResidents();
+  const sprite = (ch, x, size) => charSVG(ch).replace('<svg ', `<svg x="${x}" y="${G-size}" width="${size}" height="${size}" `);
+  if(res.buddy){
+    const hx=298;
+    out += `<g class="bhouse"><path d="M${hx-11} ${G-13} L${hx} ${G-22} L${hx+11} ${G-13}Z" fill="#ff6a5c"/><rect x="${hx-9}" y="${G-13}" width="18" height="13" fill="#f4e3cf"/><rect x="${hx-2.5}" y="${G-8}" width="5" height="8" rx="2.5" fill="#8a5a3a"/><path class="heart" d="M${hx} ${G-14.5} l-2.2 -2.1 a1.3 1.3 0 0 1 2.2 -1.6 a1.3 1.3 0 0 1 2.2 1.6z"/></g>`;
+    out += `<g class="walker" transform="translate(268 0)" style="--a:262px;--b:276px;--dur:7s;--delay:-2s"><g class="hop">${sprite(res.buddy, 0, 17)}</g></g>`;
+  }
+  res.walkers.forEach((ch,i)=>{
+    const r=cityHash(nightKey()+ch.id), a=Math.round(4+r*90+i*40), b=Math.min(res.buddy ? 236 : 296, a+70+Math.round(r*80)), dur=(12+r*10).toFixed(1);
+    out += `<g class="walker" transform="translate(${a} 0)" style="--a:${a}px;--b:${b}px;--dur:${dur}s;--delay:-${(r*dur).toFixed(1)}s"><g class="hop">${sprite(ch, 0, 15)}</g></g>`;
+  });
+  return out;
+}
+
+/* ---- city sheet: wallet, crafting, building, residents ---- */
+function renderCitySheet(){
+  const w=cityWallet(), res=cityResidents(), up=upgradableHouses(), deco=monthDecor(), free=DECOR_SLOTS - deco.filter(Boolean).length;
+  const cost = n => `<span>${icon('brick')}${t('costBricks',{n})}</span>`;
+  const row = (ic, title, sub, act, ok) => `<div class="cs-row"><div class="ic">${icon(ic)}</div><div class="t"><b>${title}</b>${sub}</div><button class="press" data-act="${act}" ${ok?'':'disabled'}>${t('build')}</button></div>`;
+  $('csBody').innerHTML = `
+    <h3 class="rd-title" id="csH">${t('cityTitle',{m:cityStats.month})}</h3>
+    <p class="cs-sub">${t('citySub',{b:cityStats.towers, h:cityStats.houses, r:res.total})}</p>
+    <div class="cs-wallet">
+      <div><div class="ic brick">${icon('brick')}</div><div><b class="num">${w.brick}</b><span>${t('brick')}</span></div></div>
+      <div><div class="ic wood">${icon('wood')}</div><div><b class="num">${w.wood}</b><span>${t('wood')}</span></div></div>
+    </div>
+    <button class="cs-craft press" data-act="craft" ${w.wood>=3?'':'disabled'}>${icon('wood')}${t('craft')}</button>
+    <div class="rd-h">${t('cityBuild')}<span>${t('slotsLeft',{n:free})}</span></div>
+    <div class="cs-list">
+      ${row('building', t('upHouse'), `${cost(UPGRADE_COST)}<span> · ${t('upHouseSub',{n:up.length})}</span>`, 'upgrade', up.length && w.brick>=UPGRADE_COST)}
+      ${row('tree', t('dTree'), cost(DECOR.tree.cost), 'tree', free>0 && w.brick>=DECOR.tree.cost)}
+      ${row('lamp', t('dLamp'), cost(DECOR.lamp.cost), 'lamp', free>0 && w.brick>=DECOR.lamp.cost)}
+      ${row('fountain', t('dFountain'), cost(DECOR.fountain.cost), 'fountain', free>0 && w.brick>=DECOR.fountain.cost)}
+    </div>
+    <div class="rd-h">${t('residents')}<span>${res.total}</span></div>
+    ${res.total ? `<div class="cs-res">${res.buddy ? `<div class="bud">${charSVG(res.buddy)}${t('buddyHome',{name:escHTML(res.buddy.name[lang])})}</div>` : ''}${res.walkers.map(c=>`<div>${charSVG(c)}${escHTML(c.name[lang])}</div>`).join('')}</div>` : `<p class="cs-note" style="margin-top:0">${t('noResidents')}</p>`}
+    <p class="cs-note">${t('cityHow')}</p>`;
+}
+function openCitySheet(){ renderCitySheet(); openSheet('citySheet'); }
+function cityAct(act){
+  const w=cityWallet(), c=S.city, ym=cityMonth();
+  if(act==='craft'){ if(w.wood<3) return; c.woodUsed=(c.woodUsed||0)+3; c.crafted=(c.crafted||0)+1; toast(t('crafted')); }
+  else if(act==='upgrade'){
+    const k=upgradableHouses()[0]; if(!k || w.brick<UPGRADE_COST) return toast(t('noBricks'));
+    c.up[k]=1; c.brickUsed=(c.brickUsed||0)+UPGRADE_COST; toast(t('builtToast'));
+  } else if(DECOR[act]){
+    const i=[...Array(DECOR_SLOTS).keys()].find(i=>!c.decor[ym+':'+i]);
+    if(i===undefined) return;
+    if(w.brick<DECOR[act].cost) return toast(t('noBricks'));
+    c.decor[ym+':'+i]=act; c.brickUsed=(c.brickUsed||0)+DECOR[act].cost; toast(t('builtToast'));
+  } else return;
+  save(); renderCity(); renderCitySheet(); celebrate(.4);
+}
+$('csBody').addEventListener('click', e=>{ const b=e.target.closest('[data-act]'); if(b && !b.disabled) cityAct(b.dataset.act); });
+$('city').onclick = $('cityCap').onclick = openCitySheet;
+$('csClose').onclick = $('citySheetBg').onclick = ()=>closeSheet('citySheet');
 
 /* ---------- render: progress ---------- */
 let calMonth = (()=>{ const d=fromKey(nightKey()); return new Date(d.getFullYear(), d.getMonth(), 1); })();
@@ -3642,7 +3813,7 @@ function syncMeta(){ try{ return JSON.parse(localStorage.getItem(SYNC_KEY)) || {
 function setSyncMeta(m){ try{ localStorage.setItem(SYNC_KEY, JSON.stringify(m)); }catch(e){} }
 /* JSON with sorted keys: Postgres jsonb does not keep key order */
 function stable(v){ return JSON.stringify(v, (k,x)=> x && typeof x==='object' && !Array.isArray(x) ? Object.keys(x).sort().reduce((o,key)=>(o[key]=x[key],o),{}) : x); }
-const pristine = s => !Object.keys(s.log).length && !s.gacha.pulls && !Object.keys(s.quests.claimed).length && !s.sessions.length && !(s.runs||[]).length;
+const pristine = s => !Object.keys(s.log).length && !s.gacha.pulls && !Object.keys(s.quests.claimed).length && !s.sessions.length && !(s.runs||[]).length && !Object.keys((s.city||{}).decor||{}).length;
 
 /* Merge two copies of the state.
    - A reset (newer epoch) wins outright.
@@ -3674,6 +3845,8 @@ function mergeState(a, b, keepA){
   m.runDel = {...o.runDel, ...n.runDel};
   const runs = new Map(); [...o.runs, ...n.runs].forEach(r=>runs.set(r.id, r));
   m.runs = [...runs.values()].filter(r=>!m.runDel[r.id]).sort((x,y)=>x.at-y.at);
+  for(const f of ['crafted','brickUsed','woodUsed']) m.city[f] = Math.max(n.city[f]||0, o.city[f]||0);
+  m.city.up = {...o.city.up, ...n.city.up}; m.city.decor = {...o.city.decor, ...n.city.decor};
   m.updatedAt = Math.max(n.updatedAt||0, o.updatedAt||0);
   return m;
 }
