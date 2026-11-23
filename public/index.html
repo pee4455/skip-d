@@ -205,6 +205,65 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .cs-res svg{width:28px;height:28px;border-radius:50%;background:#17171c}
 .cs-res .bud{background:rgba(255,77,109,.14);color:#e5375d}
 .cs-note{font-size:12.5px;color:var(--muted);line-height:1.55;margin:14px 2px 0}
+/* festival */
+.river{margin:0 -18px;line-height:0}
+.river svg{display:block;width:100%;height:auto}
+.moonref ellipse{fill:#ffe9a8;opacity:.45;animation:shimmer 3s ease-in-out infinite alternate}
+.moonref ellipse:nth-child(2){animation-delay:-1s}.moonref ellipse:nth-child(3){animation-delay:-2s}
+@keyframes shimmer{to{opacity:.15;transform:translateX(3px)}}
+.rip{stroke:rgba(255,255,255,.08);stroke-width:1;stroke-dasharray:10 16;animation:rip 6s linear infinite}
+@keyframes rip{to{stroke-dashoffset:-52}}
+.kt-enter{animation:ktin 4s cubic-bezier(.2,.7,.3,1) both}
+@keyframes ktin{from{transform:translateX(-140px)}}
+.kt-bob{animation:ktbob 3.2s ease-in-out infinite}
+@keyframes ktbob{50%{transform:translate(3px,-1.5px) rotate(2deg)}}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .45s ease-in-out infinite alternate}
+@keyframes flick{to{transform:scaleY(.8) scaleX(1.1)}}
+.fglow{animation:dotpulse 1.6s ease-in-out infinite}
+.lan{animation:lan var(--d) linear infinite var(--dl)}
+@keyframes lan{from{transform:translate(var(--x),200px)}to{transform:translate(calc(var(--x) + var(--dx)),-24px)}}
+.fest-banner{display:flex;align-items:center;gap:12px;width:100%;margin-top:12px;text-align:left;
+  background:linear-gradient(120deg,#1d2c50,#3a2a5a 60%,#5a2f4a);color:#fff;box-shadow:0 12px 28px rgba(58,42,90,.35)}
+.fb-ic{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#ffb3cf,#ff6a9a);display:grid;place-items:center;flex:none;color:#fff}
+.fb-ic svg{width:22px;height:22px}
+.fest-banner .tx{flex:1;min-width:0}
+.fest-banner .tx b{display:block;font-size:15px;font-weight:700}
+.fest-banner .tx span{font-size:12.5px;color:rgba(255,255,255,.7)}
+.lotus-pill{display:inline-flex;align-items:center;gap:4px;height:30px;padding:0 11px;border-radius:99px;background:rgba(255,143,184,.22);color:#ffc2d9;font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;flex:none}
+.lotus-pill svg{width:15px;height:15px}
+.fs-hero{position:relative;overflow:hidden;border-radius:18px;background:linear-gradient(#18203d,#0d1326);color:#fff;padding:16px 16px 0;margin-bottom:12px}
+.fs-hero .k{font-size:12px;font-weight:700;color:#ffb3cf;letter-spacing:.04em}
+.fs-hero h3{margin:2px 0 2px;font-size:22px}
+.fs-hero .sub{font-size:13px;color:rgba(255,255,255,.7)}
+.fs-hero .left{position:absolute;top:14px;right:14px;font-size:12px;font-weight:800;padding:4px 10px;border-radius:99px;background:#ff6a9a;color:#fff}
+.fs-hero svg{display:block;width:calc(100% + 32px);margin:10px -16px 0;height:auto}
+.fs-wallet{display:flex;align-items:center;gap:12px;background:var(--fill);border-radius:16px;padding:12px 14px}
+.fs-wallet .ic{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#ffb3cf,#ff6a9a);display:grid;place-items:center;color:#fff;flex:none}
+.fs-wallet .ic svg{width:21px;height:21px}
+.fs-wallet b{display:block;font-size:24px;line-height:1.1}
+.fs-wallet span{font-size:12px;color:var(--muted)}
+.kt-pick{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.kt-pick::-webkit-scrollbar{display:none}
+.kt-pick button{flex:none;width:76px;border-radius:14px;background:var(--fill);padding:6px 4px 6px;border:2px solid transparent;font-size:11px;font-weight:600;color:var(--ink2)}
+.kt-pick button.sel{border-color:#ff6a9a;background:rgba(255,106,154,.1)}
+.kt-pick svg{display:block;width:100%;height:44px;margin-bottom:2px}
+.fs-wish{width:100%;margin-top:10px;height:46px;border-radius:14px;border:1.5px solid transparent;background:var(--fill);padding:0 14px;font:inherit;font-size:15px;color:var(--ink);outline:none}
+.fs-wish:focus{border-color:#ff6a9a;background:var(--card)}
+.fs-float{width:100%;margin-top:10px;height:50px;border-radius:25px;background:linear-gradient(135deg,#ff8fb8,#ff5a8a);color:#fff;font-weight:700;font-size:16px;box-shadow:0 10px 24px rgba(255,90,138,.35);display:flex;align-items:center;justify-content:center;gap:8px}
+.fs-float svg{width:19px;height:19px}
+.fs-done{display:flex;align-items:center;gap:12px;background:var(--fill);border-radius:16px;padding:10px 14px}
+.fs-done svg{width:62px;height:44px;flex:none}
+.fs-done b{display:block;font-size:14.5px}
+.fs-done span{font-size:13px;color:var(--muted)}
+.rw.l{background:rgba(255,106,154,.14);color:#e5376d}
+.rw.l svg{width:12px;height:12px}
+.fs-q .q-claim{background:var(--fill)}
+.fs-q .q-claim:not(:disabled){background:linear-gradient(135deg,#ff8fb8,#ff5a8a);color:#fff}
+.si-buy.lotus{background:linear-gradient(135deg,#ffb3cf,#ff6a9a);color:#fff}
+.si-buy.lotus.poor{background:var(--fill);color:var(--muted)}
+.si-art.kt{background:linear-gradient(#1d2c50,#0c1326)}
+.si-art.kt svg{width:80%;height:80%}
+[data-frame="frame_lotus"]{box-shadow:0 0 0 2.5px #ff8fb8,0 0 0 5px rgba(255,211,107,.85),0 0 16px rgba(255,143,184,.6)!important}
 /* shop */
 .rw.c{background:rgba(245,158,11,.15);color:#b77400}
 .rw.c svg{width:12px;height:12px}
@@ -1110,6 +1169,7 @@ html:has(#splash){overflow:hidden}
 <symbol id="i-square" viewBox="0 0 24 24"> <rect width="18" height="18" x="3" y="3" rx="2" /></symbol>
 <symbol id="i-trending-up" viewBox="0 0 24 24"> <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /> <polyline points="16 7 22 7 22 13" /></symbol>
 <symbol id="i-chevron-down" viewBox="0 0 24 24"> <path d="m6 9 6 6 6-6" /></symbol>
+<symbol id="i-lotus" viewBox="0 0 24 24"><path d="M12 20c-4.5 0-8.5-2.2-9.5-6 3.2 0 6.4 1.2 9.5 4.2 3.1-3 6.3-4.2 9.5-4.2-1 3.8-5 6-9.5 6z"/><path d="M12 18.2c-2.2-3.4-2.2-8.6 0-12.7 2.2 4.1 2.2 9.3 0 12.7z"/><path d="M11.4 17.6C8 16.4 6 12.8 6.2 8.6c2.8 1.2 4.6 3.8 5.2 7M12.6 17.6c3.4-1.2 5.4-4.8 5.2-9-2.8 1.2-4.6 3.8-5.2 7"/></symbol>
 <symbol id="i-brick" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 12h18M9 6v6M15 12v6"/></symbol>
 <symbol id="i-wood" viewBox="0 0 24 24"><ellipse cx="6.5" cy="12" rx="3.5" ry="5.5"/><path d="M6.5 6.5h11a3.5 5.5 0 0 1 0 11h-11"/><ellipse cx="6.5" cy="12" rx="1.2" ry="2"/></symbol>
 <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 3 6.5 12H10l-3.5 6h11L14 12h3.5z"/><path d="M12 18v3"/></symbol>
@@ -1175,6 +1235,13 @@ html:has(#splash){overflow:hidden}
           <div class="sub" id="heroSub"></div>
         </div>
       </div>
+      <div class="river" id="river" hidden><svg viewBox="0 0 320 46" aria-hidden="true">
+        <defs><linearGradient id="gRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d2c50"/><stop offset="1" stop-color="#0c1326"/></linearGradient></defs>
+        <rect width="320" height="46" fill="url(#gRiver)"/>
+        <g class="moonref"><ellipse cx="262" cy="12" rx="11" ry="2.4"/><ellipse cx="260" cy="19" rx="7" ry="1.8"/><ellipse cx="264" cy="26" rx="4" ry="1.4"/></g>
+        <path class="rip" d="M0 9 H320 M0 22 H320 M0 36 H320"/>
+        <g id="riverKt"></g>
+      </svg></div>
       <div class="city-cap" id="cityCap"></div>
       <div class="hero-metrics">
         <div><svg class="i"><use href="#i-sunset"/></svg><span class="k" data-i18n="lblClose"></span><span class="v num" id="mClose"></span></div>
@@ -1183,6 +1250,11 @@ html:has(#splash){overflow:hidden}
       </div>
     </div>
 
+    <button class="card fest-banner press anim" id="festBanner" hidden>
+      <span class="fb-ic"><svg class="i"><use href="#i-lotus"/></svg></span>
+      <span class="tx"><b id="fbTitle"></b><span id="fbSub"></span></span>
+      <span class="lotus-pill"><svg class="i"><use href="#i-lotus"/></svg><span id="fbLotus">0</span></span>
+    </button>
     <button class="cta press anim" id="sosBtn"><svg class="i"><use href="#i-shield-check"/></svg><span data-i18n="sosCta"></span></button>
 
     <div class="section anim"><h2 id="ciTitle"></h2><span class="aside" id="ciDate"></span></div>
@@ -1584,6 +1656,14 @@ html:has(#splash){overflow:hidden}
   </div>
 </div>
 
+<div class="rmodal" id="festSheet" role="dialog" aria-modal="true" aria-labelledby="fsH">
+  <div class="rm-bg" id="festBg"></div>
+  <div class="rm-panel run-panel">
+    <div id="fsBody"></div>
+    <div class="rd-actions"><button class="st-btn press" id="fsClose" data-i18n="close"></button></div>
+  </div>
+</div>
+
 <!-- ============ GACHA STAGE ============ -->
 <div class="stage" id="stage" role="dialog" aria-modal="true">
   <div class="burst" id="burst"></div>
@@ -1834,6 +1914,18 @@ const I18N = {
     t_name:'ก่อนอื่นเลย… ให้เราเรียกคุณว่าอะไรดี?',
     t_hero:'{hi}นี่คือเมืองของคุณ! กลางวันพระอาทิตย์จะเดินข้ามฟ้าจนถึงเวลาปิดครัว พอถึงเวลา ดวงจันทร์จะนับว่างดมาแล้วกี่ชั่วโมง\nงดได้ 1 คืน = สร้างตึก 1 หลัง กินเบาๆ = ได้บ้านหลังเล็ก',
     cityCap:'เมืองเดือน{m} · ตึก {b} · บ้าน {h}',
+    festName:'ลอยกระทง 2569', festKicker:'เทศกาล', festPeak:'คืนวันเพ็ญ อังคารที่ 24 พ.ย.', festLeft:'เหลือ {n} วัน', festLast:'วันสุดท้าย!',
+    lotus:'ดอกบัว', lotusHow:'งดได้ +5 · กินเบาๆ +2 · ลอยกระทง +1 ต่อคืน',
+    floatTitle:'ลอยกระทงคืนนี้', floatWish:'คำอธิษฐาน (ไม่ใส่ก็ได้)', floatBtn:'ลอยกระทง', floated:'ลอยกระทงแล้ว ขอให้สมหวังนะ!',
+    floatedTonight:'คืนนี้ลอยกระทงแล้ว', floatNoWish:'พรุ่งนี้มาลอยใหม่ได้อีก', fbFloat:'คืนนี้ยังไม่ได้ลอยกระทง', fbDone:'ลอยกระทงคืนนี้แล้ว', fbReady:'เควสพร้อมรับ {n}',
+    festQuests:'เควสเทศกาล', claimedLotus:'ได้ดอกบัว +{n}',
+    fq_float1:'ลอยกระทงครั้งแรก', fq_sos:'ต้านหิวได้ 1 ครั้งช่วงเทศกาล', fq_fast3:'งดได้ 3 คืนช่วงเทศกาล', fq_peak:'งดได้ในคืนวันลอยกระทง (24 พ.ย.)', fq_float5:'ลอยกระทงครบ 5 คืน',
+    festShop:'ร้านเทศกาล', festShopSub:'ของรุ่นพิเศษ ซื้อได้ถึง 30 พ.ย.', notEnoughLotus:'ดอกบัวไม่พอ งดมื้อเย็นเพิ่มอีกนิดนะ',
+    festNote:'หมดเทศกาลแล้ว ดอกบัวที่เหลือจะแลกเป็นเหรียญให้อัตโนมัติ (1 ดอก = 5 เหรียญ) ส่วนของที่ซื้อไว้เก็บใช้ได้ตลอด',
+    si_kt_leaf:'กระทงใบตอง', si_kt_bread:'กระทงขนมปัง', sd_kt_bread:'ให้ปลากินแทนเรา', si_kt_coco:'กระทงกะลา', sd_kt_coco:'รักษ์โลก ลอยได้นาน',
+    si_kt_lotus:'กระทงบัวทอง', sd_kt_lotus:'อลังการที่สุดในแม่น้ำ', si_kt_moonie:'กระทงมูนนี่', sd_kt_moonie:'มูนนี่ลอยไปส่งคำอธิษฐาน',
+    si_lantern:'โคมลอยยี่เป็ง', sd_lantern:'โคมลอยขึ้นฟ้าเหนือเมืองยามค่ำ', si_hat_chada:'ชฎา', sd_hat_chada:'ชุดไทยให้ตัวคู่หู',
+    si_frame_lotus:'กรอบดอกบัว', sd_frame_lotus:'กรอบรูปโปรไฟล์ฉบับเทศกาล', sd_fchar:'ตัวละครรุ่นพิเศษ มีเฉพาะเทศกาลนี้',
     shopTitle:'ร้านค้า', shopBanner:'ใช้เหรียญจากเควสซื้อของแต่งเมือง ตัวละคร และไอเทม', coins:'เหรียญ',
     coinHow:'ได้เหรียญจากเควส: รายวัน +10 · รายสัปดาห์ +30 · เป้าหมาย +50 · ครบคอลเลกชัน +100',
     catItem:'ไอเทม', catChars:'ตัวละคร', catCity:'แต่งเมือง', catStyle:'แต่งตัวละคร',
@@ -1872,7 +1964,7 @@ const I18N = {
     t_doneAgain:'พร้อมแล้ว{nm}! ไปลุยกันต่อเลย',
     levels:['มือใหม่','เริ่มจับทาง','มีวินัย','สม่ำเสมอ','แข็งแกร่ง','ตัวจริง','ระดับโปร','ตำนาน'],
     badges:{ first:'คืนแรก', s3:'สตรีค 3 คืน', s7:'สตรีค 7 คืน', s14:'สตรีค 14 คืน', s30:'สตรีค 30 คืน', n20:'งดได้ 20 คืน',
-      f1:'ต้านหิวครั้งแรก', f10:'ต้านหิว 10 ครั้ง', c10:'ภารกิจ 10 ครั้ง', b500:'ประหยัด ฿500', b2000:'ประหยัด ฿2,000', honest:'บันทึกตามจริง', run1:'วิ่งครั้งแรก', run42:'ครบมาราธอน' },
+      f1:'ต้านหิวครั้งแรก', f10:'ต้านหิว 10 ครั้ง', c10:'ภารกิจ 10 ครั้ง', b500:'ประหยัด ฿500', b2000:'ประหยัด ฿2,000', honest:'บันทึกตามจริง', run1:'วิ่งครั้งแรก', run42:'ครบมาราธอน', lk26:'ลอยกระทง 2569' },
     missionList:[
       'ดื่มน้ำเปล่า 1 แก้วใหญ่ให้หมดแก้ว','แปรงฟันเลย ปากสดชื่นแล้วความอยากจะลดลง','ชงชาร้อนหรือชาสมุนไพร ไม่ใส่น้ำตาล',
       'สควอท 15 ครั้ง','ออกไปเดินเบาๆ 5 นาที','อาบน้ำอุ่นให้สบายตัว','ทักหรือโทรหาเพื่อนสักคน','เขียน 3 เรื่องดีๆ ที่เกิดขึ้นวันนี้',
@@ -1993,6 +2085,18 @@ const I18N = {
     t_name:'First things first… what should I call you?',
     t_hero:'{hi}This is your city! By day the sun crosses the sky until closing time, then the moon shows how long you have fasted.\nEach fasted night builds a tower, a light meal builds a small house.',
     cityCap:'{m} city · {b} towers · {h} houses',
+    festName:'Loy Krathong 2026', festKicker:'Festival', festPeak:'Full-moon night: Tuesday 24 Nov', festLeft:'{n} days left', festLast:'Last day!',
+    lotus:'Lotus', lotusHow:'Fasted +5 · light meal +2 · float +1 per night',
+    floatTitle:'Float a krathong tonight', floatWish:'Make a wish (optional)', floatBtn:'Float it', floated:'Your krathong is floating. May your wish come true!',
+    floatedTonight:'You floated a krathong tonight', floatNoWish:'Come back tomorrow to float another', fbFloat:"You haven't floated a krathong tonight", fbDone:'Krathong floated tonight', fbReady:'{n} quests ready',
+    festQuests:'Festival quests', claimedLotus:'+{n} lotus',
+    fq_float1:'Float your first krathong', fq_sos:'Resist a craving during the festival', fq_fast3:'Fast 3 nights during the festival', fq_peak:'Fast on Loy Krathong night (24 Nov)', fq_float5:'Float a krathong on 5 nights',
+    festShop:'Festival shop', festShopSub:'Limited items, until 30 Nov', notEnoughLotus:'Not enough lotus yet. Fast a few more nights.',
+    festNote:'When the festival ends, leftover lotus turn into coins automatically (1 lotus = 5 coins). Festival items are yours to keep.',
+    si_kt_leaf:'Banana-leaf krathong', si_kt_bread:'Bread krathong', sd_kt_bread:'The fish eat it, so you don\'t', si_kt_coco:'Coconut krathong', sd_kt_coco:'Eco-friendly and floats for ages',
+    si_kt_lotus:'Golden lotus krathong', sd_kt_lotus:'The fanciest on the river', si_kt_moonie:'Moonie krathong', sd_kt_moonie:'Moonie carries your wish',
+    si_lantern:'Yi Peng sky lanterns', sd_lantern:'Lanterns rise over your city at night', si_hat_chada:'Chada crown', sd_hat_chada:'Thai dress-up for your buddy',
+    si_frame_lotus:'Lotus frame', sd_frame_lotus:'A festival profile frame', sd_fchar:'A limited character, only during this festival',
     shopTitle:'Shop', shopBanner:'Spend quest coins on city decor, characters and items', coins:'Coins',
     coinHow:'Earn coins from quests: daily +10 · weekly +30 · goals +50 · a full collection +100',
     catItem:'Items', catChars:'Characters', catCity:'City', catStyle:'Outfits',
@@ -2031,7 +2135,7 @@ const I18N = {
     t_doneAgain:"You're all set{nm}! Let's keep going.",
     levels:['Beginner','Finding rhythm','Disciplined','Consistent','Strong','The real deal','Pro','Legend'],
     badges:{ first:'First night', s3:'3-night streak', s7:'7-night streak', s14:'14-night streak', s30:'30-night streak', n20:'20 nights fasted',
-      f1:'First craving resisted', f10:'10 cravings resisted', c10:'10 missions', b500:'Saved ฿500', b2000:'Saved ฿2,000', honest:'Honest log', run1:'First run', run42:'Marathon total' },
+      f1:'First craving resisted', f10:'10 cravings resisted', c10:'10 missions', b500:'Saved ฿500', b2000:'Saved ฿2,000', honest:'Honest log', run1:'First run', run42:'Marathon total', lk26:'Loy Krathong 2026' },
     missionList:[
       'Drink a big glass of water — all of it','Brush your teeth — a fresh mouth curbs cravings','Make hot tea or herbal tea, no sugar',
       'Do 15 squats','Take a gentle 5-minute walk','Take a warm shower','Message or call a friend','Write down 3 good things from today',
@@ -2062,11 +2166,12 @@ const BADGES = [
   { id:'honest',icon:'heart',        test:()=>countStatus('miss')>=1 },
   { id:'run1',  icon:'footprints',   test:s=>(s.runs||[]).length>=1 },
   { id:'run42', icon:'mountain',     test:()=>totalKm()>=42.195 },
+  { id:'lk26',  icon:'lotus',        test:s=>Object.keys((s.fest||{}).floats||{}).some(k=>k>='2026-11-20' && k<='2026-11-30') },
 ];
 
 /* ---------- state ---------- */
 function detectLang(){ try{ return (navigator.language||'').toLowerCase().startsWith('th') ? 'th' : 'en'; }catch(e){ return 'th'; } }
-function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, logAt:{}, epoch:0, updatedAt:0, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}}, runs:[], runDel:{}, city:{crafted:0, brickUsed:0, woodUsed:0, up:{}, decor:{}}, shop:{owned:{}, frozen:{}, equip:{hat:'', face:'', frame:'', fx:{}}} }; }
+function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, logAt:{}, epoch:0, updatedAt:0, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}}, runs:[], runDel:{}, city:{crafted:0, brickUsed:0, woodUsed:0, up:{}, decor:{}}, shop:{owned:{}, frozen:{}, equip:{hat:'', face:'', frame:'', fx:{}, krathong:'kt_leaf'}}, fest:{floats:{}} }; }
 function shape(r){
   const b=blank();
   if(!r || typeof r!=='object') return b;
@@ -2077,6 +2182,7 @@ function shape(r){
     gacha:{...b.gacha, ...g, owned:{...(g.owned||{})}}, quests:{claimed:{...((r.quests||{}).claimed||{})}},
     runs:(Array.isArray(r.runs) ? r.runs : []).map(x=>({...x, segs:(x.segs||[]).map(s=>[...s])})), runDel:{...(r.runDel||{})},
     city:{...b.city, ...(r.city||{}), up:{...((r.city||{}).up||{})}, decor:{...((r.city||{}).decor||{})}},
+    fest:{ floats:{...((r.fest||{}).floats||{})} },
     shop:(sh=>({ owned:{...(sh.owned||{})}, frozen:{...(sh.frozen||{})}, equip:{...b.shop.equip, ...(sh.equip||{}), fx:{...((sh.equip||{}).fx||{})}} }))(r.shop||{})};
 }
 function load(){
@@ -2224,7 +2330,7 @@ function renderHome(){
   $('miniAvatar').innerHTML = avatarHTML(); $('miniAvatar').dataset.frame = S.shop.equip.frame||'';
   $('phaseRange').textContent = `${S.settings.cutoff} – ${S.settings.breakfast}`;
   $('mClose').textContent = S.settings.cutoff; $('mBreak').textContent = S.settings.breakfast; $('mGoal').textContent = fastHours();
-  renderTimer(); renderCity();
+  renderTimer(); renderCity(); renderFest();
 
   const tg=checkinTarget(), cur=S.log[tg.key];
   $('ciTitle').textContent = t(tg.title);
@@ -2567,12 +2673,20 @@ const SHOP_ITEMS = [
   { id:'frame_gold',    cat:'style', slot:'frame', price:150, kind:'wear' },
   { id:'frame_rainbow', cat:'style', slot:'frame', price:250, kind:'wear' },
   { id:'frame_neon',    cat:'style', slot:'frame', price:200, kind:'wear' },
+  // Loy Krathong 2026: paid in lotus, sold only during the festival, kept forever
+  { id:'kt_bread',    cat:'fest', lotus:true, price:15, kind:'krathong' },
+  { id:'kt_coco',     cat:'fest', lotus:true, price:20, kind:'krathong' },
+  { id:'kt_lotus',    cat:'fest', lotus:true, price:40, kind:'krathong' },
+  { id:'kt_moonie',   cat:'fest', lotus:true, price:60, kind:'krathong' },
+  { id:'lantern',     cat:'fest', lotus:true, price:50, kind:'fx', showIn:'city' },
+  { id:'hat_chada',   cat:'fest', lotus:true, price:45, kind:'wear', slot:'hat', showIn:'style' },
+  { id:'frame_lotus', cat:'fest', lotus:true, price:35, kind:'wear', slot:'frame', showIn:'style' },
 ];
 const SHOP_BY_ID = Object.fromEntries(SHOP_ITEMS.map(i=>[i.id,i]));
 const CHAR_PRICE = { salt:30, common:80, rare:200, sr:500, legend:1500 };
 const itemPrice = id => id.startsWith('char:') ? CHAR_PRICE[CHAR_BY_ID[id.slice(5)]?.tier] || 0 : SHOP_BY_ID[id]?.price || 0;
-const coinsEarned = () => Object.keys(S.quests.claimed).reduce((a,id)=>a+coinValue(id), 0);
-const coinsSpent = () => Object.entries(S.shop.owned).reduce((a,[id,n])=>a+itemPrice(id)*n, 0);
+const coinsEarned = () => Object.keys(S.quests.claimed).reduce((a,id)=>a+coinValue(id), 0) + (festOver() ? lotusLeft()*FEST.rate : 0);
+const coinsSpent = () => Object.entries(S.shop.owned).reduce((a,[id,n])=>a + (SHOP_BY_ID[id]?.lotus || id.startsWith('fchar:') ? 0 : itemPrice(id)*n), 0);
 const coinsLeft = () => Math.max(0, coinsEarned() - coinsSpent());
 const freezeLeft = () => Math.max(0, (S.shop.owned.freeze||0) - Object.keys(S.shop.frozen).length);
 /* a missed night uses a streak freeze, but only when there is a streak to save */
@@ -2585,7 +2699,7 @@ function useFreeze(key){
 }
 function dailyChars(){
   const k=keyOf(new Date());
-  const pick=(tiers,salt)=>{ const pool=CHARS.filter(c=>tiers.includes(c.tier)); return pool[Math.floor(cityHash(k+salt)*pool.length)]; };
+  const pick=(tiers,salt)=>{ const pool=CHARS.filter(c=>tiers.includes(c.tier) && !c.limited); return pool[Math.floor(cityHash(k+salt)*pool.length)]; };
   return [...new Set([pick(['salt','common'],'a'), pick(['common'],'b'), pick(['rare'],'c'), pick(['sr','legend'],'d')])];
 }
 /* little scenes for the city effects */
@@ -2597,6 +2711,11 @@ function fxArt(id, preview){
     const burst=(x,y,c,delay)=>{ let l=''; for(let i=0;i<12;i++){ const a=i*Math.PI/6, c1=Math.cos(a), s1=Math.sin(a); l+=`<line x1="${(c1*4).toFixed(1)}" y1="${(s1*4).toFixed(1)}" x2="${(c1*14).toFixed(1)}" y2="${(s1*14).toFixed(1)}"/><circle cx="${(c1*16.5).toFixed(1)}" cy="${(s1*16.5).toFixed(1)}" r="1"/>`; }
       return `<g transform="translate(${x} ${y})"><g class="burst" style="animation-delay:${delay}s" stroke="${c}" fill="${c}" stroke-width="1.3" stroke-linecap="round">${l}</g></g>`; };
     return `<g class="fx-night">${burst(92,62,'#ff6a8a',0)}${burst(232,48,'#ffd36b',-1.4)}${burst(165,90,'#7dd3fc',-.7)}</g>`;
+  }
+  if(id==='lantern'){
+    let h=''; for(let i=0;i<7;i++){ const r=cityHash('lan'+i), r2=cityHash('ln2'+i), d=(16+r2*12).toFixed(1), x=Math.round(20+r*280);
+      h+=`<g class="lan" transform="translate(${x} ${preview ? Math.round(40+r2*120) : 120})" style="--x:${x}px;--d:${d}s;--dl:-${(r*d).toFixed(1)}s;--dx:${Math.round((r2-.5)*40)}px"><circle cy="1" r="7" fill="#ffb84d" opacity=".28"/><path d="M-3.2 -4.5 h6.4 l1.3 7.5 h-9z" fill="#ff9a3c"/><path d="M-2 3.2 h4" stroke="#ffe08a" stroke-width="1.4"/></g>`; }
+    return `<g class="fx-night">${h}</g>`;
   }
   if(id==='balloon') return `<g transform="translate(70 60)"><g class="bfloat"><path d="M0 -14 a11 12 0 0 1 11 12 c0 7 -6 10 -8 14 h-6 c-2 -4 -8 -7 -8 -14 a11 12 0 0 1 11 -12z" fill="#ff6a5c"/><path d="M0 -14 c-4.5 4 -5.5 16 -3 26 M0 -14 c4.5 4 5.5 16 3 26" stroke="#ffd36b" stroke-width="2.2" fill="none"/><path d="M-3 12 l1 5 M3 12 l-1 5" stroke="#c9a27a" stroke-width=".7"/><rect x="-3" y="17" width="6" height="4.5" rx="1" fill="#8a5a2b"/></g></g>`;
   if(id==='ferris'){
@@ -2613,7 +2732,7 @@ function fxArt(id, preview){
 }
 function renderCityFx(){
   const fx=S.shop.equip.fx||{};
-  $('cityFxBack').innerHTML = ['aurora','meteor','fireworks','balloon','ferris'].filter(k=>fx[k] && S.shop.owned[k]).map(k=>fxArt(k)).join('');
+  $('cityFxBack').innerHTML = ['aurora','meteor','fireworks','lantern','balloon','ferris'].filter(k=>fx[k] && S.shop.owned[k]).map(k=>fxArt(k)).join('');
   $('cityFxFront').innerHTML = fx.snow && S.shop.owned.snow ? fxArt('snow') : '';
 }
 /* ---- shop screen ---- */
@@ -2659,7 +2778,7 @@ function renderShop(){
         return `<div class="card sitem"><div class="si-art chr">${miniCardHTML(ch,{})}</div><b>${escHTML(ch.name[lang])}</b><span class="si-desc">${t('tier_'+ch.tier)} · ${'★'.repeat(TIERS[ch.tier].stars)}</span>${have ? `<button class="si-buy" disabled>${icon('check')}${t('ownedIt')}</button>` : buyBtn(id, price)}</div>`; }).join('') + '</div>';
   } else {
     const intro = { item:'introItem', city:'introCity', style:'introStyle' }[shopCat];
-    h = `<p class="shop-note">${t(intro)}${shopCat==='style' && !(S.gacha.buddy && S.gacha.owned[S.gacha.buddy]) ? ' '+t('needBuddy') : ''}</p><div class="shop-grid">${SHOP_ITEMS.filter(i=>i.cat===shopCat).map(shopCard).join('')}</div>`;
+    h = (festActive() ? `<button class="card fest-banner press" data-fest="1" style="margin:0 0 12px"><span class="fb-ic">${icon('lotus')}</span><span class="tx"><b>${t('festName')}</b><span>${t('festShopSub')}</span></span><span class="lotus-pill">${icon('lotus')}${lotusLeft()}</span></button>` : '') + `<p class="shop-note">${t(intro)}${shopCat==='style' && !(S.gacha.buddy && S.gacha.owned[S.gacha.buddy]) ? ' '+t('needBuddy') : ''}</p><div class="shop-grid">${SHOP_ITEMS.filter(i=>i.cat===shopCat || (i.showIn===shopCat && S.shop.owned[i.id])).map(shopCard).join('')}</div>`;
   }
   $('shopBody').innerHTML = h;
 }
@@ -2690,9 +2809,11 @@ function buyItem(id){
 function toggleUse(id){
   const it=SHOP_BY_ID[id]; if(!it || !S.shop.owned[id]) return;
   if(it.kind==='fx'){ if(S.shop.equip.fx[id]) delete S.shop.equip.fx[id]; else S.shop.equip.fx[id]=1; }
+  else if(it.kind==='krathong') S.shop.equip.krathong = id;
   else S.shop.equip[it.slot] = S.shop.equip[it.slot]===id ? '' : id;
   save(); renderAll(); renderShop();
 }
+$('shopBody').addEventListener('click', e=>{ if(e.target.closest('[data-fest]')){ closeShop(); openFest(); } });
 $('shopCats').onclick = e=>{ const b=e.target.closest('[data-cat]'); if(b){ shopCat=b.dataset.cat; renderShop(); } };
 /* buying takes two taps: the first turns the price into "confirm" for 3 seconds */
 $('shopBody').onclick = e=>{
@@ -2711,6 +2832,147 @@ $('shopBody').onclick = e=>{
 $('shopBtn').onclick = openShop;
 $('shopClose').onclick = closeShop;
 document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('shop').classList.contains('open')) closeShop(); });
+
+/* ---------- festivals ----------
+   One festival at a time. It runs on its own currency (lotus) earned mostly by fasting, so the
+   event rewards the habit the app is for. Leftover lotus turn into coins when it ends. */
+const FEST = { id:'lk26', start:'2026-11-20', end:'2026-11-30', peak:'2026-11-24', rate:5 };
+const FEST_CHAR = { id:'krathong', price:80 };
+const festActive = () => { const k=nightKey(); return k>=FEST.start && k<=FEST.end; };
+const festOver = () => nightKey() > FEST.end;
+const inFest = k => k>=FEST.start && k<=FEST.end;
+const festFloats = () => Object.keys(S.fest.floats).filter(inFest).sort();
+const festOk = () => Object.keys(S.log).filter(k=>inFest(k) && S.log[k]==='ok').length;
+const festSos = () => S.sessions.filter(x=>inFest(nightKey(new Date(x.t)))).length;
+const FEST_QUESTS = [
+  { id:'e:lk26:float1', ic:'sparkles',     k:'fq_float1', goal:1, val:()=>festFloats().length, lotus:5 },
+  { id:'e:lk26:sos',    ic:'shield-check', k:'fq_sos',    goal:1, val:festSos,                lotus:8 },
+  { id:'e:lk26:fast3',  ic:'moon-star',    k:'fq_fast3',  goal:3, val:festOk,                 lotus:15 },
+  { id:'e:lk26:peak',   ic:'moon-star',    k:'fq_peak',   goal:1, val:()=>S.log[FEST.peak]==='ok'?1:0, lotus:25 },
+  { id:'e:lk26:float5', ic:'sparkles',     k:'fq_float5', goal:5, val:()=>festFloats().length, lotus:20 },
+];
+function lotusEarned(){
+  let n=0;
+  Object.keys(S.log).forEach(k=>{ if(inFest(k)) n += S.log[k]==='ok' ? 5 : S.log[k]==='light' ? 2 : 0; });
+  n += festFloats().length;
+  FEST_QUESTS.forEach(q=>{ if(S.quests.claimed[q.id]) n += q.lotus; });
+  return n;
+}
+const lotusSpent = () => Object.keys(S.shop.owned).reduce((a,id)=>a + (SHOP_BY_ID[id]?.lotus ? SHOP_BY_ID[id].price : id==='fchar:'+FEST_CHAR.id ? FEST_CHAR.price : 0), 0);
+const lotusLeft = () => Math.max(0, lotusEarned() - lotusSpent());
+const festReady = () => FEST_QUESTS.filter(q=>q.val()>=q.goal && !S.quests.claimed[q.id]).length;
+function festDaysLeft(){ return Math.round((fromKey(FEST.end) - fromKey(nightKey()))/864e5); }
+
+/* krathong designs, drawn with the waterline at y=0 */
+function krathongArt(d){
+  const candle = `<circle class="fglow" cy="-23" r="6" fill="#ffd36b" opacity=".35"/><rect x="-1.7" y="-19" width="3.4" height="9" rx="1" fill="#fff3d6"/><path class="flame" d="M0 -25.5 q2.8 3.6 0 6 q-2.8 -2.4 0 -6z" fill="#ffb84d"/><path d="M-5 -10 l-2 -9 M5 -10 l2 -9" stroke="#8a5a2b" stroke-width=".8"/><circle cx="-7" cy="-19" r=".9" fill="#ff4d4d"/><circle cx="7" cy="-19" r=".9" fill="#ff4d4d"/>`;
+  const base = {
+    kt_leaf:  `<path d="M-14 -5 l2.4 -6 2.4 6 2.4 -6 2.4 6 2.4 -6 2.4 6 2.4 -6 2.4 6 2.4 -6 2.4 6 2.4 -6 1.4 6z" fill="#5cb85c"/><path d="M-16 0 q16 5 32 0 l-3 -5 h-26z" fill="#3f8f3f"/><circle cx="-8" cy="-10" r="2.6" fill="#ff8fb8"/><circle cx="8" cy="-10" r="2.6" fill="#ffd36b"/>`,
+    kt_bread: `<path d="M-15 0 q15 5 30 0 l-2 -7 q-13 -3.5 -26 0z" fill="#d9a15a"/><path d="M-11 -6 q11 -3 22 0" stroke="#f3cf95" stroke-width="2" fill="none"/><circle cx="-7" cy="-9" r="2.3" fill="#ff8fb8"/><circle cx="7" cy="-9" r="2.3" fill="#fff"/><path d="M19 3 q3.5 -2.4 7 0 q-3.5 2.4 -7 0z M26 3 l2.4 -1.8 v3.6z" fill="#ff9a3c"/>`,
+    kt_coco:  `<path d="M-15 -4 a15 9 0 0 0 30 0z" fill="#7a4b2a"/><ellipse cy="-4" rx="15" ry="2.4" fill="#f4ead6"/><circle cx="-7" cy="-8" r="2.5" fill="#ff5a8a"/><circle cx="7" cy="-8" r="2.5" fill="#ffd36b"/>`,
+    kt_lotus: `<path d="M-16 0 q16 4 32 0 l-2 -3 h-28z" fill="#d99a00"/><path d="M-14 -3 q-4 -8 2.5 -12.5 q2.5 7 1.5 12.5z M14 -3 q4 -8 -2.5 -12.5 q-2.5 7 -1.5 12.5z M-7 -3 q-2.5 -10 7 -16 q9.5 6 7 16z" fill="#ffd34d" stroke="#ff8fb8" stroke-width=".9"/>`,
+    kt_moonie:`<path d="M-15 0 q15 5 30 0 l-2 -5 h-26z" fill="#3f8f3f"/><circle cy="-11" r="9" fill="#ffd98f" stroke="#e39a33" stroke-width="1"/><ellipse cx="-3.2" cy="-12" rx="1.3" ry="1.7" fill="#2b1d16"/><ellipse cx="3.2" cy="-12" rx="1.3" ry="1.7" fill="#2b1d16"/><path d="M-2.2 -8.4 q2.2 2 4.4 0" stroke="#2b1d16" stroke-width="1" fill="none" stroke-linecap="round"/><ellipse cx="-6" cy="-9" rx="1.8" ry="1" fill="#ff8a7a" opacity=".6"/><ellipse cx="6" cy="-9" rx="1.8" ry="1" fill="#ff8a7a" opacity=".6"/>`,
+  }[d] || '';
+  return `<g>${base}${d==='kt_moonie' ? `<g transform="translate(0 -7)">${candle}</g>` : candle}</g>`;
+}
+const ktSVG = (d, h=44) => `<svg viewBox="-22 -32 48 38" style="height:${h}px" aria-hidden="true">${krathongArt(d)}</svg>`;
+let riverNew = '';
+function renderRiver(){
+  const fl = festFloats(), n = fl.length;
+  $('riverKt').innerHTML = fl.map((k,i)=>{
+    const x = n===1 ? 160 : Math.round(24 + i*(272/(n-1))), y = 33 + (i%2)*4, f=S.fest.floats[k];
+    return `<g transform="translate(${x} ${y}) scale(.72)"><g class="${k===riverNew ? 'kt-enter' : ''}"><g class="kt-bob" style="animation-delay:-${(i*.7).toFixed(1)}s">${krathongArt(f.d)}</g></g></g>`;
+  }).join('');
+  riverNew = '';
+}
+function renderFest(){
+  const on = festActive();
+  $('festBanner').hidden = $('river').hidden = !on;
+  if(!on) return;
+  renderRiver();
+  const days = festDaysLeft(), floated = !!S.fest.floats[nightKey()], ready = festReady();
+  $('fbTitle').textContent = t('festName');
+  $('fbSub').textContent = [floated ? t('fbDone') : t('fbFloat'), ready ? t('fbReady',{n:ready}) : '', days ? t('festLeft',{n:days}) : t('festLast')].filter(Boolean).join(' · ');
+  $('fbLotus').textContent = lotusLeft();
+  if($('festSheet').classList.contains('open')) renderFestSheet();
+}
+let ktChoice = '';
+function festItemCard(it){
+  const name=t('si_'+it.id), owned=!!S.shop.owned[it.id];
+  let art;
+  if(it.kind==='krathong') art = `<div class="si-art kt">${ktSVG(it.id, 70)}</div>`;
+  else art = itemArt({...it, cat: it.showIn});
+  let btn;
+  if(owned){
+    const on = it.kind==='krathong' ? S.shop.equip.krathong===it.id : it.kind==='fx' ? !!S.shop.equip.fx[it.id] : S.shop.equip[it.slot]===it.id;
+    btn = `<button class="si-buy press ${on?'on':'use'}" data-use="${it.id}">${on ? icon('check')+t('inUse') : t('useIt')}</button>`;
+  } else btn = `<button class="si-buy lotus press ${lotusLeft()<it.price?'poor':''}" data-fbuy="${it.id}" data-price="${it.price}">${icon('lotus')}${it.price}</button>`;
+  return `<div class="card sitem">${art}<b>${name}</b><span class="si-desc">${t('sd_'+it.id)}</span>${btn}</div>`;
+}
+function renderFestSheet(){
+  const k = nightKey(), f = S.fest.floats[k], days = festDaysLeft(), left = lotusLeft();
+  const owned = ['kt_leaf', ...SHOP_ITEMS.filter(i=>i.kind==='krathong' && S.shop.owned[i.id]).map(i=>i.id)];
+  if(!owned.includes(ktChoice)) ktChoice = owned.includes(S.shop.equip.krathong) ? S.shop.equip.krathong : 'kt_leaf';
+  const ch = CHAR_BY_ID[FEST_CHAR.id], haveCh = !!S.gacha.owned[ch.id];
+  const floatSec = f
+    ? `<div class="fs-done">${ktSVG(f.d)}<div><b>${t('floatedTonight')}</b><span>${f.w ? '“'+escHTML(f.w)+'”' : t('floatNoWish')}</span></div></div>`
+    : `<div class="kt-pick" id="ktPick">${owned.map(d=>`<button class="press ${d===ktChoice?'sel':''}" data-kt="${d}">${ktSVG(d)}${t('si_'+d)}</button>`).join('')}</div>
+       <input class="fs-wish" id="fsWish" maxlength="40" placeholder="${t('floatWish')}" autocomplete="off">
+       <button class="fs-float press" id="fsFloat">${icon('sparkles')}${t('floatBtn')} <span style="opacity:.8">+1</span>${icon('lotus')}</button>`;
+  const quests = FEST_QUESTS.map(q=>{ const cur=Math.min(q.val(), q.goal), done=!!S.quests.claimed[q.id], ready=cur>=q.goal && !done;
+    return `<div class="cs-row fs-q"><div class="ic">${icon(q.ic)}</div><div class="t"><b>${t(q.k)}</b><span><span class="rw l">${icon('lotus')}${q.lotus}</span> · ${cur}/${q.goal}</span></div>${done ? `<span class="q-done">${icon('check')}${t('claimed')}</span>` : `<button class="q-claim press" data-fq="${q.id}" ${ready?'':'disabled'}>${t('claim')}</button>`}</div>`; }).join('');
+  const chCard = `<div class="card sitem"><div class="si-art chr">${miniCardHTML(ch,{})}</div><b>${escHTML(ch.name[lang])}</b><span class="si-desc">${t('sd_fchar')}</span>${haveCh ? `<button class="si-buy" disabled>${icon('check')}${t('ownedIt')}</button>` : `<button class="si-buy lotus press ${left<FEST_CHAR.price?'poor':''}" data-fbuy="fchar:${ch.id}" data-price="${FEST_CHAR.price}">${icon('lotus')}${FEST_CHAR.price}</button>`}</div>`;
+  $('fsBody').innerHTML = `
+    <div class="fs-hero"><span class="left">${days ? t('festLeft',{n:days}) : t('festLast')}</span><div class="k">${t('festKicker')}</div><h3 id="fsH">${t('festName')}</h3><div class="sub">${t('festPeak')}</div>
+      <svg viewBox="0 0 320 70" aria-hidden="true"><circle cx="252" cy="22" r="13" fill="#ffe9a8"/><circle cx="252" cy="22" r="22" fill="#ffe9a8" opacity=".15"/><rect y="42" width="320" height="28" fill="#122042"/><g class="moonref"><ellipse cx="252" cy="49" rx="12" ry="2.2"/><ellipse cx="250" cy="56" rx="7" ry="1.6"/></g>
+        <g transform="translate(70 58) scale(.8)"><g class="kt-bob">${krathongArt('kt_leaf')}</g></g><g transform="translate(140 62) scale(.6)"><g class="kt-bob" style="animation-delay:-1s">${krathongArt('kt_lotus')}</g></g><g transform="translate(196 57) scale(.7)"><g class="kt-bob" style="animation-delay:-2s">${krathongArt('kt_coco')}</g></g></svg></div>
+    <div class="fs-wallet"><div class="ic">${icon('lotus')}</div><div><b class="num">${left}</b><span>${t('lotus')} · ${t('lotusHow')}</span></div></div>
+    <div class="rd-h">${t('floatTitle')}</div>${floatSec}
+    <div class="rd-h">${t('festQuests')}</div><div class="cs-list">${quests}</div>
+    <div class="rd-h">${t('festShop')}<span>${t('festShopSub')}</span></div>
+    <div class="shop-grid">${chCard}${SHOP_ITEMS.filter(i=>i.cat==='fest').map(festItemCard).join('')}</div>
+    <p class="cs-note">${t('festNote')}</p>`;
+}
+function openFest(){ ktChoice=''; renderFestSheet(); openSheet('festSheet'); }
+function floatKrathong(){
+  const k=nightKey(); if(!festActive() || S.fest.floats[k]) return;
+  S.fest.floats[k] = { d:ktChoice || 'kt_leaf', w:($('fsWish')?.value||'').trim().slice(0,40), t:Date.now() };
+  riverNew = k; checkBadges(); save(); closeSheet('festSheet');
+  showTab('home'); renderAll();
+  setTimeout(()=>{ $('river').scrollIntoView({behavior:REDUCE?'auto':'smooth', block:'center'}); }, 350);
+  toast(t('floated')); celebrate(.9);
+}
+function buyFest(id){
+  if(!festActive()) return;
+  const isChar = id.startsWith('fchar:'), it = SHOP_BY_ID[id], price = isChar ? FEST_CHAR.price : it?.price;
+  if(!price || S.shop.owned[id]) return;
+  if(lotusLeft() < price){ toast(t('notEnoughLotus')); return; }
+  S.shop.owned[id] = 1;
+  if(isChar) S.gacha.owned[id.slice(6)] = 1;
+  else if(it.kind==='fx') S.shop.equip.fx[id] = 1;
+  else if(it.kind==='wear') S.shop.equip[it.slot] = id;
+  else if(it.kind==='krathong'){ S.shop.equip.krathong = id; ktChoice = id; }
+  checkBadges(); save(); renderAll(); renderFestSheet();
+  celebrate(.6); toast(t('bought',{name: isChar ? CHAR_BY_ID[id.slice(6)].name[lang] : t('si_'+id)}));
+}
+$('fsBody').addEventListener('click', e=>{
+  const kt=e.target.closest('[data-kt]'); if(kt){ ktChoice=kt.dataset.kt; $('ktPick').querySelectorAll('button').forEach(b=>b.classList.toggle('sel', b===kt)); return; }
+  if(e.target.closest('#fsFloat')){ floatKrathong(); return; }
+  const q=e.target.closest('[data-fq]'); if(q && !q.disabled){ S.quests.claimed[q.dataset.fq]=true; save(); renderAll(); renderFestSheet(); celebrate(.5); toast(t('claimedLotus',{n:FEST_QUESTS.find(x=>x.id===q.dataset.fq).lotus})); return; }
+  const u=e.target.closest('[data-use]'); if(u){ toggleUse(u.dataset.use); renderFestSheet(); return; }
+  const b=e.target.closest('[data-fbuy]'); if(!b) return;
+  const price=Number(b.dataset.price);
+  if(lotusLeft()<price){ toast(t('notEnoughLotus')); return; }
+  if(!b.classList.contains('confirm')){   // two taps to buy, like the shop
+    $('fsBody').querySelectorAll('.si-buy.confirm').forEach(x=>{ x.classList.remove('confirm'); x.innerHTML=x.dataset.label; });
+    b.dataset.label=b.innerHTML; b.classList.add('confirm'); b.textContent=t('buyConfirm',{n:price});
+    clearTimeout(b._t); b._t=setTimeout(()=>{ if(b.isConnected){ b.classList.remove('confirm'); b.innerHTML=b.dataset.label; } }, 3000);
+    return;
+  }
+  buyFest(b.dataset.fbuy);
+});
+$('festBanner').onclick = openFest;
+$('fsClose').onclick = $('festBg').onclick = ()=>closeSheet('festSheet');
 
 /* ---------- render: progress ---------- */
 let calMonth = (()=>{ const d=fromKey(nightKey()); return new Date(d.getFullYear(), d.getMonth(), 1); })();
@@ -3318,6 +3580,15 @@ const CHARS = [
       <ellipse cx="76" cy="40" rx="8" ry="6" fill="#8ff0cc" stroke="#2fa57e" stroke-width="1.5"/><circle cx="74" cy="39" r="1.2" fill="${INK}"/><circle cx="79" cy="39" r="1.2" fill="${INK}"/>
       <path d="M83 43 q8 2 12 10 M83 37 q8 -4 14 -1" stroke="#ffd34d" stroke-width="2" fill="none" stroke-linecap="round"/>
       ${F(58,32,.8,'happy','none')}` },
+  { id:'krathong', set:'festival', tier:'sr', limited:true, name:{th:'น้องกระทง',en:'Krathong Kid'},
+    desc:{th:'ลอยมาพร้อมคำอธิษฐาน: ปีนี้ขอให้งดมื้อเย็นได้ทุกคืน',en:'Floats in with a wish: skip dinner every night this year.'},
+    art:()=>`<ellipse cx="50" cy="88" rx="42" ry="6" fill="#4aa5ff" opacity=".3"/><path d="M20 88 q8 -3 16 0 M62 90 q8 -3 16 0" stroke="#9fd8ff" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <circle cx="50" cy="18" r="11" fill="#ffd36b" opacity=".3"/><path d="M50 7 q6.5 8 0 13.5 q-6.5 -5.5 0 -13.5z" fill="#ffb84d"/><rect x="46" y="20" width="8" height="24" rx="2" fill="#fff3d6" stroke="#e8d7b0"/>
+      <path d="M38 46 l-4 -22 M62 46 l4 -22" stroke="#8a5a2b" stroke-width="1.6"/><circle cx="34" cy="23" r="1.6" fill="#ff4d4d"/><circle cx="66" cy="23" r="1.6" fill="#ff4d4d"/>
+      <path d="M16 58 l5 -12 5 12 5 -12 5 12 5 -12 5 12 5 -12 5 12 5 -12 5 12 5 -12 5 12 5 -12 4 12z" fill="#5cb85c" stroke="#3f8f3f" stroke-width="1.2" stroke-linejoin="round"/>
+      <circle cx="30" cy="48" r="5" fill="#ff8fb8"/><circle cx="30" cy="48" r="2" fill="#ffd36b"/><circle cx="70" cy="48" r="5" fill="#ffd36b"/><circle cx="70" cy="48" r="2" fill="#ff8a5c"/>
+      <path d="M12 60 q38 20 76 0 l-5 -4 h-66z" fill="#3f8f3f" stroke="#2c6e2c" stroke-width="2" stroke-linejoin="round"/>
+      ${F(50,67,.85,'happy','smile')}` },
 ];
 /* collections: every character belongs to exactly one set (the first 18 are mapped here) */
 const SETS = [
@@ -3327,6 +3598,7 @@ const SETS = [
   { id:'cravings', icon:'flame',            color:'#ff4d3d', name:{th:'ปีศาจของกินดึก',en:'Midnight Cravings'}, reward:{tickets:3} },
   { id:'fresh',    icon:'sprout',           color:'#3fae49', name:{th:'ผักผลไม้สดใส',en:'Fresh Friends'},     reward:{tickets:3} },
   { id:'sky',      icon:'sparkles',         color:'#4aa5ff', name:{th:'ท้องฟ้ายามค่ำ',en:'Night Sky'},         reward:{tickets:5, gold:2} },
+  { id:'festival', icon:'lotus',            color:'#ff8fb8', name:{th:'ของสะสมเทศกาล',en:'Festival Specials'}, reward:{tickets:2} },
 ];
 const SET_BY_ID = Object.fromEntries(SETS.map(s=>[s.id,s]));
 const FIRST_SETS = { salt:'kitchen', soy:'kitchen', pick:'kitchen', spoon:'kitchen', cat:'kitchen', ninja:'kitchen',
@@ -3357,6 +3629,7 @@ const ACC = {
   hat_beanie:`<path d="M-17 2 q0 -24 17 -24 q17 0 17 24z" fill="#4aa5ff"/><path d="M-9 -16 v14 M0 -21 v18 M9 -16 v14" stroke="#79c0ff" stroke-width="2"/><rect x="-18.5" y="-3" width="37" height="7" rx="3.5" fill="#2c83de"/><circle cy="-24" r="4.6" fill="#fff"/>`,
   hat_crown:`<path d="M-15 2 L-17 -16 L-8 -8 L0 -21 L8 -8 L17 -16 L15 2Z" fill="#ffd34d" stroke="#d99a00" stroke-width="1.4" stroke-linejoin="round"/><circle cy="-6" r="2.4" fill="#ff4d6d"/><circle cx="-9" cy="-3" r="1.6" fill="#4dc3ff"/><circle cx="9" cy="-3" r="1.6" fill="#4dc3ff"/>`,
   face_sun:`<path d="M-15.5 -3.5 h12.5 v2.5 a6.25 5 0 0 1 -12.5 0z M3 -3.5 h12.5 v2.5 a6.25 5 0 0 1 -12.5 0z" fill="#1d1d23"/><path d="M-3 -2.5 h6" stroke="#1d1d23" stroke-width="2"/><path d="M-13 -1.6 l3 -.8 M5.5 -1.6 l3 -.8" stroke="#fff" stroke-width="1" opacity=".6" stroke-linecap="round"/>`,
+  hat_chada:`<path d="M-13 2 L-11 -8 L-7 -12 L-5 -22 L-2 -30 L0 -42 L2 -30 L5 -22 L7 -12 L11 -8 L13 2Z" fill="#ffd34d" stroke="#c98a00" stroke-width="1.1" stroke-linejoin="round"/><path d="M-11 -4 h22 M-8 -13 h16 M-5 -22 h10" stroke="#c98a00" stroke-width="1.4"/><circle cy="-8" r="2.3" fill="#ff4d6d"/><circle cx="-7" cy="-2" r="1.4" fill="#3fae5f"/><circle cx="7" cy="-2" r="1.4" fill="#3fae5f"/>`,
   face_heart:`<path d="M-13 7.5 l-2.6 -2.5 a1.6 1.6 0 0 1 2.6 -1.9 a1.6 1.6 0 0 1 2.6 1.9z M13 7.5 l-2.6 -2.5 a1.6 1.6 0 0 1 2.6 -1.9 a1.6 1.6 0 0 1 2.6 1.9z" fill="#ff4d6d"/>`,
 };
 function accessorize(svg, id, eq=S.shop.equip){
@@ -3478,7 +3751,7 @@ function rollTier(force){
   return 'salt';
 }
 function grant(tier){
-  const g=S.gacha, pool=CHARS.filter(c=>c.tier===tier), ch=pool[Math.floor(Math.random()*pool.length)];
+  const g=S.gacha, pool=CHARS.filter(c=>c.tier===tier && !c.limited), ch=pool[Math.floor(Math.random()*pool.length)];
   const isNew=!g.owned[ch.id];
   g.owned[ch.id]=(g.owned[ch.id]||0)+1; g.pulls++;
   const shards=isNew?0:TIERS[tier].shard; g.shards+=shards;
@@ -4345,6 +4618,7 @@ function mergeState(a, b, keepA){
   // shop: purchases only grow (coins spent are derived from them); outfits/effects follow the newer copy
   for(const [id,c] of Object.entries(o.shop.owned)) m.shop.owned[id] = Math.max(m.shop.owned[id]||0, c);
   m.shop.frozen = {...o.shop.frozen, ...n.shop.frozen};
+  m.fest.floats = {...o.fest.floats, ...n.fest.floats};
   m.updatedAt = Math.max(n.updatedAt||0, o.updatedAt||0);
   return m;
 }
