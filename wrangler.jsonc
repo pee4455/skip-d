@@ -2,7 +2,11 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "skip-d",
   "compatibility_date": "2025-09-01",
+  // the site is built by Vite (npm run build) into dist/ before each deploy
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
-    "directory": "./public"
+    "directory": "./dist"
   }
 }
