@@ -144,6 +144,20 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .crane .blink{fill:#ff6a33;animation:dotpulse 1s ease-in-out infinite}
 .city-cap{text-align:center;font-size:12.5px;color:rgba(255,255,255,.55);font-weight:600;margin:4px 0 2px}
 .city-cap b{color:#ffb08a;font-weight:700}
+.hill{fill:#1c2f33}
+.hill.far{fill:#1a2236}
+.hero.day .hill{fill:#2a3a36}
+.hero.day .hill.far{fill:#2d2f40}
+.road{fill:#2c2c37}
+.lane{stroke:#ffd36b;stroke-width:.8;stroke-dasharray:5 4;opacity:.75}
+.cone{fill:#ff7a2b}
+.flag line{stroke:#d1d1d6;stroke-width:.8}
+.flag .pennant{fill:#ff5a1f;transform-box:fill-box;transform-origin:0 50%;animation:wave-flag 1.1s ease-in-out infinite alternate}
+@keyframes wave-flag{to{transform:scaleX(.72) skewY(6deg)}}
+.monster{display:none}
+.hero.live .monster{display:inline}
+.monster .peek{animation:peek 3.4s ease-in-out infinite}
+@keyframes peek{0%,100%{transform:translateY(16px)}35%,65%{transform:translateY(0)}}
 .city,.city-cap{cursor:pointer}
 .city-cap{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap}
 .city-cap svg{width:14px;height:14px}
@@ -191,6 +205,18 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .cs-res svg{width:28px;height:28px;border-radius:50%;background:#17171c}
 .cs-res .bud{background:rgba(255,77,109,.14);color:#e5375d}
 .cs-note{font-size:12.5px;color:var(--muted);line-height:1.55;margin:14px 2px 0}
+.cs-pc{margin-top:14px}
+.pc-months{display:flex;gap:6px;overflow-x:auto;margin:0 0 12px;scrollbar-width:none}
+.pc-months::-webkit-scrollbar{display:none}
+.pc-months button{flex:none;height:32px;padding:0 14px;border-radius:99px;background:var(--fill);font-size:13.5px;font-weight:600;color:var(--ink2)}
+.pc-months button.sel{background:var(--grad);color:#fff}
+.pc-img{position:relative;border-radius:16px;overflow:hidden;background:#0d0c18;aspect-ratio:4/5;max-height:56vh;margin:0 auto}
+.pc-img img{display:block;width:100%;height:100%;object-fit:contain;transition:opacity .25s}
+.pc-wait{position:absolute;inset:0;display:none;place-items:center}
+.pc-wait::after{content:"";width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.18);border-top-color:#ff8a5c;animation:spin .8s linear infinite}
+.pc-img.busy .pc-wait{display:grid}
+.pc-img.busy img{opacity:.3}
+.pc-stage{position:fixed;left:-10000px;top:0;width:640px;padding:0;pointer-events:none}
 .ring-track{stroke:rgba(255,255,255,.08)}
 .ring-arc{filter:drop-shadow(0 0 8px rgba(255,90,31,.55));transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)}
 .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
@@ -1068,6 +1094,7 @@ html:has(#splash){overflow:hidden}
           </g>
           <g id="skyline"></g>
           <rect class="ground" x="0" y="211" width="320" height="9"/>
+          <g id="cityRoad"></g>
         </svg>
         <div class="ring-center">
           <div class="lbl" id="heroLabel"></div>
@@ -1455,6 +1482,20 @@ html:has(#splash){overflow:hidden}
   </div>
 </div>
 
+<div class="rmodal" id="pcSheet" role="dialog" aria-modal="true" aria-labelledby="pcH">
+  <div class="rm-bg" id="pcBg"></div>
+  <div class="rm-panel run-panel">
+    <h3 class="rd-title" id="pcH" data-i18n="pcTitle"></h3>
+    <p class="cs-sub" data-i18n="pcSub"></p>
+    <div class="pc-months" id="pcMonths"></div>
+    <div class="pc-img"><img id="pcImg" alt=""><div class="pc-wait" id="pcWait"></div></div>
+    <div class="rd-actions">
+      <button class="st-btn press" id="pcShare"><svg class="i"><use href="#i-sparkles"/></svg><span data-i18n="pcShare"></span></button>
+      <button class="sheet-x press" id="pcClose" data-i18n="close"></button>
+    </div>
+  </div>
+</div>
+
 <!-- ============ GACHA STAGE ============ -->
 <div class="stage" id="stage" role="dialog" aria-modal="true">
   <div class="burst" id="burst"></div>
@@ -1705,6 +1746,9 @@ const I18N = {
     t_name:'ก่อนอื่นเลย… ให้เราเรียกคุณว่าอะไรดี?',
     t_hero:'{hi}นี่คือเมืองของคุณ! กลางวันพระอาทิตย์จะเดินข้ามฟ้าจนถึงเวลาปิดครัว พอถึงเวลา ดวงจันทร์จะนับว่างดมาแล้วกี่ชั่วโมง\nงดได้ 1 คืน = สร้างตึก 1 หลัง กินเบาๆ = ได้บ้านหลังเล็ก',
     cityCap:'เมืองเดือน{m} · ตึก {b} · บ้าน {h}',
+    pcTitle:'โปสการ์ดเมือง', pcSub:'ภาพสรุปเมืองของแต่ละเดือน แชร์ให้เพื่อนดูหรือเก็บไว้เป็นที่ระลึก', pcShare:'แชร์ / บันทึกรูป', pcFail:'สร้างโปสการ์ดไม่สำเร็จ ลองอีกครั้ง',
+    pcBrand:'ปิดครัว · โปสการ์ดเมือง', pcTowers:'ตึก', pcNights:'คืนที่งดได้', pcKm:'กม. ที่วิ่ง', pcFlags:'ธงชัยชนะ', pcFooter:'ปิดครัว — งดมื้อเย็นให้สนุกขึ้น',
+    cityFlag:'ปักธงชัยชนะบนตึกในเมืองแล้ว และไล่มอนสเตอร์ไปได้คืนนี้!',
     cityTitle:'เมืองเดือน{m}', citySub:'ตึก {b} · บ้าน {h} · ผู้อยู่อาศัย {r}', brick:'อิฐ', wood:'ไม้',
     craft:'แปรรูปไม้ 3 ชิ้น → อิฐ 1 ก้อน', crafted:'ได้อิฐเพิ่ม 1 ก้อน', cityBuild:'สร้างในเมือง', slotsLeft:'ที่ว่างหน้าเมือง {n}',
     upHouse:'อัปเกรดบ้านเป็นตึก', upHouseSub:'อัปเกรดได้ {n} หลัง', dTree:'ปลูกต้นไม้', dLamp:'เสาไฟถนน', dFountain:'น้ำพุกลางเมือง',
@@ -1844,6 +1888,9 @@ const I18N = {
     t_name:'First things first… what should I call you?',
     t_hero:'{hi}This is your city! By day the sun crosses the sky until closing time, then the moon shows how long you have fasted.\nEach fasted night builds a tower, a light meal builds a small house.',
     cityCap:'{m} city · {b} towers · {h} houses',
+    pcTitle:'City postcard', pcSub:'A snapshot of your city for each month. Share it or keep it as a souvenir.', pcShare:'Share / save image', pcFail:'Could not make the postcard. Try again.',
+    pcBrand:'Kitchen Closed · City postcard', pcTowers:'towers', pcNights:'nights fasted', pcKm:'km run', pcFlags:'victory flags', pcFooter:'Kitchen Closed — skip dinner, the fun way',
+    cityFlag:'A victory flag now flies over your city, and the monster is gone for tonight!',
     cityTitle:'{m} city', citySub:'{b} towers · {h} houses · {r} residents', brick:'Bricks', wood:'Wood',
     craft:'Turn 3 wood into 1 brick', crafted:'+1 brick', cityBuild:'Build', slotsLeft:'{n} spots left',
     upHouse:'Upgrade a house to a tower', upHouseSub:'{n} can be upgraded', dTree:'Plant a tree', dLamp:'Street lamp', dFountain:'Town fountain',
@@ -2116,44 +2163,78 @@ let cityBuilt = null;   // keys already standing, so only new buildings play the
     h+=`<circle cx="${x}" cy="${y}" r="${(.5+r*.8).toFixed(2)}" opacity="${(.35+r2*.5).toFixed(2)}" class="${i%3?'':'tw'}" style="animation-delay:${(r*2.6).toFixed(2)}s"/>`; }
   $('cityStars').innerHTML = h;
 })();
-function renderCity(){
-  const tn=fromKey(nightKey()), y=tn.getFullYear(), m=tn.getMonth(), n=new Date(y,m+1,0).getDate(), tonight=keyOf(tn);
-  const G=211, slot=312/n, first=cityBuilt===null, seen=cityBuilt||new Set(), now=new Set();
-  let out='', towers=0, houses=0, run=0;
+/* builds the skyline markup for any month; A = animation bookkeeping (live view only) */
+const ymOf = ts => nightKey(new Date(ts)).slice(0,7);
+const monthRuns = ym => S.runs.filter(r=>ymOf(r.at)===ym);
+const monthCravings = ym => S.sessions.filter(x=>ymOf(x.t)===ym).length;
+const tonightResisted = () => { const k=nightKey(); return S.sessions.some(x=>nightKey(new Date(x.t))===k); };
+function buildCity(y, m, tonight, A, postcard){
+  const n=new Date(y,m+1,0).getDate(), ym=`${y}-${pad(m+1)}`, G=211, slot=312/n;
+  const runs=monthRuns(ym), km=runs.reduce((a,r)=>a+r.dist,0), elev=runs.reduce((a,r)=>a+(r.elev||0),0), cv=monthCravings(ym);
+  let out='', towers=0, houses=0, ok=0, run=0;
+  const tops=[];
+  // hills behind the city grow with this month's treadmill climb
+  if(elev>0){
+    const h=Math.min(48, 8+elev/8), h2=h*.7;
+    out += `<path class="hill far" d="M0 ${G} C30 ${G-h2} 70 ${G-h2*.4} 110 ${G-h2*.8} S190 ${G-h2*.3} 230 ${G-h2} S300 ${G-h2*.5} 320 ${G-h2*.6} V${G}Z"/>`;
+    out += `<path class="hill" d="M0 ${G-h*.5} C40 ${G-h} 80 ${G-h*.3} 130 ${G-h*.6} S220 ${G-h} 270 ${G-h*.45} S320 ${G-h*.8} 320 ${G-h*.8} V${G}H0Z"/>`;
+  }
+  // a food monster lurks over the city on nights you have not fought a craving yet
+  if(!postcard && tonight && !tonightResisted()) out += `<g class="monster" transform="translate(238 ${G-64})"><g class="peek"><path d="M0 20 q0 -20 10 -20 q10 0 10 20 l-3.3 -3 -3.3 3 -3.4 -3 -3.3 3 -3.4 -3z" fill="#7a4fd8"/><circle cx="6.5" cy="8" r="2.4" fill="#fff"/><circle cx="13.5" cy="8" r="2.4" fill="#fff"/><circle cx="7.2" cy="8.5" r="1.1" fill="#2b1d16"/><circle cx="14.2" cy="8.5" r="1.1" fill="#2b1d16"/><path d="M6 13.5 l1.6 1.6 1.6 -1.6 1.6 1.6 1.6 -1.6 1.6 1.6" stroke="#fff" stroke-width=".9" fill="none"/><path d="M21 7 l5 -5 M23.5 1.5 v3.5 M25.8 -.4 v3.5" stroke="#c9c9cf" stroke-width="1.1" fill="none" stroke-linecap="round"/></g></g>`;
   for(let d=1; d<=n; d++){
-    const k=keyOf(new Date(y,m,d,12)), s=S.log[k], r=cityHash(k), x=4+(d-1)*slot, w=Math.max(4, slot-1.3), cx=x+w/2;
-    run = s==='ok'||s==='light' ? run+1 : 0;
-    const grow = id=>{ now.add(id); return seen.has(id) && !first ? '' : ` rise" data-d="${first ? (d*.03).toFixed(2) : '.1'}`; };
-    const upg = s==='light' && S.city.up[k];   // a light-night house upgraded with bricks
-    if(s==='ok' || upg){
+    const k=keyOf(new Date(y,m,d,12)), st=S.log[k], r=cityHash(k), x=4+(d-1)*slot, w=Math.max(4, slot-1.3), cx=x+w/2;
+    run = st==='ok'||st==='light' ? run+1 : 0;
+    if(st==='ok') ok++;
+    const grow = id=>{ if(!A) return ''; A.now.add(id); return A.seen.has(id) && !A.first ? '' : ` rise" data-d="${A.first ? (d*.03).toFixed(2) : '.1'}`; };
+    const upg = st==='light' && S.city.up[k];   // a light-night house upgraded with bricks
+    if(st==='ok' || upg){
       towers++;
-      const land = s==='ok' && run%7===0, h = land ? 70 : Math.round((upg ? 26 : 30)+r*(upg ? 18 : 26)), top=G-h, tone = upg ? '#5b4034' : CITY_TONES[Math.floor(r*CITY_TONES.length)];
+      const land = st==='ok' && run%7===0, h = land ? 70 : Math.round((upg ? 26 : 30)+r*(upg ? 18 : 26)), top=G-h, tone = upg ? '#5b4034' : CITY_TONES[Math.floor(r*CITY_TONES.length)];
       let extra='';
       if(land) extra = `<path class="emblem" d="M${cx+1.5} ${top-14} a5 5 0 1 0 4 7.5 a3.9 3.9 0 1 1 -4 -7.5z"/><line class="ant" x1="${cx}" y1="${top}" x2="${cx}" y2="${top-5}"/>`;
       else if(r>.72) extra = `<line class="ant" x1="${cx}" y1="${top}" x2="${cx}" y2="${top-8}"/><circle class="blink" cx="${cx}" cy="${top-8.5}" r="1.1"/>`;
       else if(r<.25) extra = `<rect class="roof" x="${x+w*.2}" y="${top-6}" width="${w*.6}" height="6"/>`;
+      tops.push({ x:x+1.2, top: r<.25 ? top-6 : top, h, k });
       out += `<g class="bld${grow('t'+k)}" style="--bc:${land ? '#4a3a6a' : tone}">${extra}<rect class="body" x="${x.toFixed(1)}" y="${top}" width="${w.toFixed(1)}" height="${h}" rx="1"/><rect class="wins ${r>.5?'b':''}" x="${(x+.5).toFixed(1)}" y="${top+3}" width="${(w-1).toFixed(1)}" height="${h-6}"/></g>`;
-    } else if(s==='light'){
+    } else if(st==='light'){
       houses++;
       const h=Math.round(10+r*6), top=G-h;
       out += `<g class="bld house${grow('h'+k)}" style="--bc:#6a4f3c"><path class="roof" d="M${(x-.5).toFixed(1)} ${top} L${cx.toFixed(1)} ${top-6} L${(x+w+.5).toFixed(1)} ${top}Z"/><rect class="body" x="${x.toFixed(1)}" y="${top}" width="${w.toFixed(1)}" height="${h}"/><rect class="hw" x="${(cx-1.2).toFixed(1)}" y="${top+3}" width="2.4" height="2.6"/></g>`;
-    } else if(s==='miss'){
+    } else if(st==='miss'){
       out += `<path class="lot" d="M${x.toFixed(1)} ${G} q${(w/2).toFixed(1)} -4 ${w.toFixed(1)} 0z"/>`;
-    } else if(k===tonight){
+    } else if(tonight && k===tonight){
       out += `<g class="crane"><line x1="${cx}" y1="${G}" x2="${cx}" y2="${G-46}"/><line x1="${cx-7}" y1="${G-44}" x2="${cx+16}" y2="${G-44}"/><line x1="${cx+13}" y1="${G-44}" x2="${cx+13}" y2="${G-32}"/><path d="M${cx} ${G-46} L${cx+16} ${G-44}"/><circle class="blink" cx="${cx}" cy="${G-48}" r="1.5"/></g>`;
-    } else if(k>tonight){
+    } else if(!tonight || k>tonight){
       out += `<rect class="plot" x="${x.toFixed(1)}" y="${G-1.5}" width="${w.toFixed(1)}" height="1.5"/>`;
     }
   }
-  out += cityFront(y, m, seen, now, first);
-  $('skyline').innerHTML = out;
+  // every craving you fought off this month plants a victory flag on a tower (tallest first)
+  tops.sort((a,b)=>b.h-a.h).slice(0, cv).forEach((tp,i)=>{
+    out += `<g class="flag"><line x1="${tp.x.toFixed(1)}" y1="${tp.top}" x2="${tp.x.toFixed(1)}" y2="${tp.top-10}"/><path class="pennant" style="animation-delay:-${(i*.37).toFixed(2)}s" d="M${tp.x.toFixed(1)} ${tp.top-10} l7 2 -7 2z"/></g>`;
+  });
+  out += cityFront(ym, A);
+  // the street gets paved as you run: 20 km this month paves all of it
+  const pw = Math.min(1, km/20)*320;
+  let road = '';
+  if(pw>0){
+    road = `<rect class="road" x="0" y="211.5" width="${pw.toFixed(1)}" height="8.5"/><line class="lane" x1="2" y1="215.8" x2="${Math.max(2,pw-2).toFixed(1)}" y2="215.8"/>`;
+    if(pw<320) road += `<path class="cone" d="M${(pw+3).toFixed(1)} 219 l2.2 -6 2.2 6z"/>`;
+  }
+  return { html:out, road, towers, houses, ok, km, elev, cv, ym };
+}
+function renderCity(){
+  const tn=fromKey(nightKey()), y=tn.getFullYear(), m=tn.getMonth();
+  const A = { first:cityBuilt===null, seen:cityBuilt||new Set(), now:new Set() };
+  const c = buildCity(y, m, keyOf(tn), A);
+  $('skyline').innerHTML = c.html;
+  $('cityRoad').innerHTML = c.road;
   $('skyline').querySelectorAll('[data-d]').forEach(g=>g.style.setProperty('--d', g.dataset.d+'s'));
-  cityBuilt = now;
+  cityBuilt = A.now;
   const month = L().monthsLong[m];
   const w = cityWallet();
-  $('cityCap').innerHTML = (towers||houses ? t('cityCap',{m:month, b:`<b>${towers}</b>`, h:`<b>${houses}</b>`}) : t('cityEmpty'))
+  $('cityCap').innerHTML = (c.towers||c.houses ? t('cityCap',{m:month, b:`<b>${c.towers}</b>`, h:`<b>${c.houses}</b>`}) : t('cityEmpty'))
     + ` <span class="cap-mat">${icon('brick')}${w.brick}</span>${icon('chevron-right')}`;
-  cityStats = { month, towers, houses };
+  cityStats = { month, towers:c.towers, houses:c.houses, km:c.km, cv:c.cv };
   if($('citySheet').classList.contains('open')) renderCitySheet();
 }
 
@@ -2180,13 +2261,14 @@ function cityResidents(){
   return { buddy:b, walkers:others.slice(0, b ? 3 : 4), total: CHARS.filter(c=>S.gacha.owned[c.id]).length };
 }
 /* foreground street: decorations, the buddy's house, and residents walking up and down */
-function cityFront(y, m, seen, now, first){
-  const G=211, ym=cityMonth();
+function cityFront(ym, A){
+  const G=211;
   let out='';
   monthDecor(ym).forEach((type,i)=>{
     if(!type) return;
-    const x = 12 + i*27 + (i%2)*4, id='d'+ym+i; now.add(id);
-    const cls = seen.has(id) && !first ? '' : ' rise';
+    const x = 12 + i*27 + (i%2)*4, id='d'+ym+i;
+    if(A) A.now.add(id);
+    const cls = !A || (A.seen.has(id) && !A.first) ? '' : ' rise';
     if(type==='tree') out += `<g class="deco${cls}"><rect x="${x-.8}" y="${G-6}" width="1.6" height="6" fill="#6b4a2a"/><circle cx="${x}" cy="${G-10}" r="5" fill="#2f8f4e"/><circle cx="${x-2.5}" cy="${G-8}" r="3.4" fill="#3fae5f"/><circle cx="${x+2.6}" cy="${G-8.5}" r="3.2" fill="#37a056"/></g>`;
     else if(type==='lamp') out += `<g class="deco lamp${cls}"><line x1="${x}" y1="${G}" x2="${x}" y2="${G-15}" stroke="#8a8aa0" stroke-width="1.1"/><path d="M${x-2.6} ${G-15} h5.2 l-1 -2.4 h-3.2z" fill="#8a8aa0"/><circle class="bulb" cx="${x}" cy="${G-14}" r="1.6"/><circle class="halo" cx="${x}" cy="${G-13}" r="7"/></g>`;
     else if(type==='fountain') out += `<g class="deco fountain${cls}"><path d="M${x-9} ${G-4} h18 v4 h-18z" fill="#7d8aa6"/><path class="jet" d="M${x} ${G-4} V${G-13} M${x} ${G-12} q-5 1 -7 8 M${x} ${G-12} q5 1 7 8"/><circle cx="${x}" cy="${G-14}" r="1.4" fill="#9fd8ff"/></g>`;
@@ -2227,10 +2309,12 @@ function renderCitySheet(){
     </div>
     <div class="rd-h">${t('residents')}<span>${res.total}</span></div>
     ${res.total ? `<div class="cs-res">${res.buddy ? `<div class="bud">${charSVG(res.buddy)}${t('buddyHome',{name:escHTML(res.buddy.name[lang])})}</div>` : ''}${res.walkers.map(c=>`<div>${charSVG(c)}${escHTML(c.name[lang])}</div>`).join('')}</div>` : `<p class="cs-note" style="margin-top:0">${t('noResidents')}</p>`}
+    <button class="cs-craft cs-pc press" data-act="postcard">${icon('sparkles')}${t('pcTitle')}</button>
     <p class="cs-note">${t('cityHow')}</p>`;
 }
 function openCitySheet(){ renderCitySheet(); openSheet('citySheet'); }
 function cityAct(act){
+  if(act==='postcard'){ closeSheet('citySheet'); setTimeout(()=>openPostcard(), 250); return; }
   const w=cityWallet(), c=S.city, ym=cityMonth();
   if(act==='craft'){ if(w.wood<3) return; c.woodUsed=(c.woodUsed||0)+3; c.crafted=(c.crafted||0)+1; toast(t('crafted')); }
   else if(act==='upgrade'){
@@ -2247,6 +2331,90 @@ function cityAct(act){
 $('csBody').addEventListener('click', e=>{ const b=e.target.closest('[data-act]'); if(b && !b.disabled) cityAct(b.dataset.act); });
 $('city').onclick = $('cityCap').onclick = openCitySheet;
 $('csClose').onclick = $('citySheetBg').onclick = ()=>closeSheet('citySheet');
+
+/* ---- monthly postcard: the month's city at night + its stats, as a shareable 1080×1350 image ---- */
+let pcBlob = null, pcYm = '', pcJob = 0;
+function postcardMonths(){
+  const set = new Set([cityMonth()]);
+  Object.keys(S.log).forEach(k=>set.add(k.slice(0,7)));
+  S.runs.forEach(r=>set.add(ymOf(r.at)));
+  return [...set].sort().reverse().slice(0,6);
+}
+const PC_PROPS = ['fill','stroke','stroke-width','opacity','fill-opacity','stroke-opacity','stop-color','stop-opacity','display','stroke-dasharray','stroke-linecap','stroke-linejoin'];
+async function postcardBlob(ym){
+  const [y, mo] = ym.split('-').map(Number), m = mo-1, isCur = ym===cityMonth();
+  const c = buildCity(y, m, isCur ? keyOf(fromKey(nightKey())) : null, null, true);
+  // draw the city off-screen inside a "night" hero so the CSS applies, then bake the computed styles in
+  const stage = document.createElement('div'); stage.className = 'hero live pc-stage';
+  const svg = $('city').querySelector('svg').cloneNode(true);
+  stage.appendChild(svg); document.body.appendChild(stage);
+  svg.querySelector('#skyline').innerHTML = c.html;
+  svg.querySelector('#cityRoad').innerHTML = c.road;
+  svg.querySelector('#celestial').setAttribute('transform', 'translate(262 58)');
+  svg.querySelectorAll('.arc-track,.arc-fill,.clouds').forEach(e=>e.remove());
+  const els = [svg, ...svg.querySelectorAll('*')];
+  const baked = els.map(el=>{ const cs=getComputedStyle(el); return PC_PROPS.map(pr=>`${pr}:${cs.getPropertyValue(pr)}`).join(';'); });
+  els.forEach((el,i)=>{ el.setAttribute('style', baked[i]); el.removeAttribute('class'); });
+  svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg'); svg.setAttribute('width', '1000'); svg.setAttribute('height', '688');
+  const str = new XMLSerializer().serializeToString(svg);
+  stage.remove();
+  const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(str);
+  await img.decode();
+
+  const W=1080, H=1350, cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+  const x = cv.getContext('2d');
+  const font = (w,sz) => `${w} ${sz}px "IBM Plex Sans Thai","Inter",-apple-system,system-ui,sans-serif`;
+  try{ await Promise.all([document.fonts.load(font(700,72)), document.fonts.load(font(600,28))]); }catch(e){}
+  const bg = x.createLinearGradient(0,0,0,H); bg.addColorStop(0,'#17142e'); bg.addColorStop(1,'#09090d');
+  x.fillStyle = bg; x.fillRect(0,0,W,H);
+  const gl = x.createRadialGradient(W*.88,90,0,W*.88,90,560); gl.addColorStop(0,'rgba(255,90,31,.38)'); gl.addColorStop(1,'rgba(255,90,31,0)');
+  x.fillStyle = gl; x.fillRect(0,0,W,H);
+  x.fillStyle = '#ff9a62'; x.font = font(700,30); x.fillText(t('pcBrand'), 60, 110);
+  x.fillStyle = '#fff'; x.font = font(700,72); x.fillText(`${t('cityTitle',{m:L().monthsLong[m]})} ${y}`, 60, 196);
+  // city card
+  const cx=40, cy=250, cw=1000, ch=688;
+  x.save(); x.beginPath(); x.roundRect ? x.roundRect(cx, cy, cw, ch, 40) : x.rect(cx, cy, cw, ch); x.clip();
+  x.fillStyle = '#121215'; x.fillRect(cx, cy, cw, ch); x.drawImage(img, cx, cy, cw, ch);
+  x.restore();
+  // stats
+  const stats = [[c.towers, t('pcTowers')], [c.ok, t('pcNights')], [c.km.toFixed(1), t('pcKm')], [c.cv, t('pcFlags')]];
+  stats.forEach(([v,label],i)=>{
+    const sx = 60 + i*250;
+    x.fillStyle = '#fff'; x.font = font(700,68); x.fillText(String(v), sx, 1070);
+    x.fillStyle = 'rgba(255,255,255,.55)'; x.font = font(600,27); x.fillText(label, sx, 1114);
+  });
+  x.fillStyle = 'rgba(255,255,255,.1)'; x.fillRect(60, 1180, W-120, 2);
+  x.fillStyle = 'rgba(255,255,255,.5)'; x.font = font(600,28); x.fillText(t('pcFooter'), 60, 1250);
+  return new Promise(r=>cv.toBlob(r, 'image/png'));
+}
+async function showPostcard(ym){
+  pcYm = ym; const job = ++pcJob;
+  $('pcMonths').querySelectorAll('button').forEach(b=>b.classList.toggle('sel', b.dataset.ym===ym));
+  $('pcImg').parentElement.classList.add('busy');
+  try{
+    const blob = await postcardBlob(ym);
+    if(job!==pcJob) return;
+    pcBlob = blob;
+    const old = $('pcImg').src; $('pcImg').src = URL.createObjectURL(blob); if(old.startsWith('blob:')) URL.revokeObjectURL(old);
+  }catch(e){ console.warn('postcard failed', e); toast(t('pcFail')); }
+  finally{ if(job===pcJob) $('pcImg').parentElement.classList.remove('busy'); }
+}
+function openPostcard(){
+  $('pcMonths').innerHTML = postcardMonths().map(ym=>{ const [y,m]=ym.split('-').map(Number); return `<button class="press" data-ym="${ym}">${L().monthsLong[m-1]} ${y}</button>`; }).join('');
+  openSheet('pcSheet');
+  showPostcard(cityMonth());
+}
+$('pcMonths').onclick = e=>{ const b=e.target.closest('button'); if(b && b.dataset.ym!==pcYm) showPostcard(b.dataset.ym); };
+$('pcShare').onclick = async ()=>{
+  if(!pcBlob) return;
+  const file = new File([pcBlob], `city-${pcYm}.png`, { type:'image/png' });
+  try{
+    if(navigator.canShare && navigator.canShare({ files:[file] })){ await navigator.share({ files:[file], title:t('pcTitle') }); return; }
+  }catch(e){ if(e.name==='AbortError') return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(pcBlob); a.download = file.name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+};
+$('pcClose').onclick = $('pcBg').onclick = ()=>closeSheet('pcSheet');
 
 /* ---------- render: progress ---------- */
 let calMonth = (()=>{ const d=fromKey(nightKey()); return new Date(d.getFullYear(), d.getMonth(), 1); })();
@@ -2488,7 +2656,7 @@ $('sosFinish').onclick = ()=>{
   $('sumTime').textContent = mmss(dur);
   $('sumMissions').textContent = sos.missions;
   $('sumXP').textContent = '+'+sos.xp;
-  $('sumMsg').textContent = t('sumMsg',{n:S.cravings});
+  $('sumMsg').textContent = t('sumMsg',{n:S.cravings}) + ' ' + t('cityFlag');
   $('sos').classList.add('done');
   if(HAS_GSAP){
     gsap.fromTo('#sos .summary .ok',{scale:.2,opacity:0,rotate:-30},{scale:1,opacity:1,rotate:0,duration:.7,ease:'back.out(2.2)'});
