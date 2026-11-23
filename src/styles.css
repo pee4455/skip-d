@@ -1016,3 +1016,14 @@ html:has(#splash){overflow:hidden}
 
 #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:145}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* "new version" bar (service worker update) */
+.update-bar{position:fixed;left:50%;transform:translateX(-50%);top:calc(var(--sat) + 10px);z-index:220;display:flex;align-items:center;gap:10px;
+  max-width:calc(100% - 24px);padding:8px 8px 8px 14px;border-radius:99px;background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);animation:barIn .4s cubic-bezier(.2,.9,.3,1.2) both}
+.update-bar[hidden]{display:none}
+.update-bar svg{width:17px;height:17px;color:#ff9a62;flex:none}
+.update-bar span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.update-bar button{flex:none;height:32px;padding:0 14px;border-radius:99px;background:var(--grad);color:#fff;font-weight:700;font-size:13.5px}
+.update-bar.busy button{opacity:.6;pointer-events:none}
+@keyframes barIn{from{transform:translate(-50%,-30px);opacity:0}}

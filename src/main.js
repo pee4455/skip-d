@@ -13,12 +13,14 @@ import { R, buildRun, startRun } from './run';
 import { cloudInit } from './cloud';
 import { splashGate } from './splash';
 import { applyStatic, renderAll, showTab, tab } from './app';
+import { registerSW } from './pwa';
 
 /* ---------- boot ---------- */
 applyStatic(); checkBadges(); save(); renderAll(); showTab('home');
 setInterval(()=>{ if(tab==='home') renderTimer(); }, 1000);
 cloudInit();
 splashGate();
+registerSW();
 let lastNight = nightKey();
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden){ renderAll(); } });
 setInterval(()=>{ const n=nightKey(); if(n!==lastNight){ lastNight=n; renderAll(); } }, 60000);
