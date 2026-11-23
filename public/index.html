@@ -96,8 +96,54 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .hero.live .pill .dot{background:#ff6a33;box-shadow:0 0 0 0 rgba(255,106,51,.6);animation:ping 1.8s infinite}
 @keyframes ping{70%{box-shadow:0 0 0 8px rgba(255,106,51,0)}100%{box-shadow:0 0 0 0 rgba(255,106,51,0)}}
 .hero-top .range{font-size:13px;color:rgba(255,255,255,.55);font-weight:500}
-.ring-wrap{position:relative;width:min(64vw,240px);aspect-ratio:1;margin:10px auto 6px}
-.ring-wrap svg{width:100%;height:100%;overflow:visible}
+/* city scene (replaces the round ring) */
+.city{position:relative;margin:6px -18px 0;aspect-ratio:320/220}
+.city-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.city .ring-center{inset:auto 0;top:23%;justify-content:flex-start}
+.city .ring-center .time,.city .ring-center .lbl,.city .ring-center .sub{text-shadow:0 2px 14px rgba(0,0,0,.65)}
+.sky-a{stop-color:#3b3a7a;stop-opacity:.5;transition:stop-color 1.2s}
+.sky-b{stop-color:#3b3a7a;stop-opacity:0}
+.hero.day .sky-a{stop-color:#ff8a4c;stop-opacity:.32}
+.hero.day .sky-b{stop-color:#ff8a4c}
+.glow-a{stop-color:#ffe9a8;stop-opacity:.5}
+.glow-b{stop-color:#ffe9a8;stop-opacity:0}
+.hero.day .glow-a,.hero.day .glow-b{stop-color:#ffb35c}
+.c-sun,.hero.day .c-moon{display:none}
+.hero.day .c-sun{display:inline}
+.c-glow{animation:cglow 4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes cglow{50%{transform:scale(1.15);opacity:.8}}
+.arc-track{fill:none;stroke:rgba(255,255,255,.1);stroke-width:2.5;stroke-dasharray:1 6;stroke-linecap:round}
+.arc-fill{fill:none;stroke-width:3.5;stroke-linecap:round}
+.stars circle{fill:#fff;transition:opacity 1.2s}
+.stars .tw{animation:twinkle 2.6s ease-in-out infinite}
+.hero.day .stars circle{opacity:0}
+.cloud{fill:#fff;opacity:0;transition:opacity 1.2s}
+.hero.day .cloud{opacity:.13}
+.cloud.c1{animation:drift 46s linear infinite}
+.cloud.c2{animation:drift 70s linear infinite -30s}
+@keyframes drift{from{transform:translateX(-90px)}to{transform:translateX(340px)}}
+.ground{fill:#1e1e26}
+.bld rect.body{fill:var(--bc)}
+.bld rect.wins{fill:url(#gWin)}
+.bld rect.wins.b{fill:url(#gWinB)}
+.win{fill:rgba(255,255,255,.09);transition:fill 1.2s}
+.hero.live .win{fill:#ffd36b}
+.hero.live .win.b{fill:rgba(255,211,107,.35)}
+.bld .roof{fill:var(--bc)}
+.bld .ant{stroke:#55556a;stroke-width:1}
+.bld .blink{fill:#ff4d4d;animation:dotpulse 1.4s ease-in-out infinite}
+.bld .emblem{fill:#ffd36b;filter:drop-shadow(0 0 3px rgba(255,211,107,.8))}
+.house .door{fill:#2a1f18}
+.house .hw{fill:rgba(255,255,255,.12);transition:fill 1.2s}
+.hero.live .house .hw{fill:#ffb35c}
+.rise{transform-box:fill-box;transform-origin:50% 100%;animation:rise .9s cubic-bezier(.3,1.35,.5,1) both;animation-delay:var(--d,0s)}
+@keyframes rise{from{transform:scaleY(0)}}
+.lot{fill:#3a3a44}
+.plot{fill:rgba(255,255,255,.07)}
+.crane line,.crane path{stroke:#ff9a62;stroke-width:1.1;fill:none;stroke-linecap:round}
+.crane .blink{fill:#ff6a33;animation:dotpulse 1s ease-in-out infinite}
+.city-cap{text-align:center;font-size:12.5px;color:rgba(255,255,255,.55);font-weight:600;margin:4px 0 2px}
+.city-cap b{color:#ffb08a;font-weight:700}
 .ring-track{stroke:rgba(255,255,255,.08)}
 .ring-arc{filter:drop-shadow(0 0 8px rgba(255,90,31,.55));transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)}
 .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
@@ -947,12 +993,28 @@ html:has(#splash){overflow:hidden}
         <span class="pill"><span class="dot"></span><span id="phaseText"></span></span>
         <span class="range" id="phaseRange"></span>
       </div>
-      <div class="ring-wrap">
-        <svg viewBox="0 0 240 240" aria-hidden="true">
-          <circle class="ring-track" cx="120" cy="120" r="104" fill="none" stroke-width="14"/>
-          <circle class="ring-arc" id="ringArc" cx="120" cy="120" r="104" fill="none" stroke="url(#gArc)" stroke-width="14" stroke-linecap="round"
-            stroke-dasharray="653.45" stroke-dashoffset="653.45" transform="rotate(-90 120 120)"/>
-          <circle id="ringKnob" cx="120" cy="16" r="9" fill="#fff" stroke="#ff5a1f" stroke-width="4"/>
+      <!-- the fasting clock as a city: the moon (sun by day) travels the sky arc, each night of the month adds a building -->
+      <div class="city" id="city">
+        <svg class="city-svg" viewBox="0 0 320 220" aria-hidden="true">
+          <defs>
+            <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="sky-b"/><stop offset=".45" class="sky-a"/><stop offset="1" class="sky-b"/></linearGradient>
+            <radialGradient id="gGlow"><stop offset="0" class="glow-a"/><stop offset="1" class="glow-b"/></radialGradient>
+            <pattern id="gWin" width="4" height="5.5" patternUnits="userSpaceOnUse"><rect x="1" y="1.2" width="1.7" height="2.3" rx=".3" class="win"/></pattern>
+            <pattern id="gWinB" width="4" height="5.5" patternUnits="userSpaceOnUse"><rect x="1" y="1.2" width="1.7" height="2.3" rx=".3" class="win b"/></pattern>
+          </defs>
+          <rect class="sky" x="0" y="0" width="320" height="220" fill="url(#gSky)"/>
+          <g class="stars" id="cityStars"></g>
+          <g class="clouds"><g class="cloud c1"><circle cx="40" cy="70" r="7"/><circle cx="50" cy="66" r="9"/><circle cx="60" cy="71" r="6"/><rect x="34" y="70" width="32" height="7" rx="3.5"/></g>
+            <g class="cloud c2"><circle cx="230" cy="48" r="5"/><circle cx="238" cy="45" r="7"/><circle cx="246" cy="49" r="5"/><rect x="226" y="48" width="25" height="6" rx="3"/></g></g>
+          <path class="arc-track" d="M25 172 A135 135 0 0 1 295 172"/>
+          <path class="ring-arc arc-fill" id="ringArc" d="M25 172 A135 135 0 0 1 295 172" pathLength="1" stroke="url(#gArc)" stroke-dasharray="1" stroke-dashoffset="1"/>
+          <g id="celestial" transform="translate(25 172)">
+            <circle class="c-glow" r="30" fill="url(#gGlow)"/>
+            <g class="c-sun"><circle r="10.5" fill="#ffc46b"/><circle r="10.5" fill="none" stroke="#ff9a3c" stroke-width="1.5"/></g>
+            <g class="c-moon"><path d="M2.5 -11.5 a11.8 11.8 0 1 0 9.4 18.6 a9.2 9.2 0 1 1 -9.4 -18.6z" fill="#ffe9a8"/><circle cx="-4" cy="2" r="1.6" fill="#f2cf73" opacity=".7"/><circle cx="-1" cy="6.5" r="1.1" fill="#f2cf73" opacity=".7"/></g>
+          </g>
+          <g id="skyline"></g>
+          <rect class="ground" x="0" y="211" width="320" height="9"/>
         </svg>
         <div class="ring-center">
           <div class="lbl" id="heroLabel"></div>
@@ -960,6 +1022,7 @@ html:has(#splash){overflow:hidden}
           <div class="sub" id="heroSub"></div>
         </div>
       </div>
+      <div class="city-cap" id="cityCap"></div>
       <div class="hero-metrics">
         <div><svg class="i"><use href="#i-sunset"/></svg><span class="k" data-i18n="lblClose"></span><span class="v num" id="mClose"></span></div>
         <div><svg class="i"><use href="#i-sunrise"/></svg><span class="k" data-i18n="lblBreak"></span><span class="v num" id="mBreak"></span></div>
@@ -1579,7 +1642,8 @@ const I18N = {
     errEmail:'อีเมลไม่ถูกต้อง', errCode:'รหัสไม่ถูกต้องหรือหมดอายุ', errSend:'ส่งไม่สำเร็จ ลองใหม่อีกครั้ง', errRate:'ส่งบ่อยเกินไป รอสักครู่แล้วลองใหม่', errNet:'เชื่อมต่อไม่ได้ ตรวจอินเทอร์เน็ต', errGeneric:'มีบางอย่างผิดพลาด ลองใหม่อีกครั้ง',
     t_welcome:'สวัสดี! เราชื่อ "มูนนี่" เป็นเชฟประจำแอปปิดครัว\nเดี๋ยวเราพาทัวร์สั้นๆ แค่ 1 นาทีนะ',
     t_name:'ก่อนอื่นเลย… ให้เราเรียกคุณว่าอะไรดี?',
-    t_hero:'{hi}นี่คือนาฬิกาปิดครัว กลางวันจะนับถอยหลังถึงเวลาปิดครัว พอถึงเวลาแล้ว วงแหวนจะนับว่างดมาแล้วกี่ชั่วโมง',
+    t_hero:'{hi}นี่คือเมืองของคุณ! กลางวันพระอาทิตย์จะเดินข้ามฟ้าจนถึงเวลาปิดครัว พอถึงเวลา ดวงจันทร์จะนับว่างดมาแล้วกี่ชั่วโมง\nงดได้ 1 คืน = สร้างตึก 1 หลัง กินเบาๆ = ได้บ้านหลังเล็ก',
+    cityCap:'เมืองเดือน{m} · ตึก {b} · บ้าน {h}', cityEmpty:'งดมื้อเย็นได้ 1 คืน = สร้างตึก 1 หลังในเมืองนี้',
     t_cutoff:'ปกติอยากปิดครัวกี่โมงดี? เลือกได้เลย\n(เปลี่ยนทีหลังได้ในหน้าโปรไฟล์)',
     t_sos:'ตอนดึกๆ ถ้าหิวจนทนไม่ไหว กดปุ่มนี้เลย! เราจะพาหายใจ และให้ทำภารกิจเล็กๆ จนความอยากผ่านไป',
     t_checkin:'หลังเวลาปิดครัว มาเช็คอินตรงนี้ทุกคืนนะ\nงดได้รับ 50 XP · กินเบาๆ ก็ยังรักษาสตรีคไว้ได้',
@@ -1711,7 +1775,8 @@ const I18N = {
     errEmail:'That email looks wrong', errCode:'Wrong or expired code', errSend:"Couldn't send. Try again.", errRate:'Too many tries. Wait a moment and try again.', errNet:'No connection. Check your internet.', errGeneric:'Something went wrong. Try again.',
     t_welcome:"Hi there! I'm Moonie, the chef of Kitchen Closed.\nLet me give you a quick 1-minute tour.",
     t_name:'First things first… what should I call you?',
-    t_hero:'{hi}This is your kitchen clock. During the day it counts down to closing time — after that, the ring shows how long you have fasted.',
+    t_hero:'{hi}This is your city! By day the sun crosses the sky until closing time, then the moon shows how long you have fasted.\nEach fasted night builds a tower, a light meal builds a small house.',
+    cityCap:'{m} city · {b} towers · {h} houses', cityEmpty:'Each fasted night builds a tower in this city',
     t_cutoff:'What time do you usually want to close the kitchen? Pick one!\n(You can change it later in Profile.)',
     t_sos:'Late-night hunger getting loud? Tap this! I will breathe with you and give you small missions until the craving passes.',
     t_checkin:'After closing time, check in here every night.\nFasted earns 50 XP · a light meal still keeps your streak.',
@@ -1912,7 +1977,7 @@ function renderHome(){
   $('miniAvatar').innerHTML = avatarHTML();
   $('phaseRange').textContent = `${S.settings.cutoff} – ${S.settings.breakfast}`;
   $('mClose').textContent = S.settings.cutoff; $('mBreak').textContent = S.settings.breakfast; $('mGoal').textContent = fastHours();
-  renderTimer();
+  renderTimer(); renderCity();
 
   const tg=checkinTarget(), cur=S.log[tg.key];
   $('ciTitle').textContent = t(tg.title);
@@ -1959,10 +2024,57 @@ function renderTimer(){
     $('heroTime').textContent=hms(left);
     $('heroSub').textContent = left<3600000 ? t('lastMealSoon') : t('eatLunch');
   }
-  $('ringArc').style.strokeDashoffset = RING_C*(1-p);
-  const a = (-90 + 360*p) * Math.PI/180;
-  $('ringKnob').setAttribute('cx', 120 + 104*Math.cos(a));
-  $('ringKnob').setAttribute('cy', 120 + 104*Math.sin(a));
+  // the moon (sun by day) rides the sky arc from left to right as time passes
+  $('ringArc').style.strokeDashoffset = 1-p;
+  const th = Math.PI*(1-p);
+  $('celestial').setAttribute('transform', `translate(${(160+135*Math.cos(th)).toFixed(1)} ${(172-135*Math.sin(th)).toFixed(1)})`);
+}
+
+/* ---------- city: one plot per night of this month ----------
+   fasted → a tower (every 7th night in a row → a landmark), light → a small house,
+   missed → an empty lot, tonight (not logged yet) → a crane waiting to build. */
+const CITY_TONES = ['#2c3150','#36304f','#2a3d4f','#3d3045','#2f2f45','#283a44'];
+const cityHash = k => { let h=2166136261; for(const c of k) h=Math.imul(h ^ c.charCodeAt(0), 16777619); return (h>>>0)/4294967296; };
+let cityBuilt = null;   // keys already standing, so only new buildings play the rise animation
+(function cityStars(){
+  let h='';
+  for(let i=0;i<30;i++){ const r=cityHash('star'+i), r2=cityHash('s2'+i), x=(r*318+1).toFixed(1), y=(r2*120+6).toFixed(1);
+    h+=`<circle cx="${x}" cy="${y}" r="${(.5+r*.8).toFixed(2)}" opacity="${(.35+r2*.5).toFixed(2)}" class="${i%3?'':'tw'}" style="animation-delay:${(r*2.6).toFixed(2)}s"/>`; }
+  $('cityStars').innerHTML = h;
+})();
+function renderCity(){
+  const tn=fromKey(nightKey()), y=tn.getFullYear(), m=tn.getMonth(), n=new Date(y,m+1,0).getDate(), tonight=keyOf(tn);
+  const G=211, slot=312/n, first=cityBuilt===null, seen=cityBuilt||new Set(), now=new Set();
+  let out='', towers=0, houses=0, run=0;
+  for(let d=1; d<=n; d++){
+    const k=keyOf(new Date(y,m,d,12)), s=S.log[k], r=cityHash(k), x=4+(d-1)*slot, w=Math.max(4, slot-1.3), cx=x+w/2;
+    run = s==='ok'||s==='light' ? run+1 : 0;
+    const grow = id=>{ now.add(id); return seen.has(id) && !first ? '' : ` rise" data-d="${first ? (d*.03).toFixed(2) : '.1'}`; };
+    if(s==='ok'){
+      towers++;
+      const land = run%7===0, h = land ? 70 : Math.round(30+r*26), top=G-h, tone=CITY_TONES[Math.floor(r*CITY_TONES.length)];
+      let extra='';
+      if(land) extra = `<path class="emblem" d="M${cx+1.5} ${top-14} a5 5 0 1 0 4 7.5 a3.9 3.9 0 1 1 -4 -7.5z"/><line class="ant" x1="${cx}" y1="${top}" x2="${cx}" y2="${top-5}"/>`;
+      else if(r>.72) extra = `<line class="ant" x1="${cx}" y1="${top}" x2="${cx}" y2="${top-8}"/><circle class="blink" cx="${cx}" cy="${top-8.5}" r="1.1"/>`;
+      else if(r<.25) extra = `<rect class="roof" x="${x+w*.2}" y="${top-6}" width="${w*.6}" height="6"/>`;
+      out += `<g class="bld${grow('t'+k)}" style="--bc:${land ? '#4a3a6a' : tone}">${extra}<rect class="body" x="${x.toFixed(1)}" y="${top}" width="${w.toFixed(1)}" height="${h}" rx="1"/><rect class="wins ${r>.5?'b':''}" x="${(x+.5).toFixed(1)}" y="${top+3}" width="${(w-1).toFixed(1)}" height="${h-6}"/></g>`;
+    } else if(s==='light'){
+      houses++;
+      const h=Math.round(10+r*6), top=G-h;
+      out += `<g class="bld house${grow('h'+k)}" style="--bc:#6a4f3c"><path class="roof" d="M${(x-.5).toFixed(1)} ${top} L${cx.toFixed(1)} ${top-6} L${(x+w+.5).toFixed(1)} ${top}Z"/><rect class="body" x="${x.toFixed(1)}" y="${top}" width="${w.toFixed(1)}" height="${h}"/><rect class="hw" x="${(cx-1.2).toFixed(1)}" y="${top+3}" width="2.4" height="2.6"/></g>`;
+    } else if(s==='miss'){
+      out += `<path class="lot" d="M${x.toFixed(1)} ${G} q${(w/2).toFixed(1)} -4 ${w.toFixed(1)} 0z"/>`;
+    } else if(k===tonight){
+      out += `<g class="crane"><line x1="${cx}" y1="${G}" x2="${cx}" y2="${G-46}"/><line x1="${cx-7}" y1="${G-44}" x2="${cx+16}" y2="${G-44}"/><line x1="${cx+13}" y1="${G-44}" x2="${cx+13}" y2="${G-32}"/><path d="M${cx} ${G-46} L${cx+16} ${G-44}"/><circle class="blink" cx="${cx}" cy="${G-48}" r="1.5"/></g>`;
+    } else if(k>tonight){
+      out += `<rect class="plot" x="${x.toFixed(1)}" y="${G-1.5}" width="${w.toFixed(1)}" height="1.5"/>`;
+    }
+  }
+  $('skyline').innerHTML = out;
+  $('skyline').querySelectorAll('[data-d]').forEach(g=>g.style.setProperty('--d', g.dataset.d+'s'));
+  cityBuilt = now;
+  const month = L().monthsLong[m];
+  $('cityCap').innerHTML = towers||houses ? t('cityCap',{m:month, b:`<b>${towers}</b>`, h:`<b>${houses}</b>`}) : t('cityEmpty');
 }
 
 /* ---------- render: progress ---------- */
