@@ -205,6 +205,77 @@ h1.large{font-size:32px;line-height:1.15;font-weight:700;margin:2px 0 18px;lette
 .cs-res svg{width:28px;height:28px;border-radius:50%;background:#17171c}
 .cs-res .bud{background:rgba(255,77,109,.14);color:#e5375d}
 .cs-note{font-size:12.5px;color:var(--muted);line-height:1.55;margin:14px 2px 0}
+/* shop */
+.rw.c{background:rgba(245,158,11,.15);color:#b77400}
+.rw.c svg{width:12px;height:12px}
+.shop-banner{display:flex;align-items:center;gap:12px;width:100%;margin-top:12px;text-align:left}
+.shop-banner .ic{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#ffd34d,#f59e0b);color:#3a2500;display:grid;place-items:center;flex:none}
+.shop-banner .ic svg{width:21px;height:21px}
+.shop-banner .tx{flex:1;min-width:0}
+.shop-banner .tx b{display:block;font-size:15px;font-weight:700}
+.shop-banner .tx span{font-size:12.5px;color:var(--muted);line-height:1.35;display:block}
+.coin-pill{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 12px;border-radius:99px;background:linear-gradient(135deg,#ffd34d,#f59e0b);color:#3a2500;font-weight:800;font-size:14.5px;font-variant-numeric:tabular-nums;flex:none}
+.coin-pill svg{width:16px;height:16px}
+.shop{position:fixed;inset:0;z-index:58;background:var(--bg);display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.shop.open{display:block}
+.shop-in{max-width:560px;margin:0 auto;padding:calc(var(--sat) + 8px) 16px calc(var(--sab) + 28px)}
+.shop-top{display:flex;align-items:center;justify-content:space-between;height:44px}
+.shop-top b{font-size:17px;font-weight:700}
+.shop-how{font-size:12.5px;color:var(--muted);text-align:center;margin:6px 8px 0;line-height:1.5}
+.shop-cats{display:flex;gap:6px;margin:14px -16px 14px;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.shop-cats::-webkit-scrollbar{display:none}
+.shop-cats button{flex:none;height:38px;padding:0 14px;border-radius:99px;background:var(--card);box-shadow:var(--shadow);font-weight:700;font-size:14px;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.shop-cats button svg{width:16px;height:16px}
+.shop-cats button.sel{background:var(--ink);color:var(--bg)}
+.shop-sec{display:flex;justify-content:space-between;align-items:baseline;margin:4px 4px 10px}
+.shop-sec h3{margin:0;font-size:18px}
+.shop-sec span{font-size:12.5px;color:var(--muted)}
+.shop-note{font-size:12.5px;color:var(--muted);margin:-2px 4px 12px;line-height:1.5}
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sitem{position:relative;display:flex;flex-direction:column;padding:12px;min-width:0}
+.si-art{position:relative;aspect-ratio:1.2;border-radius:14px;background:var(--fill);display:grid;place-items:center;overflow:hidden;margin-bottom:10px}
+.si-art>svg{width:58%;height:58%}
+.si-art .big{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;color:#fff}
+.si-art .big svg{width:28px;height:28px}
+.si-art.scene{background:linear-gradient(#1d1b3a,#121219)}
+.si-art.scene>svg{width:100%;height:100%}
+.si-art.chr .mcard{width:62%}
+.si-art .fprev{width:62px;height:62px;border-radius:50%;background:var(--grad);display:grid;place-items:center;overflow:visible}
+.si-art .fprev svg{width:84%;height:84%}
+.sitem b{font-size:15px;font-weight:700;line-height:1.3}
+.si-desc{font-size:12px;color:var(--muted);line-height:1.4;flex:1;margin-top:2px}
+.si-stock{position:absolute;top:18px;right:18px;font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px;background:var(--card);color:var(--ink2);box-shadow:var(--shadow)}
+.si-buy{margin-top:10px;height:36px;border-radius:99px;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;gap:5px;background:linear-gradient(135deg,#ffd34d,#f59e0b);color:#3a2500;font-variant-numeric:tabular-nums}
+.si-buy svg{width:15px;height:15px}
+.si-buy.confirm{background:var(--grad);color:#fff;animation:nudge 1s ease-in-out infinite}
+.si-buy.poor{background:var(--fill);color:var(--muted)}
+.si-buy.use{background:var(--fill);color:var(--accent)}
+.si-buy.on{background:var(--accent-soft);color:var(--accent)}
+.si-buy:disabled{background:var(--fill);color:var(--muted)}
+[data-frame="frame_gold"]{box-shadow:0 0 0 2.5px #ffd34d,0 0 14px rgba(255,211,77,.6)!important}
+[data-frame="frame_rainbow"]{box-shadow:0 0 0 2px #ff4d8d,0 0 0 4px #ffd34d,0 0 0 6px #4dc3ff!important}
+[data-frame="frame_neon"]{box-shadow:0 0 0 2.5px #7dffd8,0 0 16px #7dffd8!important;animation:neon 2.2s ease-in-out infinite}
+@keyframes neon{50%{box-shadow:0 0 0 2.5px #7dffd8,0 0 5px #7dffd8}}
+.mini-avatar svg,.av-wrap .avatar svg{overflow:visible}
+/* city effects from the shop */
+.hero.day .fx-night{display:none}
+.ice rect{fill:#bfe8ff;opacity:.85}
+.ice path{stroke:#fff;stroke-width:1;stroke-linecap:round}
+.au{animation:sway 9s ease-in-out infinite alternate}
+.au.a2{animation-duration:13s}
+@keyframes sway{from{transform:translateX(-14px);opacity:.7}to{transform:translateX(14px);opacity:1}}
+.meteor{animation:meteor 7s linear infinite}
+.meteor.m2{animation-delay:-3.5s;animation-duration:9s}
+@keyframes meteor{0%{transform:translate(60px,14px);opacity:0}3%{opacity:1}14%{transform:translate(200px,62px);opacity:0}100%{transform:translate(200px,62px);opacity:0}}
+.burst{transform-box:fill-box;transform-origin:center;animation:burst 2.8s ease-out infinite}
+@keyframes burst{0%{transform:scale(.1);opacity:0}8%{opacity:1}60%{transform:scale(1);opacity:.9}100%{transform:scale(1.12);opacity:0}}
+.bfloat{animation:bfloat 7s ease-in-out infinite}
+@keyframes bfloat{50%{transform:translate(12px,-7px)}}
+.wheel{animation:spin 30s linear infinite}
+.cab{fill:#8a8ab0;transition:fill 1.2s}
+.hero.live .cab{fill:#ffd36b}
+.flake{fill:#fff;opacity:.85;animation:fall var(--d) linear infinite var(--dl)}
+@keyframes fall{to{transform:translate(var(--dx),232px)}}
 .cs-pc{margin-top:14px}
 .pc-months{display:flex;gap:6px;overflow-x:auto;margin:0 0 12px;scrollbar-width:none}
 .pc-months::-webkit-scrollbar{display:none}
@@ -1085,6 +1156,7 @@ html:has(#splash){overflow:hidden}
           <g class="stars" id="cityStars"></g>
           <g class="clouds"><g class="cloud c1"><circle cx="40" cy="70" r="7"/><circle cx="50" cy="66" r="9"/><circle cx="60" cy="71" r="6"/><rect x="34" y="70" width="32" height="7" rx="3.5"/></g>
             <g class="cloud c2"><circle cx="230" cy="48" r="5"/><circle cx="238" cy="45" r="7"/><circle cx="246" cy="49" r="5"/><rect x="226" y="48" width="25" height="6" rx="3"/></g></g>
+          <g id="cityFxBack"></g>
           <path class="arc-track" d="M25 172 A135 135 0 0 1 295 172"/>
           <path class="ring-arc arc-fill" id="ringArc" d="M25 172 A135 135 0 0 1 295 172" pathLength="1" stroke="url(#gArc)" stroke-dasharray="1" stroke-dashoffset="1"/>
           <g id="celestial" transform="translate(25 172)">
@@ -1095,6 +1167,7 @@ html:has(#splash){overflow:hidden}
           <g id="skyline"></g>
           <rect class="ground" x="0" y="211" width="320" height="9"/>
           <g id="cityRoad"></g>
+          <g id="cityFxFront"></g>
         </svg>
         <div class="ring-center">
           <div class="lbl" id="heroLabel"></div>
@@ -1180,6 +1253,7 @@ html:has(#splash){overflow:hidden}
       <div><span class="label" data-i18n="gold"></span><span class="wv num gold"><svg class="i"><use href="#i-ticket"/></svg><span id="wGold">0</span></span></div>
       <div><span class="label" data-i18n="shards"></span><span class="wv num star"><b>✦</b><span id="wShards">0</span></span><button class="ex-btn press" id="exBtn" data-i18n="exchange"></button></div>
     </div>
+    <button class="card shop-banner press anim" id="shopBtn"><span class="ic"><svg class="i"><use href="#i-coins"/></svg></span><span class="tx"><b data-i18n="shopTitle"></b><span data-i18n="shopBanner"></span></span><span class="coin-pill"><svg class="i"><use href="#i-coins"/></svg><span id="wCoins">0</span></span></button>
 
     <div class="machine-card anim" id="machineCard">
       <div class="mc-head"><b data-i18n="machineTitle"></b><button class="info-btn press" id="ratesBtn"><svg class="i"><use href="#i-info"/></svg><span data-i18n="rates"></span></button></div>
@@ -1496,6 +1570,20 @@ html:has(#splash){overflow:hidden}
   </div>
 </div>
 
+<!-- ============ SHOP ============ -->
+<div class="shop" id="shop" role="dialog" aria-modal="true" aria-labelledby="shopH">
+  <div class="shop-in">
+    <div class="shop-top">
+      <button class="icon-btn press" id="shopClose" data-i18n-aria="close"><svg class="i"><use href="#i-x"/></svg></button>
+      <b id="shopH" data-i18n="shopTitle"></b>
+      <span class="coin-pill"><svg class="i"><use href="#i-coins"/></svg><span id="shopCoins">0</span></span>
+    </div>
+    <p class="shop-how" data-i18n="coinHow"></p>
+    <div class="shop-cats" id="shopCats"></div>
+    <div id="shopBody"></div>
+  </div>
+</div>
+
 <!-- ============ GACHA STAGE ============ -->
 <div class="stage" id="stage" role="dialog" aria-modal="true">
   <div class="burst" id="burst"></div>
@@ -1746,6 +1834,23 @@ const I18N = {
     t_name:'ก่อนอื่นเลย… ให้เราเรียกคุณว่าอะไรดี?',
     t_hero:'{hi}นี่คือเมืองของคุณ! กลางวันพระอาทิตย์จะเดินข้ามฟ้าจนถึงเวลาปิดครัว พอถึงเวลา ดวงจันทร์จะนับว่างดมาแล้วกี่ชั่วโมง\nงดได้ 1 คืน = สร้างตึก 1 หลัง กินเบาๆ = ได้บ้านหลังเล็ก',
     cityCap:'เมืองเดือน{m} · ตึก {b} · บ้าน {h}',
+    shopTitle:'ร้านค้า', shopBanner:'ใช้เหรียญจากเควสซื้อของแต่งเมือง ตัวละคร และไอเทม', coins:'เหรียญ',
+    coinHow:'ได้เหรียญจากเควส: รายวัน +10 · รายสัปดาห์ +30 · เป้าหมาย +50 · ครบคอลเลกชัน +100',
+    catItem:'ไอเทม', catChars:'ตัวละคร', catCity:'แต่งเมือง', catStyle:'แต่งตัวละคร',
+    introItem:'ไอเทมช่วยเล่น ซื้อได้ไม่จำกัด', introCity:'เอฟเฟกต์ในเมืองของคุณ ซื้อครั้งเดียว เปิด/ปิดได้ตลอด', introStyle:'ของแต่งให้ตัวคู่หู และกรอบรูปโปรไฟล์',
+    needBuddy:'(ตั้งตัวคู่หูในสมุดสะสมก่อน ของแต่งจะใส่ให้ตัวคู่หู)',
+    charsToday:'ตัวละครประจำวัน', charsRefresh:'เปลี่ยนในอีก {h} ชม.', ownedIt:'มีแล้ว',
+    buyConfirm:'ยืนยัน {n}', bought:'ซื้อแล้ว: {name}', notEnough:'เหรียญไม่พอ ทำเควสเพิ่มอีกนิด', useIt:'ใช้', inUse:'ใช้อยู่', stockN:'มี {n}',
+    freezeUsed:'ใช้บัตรกันสตรีคแล้ว สตรีคยังไม่ขาด!',
+    si_ticket:'ตั๋วกาชา', sd_ticket:'หมุนตู้กาชาได้ 1 ครั้ง', si_ticket10:'ตั๋วกาชา ×10', sd_ticket10:'คุ้มกว่าซื้อทีละใบ',
+    si_goldt:'ตั๋วทอง', sd_goldt:'การันตีระดับซูเปอร์แรร์ขึ้นไป', si_freeze:'บัตรกันสตรีค', sd_freeze:'พลาด 1 คืน สตรีคไม่ขาด ใช้ให้อัตโนมัติ',
+    si_bricks:'อิฐ ×5', sd_bricks:'เอาไปอัปเกรดและแต่งเมือง',
+    si_balloon:'บอลลูนลมร้อน', sd_balloon:'ลอยเหนือเมืองทั้งวัน', si_ferris:'ชิงช้าสวรรค์', sd_ferris:'หมุนช้าๆ หลังเมือง ไฟเปิดตอนกลางคืน',
+    si_fireworks:'ดอกไม้ไฟ', sd_fireworks:'จุดฉลองทุกคืนที่งดอยู่', si_aurora:'แสงเหนือ', sd_aurora:'ม่านแสงเขียวม่วงบนฟ้ายามค่ำ',
+    si_meteor:'ฝนดาวตก', sd_meteor:'ดาวตกพาดผ่านฟ้าเป็นระยะ', si_snow:'หิมะตก', sd_snow:'หิมะโปรยลงมาเบาๆ',
+    si_hat_party:'หมวกปาร์ตี้', sd_hat_party:'ใส่ให้ตัวคู่หู', si_hat_beanie:'หมวกไหมพรม', sd_hat_beanie:'ใส่ให้ตัวคู่หู', si_hat_crown:'มงกุฎทอง', sd_hat_crown:'ใส่ให้ตัวคู่หู',
+    si_face_sun:'แว่นกันแดด', sd_face_sun:'ใส่ให้ตัวคู่หู', si_face_heart:'แก้มหัวใจ', sd_face_heart:'ใส่ให้ตัวคู่หู',
+    si_frame_gold:'กรอบทอง', sd_frame_gold:'กรอบรูปโปรไฟล์', si_frame_rainbow:'กรอบสายรุ้ง', sd_frame_rainbow:'กรอบรูปโปรไฟล์', si_frame_neon:'กรอบนีออน', sd_frame_neon:'กรอบรูปโปรไฟล์เรืองแสง',
     pcTitle:'โปสการ์ดเมือง', pcSub:'ภาพสรุปเมืองของแต่ละเดือน แชร์ให้เพื่อนดูหรือเก็บไว้เป็นที่ระลึก', pcShare:'แชร์ / บันทึกรูป', pcFail:'สร้างโปสการ์ดไม่สำเร็จ ลองอีกครั้ง',
     pcBrand:'ปิดครัว · โปสการ์ดเมือง', pcTowers:'ตึก', pcNights:'คืนที่งดได้', pcKm:'กม. ที่วิ่ง', pcFlags:'ธงชัยชนะ', pcFooter:'ปิดครัว — งดมื้อเย็นให้สนุกขึ้น',
     cityFlag:'ปักธงชัยชนะบนตึกในเมืองแล้ว และไล่มอนสเตอร์ไปได้คืนนี้!',
@@ -1888,6 +1993,23 @@ const I18N = {
     t_name:'First things first… what should I call you?',
     t_hero:'{hi}This is your city! By day the sun crosses the sky until closing time, then the moon shows how long you have fasted.\nEach fasted night builds a tower, a light meal builds a small house.',
     cityCap:'{m} city · {b} towers · {h} houses',
+    shopTitle:'Shop', shopBanner:'Spend quest coins on city decor, characters and items', coins:'Coins',
+    coinHow:'Earn coins from quests: daily +10 · weekly +30 · goals +50 · a full collection +100',
+    catItem:'Items', catChars:'Characters', catCity:'City', catStyle:'Outfits',
+    introItem:'Handy items, buy as many as you like.', introCity:'Effects for your city. Buy once, switch on or off any time.', introStyle:'Outfits for your buddy and frames for your profile picture.',
+    needBuddy:'(Pick a buddy in the Collection first; outfits are worn by your buddy.)',
+    charsToday:"Today's characters", charsRefresh:'New in {h}h', ownedIt:'Owned',
+    buyConfirm:'Confirm {n}', bought:'Bought: {name}', notEnough:'Not enough coins yet. Finish a few more quests.', useIt:'Use', inUse:'In use', stockN:'×{n}',
+    freezeUsed:'Streak freeze used. Your streak is safe!',
+    si_ticket:'Gacha ticket', sd_ticket:'One pull at the gachapon', si_ticket10:'Gacha tickets ×10', sd_ticket10:'Better value than one by one',
+    si_goldt:'Gold ticket', sd_goldt:'Guaranteed Super Rare or better', si_freeze:'Streak freeze', sd_freeze:'Miss a night without losing your streak. Used automatically.',
+    si_bricks:'Bricks ×5', sd_bricks:'For upgrading and decorating your city',
+    si_balloon:'Hot-air balloon', sd_balloon:'Floats over your city all day', si_ferris:'Ferris wheel', sd_ferris:'Turns slowly behind the city, lit at night',
+    si_fireworks:'Fireworks', sd_fireworks:'A celebration every fasting night', si_aurora:'Aurora', sd_aurora:'Green and violet lights in the night sky',
+    si_meteor:'Meteor shower', sd_meteor:'Shooting stars cross the sky', si_snow:'Snowfall', sd_snow:'Gentle snow over the city',
+    si_hat_party:'Party hat', sd_hat_party:'For your buddy', si_hat_beanie:'Beanie', sd_hat_beanie:'For your buddy', si_hat_crown:'Golden crown', sd_hat_crown:'For your buddy',
+    si_face_sun:'Sunglasses', sd_face_sun:'For your buddy', si_face_heart:'Heart cheeks', sd_face_heart:'For your buddy',
+    si_frame_gold:'Gold frame', sd_frame_gold:'For your profile picture', si_frame_rainbow:'Rainbow frame', sd_frame_rainbow:'For your profile picture', si_frame_neon:'Neon frame', sd_frame_neon:'A glowing profile frame',
     pcTitle:'City postcard', pcSub:'A snapshot of your city for each month. Share it or keep it as a souvenir.', pcShare:'Share / save image', pcFail:'Could not make the postcard. Try again.',
     pcBrand:'Kitchen Closed · City postcard', pcTowers:'towers', pcNights:'nights fasted', pcKm:'km run', pcFlags:'victory flags', pcFooter:'Kitchen Closed — skip dinner, the fun way',
     cityFlag:'A victory flag now flies over your city, and the monster is gone for tonight!',
@@ -1944,7 +2066,7 @@ const BADGES = [
 
 /* ---------- state ---------- */
 function detectLang(){ try{ return (navigator.language||'').toLowerCase().startsWith('th') ? 'th' : 'en'; }catch(e){ return 'th'; } }
-function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, logAt:{}, epoch:0, updatedAt:0, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}}, runs:[], runDel:{}, city:{crafted:0, brickUsed:0, woodUsed:0, up:{}, decor:{}} }; }
+function blank(){ return { settings:{...DEFAULTS, lang:detectLang()}, log:{}, logAt:{}, epoch:0, updatedAt:0, xp:0, challenges:0, cravings:0, best:0, badges:[], sessions:[], tourDone:false, gacha:{tickets:0,gold:0,shards:0,pity:0,pulls:0,owned:{},buddy:null}, quests:{claimed:{}}, runs:[], runDel:{}, city:{crafted:0, brickUsed:0, woodUsed:0, up:{}, decor:{}}, shop:{owned:{}, frozen:{}, equip:{hat:'', face:'', frame:'', fx:{}}} }; }
 function shape(r){
   const b=blank();
   if(!r || typeof r!=='object') return b;
@@ -1954,7 +2076,8 @@ function shape(r){
   return {...b, ...r, settings, log:{...(r.log||{})}, logAt:{...(r.logAt||{})}, badges:[...(r.badges||[])], sessions:[...(r.sessions||[])],
     gacha:{...b.gacha, ...g, owned:{...(g.owned||{})}}, quests:{claimed:{...((r.quests||{}).claimed||{})}},
     runs:(Array.isArray(r.runs) ? r.runs : []).map(x=>({...x, segs:(x.segs||[]).map(s=>[...s])})), runDel:{...(r.runDel||{})},
-    city:{...b.city, ...(r.city||{}), up:{...((r.city||{}).up||{})}, decor:{...((r.city||{}).decor||{})}}};
+    city:{...b.city, ...(r.city||{}), up:{...((r.city||{}).up||{})}, decor:{...((r.city||{}).decor||{})}},
+    shop:(sh=>({ owned:{...(sh.owned||{})}, frozen:{...(sh.frozen||{})}, equip:{...b.shop.equip, ...(sh.equip||{}), fx:{...((sh.equip||{}).fx||{})}} }))(r.shop||{})};
 }
 function load(){
   try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r && typeof r==='object') return shape(r); }catch(e){}
@@ -2003,7 +2126,8 @@ function saved(){ return Object.values(S.log).reduce((a,s)=>a+nightSaving(s),0);
 function streak(){
   let d = fromKey(nightKey());
   if(!S.log[keyOf(d)]) d = addDays(d,-1);
-  let n=0; while(S.log[keyOf(d)]==='ok'||S.log[keyOf(d)]==='light'){ n++; d=addDays(d,-1); }
+  let n=0;
+  for(;;){ const k=keyOf(d), v=S.log[k]; if(v==='ok'||v==='light') n++; else if(!(v==='miss' && S.shop.frozen[k])) break; d=addDays(d,-1); }
   return n;
 }
 function levelInfo(xp){ let Lv=1; while(xp >= 50*(Lv+1)*Lv) Lv++; const base=50*Lv*(Lv-1), next=50*(Lv+1)*Lv; return {L:Lv,cur:xp-base,need:next-base}; }
@@ -2064,6 +2188,8 @@ function checkinTarget(){
 }
 function setStatus(key,status){
   const old = S.log[key];
+  if(status==='miss' && old!=='miss') useFreeze(key);
+  else if(status!=='miss' && S.shop.frozen[key]) delete S.shop.frozen[key];   // not a miss any more: the freeze comes back
   if(old) gainXP(-XP_VAL[old]);
   if(status){ S.log[key]=status; gainXP(XP_VAL[status]); } else delete S.log[key];
   S.logAt[key] = Date.now();
@@ -2095,7 +2221,7 @@ function renderHome(){
   const now=new Date();
   $('homeDate').textContent = L().homeDate(now, L());
   $('homeTitle').textContent = S.settings.name ? t('hello',{name:S.settings.name}) : t('tabToday');
-  $('miniAvatar').innerHTML = avatarHTML();
+  $('miniAvatar').innerHTML = avatarHTML(); $('miniAvatar').dataset.frame = S.shop.equip.frame||'';
   $('phaseRange').textContent = `${S.settings.cutoff} – ${S.settings.breakfast}`;
   $('mClose').textContent = S.settings.cutoff; $('mBreak').textContent = S.settings.breakfast; $('mGoal').textContent = fastHours();
   renderTimer(); renderCity();
@@ -2201,7 +2327,8 @@ function buildCity(y, m, tonight, A, postcard){
       const h=Math.round(10+r*6), top=G-h;
       out += `<g class="bld house${grow('h'+k)}" style="--bc:#6a4f3c"><path class="roof" d="M${(x-.5).toFixed(1)} ${top} L${cx.toFixed(1)} ${top-6} L${(x+w+.5).toFixed(1)} ${top}Z"/><rect class="body" x="${x.toFixed(1)}" y="${top}" width="${w.toFixed(1)}" height="${h}"/><rect class="hw" x="${(cx-1.2).toFixed(1)}" y="${top+3}" width="2.4" height="2.6"/></g>`;
     } else if(st==='miss'){
-      out += `<path class="lot" d="M${x.toFixed(1)} ${G} q${(w/2).toFixed(1)} -4 ${w.toFixed(1)} 0z"/>`;
+      out += S.shop.frozen[k] ? `<g class="ice"><rect x="${x.toFixed(1)}" y="${G-7}" width="${w.toFixed(1)}" height="7" rx="1.5"/><path d="M${(x+1.2).toFixed(1)} ${G-5.5} h${(w*.4).toFixed(1)}"/></g>`
+        : `<path class="lot" d="M${x.toFixed(1)} ${G} q${(w/2).toFixed(1)} -4 ${w.toFixed(1)} 0z"/>`;
     } else if(tonight && k===tonight){
       out += `<g class="crane"><line x1="${cx}" y1="${G}" x2="${cx}" y2="${G-46}"/><line x1="${cx-7}" y1="${G-44}" x2="${cx+16}" y2="${G-44}"/><line x1="${cx+13}" y1="${G-44}" x2="${cx+13}" y2="${G-32}"/><path d="M${cx} ${G-46} L${cx+16} ${G-44}"/><circle class="blink" cx="${cx}" cy="${G-48}" r="1.5"/></g>`;
     } else if(!tonight || k>tonight){
@@ -2228,6 +2355,7 @@ function renderCity(){
   const c = buildCity(y, m, keyOf(tn), A);
   $('skyline').innerHTML = c.html;
   $('cityRoad').innerHTML = c.road;
+  renderCityFx();
   $('skyline').querySelectorAll('[data-d]').forEach(g=>g.style.setProperty('--d', g.dataset.d+'s'));
   cityBuilt = A.now;
   const month = L().monthsLong[m];
@@ -2246,7 +2374,7 @@ const DECOR_SLOTS = 10, UPGRADE_COST = 3;
 const cityMonth = () => nightKey().slice(0,7);
 function cityWallet(){
   const c=S.city;
-  return { brick: Math.max(0, countStatus('ok')*2 + (c.crafted||0) - (c.brickUsed||0)), wood: Math.max(0, countStatus('light') - (c.woodUsed||0)) };
+  return { brick: Math.max(0, countStatus('ok')*2 + (c.crafted||0) + 5*(S.shop.owned.bricks||0) - (c.brickUsed||0)), wood: Math.max(0, countStatus('light') - (c.woodUsed||0)) };
 }
 function monthDecor(ym=cityMonth()){
   const out=[]; for(let i=0;i<DECOR_SLOTS;i++){ const v=S.city.decor[ym+':'+i]; if(v) out[i]=v; } return out;
@@ -2278,7 +2406,7 @@ function cityFront(ym, A){
   if(res.buddy){
     const hx=298;
     out += `<g class="bhouse"><path d="M${hx-11} ${G-13} L${hx} ${G-22} L${hx+11} ${G-13}Z" fill="#ff6a5c"/><rect x="${hx-9}" y="${G-13}" width="18" height="13" fill="#f4e3cf"/><rect x="${hx-2.5}" y="${G-8}" width="5" height="8" rx="2.5" fill="#8a5a3a"/><path class="heart" d="M${hx} ${G-14.5} l-2.2 -2.1 a1.3 1.3 0 0 1 2.2 -1.6 a1.3 1.3 0 0 1 2.2 1.6z"/></g>`;
-    out += `<g class="walker" transform="translate(268 0)" style="--a:262px;--b:276px;--dur:7s;--delay:-2s"><g class="hop">${sprite(res.buddy, 0, 17)}</g></g>`;
+    out += `<g class="walker" transform="translate(268 0)" style="--a:262px;--b:276px;--dur:7s;--delay:-2s"><g class="hop">${buddySVG(res.buddy).replace('<svg ', `<svg x="0" y="${G-17}" width="17" height="17" `)}</g></g>`;
   }
   res.walkers.forEach((ch,i)=>{
     const r=cityHash(nightKey()+ch.id), a=Math.round(4+r*90+i*40), b=Math.min(res.buddy ? 236 : 296, a+70+Math.round(r*80)), dur=(12+r*10).toFixed(1);
@@ -2416,6 +2544,174 @@ $('pcShare').onclick = async ()=>{
 };
 $('pcClose').onclick = $('pcBg').onclick = ()=>closeSheet('pcSheet');
 
+/* ---------- shop: spend quest coins ----------
+   Coins earned come from claimed quests and coins spent from what you own, so both are
+   derived and merge cleanly between devices. */
+const SHOP_ITEMS = [
+  { id:'ticket',   cat:'item',  price:40,  kind:'use',   art:'ticket', tone:'linear-gradient(135deg,#ff9a62,#ff5a1f)', grant:()=>{ S.gacha.tickets+=1; } },
+  { id:'ticket10', cat:'item',  price:360, kind:'use',   art:'ticket', tone:'linear-gradient(135deg,#a78bfa,#7c3aed)', grant:()=>{ S.gacha.tickets+=10; } },
+  { id:'goldt',    cat:'item',  price:400, kind:'use',   art:'ticket', tone:'linear-gradient(135deg,#ffd34d,#f59e0b)', grant:()=>{ S.gacha.gold+=1; } },
+  { id:'freeze',   cat:'item',  price:120, kind:'stock', art:'shield-check', tone:'linear-gradient(135deg,#7dd3fc,#2563eb)' },
+  { id:'bricks',   cat:'item',  price:30,  kind:'stock', art:'brick', tone:'linear-gradient(135deg,#ff8a5c,#d9480f)' },
+  { id:'balloon',  cat:'city',  price:150, kind:'fx' },
+  { id:'ferris',   cat:'city',  price:350, kind:'fx' },
+  { id:'fireworks',cat:'city',  price:250, kind:'fx' },
+  { id:'aurora',   cat:'city',  price:300, kind:'fx' },
+  { id:'meteor',   cat:'city',  price:200, kind:'fx' },
+  { id:'snow',     cat:'city',  price:180, kind:'fx' },
+  { id:'hat_party',  cat:'style', slot:'hat',   price:100, kind:'wear' },
+  { id:'hat_beanie', cat:'style', slot:'hat',   price:120, kind:'wear' },
+  { id:'hat_crown',  cat:'style', slot:'hat',   price:300, kind:'wear' },
+  { id:'face_sun',   cat:'style', slot:'face',  price:120, kind:'wear' },
+  { id:'face_heart', cat:'style', slot:'face',  price:90,  kind:'wear' },
+  { id:'frame_gold',    cat:'style', slot:'frame', price:150, kind:'wear' },
+  { id:'frame_rainbow', cat:'style', slot:'frame', price:250, kind:'wear' },
+  { id:'frame_neon',    cat:'style', slot:'frame', price:200, kind:'wear' },
+];
+const SHOP_BY_ID = Object.fromEntries(SHOP_ITEMS.map(i=>[i.id,i]));
+const CHAR_PRICE = { salt:30, common:80, rare:200, sr:500, legend:1500 };
+const itemPrice = id => id.startsWith('char:') ? CHAR_PRICE[CHAR_BY_ID[id.slice(5)]?.tier] || 0 : SHOP_BY_ID[id]?.price || 0;
+const coinsEarned = () => Object.keys(S.quests.claimed).reduce((a,id)=>a+coinValue(id), 0);
+const coinsSpent = () => Object.entries(S.shop.owned).reduce((a,[id,n])=>a+itemPrice(id)*n, 0);
+const coinsLeft = () => Math.max(0, coinsEarned() - coinsSpent());
+const freezeLeft = () => Math.max(0, (S.shop.owned.freeze||0) - Object.keys(S.shop.frozen).length);
+/* a missed night uses a streak freeze, but only when there is a streak to save */
+function useFreeze(key){
+  if(!freezeLeft()) return;
+  const prev=keyOf(addDays(fromKey(key),-1)), v=S.log[prev];
+  if(!(v==='ok' || v==='light' || S.shop.frozen[prev])) return;
+  S.shop.frozen[key]=Date.now();
+  setTimeout(()=>toast(t('freezeUsed')), 300);
+}
+function dailyChars(){
+  const k=keyOf(new Date());
+  const pick=(tiers,salt)=>{ const pool=CHARS.filter(c=>tiers.includes(c.tier)); return pool[Math.floor(cityHash(k+salt)*pool.length)]; };
+  return [...new Set([pick(['salt','common'],'a'), pick(['common'],'b'), pick(['rare'],'c'), pick(['sr','legend'],'d')])];
+}
+/* little scenes for the city effects */
+function fxArt(id, preview){
+  const G=211;
+  if(id==='aurora') return `<g class="fx-night"><defs><linearGradient id="gAuro" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7dffd8" stop-opacity="0"/><stop offset=".3" stop-color="#7dffd8" stop-opacity=".5"/><stop offset=".7" stop-color="#b48aff" stop-opacity=".45"/><stop offset="1" stop-color="#b48aff" stop-opacity="0"/></linearGradient></defs><path class="au" d="M-20 40 C40 10 90 60 150 30 S260 10 340 40 L340 62 C260 32 200 72 150 52 S40 32 -20 62Z" fill="url(#gAuro)"/><path class="au a2" d="M-20 72 C60 42 110 82 170 57 S270 42 340 68 L340 84 C270 60 210 94 170 72 S60 62 -20 86Z" fill="url(#gAuro)" opacity=".6"/></g>`;
+  if(id==='meteor') return `<g class="fx-night"><g class="meteor" transform="translate(120 40)"><line x1="0" y1="0" x2="-26" y2="-9" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".9"/><circle r="1.4" fill="#fff"/></g><g class="meteor m2" transform="translate(200 30)"><line x1="0" y1="0" x2="-20" y2="-7" stroke="#cfe6ff" stroke-width="1.1" stroke-linecap="round"/><circle r="1.1" fill="#fff"/></g></g>`;
+  if(id==='fireworks'){
+    const burst=(x,y,c,delay)=>{ let l=''; for(let i=0;i<12;i++){ const a=i*Math.PI/6, c1=Math.cos(a), s1=Math.sin(a); l+=`<line x1="${(c1*4).toFixed(1)}" y1="${(s1*4).toFixed(1)}" x2="${(c1*14).toFixed(1)}" y2="${(s1*14).toFixed(1)}"/><circle cx="${(c1*16.5).toFixed(1)}" cy="${(s1*16.5).toFixed(1)}" r="1"/>`; }
+      return `<g transform="translate(${x} ${y})"><g class="burst" style="animation-delay:${delay}s" stroke="${c}" fill="${c}" stroke-width="1.3" stroke-linecap="round">${l}</g></g>`; };
+    return `<g class="fx-night">${burst(92,62,'#ff6a8a',0)}${burst(232,48,'#ffd36b',-1.4)}${burst(165,90,'#7dd3fc',-.7)}</g>`;
+  }
+  if(id==='balloon') return `<g transform="translate(70 60)"><g class="bfloat"><path d="M0 -14 a11 12 0 0 1 11 12 c0 7 -6 10 -8 14 h-6 c-2 -4 -8 -7 -8 -14 a11 12 0 0 1 11 -12z" fill="#ff6a5c"/><path d="M0 -14 c-4.5 4 -5.5 16 -3 26 M0 -14 c4.5 4 5.5 16 3 26" stroke="#ffd36b" stroke-width="2.2" fill="none"/><path d="M-3 12 l1 5 M3 12 l-1 5" stroke="#c9a27a" stroke-width=".7"/><rect x="-3" y="17" width="6" height="4.5" rx="1" fill="#8a5a2b"/></g></g>`;
+  if(id==='ferris'){
+    const cx=preview?160:58, cy=G-30, r=22; let sp='', cab='';
+    for(let i=0;i<8;i++){ const a=i*Math.PI/4, x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r; sp+=`<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}"/>`; cab+=`<circle class="cab" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.6"/>`; }
+    return `<g><path d="M${cx-13} ${G} L${cx} ${cy} L${cx+13} ${G}" stroke="#7d7da0" stroke-width="1.8" fill="none"/><g class="wheel" style="transform-origin:${cx}px ${cy}px"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#b9b9d6" stroke-width="1.3"/><g stroke="#9a9ac0" stroke-width=".8">${sp}</g>${cab}</g><circle cx="${cx}" cy="${cy}" r="2.4" fill="#d1d1e6"/></g>`;
+  }
+  if(id==='snow'){
+    let h=''; for(let i=0;i<34;i++){ const r=cityHash('flake'+i), r2=cityHash('fl2'+i), d=(6+r2*6).toFixed(1);
+      h+=`<circle class="flake" cx="${(r*320).toFixed(1)}" cy="${preview ? (r2*200).toFixed(1) : -6}" r="${(.7+r2*1.1).toFixed(2)}" style="--d:${d}s;--dl:-${(r*d).toFixed(1)}s;--dx:${((r2-.5)*24).toFixed(1)}px"/>`; }
+    return `<g>${h}</g>`;
+  }
+  return '';
+}
+function renderCityFx(){
+  const fx=S.shop.equip.fx||{};
+  $('cityFxBack').innerHTML = ['aurora','meteor','fireworks','balloon','ferris'].filter(k=>fx[k] && S.shop.owned[k]).map(k=>fxArt(k)).join('');
+  $('cityFxFront').innerHTML = fx.snow && S.shop.owned.snow ? fxArt('snow') : '';
+}
+/* ---- shop screen ---- */
+let shopCat = 'item';
+const SHOP_CATS = [['item','ticket','catItem'], ['chars','sparkles','catChars'], ['city','building','catCity'], ['style','heart','catStyle']];
+function itemArt(it){
+  if(it.cat==='item') return `<div class="si-art"><div class="big" style="background:${it.tone}">${icon(it.art)}</div></div>`;
+  if(it.cat==='city') return `<div class="si-art scene"><svg viewBox="0 0 320 220">${fxArt(it.id, true).replace(/gAuro/g, "gAuroP")}<rect x="0" y="205" width="320" height="15" fill="#1e1e26"/><path d="M20 205 h30 v-40 h-30z M60 205 h22 v-60 h-22z M240 205 h26 v-48 h-26z M276 205 h24 v-30 h-24z" fill="#2c3150"/></svg></div>`;
+  const b = S.gacha.buddy && S.gacha.owned[S.gacha.buddy] && CHAR_BY_ID[S.gacha.buddy];
+  const base = b ? charSVG(b) : `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="58" r="32" fill="#ffd98f" stroke="#e39a33" stroke-width="1.5"/>${F(50,60,1)}</svg>`;
+  const id = b ? b.id : '_plain';
+  if(!b) _faceCache._plain = {cx:50, cy:60, s:1};
+  if(it.slot==='frame') return `<div class="si-art"><div class="fprev" data-frame="${it.id}">${b ? base : ''}</div></div>`;
+  return `<div class="si-art">${accessorize(base, id, {[it.slot]:it.id})}</div>`;
+}
+function buyBtn(id, price, label){
+  const poor = coinsLeft() < price;
+  return `<button class="si-buy press ${poor?'poor':''}" data-buy="${id}" data-price="${price}">${label || icon('coins')+price}</button>`;
+}
+function shopCard(it){
+  const name=t('si_'+it.id), desc=t('sd_'+it.id), owned=S.shop.owned[it.id]||0;
+  let btn, stock='';
+  if(it.kind==='fx'){
+    const on = !!S.shop.equip.fx[it.id];
+    btn = owned ? `<button class="si-buy press ${on?'on':'use'}" data-use="${it.id}">${on ? icon('check')+t('inUse') : t('useIt')}</button>` : buyBtn(it.id, it.price);
+  } else if(it.kind==='wear'){
+    const on = S.shop.equip[it.slot]===it.id;
+    btn = owned ? `<button class="si-buy press ${on?'on':'use'}" data-use="${it.id}">${on ? icon('check')+t('inUse') : t('useIt')}</button>` : buyBtn(it.id, it.price);
+  } else {
+    btn = buyBtn(it.id, it.price);
+    if(it.id==='freeze' && freezeLeft()) stock = t('stockN',{n:freezeLeft()});
+  }
+  return `<div class="card sitem">${itemArt(it)}${stock?`<span class="si-stock">${stock}</span>`:''}<b>${name}</b><span class="si-desc">${desc}</span>${btn}</div>`;
+}
+function renderShop(){
+  $('shopCoins').textContent = coinsLeft().toLocaleString(L().locale);
+  $('shopCats').innerHTML = SHOP_CATS.map(([id,ic,k])=>`<button class="press ${id===shopCat?'sel':''}" data-cat="${id}">${icon(ic)}${t(k)}</button>`).join('');
+  let h='';
+  if(shopCat==='chars'){
+    const hrs = Math.max(1, Math.ceil((dayStart(addDays(new Date(),1)) - new Date())/3600000));
+    h = `<div class="shop-sec"><h3>${t('charsToday')}</h3><span>${t('charsRefresh',{h:hrs})}</span></div><div class="shop-grid">` +
+      dailyChars().map(ch=>{ const id='char:'+ch.id, price=CHAR_PRICE[ch.tier], have=S.gacha.owned[ch.id];
+        return `<div class="card sitem"><div class="si-art chr">${miniCardHTML(ch,{})}</div><b>${escHTML(ch.name[lang])}</b><span class="si-desc">${t('tier_'+ch.tier)} · ${'★'.repeat(TIERS[ch.tier].stars)}</span>${have ? `<button class="si-buy" disabled>${icon('check')}${t('ownedIt')}</button>` : buyBtn(id, price)}</div>`; }).join('') + '</div>';
+  } else {
+    const intro = { item:'introItem', city:'introCity', style:'introStyle' }[shopCat];
+    h = `<p class="shop-note">${t(intro)}${shopCat==='style' && !(S.gacha.buddy && S.gacha.owned[S.gacha.buddy]) ? ' '+t('needBuddy') : ''}</p><div class="shop-grid">${SHOP_ITEMS.filter(i=>i.cat===shopCat).map(shopCard).join('')}</div>`;
+  }
+  $('shopBody').innerHTML = h;
+}
+function openShop(){
+  renderShop(); $('shop').classList.add('open'); $('shop').scrollTop=0; document.body.style.overflow='hidden';
+  if(HAS_GSAP) gsap.fromTo('#shop .shop-in',{y:40,opacity:0},{y:0,opacity:1,duration:.4,ease:'power3.out',clearProps:'transform,opacity'});
+}
+function closeShop(){ $('shop').classList.remove('open'); document.body.style.overflow=''; }
+function buyItem(id){
+  const price=itemPrice(id);
+  if(!price || coinsLeft()<price){ toast(t('notEnough')); return; }
+  let name;
+  if(id.startsWith('char:')){
+    const ch=CHAR_BY_ID[id.slice(5)]; if(S.gacha.owned[ch.id]) return;
+    S.gacha.owned[ch.id]=1; name=ch.name[lang];
+  } else {
+    const it=SHOP_BY_ID[id]; name=t('si_'+id);
+    if(it.kind==='use') it.grant();
+    if((it.kind==='fx' || it.kind==='wear') && S.shop.owned[id]) return;
+  }
+  S.shop.owned[id]=(S.shop.owned[id]||0)+1;
+  const it=SHOP_BY_ID[id];
+  if(it?.kind==='fx') S.shop.equip.fx[id]=1;          // put new things on right away
+  if(it?.kind==='wear') S.shop.equip[it.slot]=id;
+  checkBadges(); save(); renderAll(); renderShop();
+  pop($('shopCoins').parentElement); celebrate(.6); toast(t('bought',{name}));
+}
+function toggleUse(id){
+  const it=SHOP_BY_ID[id]; if(!it || !S.shop.owned[id]) return;
+  if(it.kind==='fx'){ if(S.shop.equip.fx[id]) delete S.shop.equip.fx[id]; else S.shop.equip.fx[id]=1; }
+  else S.shop.equip[it.slot] = S.shop.equip[it.slot]===id ? '' : id;
+  save(); renderAll(); renderShop();
+}
+$('shopCats').onclick = e=>{ const b=e.target.closest('[data-cat]'); if(b){ shopCat=b.dataset.cat; renderShop(); } };
+/* buying takes two taps: the first turns the price into "confirm" for 3 seconds */
+$('shopBody').onclick = e=>{
+  const u=e.target.closest('[data-use]'); if(u){ toggleUse(u.dataset.use); return; }
+  const b=e.target.closest('[data-buy]'); if(!b) return;
+  const price=Number(b.dataset.price);
+  if(coinsLeft()<price){ toast(t('notEnough')); return; }
+  if(!b.classList.contains('confirm')){
+    document.querySelectorAll('#shopBody .si-buy.confirm').forEach(x=>{ x.classList.remove('confirm'); x.innerHTML=x.dataset.label; });
+    b.dataset.label=b.innerHTML; b.classList.add('confirm'); b.textContent=t('buyConfirm',{n:price});
+    clearTimeout(b._t); b._t=setTimeout(()=>{ if(b.isConnected){ b.classList.remove('confirm'); b.innerHTML=b.dataset.label; } }, 3000);
+    return;
+  }
+  buyItem(b.dataset.buy);
+};
+$('shopBtn').onclick = openShop;
+$('shopClose').onclick = closeShop;
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('shop').classList.contains('open')) closeShop(); });
+
 /* ---------- render: progress ---------- */
 let calMonth = (()=>{ const d=fromKey(nightKey()); return new Date(d.getFullYear(), d.getMonth(), 1); })();
 let weekChart=null, saveChart=null;
@@ -2544,7 +2840,7 @@ $('sheetBg').onclick = closeSheet; $('sheetCancel').onclick = closeSheet;
 /* ---------- render: profile ---------- */
 function renderProfile(){
   const li=levelInfo(S.xp);
-  $('avatar').innerHTML = avatarHTML();
+  $('avatar').innerHTML = avatarHTML(); $('avatar').dataset.frame = S.shop.equip.frame||'';
   $('pName').textContent = S.settings.name || t('user');
   $('pLevel').textContent = `Lv.${li.L} · ${levelName(li.L)}`;
   $('pXP').textContent = t('xpLine',{xp:S.xp.toLocaleString(L().locale), n:li.need-li.cur, l:li.L+1});
@@ -2679,7 +2975,9 @@ const PITY = 10;
 const tierIdx = k => TIER_ORDER.indexOf(k);
 
 const INK = '#2b1d16';
+let _faceRec = null;
 function F(cx,cy,s=1,e='open',mo='smile'){
+  if(_faceRec && !_faceRec.v) _faceRec.v = {cx, cy, s};
   const ex=8.5*s, sw=(2.3*s).toFixed(2), my=cy+6.5*s;
   const P=d=>`<path d="${d}" stroke="${INK}" stroke-width="${sw}" fill="none" stroke-linecap="round"/>`;
   let o='';
@@ -3041,15 +3339,36 @@ const CHAR_BY_ID = Object.fromEntries(CHARS.map(c=>[c.id,c]));
 const _artCache = {};
 let _artUid = 0;
 function charSVG(ch){
-  let s = _artCache[ch.id] ||= ch.art();
+  let s = charArt(ch);
   // gradients need ids unique per copy: a copy inside a hidden tab would otherwise win and render nothing
   if(s.includes(' id="')){ const u = ++_artUid; s = s.replace(/ id="(\w+)"/g, ` id="$1_${u}"`).replace(/url\(#(\w+)\)/g, `url(#$1_${u})`); }
   return `<svg viewBox="0 0 100 100" aria-hidden="true">${s}</svg>`;
 }
 const ownedCount = () => CHARS.filter(c=>S.gacha.owned[c.id]).length;
+const _faceCache = {};
+const FACE_DEFAULT = { owl:{cx:50,cy:47,s:1.15}, ninja:{cx:50,cy:56,s:1}, mask:{cx:50,cy:51,s:1.1}, melon:{cx:50,cy:43,s:1} };
+function charArt(ch){
+  if(!_artCache[ch.id]){ _faceRec={}; _artCache[ch.id]=ch.art(); _faceCache[ch.id]=_faceRec.v || FACE_DEFAULT[ch.id] || {cx:50,cy:50,s:1}; _faceRec=null; }
+  return _artCache[ch.id];
+}
+/* buddy outfits, drawn around the face: hats sit above the eyes, glasses on them */
+const ACC = {
+  hat_party:`<path d="M-12 2 L0 -28 L12 2Z" fill="#ff5a8a" stroke="#d63a6b" stroke-width="1.2" stroke-linejoin="round"/><path d="M-8 -8 L8 -8 M-4.5 -18 L4.5 -18" stroke="#ffe066" stroke-width="2.6" stroke-linecap="round"/><circle cy="-29" r="3.6" fill="#ffe066"/>`,
+  hat_beanie:`<path d="M-17 2 q0 -24 17 -24 q17 0 17 24z" fill="#4aa5ff"/><path d="M-9 -16 v14 M0 -21 v18 M9 -16 v14" stroke="#79c0ff" stroke-width="2"/><rect x="-18.5" y="-3" width="37" height="7" rx="3.5" fill="#2c83de"/><circle cy="-24" r="4.6" fill="#fff"/>`,
+  hat_crown:`<path d="M-15 2 L-17 -16 L-8 -8 L0 -21 L8 -8 L17 -16 L15 2Z" fill="#ffd34d" stroke="#d99a00" stroke-width="1.4" stroke-linejoin="round"/><circle cy="-6" r="2.4" fill="#ff4d6d"/><circle cx="-9" cy="-3" r="1.6" fill="#4dc3ff"/><circle cx="9" cy="-3" r="1.6" fill="#4dc3ff"/>`,
+  face_sun:`<path d="M-15.5 -3.5 h12.5 v2.5 a6.25 5 0 0 1 -12.5 0z M3 -3.5 h12.5 v2.5 a6.25 5 0 0 1 -12.5 0z" fill="#1d1d23"/><path d="M-3 -2.5 h6" stroke="#1d1d23" stroke-width="2"/><path d="M-13 -1.6 l3 -.8 M5.5 -1.6 l3 -.8" stroke="#fff" stroke-width="1" opacity=".6" stroke-linecap="round"/>`,
+  face_heart:`<path d="M-13 7.5 l-2.6 -2.5 a1.6 1.6 0 0 1 2.6 -1.9 a1.6 1.6 0 0 1 2.6 1.9z M13 7.5 l-2.6 -2.5 a1.6 1.6 0 0 1 2.6 -1.9 a1.6 1.6 0 0 1 2.6 1.9z" fill="#ff4d6d"/>`,
+};
+function accessorize(svg, id, eq=S.shop.equip){
+  const f=_faceCache[id] || {cx:50,cy:50,s:1}; let add='';
+  if(eq.face && ACC[eq.face]) add += `<g transform="translate(${f.cx} ${f.cy}) scale(${f.s})">${ACC[eq.face]}</g>`;
+  if(eq.hat && ACC[eq.hat]) add += `<g transform="translate(${f.cx} ${f.cy-21*f.s}) scale(${f.s})">${ACC[eq.hat]}</g>`;
+  return add ? svg.replace('<svg ', '<svg style="overflow:visible" ').replace(/<\/svg>$/, add+'</svg>') : svg;
+}
+function buddySVG(b){ return accessorize(charSVG(b), b.id); }
 function avatarHTML(){
   const b = S.gacha.buddy && CHAR_BY_ID[S.gacha.buddy];
-  return b ? charSVG(b) : escapeHtml((S.settings.name||'?').trim().charAt(0).toUpperCase() || '?');
+  return b ? buddySVG(b) : escapeHtml((S.settings.name||'?').trim().charAt(0).toUpperCase() || '?');
 }
 
 /* ---------- quests ---------- */
@@ -3107,7 +3426,11 @@ function milestoneQuests(){
   }
   return out;
 }
-function allQuests(){ const k=questNight(); return { k, daily:dailyQuests(k), weekly:weeklyQuests(k), milestones:milestoneQuests() }; }
+function allQuests(){
+  const k=questNight(), add=l=>l.map(q=>({...q, reward:{...q.reward, coins:coinValue(q.id)}}));
+  return { k, daily:add(dailyQuests(k)), weekly:add(weeklyQuests(k)), milestones:add(milestoneQuests()) };
+}
+function coinValue(id){ if(id==='m:welcome') return 50; return ({d:10, w:30, m:50, set:100})[id.split(':')[0]] || 0; }
 const isClaimable = q => q.cur>=q.goal && !S.quests.claimed[q.id];
 function claimableCount(){ const a=allQuests(); return [...a.daily,...a.weekly,...a.milestones].filter(isClaimable).length; }
 
@@ -3116,6 +3439,7 @@ function rewardChips(r){
   if(r.tickets) h+=`<span class="rw t">${icon('ticket')}${r.tickets}</span>`;
   if(r.gold) h+=`<span class="rw g">${icon('ticket')}${r.gold}</span>`;
   if(r.shards) h+=`<span class="rw s">✦${r.shards}</span>`;
+  if(r.coins) h+=`<span class="rw c">${icon('coins')}${r.coins}</span>`;
   return h;
 }
 function rewardText(r){
@@ -3123,6 +3447,7 @@ function rewardText(r){
   if(r.tickets) p.push(`${t('tickets')} ×${r.tickets}`);
   if(r.gold) p.push(`${t('gold')} ×${r.gold}`);
   if(r.shards) p.push(`✦ ×${r.shards}`);
+  if(r.coins) p.push(`${t('coins')} ×${r.coins}`);
   return p.join(' · ');
 }
 let questIndex = {};
@@ -3350,6 +3675,8 @@ function renderRewards(){
   const g=S.gacha;
   renderMachine();
   countTo($('wTickets'), g.tickets); countTo($('wGold'), g.gold); countTo($('wShards'), g.shards);
+  countTo($('wCoins'), coinsLeft());
+  if($('shop').classList.contains('open')) $('shopCoins').textContent = coinsLeft().toLocaleString(L().locale);
   $('exBtn').disabled = g.shards<10;
   $('pityText').innerHTML = t('pity',{n:`<b>${PITY-g.pity}</b>`});
   $('pull1').disabled = g.tickets<1; $('pull10').disabled = g.tickets<10;
@@ -4015,6 +4342,9 @@ function mergeState(a, b, keepA){
   m.runs = [...runs.values()].filter(r=>!m.runDel[r.id]).sort((x,y)=>x.at-y.at);
   for(const f of ['crafted','brickUsed','woodUsed']) m.city[f] = Math.max(n.city[f]||0, o.city[f]||0);
   m.city.up = {...o.city.up, ...n.city.up}; m.city.decor = {...o.city.decor, ...n.city.decor};
+  // shop: purchases only grow (coins spent are derived from them); outfits/effects follow the newer copy
+  for(const [id,c] of Object.entries(o.shop.owned)) m.shop.owned[id] = Math.max(m.shop.owned[id]||0, c);
+  m.shop.frozen = {...o.shop.frozen, ...n.shop.frozen};
   m.updatedAt = Math.max(n.updatedAt||0, o.updatedAt||0);
   return m;
 }
